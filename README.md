@@ -1,4 +1,4 @@
-# Reproducing the Results
+# Evaluating Spectrum-Based Fault Localization on Rust Bugs
 This directory contains data and scripts to reproduce the study:
 1. **Tables** generates the CSVs from the per-bug metrics
 2. **Experiments** runs coverage collection and SBFL ranking from the upstream Rust bug histories (requires Rust toolchain).
@@ -6,7 +6,6 @@ This directory contains data and scripts to reproduce the study:
 ## Repository Layout
 ```
 experiment/
-├── README.md
 ├── scripts/
 │   ├── sbfl_from_llvm_cov.py         SBFL: LLVM coverage JSON → ranked lines + metrics
 │   ├── aggregate_metrics.py          Joins bug manifest with per-bug metric CSVs
