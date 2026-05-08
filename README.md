@@ -70,13 +70,6 @@ results/analysis/formula_agreement.csv
 - 27/28 bugs have identical best ranks across Tarantula, Ochiai, and DStar².
 - 28/28 bugs have identical Top-10 outcomes across formulas.
 
-Inspect with:
-```bash
-cat results/analysis/formula_summary.csv
-cat results/analysis/formula_agreement.csv
-cat results/analysis/category_summary.csv
-```
-
 ## Dataset
 The 28 bugs are manually reconstructed from upstream Rust project. Each bug has:
 - A known upstream repository and buggy/fixed commit pair.
