@@ -1,0 +1,599 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/compiler.rs,56,1,0,0,2,1.0,1.0,inf,self.trim_next = false;
+2,src/compiler.rs,58,1,0,0,2,1.0,1.0,inf,"let tag = self.consume_tag(""#}"")?;"
+3,src/compiler.rs,59,1,0,0,2,1.0,1.0,inf,let comment = tag[2..(tag.len() - 2)].trim();
+4,src/compiler.rs,60,1,0,0,2,1.0,1.0,inf,if comment.starts_with('-') {
+5,src/compiler.rs,62,1,0,0,2,1.0,1.0,inf,}
+6,src/compiler.rs,63,1,0,0,2,1.0,1.0,inf,if comment.ends_with('-') {
+7,src/compiler.rs,65,1,0,0,2,1.0,1.0,inf,}
+8,src/compiler.rs,169,1,0,0,2,1.0,1.0,inf,}
+9,src/compiler.rs,171,1,0,0,2,1.0,1.0,inf,if escaped && self.remaining_text.is_empty() {
+10,src/compiler.rs,172,1,0,0,2,1.0,1.0,inf,return Err(self.parse_error(
+11,src/compiler.rs,173,1,0,0,2,1.0,1.0,inf,"text,"
+12,src/compiler.rs,55,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"if self.remaining_text.starts_with(""{#"") {"
+13,src/compiler.rs,168,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,break;
+14,src/compiler.rs,351,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"fn consume_tag(&mut self, expected_close: &str) -> Result<&'template str> {"
+15,src/compiler.rs,352,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,if let Some(line) = self.remaining_text.lines().next() {
+16,src/compiler.rs,353,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,if let Some(pos) = line.find(expected_close) {
+17,src/compiler.rs,354,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"let (tag, remaining) = self.remaining_text.split_at(pos + expected_close.len());"
+18,src/compiler.rs,355,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,self.remaining_text = remaining;
+19,src/compiler.rs,356,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,Ok(tag)
+20,src/compiler.rs,375,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+21,src/compiler.rs,41,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn new(text: &'template str) -> TemplateCompiler<'template> {
+22,src/compiler.rs,42,1,2,0,0,0.5,0.5773502691896258,0.5,TemplateCompiler {
+23,src/compiler.rs,43,1,2,0,0,0.5,0.5773502691896258,0.5,"original_text: text,"
+24,src/compiler.rs,44,1,2,0,0,0.5,0.5773502691896258,0.5,"remaining_text: text,"
+25,src/compiler.rs,49,1,2,0,0,0.5,0.5773502691896258,0.5,}
+26,src/compiler.rs,52,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn compile(mut self) -> Result<Vec<Instruction<'template>>> {
+27,src/compiler.rs,53,1,2,0,0,0.5,0.5773502691896258,0.5,while !self.remaining_text.is_empty() {
+28,src/compiler.rs,189,1,2,0,0,0.5,0.5773502691896258,0.5,}
+29,src/lib.rs,177,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn new() -> TinyTemplate<'template> {
+30,src/lib.rs,178,1,2,0,0,0.5,0.5773502691896258,0.5,let mut tt = TinyTemplate {
+31,src/lib.rs,179,1,2,0,0,0.5,0.5773502691896258,0.5,"templates: HashMap::default(),"
+32,src/lib.rs,183,1,2,0,0,0.5,0.5773502691896258,0.5,"tt.add_formatter(""unescaped"", format_unescaped);"
+33,src/lib.rs,184,1,2,0,0,0.5,0.5773502691896258,0.5,tt
+34,src/lib.rs,185,1,2,0,0,0.5,0.5773502691896258,0.5,}
+35,src/lib.rs,188,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn add_template(&mut self, name: &'template str, text: &'template str) -> Result<()> {"
+36,src/lib.rs,189,1,2,0,0,0.5,0.5773502691896258,0.5,let template = Template::compile(text)?;
+37,src/lib.rs,190,1,2,0,0,0.5,0.5773502691896258,0.5,"self.templates.insert(name, template);"
+38,src/lib.rs,191,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(())
+39,src/lib.rs,192,1,2,0,0,0.5,0.5773502691896258,0.5,}
+40,src/lib.rs,203,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn add_formatter<F>(&mut self, name: &'template str, formatter: F)"
+41,src/lib.rs,207,1,2,0,0,0.5,0.5773502691896258,0.5,"self.formatters.insert(name, Box::new(formatter));"
+42,src/lib.rs,208,1,2,0,0,0.5,0.5773502691896258,0.5,}
+43,src/template.rs,120,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn compile(text: &'template str) -> Result<Template> {
+44,src/template.rs,122,1,2,0,0,0.5,0.5773502691896258,0.5,"original_text: text,"
+45,src/template.rs,123,1,2,0,0,0.5,0.5773502691896258,0.5,"template_len: text.len(),"
+46,src/template.rs,124,1,2,0,0,0.5,0.5773502691896258,0.5,"instructions: TemplateCompiler::new(text).compile()?,"
+47,src/template.rs,126,1,2,0,0,0.5,0.5773502691896258,0.5,}
+48,src/compiler.rs,68,0,1,1,1,0.0,0.0,0.0,"} else if self.remaining_text.starts_with(""{{"") {"
+49,src/compiler.rs,69,0,0,1,2,0.0,0.0,0.0,self.trim_next = false;
+50,src/compiler.rs,71,0,0,1,2,0.0,0.0,0.0,"let (discriminant, rest) = self.consume_block()?;"
+51,src/compiler.rs,72,0,0,1,2,0.0,0.0,0.0,match discriminant {
+52,src/compiler.rs,73,0,0,1,2,0.0,0.0,0.0,"""if"" => {"
+53,src/compiler.rs,74,0,0,1,2,0.0,0.0,0.0,"let (path, negated) = if rest.starts_with(""not"") {"
+54,src/compiler.rs,75,0,0,1,2,0.0,0.0,0.0,"(self.parse_path(&rest[4..])?, true)"
+55,src/compiler.rs,77,0,0,1,2,0.0,0.0,0.0,"(self.parse_path(rest)?, false)"
+56,src/compiler.rs,79,0,0,1,2,0.0,0.0,0.0,self.block_stack
+57,src/compiler.rs,80,0,0,1,2,0.0,0.0,0.0,".push((discriminant, Block::Branch(self.instructions.len())));"
+58,src/compiler.rs,81,0,0,1,2,0.0,0.0,0.0,self.instructions
+59,src/compiler.rs,82,0,0,1,2,0.0,0.0,0.0,".push(Instruction::Branch(path, !negated, UNKNOWN));"
+60,src/compiler.rs,84,0,0,1,2,0.0,0.0,0.0,"""else"" => {"
+61,src/compiler.rs,85,0,0,1,2,0.0,0.0,0.0,self.expect_empty(rest)?;
+62,src/compiler.rs,86,0,0,1,2,0.0,0.0,0.0,let num_instructions = self.instructions.len() + 1;
+63,src/compiler.rs,87,0,0,1,2,0.0,0.0,0.0,"self.close_branch(num_instructions, discriminant)?;"
+64,src/compiler.rs,88,0,0,1,2,0.0,0.0,0.0,self.block_stack
+65,src/compiler.rs,89,0,0,1,2,0.0,0.0,0.0,".push((discriminant, Block::Branch(self.instructions.len())));"
+66,src/compiler.rs,90,0,0,1,2,0.0,0.0,0.0,self.instructions.push(Instruction::Goto(UNKNOWN))
+67,src/compiler.rs,92,0,0,1,2,0.0,0.0,0.0,"""endif"" => {"
+68,src/compiler.rs,93,0,0,1,2,0.0,0.0,0.0,self.expect_empty(rest)?;
+69,src/compiler.rs,94,0,0,1,2,0.0,0.0,0.0,let num_instructions = self.instructions.len();
+70,src/compiler.rs,95,0,0,1,2,0.0,0.0,0.0,"self.close_branch(num_instructions, discriminant)?;"
+71,src/compiler.rs,97,0,0,1,2,0.0,0.0,0.0,"""with"" => {"
+72,src/compiler.rs,98,0,0,1,2,0.0,0.0,0.0,"let (path, name) = self.parse_with(rest)?;"
+73,src/compiler.rs,99,0,0,1,2,0.0,0.0,0.0,"let instruction = Instruction::PushNamedContext(path, name);"
+74,src/compiler.rs,100,0,0,1,2,0.0,0.0,0.0,self.instructions.push(instruction);
+75,src/compiler.rs,101,0,0,1,2,0.0,0.0,0.0,"self.block_stack.push((discriminant, Block::With));"
+76,src/compiler.rs,103,0,0,1,2,0.0,0.0,0.0,"""endwith"" => {"
+77,src/compiler.rs,104,0,0,1,2,0.0,0.0,0.0,self.expect_empty(rest)?;
+78,src/compiler.rs,105,0,0,1,2,0.0,0.0,0.0,"if let Some((_, Block::With)) = self.block_stack.pop() {"
+79,src/compiler.rs,106,0,0,1,2,0.0,0.0,0.0,self.instructions.push(Instruction::PopContext)
+80,src/compiler.rs,108,0,0,1,2,0.0,0.0,0.0,return Err(self.parse_error(
+81,src/compiler.rs,109,0,0,1,2,0.0,0.0,0.0,"discriminant,"
+82,src/compiler.rs,114,0,0,1,2,0.0,0.0,0.0,"""for"" => {"
+83,src/compiler.rs,115,0,0,1,2,0.0,0.0,0.0,"let (path, name) = self.parse_for(rest)?;"
+84,src/compiler.rs,116,0,0,1,2,0.0,0.0,0.0,self.instructions
+85,src/compiler.rs,117,0,0,1,2,0.0,0.0,0.0,".push(Instruction::PushIterationContext(path, name));"
+86,src/compiler.rs,118,0,0,1,2,0.0,0.0,0.0,self.block_stack
+87,src/compiler.rs,119,0,0,1,2,0.0,0.0,0.0,".push((discriminant, Block::For(self.instructions.len())));"
+88,src/compiler.rs,120,0,0,1,2,0.0,0.0,0.0,self.instructions.push(Instruction::Iterate(UNKNOWN));
+89,src/compiler.rs,122,0,0,1,2,0.0,0.0,0.0,"""endfor"" => {"
+90,src/compiler.rs,123,0,0,1,2,0.0,0.0,0.0,self.expect_empty(rest)?;
+91,src/compiler.rs,124,0,0,1,2,0.0,0.0,0.0,let num_instructions = self.instructions.len() + 1;
+92,src/compiler.rs,125,0,0,1,2,0.0,0.0,0.0,"let goto_target = self.close_for(num_instructions, discriminant)?;"
+93,src/compiler.rs,126,0,0,1,2,0.0,0.0,0.0,self.instructions.push(Instruction::Goto(goto_target));
+94,src/compiler.rs,127,0,0,1,2,0.0,0.0,0.0,self.instructions.push(Instruction::PopContext);
+95,src/compiler.rs,129,0,0,1,2,0.0,0.0,0.0,"""call"" => {"
+96,src/compiler.rs,130,0,0,1,2,0.0,0.0,0.0,"let (name, path) = self.parse_call(rest)?;"
+97,src/compiler.rs,131,0,0,1,2,0.0,0.0,0.0,"self.instructions.push(Instruction::Call(name, path));"
+98,src/compiler.rs,134,0,0,1,2,0.0,0.0,0.0,return Err(self.parse_error(
+99,src/compiler.rs,143,0,1,1,1,0.0,0.0,0.0,} else if self.remaining_text.starts_with('{') {
+100,src/compiler.rs,144,0,1,1,1,0.0,0.0,0.0,self.trim_next = false;
+101,src/compiler.rs,146,0,1,1,1,0.0,0.0,0.0,"let (path, name) = self.consume_value()?;"
+102,src/compiler.rs,147,0,1,1,1,0.0,0.0,0.0,let instruction = match name {
+103,src/compiler.rs,148,0,0,1,2,0.0,0.0,0.0,"Some(name) => Instruction::FormattedValue(path, name),"
+104,src/compiler.rs,149,0,1,1,1,0.0,0.0,0.0,"None => Instruction::Value(path),"
+105,src/compiler.rs,151,0,1,1,1,0.0,0.0,0.0,self.instructions.push(instruction);
+106,src/compiler.rs,154,0,1,1,1,0.0,0.0,0.0,let mut escaped = false;
+107,src/compiler.rs,156,0,1,1,1,0.0,0.0,0.0,let mut text = self.consume_text(escaped);
+108,src/compiler.rs,157,0,1,1,1,0.0,0.0,0.0,if self.trim_next {
+109,src/compiler.rs,160,0,1,1,1,0.0,0.0,0.0,}
+110,src/compiler.rs,161,0,1,1,1,0.0,0.0,0.0,escaped = text.ends_with('\\');
+111,src/compiler.rs,162,0,1,1,1,0.0,0.0,0.0,if escaped {
+112,src/compiler.rs,163,0,0,1,2,0.0,0.0,0.0,text = &text[..text.len() - 1];
+113,src/compiler.rs,164,0,1,1,1,0.0,0.0,0.0,}
+114,src/compiler.rs,165,0,1,1,1,0.0,0.0,0.0,self.instructions.push(Instruction::Literal(text));
+115,src/compiler.rs,167,0,1,1,1,0.0,0.0,0.0,if !escaped {
+116,src/compiler.rs,176,0,0,1,2,0.0,0.0,0.0,}
+117,src/compiler.rs,181,0,2,1,0,0.0,0.0,0.0,"if let Some((text, _)) = self.block_stack.pop() {"
+118,src/compiler.rs,182,0,0,1,2,0.0,0.0,0.0,return Err(self.parse_error(
+119,src/compiler.rs,183,0,0,1,2,0.0,0.0,0.0,"text,"
+120,src/compiler.rs,186,0,2,1,0,0.0,0.0,0.0,}
+121,src/compiler.rs,188,0,2,1,0,0.0,0.0,0.0,Ok(self.instructions)
+122,src/compiler.rs,193,0,1,1,1,0.0,0.0,0.0,"fn parse_path(&self, text: &'template str) -> Result<Path<'template>> {"
+123,src/compiler.rs,194,0,1,1,1,0.0,0.0,0.0,if !text.starts_with('@') {
+124,src/compiler.rs,195,0,1,1,1,0.0,0.0,0.0,Ok(text
+125,src/compiler.rs,196,0,1,1,1,0.0,0.0,0.0,.split('.')
+126,src/compiler.rs,197,0,1,1,1,0.0,0.0,0.0,.map(|s| match s.parse::<usize>() {
+127,src/compiler.rs,198,0,0,1,2,0.0,0.0,0.0,"Ok(n) => PathStep::Index(s, n),"
+128,src/compiler.rs,199,0,1,1,1,0.0,0.0,0.0,"Err(_) => PathStep::Name(s),"
+129,src/compiler.rs,200,0,1,1,1,0.0,0.0,0.0,})
+130,src/compiler.rs,201,0,1,1,1,0.0,0.0,0.0,.collect::<Vec<_>>())
+131,src/compiler.rs,202,0,0,1,2,0.0,0.0,0.0,} else if KNOWN_KEYWORDS.iter().any(|k| *k == text) {
+132,src/compiler.rs,203,0,0,1,2,0.0,0.0,0.0,Ok(vec![PathStep::Name(text)])
+133,src/compiler.rs,205,0,0,1,2,0.0,0.0,0.0,"Err(self.parse_error(text, format!(""Invalid keyword name '{}'"", text)))"
+134,src/compiler.rs,207,0,1,1,1,0.0,0.0,0.0,}
+135,src/compiler.rs,211,0,0,1,2,0.0,0.0,0.0,"fn parse_error(&self, location: &str, msg: String) -> Error {"
+136,src/compiler.rs,212,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(self.original_text, location);"
+137,src/compiler.rs,213,0,0,1,2,0.0,0.0,0.0,"ParseError { msg, line, column }"
+138,src/compiler.rs,214,0,0,1,2,0.0,0.0,0.0,}
+139,src/compiler.rs,218,0,0,1,2,0.0,0.0,0.0,"fn expect_empty(&self, text: &str) -> Result<()> {"
+140,src/compiler.rs,219,0,0,1,2,0.0,0.0,0.0,if text.is_empty() {
+141,src/compiler.rs,220,0,0,1,2,0.0,0.0,0.0,Ok(())
+142,src/compiler.rs,222,0,0,1,2,0.0,0.0,0.0,"Err(self.parse_error(text, format!(""Unexpected text '{}'"", text)))"
+143,src/compiler.rs,224,0,0,1,2,0.0,0.0,0.0,}
+144,src/compiler.rs,229,0,0,1,2,0.0,0.0,0.0,"fn close_branch(&mut self, new_target: usize, discriminant: &str) -> Result<()> {"
+145,src/compiler.rs,230,0,0,1,2,0.0,0.0,0.0,let branch_block = self.block_stack.pop();
+146,src/compiler.rs,231,0,0,1,2,0.0,0.0,0.0,"if let Some((_, Block::Branch(index))) = branch_block {"
+147,src/compiler.rs,232,0,0,1,2,0.0,0.0,0.0,match &mut self.instructions[index] {
+148,src/compiler.rs,233,0,0,1,2,0.0,0.0,0.0,"Instruction::Branch(_, _, target) => {"
+149,src/compiler.rs,234,0,0,1,2,0.0,0.0,0.0,*target = new_target;
+150,src/compiler.rs,235,0,0,1,2,0.0,0.0,0.0,Ok(())
+151,src/compiler.rs,237,0,0,1,2,0.0,0.0,0.0,Instruction::Goto(target) => {
+152,src/compiler.rs,238,0,0,1,2,0.0,0.0,0.0,*target = new_target;
+153,src/compiler.rs,239,0,0,1,2,0.0,0.0,0.0,Ok(())
+154,src/compiler.rs,241,0,0,1,2,0.0,0.0,0.0,"_ => panic!(),"
+155,src/compiler.rs,244,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+156,src/compiler.rs,245,0,0,1,2,0.0,0.0,0.0,"discriminant,"
+157,src/compiler.rs,250,0,0,1,2,0.0,0.0,0.0,}
+158,src/compiler.rs,255,0,0,1,2,0.0,0.0,0.0,"fn close_for(&mut self, new_target: usize, discriminant: &str) -> Result<usize> {"
+159,src/compiler.rs,256,0,0,1,2,0.0,0.0,0.0,let branch_block = self.block_stack.pop();
+160,src/compiler.rs,257,0,0,1,2,0.0,0.0,0.0,"if let Some((_, Block::For(index))) = branch_block {"
+161,src/compiler.rs,258,0,0,1,2,0.0,0.0,0.0,match &mut self.instructions[index] {
+162,src/compiler.rs,259,0,0,1,2,0.0,0.0,0.0,Instruction::Iterate(target) => {
+163,src/compiler.rs,260,0,0,1,2,0.0,0.0,0.0,*target = new_target;
+164,src/compiler.rs,261,0,0,1,2,0.0,0.0,0.0,Ok(index)
+165,src/compiler.rs,263,0,0,1,2,0.0,0.0,0.0,"_ => panic!(),"
+166,src/compiler.rs,266,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+167,src/compiler.rs,267,0,0,1,2,0.0,0.0,0.0,"discriminant,"
+168,src/compiler.rs,271,0,0,1,2,0.0,0.0,0.0,}
+169,src/compiler.rs,275,0,1,1,1,0.0,0.0,0.0,"fn consume_text(&mut self, escaped: bool) -> &'template str {"
+170,src/compiler.rs,276,0,1,1,1,0.0,0.0,0.0,let search_substr = if escaped {
+171,src/compiler.rs,277,0,0,1,2,0.0,0.0,0.0,&self.remaining_text[1..]
+172,src/compiler.rs,279,0,1,1,1,0.0,0.0,0.0,self.remaining_text
+173,src/compiler.rs,282,0,1,1,1,0.0,0.0,0.0,let mut position = search_substr
+174,src/compiler.rs,283,0,1,1,1,0.0,0.0,0.0,.find('{')
+175,src/compiler.rs,284,0,1,1,1,0.0,0.0,0.0,.unwrap_or_else(|| search_substr.len());
+176,src/compiler.rs,285,0,1,1,1,0.0,0.0,0.0,if escaped {
+177,src/compiler.rs,287,0,1,1,1,0.0,0.0,0.0,}
+178,src/compiler.rs,289,0,1,1,1,0.0,0.0,0.0,"let (text, remaining) = self.remaining_text.split_at(position);"
+179,src/compiler.rs,290,0,1,1,1,0.0,0.0,0.0,self.remaining_text = remaining;
+180,src/compiler.rs,291,0,1,1,1,0.0,0.0,0.0,text
+181,src/compiler.rs,292,0,1,1,1,0.0,0.0,0.0,}
+182,src/compiler.rs,296,0,1,1,1,0.0,0.0,0.0,"fn consume_value(&mut self) -> Result<(Path<'template>, Option<&'template str>)> {"
+183,src/compiler.rs,297,0,1,1,1,0.0,0.0,0.0,"let tag = self.consume_tag(""}"")?;"
+184,src/compiler.rs,298,0,1,1,1,0.0,0.0,0.0,let mut tag = tag[1..(tag.len() - 1)].trim();
+185,src/compiler.rs,299,0,1,1,1,0.0,0.0,0.0,if tag.starts_with('-') {
+186,src/compiler.rs,300,0,0,1,2,0.0,0.0,0.0,tag = tag[1..].trim();
+187,src/compiler.rs,302,0,1,1,1,0.0,0.0,0.0,}
+188,src/compiler.rs,303,0,1,1,1,0.0,0.0,0.0,if tag.ends_with('-') {
+189,src/compiler.rs,304,0,0,1,2,0.0,0.0,0.0,tag = tag[0..tag.len() - 1].trim();
+190,src/compiler.rs,306,0,1,1,1,0.0,0.0,0.0,}
+191,src/compiler.rs,308,0,1,1,1,0.0,0.0,0.0,if let Some(index) = tag.find('|') {
+192,src/compiler.rs,309,0,0,1,2,0.0,0.0,0.0,"let (path_str, name_str) = tag.split_at(index);"
+193,src/compiler.rs,310,0,0,1,2,0.0,0.0,0.0,let name = name_str[1..].trim();
+194,src/compiler.rs,311,0,0,1,2,0.0,0.0,0.0,let path = self.parse_path(path_str.trim())?;
+195,src/compiler.rs,312,0,0,1,2,0.0,0.0,0.0,"Ok((path, Some(name)))"
+196,src/compiler.rs,314,0,1,1,1,0.0,0.0,0.0,"Ok((self.parse_path(tag)?, None))"
+197,src/compiler.rs,316,0,1,1,1,0.0,0.0,0.0,}
+198,src/compiler.rs,319,0,0,1,2,0.0,0.0,0.0,fn trim_last_whitespace(&mut self) {
+199,src/compiler.rs,320,0,0,1,2,0.0,0.0,0.0,if let Some(Instruction::Literal(text)) = self.instructions.last_mut() {
+200,src/compiler.rs,322,0,0,1,2,0.0,0.0,0.0,}
+201,src/compiler.rs,323,0,0,1,2,0.0,0.0,0.0,}
+202,src/compiler.rs,326,0,0,1,2,0.0,0.0,0.0,fn trim_next_whitespace(&mut self) {
+203,src/compiler.rs,327,0,0,1,2,0.0,0.0,0.0,self.trim_next = true;
+204,src/compiler.rs,328,0,0,1,2,0.0,0.0,0.0,}
+205,src/compiler.rs,332,0,0,1,2,0.0,0.0,0.0,"fn consume_block(&mut self) -> Result<(&'template str, &'template str)> {"
+206,src/compiler.rs,333,0,0,1,2,0.0,0.0,0.0,"let tag = self.consume_tag(""}}"")?;"
+207,src/compiler.rs,334,0,0,1,2,0.0,0.0,0.0,let mut block = tag[2..(tag.len() - 2)].trim();
+208,src/compiler.rs,335,0,0,1,2,0.0,0.0,0.0,if block.starts_with('-') {
+209,src/compiler.rs,336,0,0,1,2,0.0,0.0,0.0,block = block[1..].trim();
+210,src/compiler.rs,338,0,0,1,2,0.0,0.0,0.0,}
+211,src/compiler.rs,339,0,0,1,2,0.0,0.0,0.0,if block.ends_with('-') {
+212,src/compiler.rs,340,0,0,1,2,0.0,0.0,0.0,block = block[0..block.len() - 1].trim();
+213,src/compiler.rs,342,0,0,1,2,0.0,0.0,0.0,}
+214,src/compiler.rs,343,0,0,1,2,0.0,0.0,0.0,let discriminant = block.split_whitespace().next().unwrap_or(block);
+215,src/compiler.rs,344,0,0,1,2,0.0,0.0,0.0,let rest = block[discriminant.len()..].trim();
+216,src/compiler.rs,345,0,0,1,2,0.0,0.0,0.0,"Ok((discriminant, rest))"
+217,src/compiler.rs,346,0,0,1,2,0.0,0.0,0.0,}
+218,src/compiler.rs,358,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+219,src/compiler.rs,367,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+220,src/compiler.rs,378,0,0,1,2,0.0,0.0,0.0,"fn parse_with(&self, with_text: &'template str) -> Result<(Path<'template>, &'template str)> {"
+221,src/compiler.rs,379,0,0,1,2,0.0,0.0,0.0,"if let Some(index) = with_text.find("" as "") {"
+222,src/compiler.rs,380,0,0,1,2,0.0,0.0,0.0,"let (path_str, name_str) = with_text.split_at(index);"
+223,src/compiler.rs,381,0,0,1,2,0.0,0.0,0.0,let path = self.parse_path(path_str.trim())?;
+224,src/compiler.rs,382,0,0,1,2,0.0,0.0,0.0,"let name = name_str["" as "".len()..].trim();"
+225,src/compiler.rs,383,0,0,1,2,0.0,0.0,0.0,"Ok((path, name))"
+226,src/compiler.rs,385,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+227,src/compiler.rs,393,0,0,1,2,0.0,0.0,0.0,}
+228,src/compiler.rs,396,0,0,1,2,0.0,0.0,0.0,"fn parse_for(&self, for_text: &'template str) -> Result<(Path<'template>, &'template str)> {"
+229,src/compiler.rs,397,0,0,1,2,0.0,0.0,0.0,"if let Some(index) = for_text.find("" in "") {"
+230,src/compiler.rs,398,0,0,1,2,0.0,0.0,0.0,"let (name_str, path_str) = for_text.split_at(index);"
+231,src/compiler.rs,399,0,0,1,2,0.0,0.0,0.0,let name = name_str.trim();
+232,src/compiler.rs,400,0,0,1,2,0.0,0.0,0.0,"let path = self.parse_path(path_str["" in "".len()..].trim())?;"
+233,src/compiler.rs,401,0,0,1,2,0.0,0.0,0.0,"Ok((path, name))"
+234,src/compiler.rs,403,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+235,src/compiler.rs,408,0,0,1,2,0.0,0.0,0.0,}
+236,src/compiler.rs,411,0,0,1,2,0.0,0.0,0.0,"fn parse_call(&self, call_text: &'template str) -> Result<(&'template str, Path<'template>)> {"
+237,src/compiler.rs,412,0,0,1,2,0.0,0.0,0.0,"if let Some(index) = call_text.find("" with "") {"
+238,src/compiler.rs,413,0,0,1,2,0.0,0.0,0.0,"let (name_str, path_str) = call_text.split_at(index);"
+239,src/compiler.rs,414,0,0,1,2,0.0,0.0,0.0,let name = name_str.trim();
+240,src/compiler.rs,415,0,0,1,2,0.0,0.0,0.0,"let path = self.parse_path(path_str["" with "".len()..].trim())?;"
+241,src/compiler.rs,416,0,0,1,2,0.0,0.0,0.0,"Ok((name, path))"
+242,src/compiler.rs,418,0,0,1,2,0.0,0.0,0.0,Err(self.parse_error(
+243,src/compiler.rs,423,0,0,1,2,0.0,0.0,0.0,}
+244,src/error.rs,48,0,0,1,2,0.0,0.0,0.0,fn from(err: SerdeJsonError) -> Error {
+245,src/error.rs,49,0,0,1,2,0.0,0.0,0.0,Error::SerdeError { err }
+246,src/error.rs,50,0,0,1,2,0.0,0.0,0.0,}
+247,src/error.rs,53,0,0,1,2,0.0,0.0,0.0,fn from(err: fmt::Error) -> Error {
+248,src/error.rs,54,0,0,1,2,0.0,0.0,0.0,Error::StdFormatError { err }
+249,src/error.rs,55,0,0,1,2,0.0,0.0,0.0,}
+250,src/error.rs,58,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+251,src/error.rs,59,0,0,1,2,0.0,0.0,0.0,match self {
+252,src/error.rs,60,0,0,1,2,0.0,0.0,0.0,"Error::ParseError { msg, line, column } => write!("
+253,src/error.rs,61,0,0,1,2,0.0,0.0,0.0,"f,"
+254,src/error.rs,65,0,0,1,2,0.0,0.0,0.0,"Error::RenderError { msg, line, column } => {"
+255,src/error.rs,66,0,0,1,2,0.0,0.0,0.0,write!(
+256,src/error.rs,67,0,0,1,2,0.0,0.0,0.0,"f,"
+257,src/error.rs,72,0,0,1,2,0.0,0.0,0.0,Error::SerdeError { err } => {
+258,src/error.rs,73,0,0,1,2,0.0,0.0,0.0,"write!(f, ""Unexpected serde error while converting the context to a serde_json::Value. Error: {}"", err)"
+259,src/error.rs,75,0,0,1,2,0.0,0.0,0.0,Error::GenericError { msg } => {
+260,src/error.rs,76,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{}"", msg)"
+261,src/error.rs,78,0,0,1,2,0.0,0.0,0.0,Error::StdFormatError { err } => {
+262,src/error.rs,79,0,0,1,2,0.0,0.0,0.0,"write!(f, ""Unexpected formatting error: {}"", err)"
+263,src/error.rs,82,0,0,1,2,0.0,0.0,0.0,"name,"
+264,src/error.rs,83,0,0,1,2,0.0,0.0,0.0,"err,"
+265,src/error.rs,84,0,0,1,2,0.0,0.0,0.0,"line,"
+266,src/error.rs,85,0,0,1,2,0.0,0.0,0.0,"column,"
+267,src/error.rs,87,0,0,1,2,0.0,0.0,0.0,write!(
+268,src/error.rs,88,0,0,1,2,0.0,0.0,0.0,"f,"
+269,src/error.rs,94,0,0,1,2,0.0,0.0,0.0,"name,"
+270,src/error.rs,95,0,0,1,2,0.0,0.0,0.0,"err,"
+271,src/error.rs,96,0,0,1,2,0.0,0.0,0.0,"line,"
+272,src/error.rs,97,0,0,1,2,0.0,0.0,0.0,"column,"
+273,src/error.rs,99,0,0,1,2,0.0,0.0,0.0,write!(
+274,src/error.rs,100,0,0,1,2,0.0,0.0,0.0,"f,"
+275,src/error.rs,105,0,0,1,2,0.0,0.0,0.0,"Error::__NonExhaustive => unreachable!(),"
+276,src/error.rs,107,0,0,1,2,0.0,0.0,0.0,}
+277,src/error.rs,110,0,0,1,2,0.0,0.0,0.0,fn description(&self) -> &str {
+278,src/error.rs,111,0,0,1,2,0.0,0.0,0.0,match self {
+279,src/error.rs,112,0,0,1,2,0.0,0.0,0.0,"Error::ParseError { .. } => ""ParseError"","
+280,src/error.rs,113,0,0,1,2,0.0,0.0,0.0,"Error::RenderError { .. } => ""RenderError"","
+281,src/error.rs,114,0,0,1,2,0.0,0.0,0.0,"Error::SerdeError { .. } => ""SerdeError"","
+282,src/error.rs,115,0,0,1,2,0.0,0.0,0.0,"Error::GenericError { msg } => &msg,"
+283,src/error.rs,116,0,0,1,2,0.0,0.0,0.0,"Error::StdFormatError { .. } => ""StdFormatError"","
+284,src/error.rs,117,0,0,1,2,0.0,0.0,0.0,"Error::CalledTemplateError { .. } => ""CalledTemplateError"","
+285,src/error.rs,118,0,0,1,2,0.0,0.0,0.0,"Error::CalledFormatterError { .. } => ""CalledFormatterError"","
+286,src/error.rs,119,0,0,1,2,0.0,0.0,0.0,"Error::__NonExhaustive => unreachable!(),"
+287,src/error.rs,121,0,0,1,2,0.0,0.0,0.0,}
+288,src/error.rs,126,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn lookup_error(source: &str, step: &str, path: PathSlice, current: &Value) -> Error {"
+289,src/error.rs,127,0,0,1,2,0.0,0.0,0.0,let avail_str = if let Value::Object(object_map) = current {
+290,src/error.rs,128,0,0,1,2,0.0,0.0,0.0,"let mut avail_str = "" Available values at this level are "".to_string();"
+291,src/error.rs,129,0,0,1,2,0.0,0.0,0.0,"for (i, key) in object_map.keys().enumerate() {"
+292,src/error.rs,130,0,0,1,2,0.0,0.0,0.0,if i > 0 {
+293,src/error.rs,131,0,0,1,2,0.0,0.0,0.0,"avail_str.push_str("", "");"
+294,src/error.rs,132,0,0,1,2,0.0,0.0,0.0,}
+295,src/error.rs,133,0,0,1,2,0.0,0.0,0.0,avail_str.push('\'');
+296,src/error.rs,134,0,0,1,2,0.0,0.0,0.0,avail_str.push_str(key);
+297,src/error.rs,135,0,0,1,2,0.0,0.0,0.0,avail_str.push('\'');
+298,src/error.rs,137,0,0,1,2,0.0,0.0,0.0,avail_str
+299,src/error.rs,139,0,0,1,2,0.0,0.0,0.0,""""".to_string()"
+300,src/error.rs,142,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, step);"
+301,src/error.rs,144,0,0,1,2,0.0,0.0,0.0,Error::RenderError {
+302,src/error.rs,145,0,0,1,2,0.0,0.0,0.0,msg: format!(
+303,src/error.rs,148,0,0,1,2,0.0,0.0,0.0,"path_to_str(path),"
+304,src/error.rs,154,0,0,1,2,0.0,0.0,0.0,}
+305,src/error.rs,156,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn truthiness_error(source: &str, path: PathSlice) -> Error {"
+306,src/error.rs,157,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, path.last().unwrap());"
+307,src/error.rs,158,0,0,1,2,0.0,0.0,0.0,Error::RenderError {
+308,src/error.rs,159,0,0,1,2,0.0,0.0,0.0,msg: format!(
+309,src/error.rs,161,0,0,1,2,0.0,0.0,0.0,path_to_str(path)
+310,src/error.rs,166,0,0,1,2,0.0,0.0,0.0,}
+311,src/error.rs,168,0,0,1,2,0.0,0.0,0.0,pub(crate) fn unprintable_error() -> Error {
+312,src/error.rs,169,0,0,1,2,0.0,0.0,0.0,Error::GenericError {
+313,src/error.rs,172,0,0,1,2,0.0,0.0,0.0,}
+314,src/error.rs,174,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn not_iterable_error(source: &str, path: PathSlice) -> Error {"
+315,src/error.rs,175,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, path.last().unwrap());"
+316,src/error.rs,176,0,0,1,2,0.0,0.0,0.0,Error::RenderError {
+317,src/error.rs,177,0,0,1,2,0.0,0.0,0.0,msg: format!(
+318,src/error.rs,179,0,0,1,2,0.0,0.0,0.0,path_to_str(path)
+319,src/error.rs,184,0,0,1,2,0.0,0.0,0.0,}
+320,src/error.rs,186,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn unknown_template(source: &str, name: &str) -> Error {"
+321,src/error.rs,187,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, name);"
+322,src/error.rs,188,0,0,1,2,0.0,0.0,0.0,Error::RenderError {
+323,src/error.rs,189,0,0,1,2,0.0,0.0,0.0,"msg: format!(""Tried to call an unknown template '{}'"", name),"
+324,src/error.rs,193,0,0,1,2,0.0,0.0,0.0,}
+325,src/error.rs,195,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn unknown_formatter(source: &str, name: &str) -> Error {"
+326,src/error.rs,196,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, name);"
+327,src/error.rs,197,0,0,1,2,0.0,0.0,0.0,Error::RenderError {
+328,src/error.rs,198,0,0,1,2,0.0,0.0,0.0,"msg: format!(""Tried to call an unknown formatter '{}'"", name),"
+329,src/error.rs,202,0,0,1,2,0.0,0.0,0.0,}
+330,src/error.rs,204,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn called_template_error(source: &str, template_name: &str, err: Error) -> Error {"
+331,src/error.rs,205,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, template_name);"
+332,src/error.rs,206,0,0,1,2,0.0,0.0,0.0,Error::CalledTemplateError {
+333,src/error.rs,207,0,0,1,2,0.0,0.0,0.0,"name: template_name.to_string(),"
+334,src/error.rs,208,0,0,1,2,0.0,0.0,0.0,"err: Box::new(err),"
+335,src/error.rs,212,0,0,1,2,0.0,0.0,0.0,}
+336,src/error.rs,214,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn called_formatter_error(source: &str, formatter_name: &str, err: Error) -> Error {"
+337,src/error.rs,215,0,0,1,2,0.0,0.0,0.0,"let (line, column) = get_offset(source, formatter_name);"
+338,src/error.rs,216,0,0,1,2,0.0,0.0,0.0,Error::CalledFormatterError {
+339,src/error.rs,217,0,0,1,2,0.0,0.0,0.0,"name: formatter_name.to_string(),"
+340,src/error.rs,218,0,0,1,2,0.0,0.0,0.0,"err: Box::new(err),"
+341,src/error.rs,222,0,0,1,2,0.0,0.0,0.0,}
+342,src/error.rs,226,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn get_offset(source: &str, target: &str) -> (usize, usize) {"
+343,src/error.rs,227,0,0,1,2,0.0,0.0,0.0,let offset = target.as_ptr() as isize - source.as_ptr() as isize;
+344,src/error.rs,228,0,0,1,2,0.0,0.0,0.0,let to_scan = &source[0..(offset as usize)];
+345,src/error.rs,230,0,0,1,2,0.0,0.0,0.0,let mut line = 1;
+346,src/error.rs,231,0,0,1,2,0.0,0.0,0.0,let mut column = 0;
+347,src/error.rs,233,0,0,1,2,0.0,0.0,0.0,for byte in to_scan.bytes() {
+348,src/error.rs,234,0,0,1,2,0.0,0.0,0.0,match byte as char {
+349,src/error.rs,235,0,0,1,2,0.0,0.0,0.0,'\n' => {
+350,src/error.rs,239,0,0,1,2,0.0,0.0,0.0,_ => {
+351,src/error.rs,245,0,0,1,2,0.0,0.0,0.0,"(line, column)"
+352,src/error.rs,246,0,0,1,2,0.0,0.0,0.0,}
+353,src/instruction.rs,21,0,0,1,2,0.0,0.0,0.0,fn deref(&self) -> &Self::Target {
+354,src/instruction.rs,22,0,0,1,2,0.0,0.0,0.0,match self {
+355,src/instruction.rs,23,0,0,1,2,0.0,0.0,0.0,"PathStep::Name(s) => s,"
+356,src/instruction.rs,24,0,0,1,2,0.0,0.0,0.0,"PathStep::Index(s, _) => s,"
+357,src/instruction.rs,26,0,0,1,2,0.0,0.0,0.0,}
+358,src/instruction.rs,76,0,0,1,2,0.0,0.0,0.0,pub(crate) fn path_to_str(path: PathSlice) -> String {
+359,src/instruction.rs,77,0,0,1,2,0.0,0.0,0.0,"let mut path_str = """".to_string();"
+360,src/instruction.rs,78,0,0,1,2,0.0,0.0,0.0,"for (i, step) in path.iter().enumerate() {"
+361,src/instruction.rs,79,0,0,1,2,0.0,0.0,0.0,if i > 0 {
+362,src/instruction.rs,81,0,0,1,2,0.0,0.0,0.0,}
+363,src/instruction.rs,82,0,0,1,2,0.0,0.0,0.0,path_str.push_str(step);
+364,src/instruction.rs,84,0,0,1,2,0.0,0.0,0.0,path_str
+365,src/instruction.rs,85,0,0,1,2,0.0,0.0,0.0,}
+366,src/lib.rs,89,0,0,1,2,0.0,0.0,0.0,"pub fn escape(value: &str, output: &mut String) {"
+367,src/lib.rs,91,0,0,1,2,0.0,0.0,0.0,let value_str = value;
+368,src/lib.rs,92,0,0,1,2,0.0,0.0,0.0,let mut last_emitted = 0;
+369,src/lib.rs,93,0,0,1,2,0.0,0.0,0.0,"for (i, ch) in value.bytes().enumerate() {"
+370,src/lib.rs,94,0,0,1,2,0.0,0.0,0.0,match ch as char {
+371,src/lib.rs,96,0,0,1,2,0.0,0.0,0.0,output.push_str(&value_str[last_emitted..i]);
+372,src/lib.rs,97,0,0,1,2,0.0,0.0,0.0,let s = match ch as char {
+373,src/lib.rs,98,0,0,1,2,0.0,0.0,0.0,"'>' => ""&gt;"","
+374,src/lib.rs,99,0,0,1,2,0.0,0.0,0.0,"'<' => ""&lt;"","
+375,src/lib.rs,100,0,0,1,2,0.0,0.0,0.0,"'&' => ""&amp;"","
+376,src/lib.rs,101,0,0,1,2,0.0,0.0,0.0,"'\'' => ""&#39;"","
+377,src/lib.rs,102,0,0,1,2,0.0,0.0,0.0,"'""' => ""&quot;"","
+378,src/lib.rs,103,0,0,1,2,0.0,0.0,0.0,"_ => unreachable!(),"
+379,src/lib.rs,105,0,0,1,2,0.0,0.0,0.0,output.push_str(s);
+380,src/lib.rs,106,0,0,1,2,0.0,0.0,0.0,last_emitted = i + 1;
+381,src/lib.rs,108,0,0,1,2,0.0,0.0,0.0,_ => {}
+382,src/lib.rs,112,0,0,1,2,0.0,0.0,0.0,if last_emitted < value_str.len() {
+383,src/lib.rs,113,0,0,1,2,0.0,0.0,0.0,output.push_str(&value_str[last_emitted..]);
+384,src/lib.rs,114,0,0,1,2,0.0,0.0,0.0,}
+385,src/lib.rs,115,0,0,1,2,0.0,0.0,0.0,}
+386,src/lib.rs,127,0,0,1,2,0.0,0.0,0.0,"pub fn format(value: &Value, output: &mut String) -> Result<()> {"
+387,src/lib.rs,128,0,0,1,2,0.0,0.0,0.0,match value {
+388,src/lib.rs,129,0,0,1,2,0.0,0.0,0.0,"Value::Null => Ok(()),"
+389,src/lib.rs,130,0,0,1,2,0.0,0.0,0.0,Value::Bool(b) => {
+390,src/lib.rs,131,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", b)?;"
+391,src/lib.rs,132,0,0,1,2,0.0,0.0,0.0,Ok(())
+392,src/lib.rs,134,0,0,1,2,0.0,0.0,0.0,Value::Number(n) => {
+393,src/lib.rs,135,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", n)?;"
+394,src/lib.rs,136,0,0,1,2,0.0,0.0,0.0,Ok(())
+395,src/lib.rs,138,0,0,1,2,0.0,0.0,0.0,Value::String(s) => {
+396,src/lib.rs,139,0,0,1,2,0.0,0.0,0.0,"escape(s, output);"
+397,src/lib.rs,140,0,0,1,2,0.0,0.0,0.0,Ok(())
+398,src/lib.rs,142,0,0,1,2,0.0,0.0,0.0,"_ => Err(unprintable_error()),"
+399,src/lib.rs,144,0,0,1,2,0.0,0.0,0.0,}
+400,src/lib.rs,147,0,0,1,2,0.0,0.0,0.0,"pub fn format_unescaped(value: &Value, output: &mut String) -> Result<()> {"
+401,src/lib.rs,148,0,0,1,2,0.0,0.0,0.0,match value {
+402,src/lib.rs,149,0,0,1,2,0.0,0.0,0.0,"Value::Null => Ok(()),"
+403,src/lib.rs,150,0,0,1,2,0.0,0.0,0.0,Value::Bool(b) => {
+404,src/lib.rs,151,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", b)?;"
+405,src/lib.rs,152,0,0,1,2,0.0,0.0,0.0,Ok(())
+406,src/lib.rs,154,0,0,1,2,0.0,0.0,0.0,Value::Number(n) => {
+407,src/lib.rs,155,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", n)?;"
+408,src/lib.rs,156,0,0,1,2,0.0,0.0,0.0,Ok(())
+409,src/lib.rs,158,0,0,1,2,0.0,0.0,0.0,Value::String(s) => {
+410,src/lib.rs,159,0,0,1,2,0.0,0.0,0.0,output.push_str(s);
+411,src/lib.rs,160,0,0,1,2,0.0,0.0,0.0,Ok(())
+412,src/lib.rs,162,0,0,1,2,0.0,0.0,0.0,"_ => Err(unprintable_error()),"
+413,src/lib.rs,164,0,0,1,2,0.0,0.0,0.0,}
+414,src/lib.rs,195,0,0,1,2,0.0,0.0,0.0,"pub fn set_default_formatter<F>(&mut self, formatter: &'template F)"
+415,src/lib.rs,199,0,0,1,2,0.0,0.0,0.0,self.default_formatter = formatter;
+416,src/lib.rs,200,0,0,1,2,0.0,0.0,0.0,}
+417,src/lib.rs,212,0,0,1,2,0.0,0.0,0.0,"pub fn render<C>(&self, template: &str, context: &C) -> Result<String>"
+418,src/lib.rs,216,0,0,1,2,0.0,0.0,0.0,let value = serde_json::to_value(context)?;
+419,src/lib.rs,217,0,0,1,2,0.0,0.0,0.0,match self.templates.get(template) {
+420,src/lib.rs,218,0,0,1,2,0.0,0.0,0.0,Some(tmpl) => tmpl.render(
+421,src/lib.rs,219,0,0,1,2,0.0,0.0,0.0,"&value,"
+422,src/lib.rs,220,0,0,1,2,0.0,0.0,0.0,"&self.templates,"
+423,src/lib.rs,221,0,0,1,2,0.0,0.0,0.0,"&self.formatters,"
+424,src/lib.rs,222,0,0,1,2,0.0,0.0,0.0,"self.default_formatter,"
+425,src/lib.rs,224,0,0,1,2,0.0,0.0,0.0,None => Err(Error::GenericError {
+426,src/lib.rs,228,0,0,1,2,0.0,0.0,0.0,}
+427,src/lib.rs,231,0,0,1,2,0.0,0.0,0.0,fn default() -> TinyTemplate<'template> {
+428,src/lib.rs,232,0,0,1,2,0.0,0.0,0.0,TinyTemplate::new()
+429,src/lib.rs,233,0,0,1,2,0.0,0.0,0.0,}
+430,src/template.rs,42,0,0,1,2,0.0,0.0,0.0,"fn lookup(&self, path: PathSlice) -> Result<&'render Value> {"
+431,src/template.rs,43,0,0,1,2,0.0,0.0,0.0,for stack_layer in self.context_stack.iter().rev() {
+432,src/template.rs,44,0,0,1,2,0.0,0.0,0.0,match stack_layer {
+433,src/template.rs,45,0,0,1,2,0.0,0.0,0.0,"ContextElement::Object(obj) => return self.lookup_in(path, obj),"
+434,src/template.rs,46,0,0,1,2,0.0,0.0,0.0,"ContextElement::Named(name, obj) => {"
+435,src/template.rs,47,0,0,1,2,0.0,0.0,0.0,if *name == &*path[0] {
+436,src/template.rs,48,0,0,1,2,0.0,0.0,0.0,"return self.lookup_in(&path[1..], obj);"
+437,src/template.rs,49,0,0,1,2,0.0,0.0,0.0,}
+438,src/template.rs,51,0,0,1,2,0.0,0.0,0.0,"ContextElement::Iteration(name, obj, _, _, _) => {"
+439,src/template.rs,52,0,0,1,2,0.0,0.0,0.0,if *name == &*path[0] {
+440,src/template.rs,53,0,0,1,2,0.0,0.0,0.0,"return self.lookup_in(&path[1..], obj);"
+441,src/template.rs,54,0,0,1,2,0.0,0.0,0.0,}
+442,src/template.rs,58,0,0,1,2,0.0,0.0,0.0,"panic!(""Attempted to do a lookup with an empty context stack. That shouldn't be possible."")"
+443,src/template.rs,59,0,0,1,2,0.0,0.0,0.0,}
+444,src/template.rs,63,0,0,1,2,0.0,0.0,0.0,"fn lookup_in(&self, path: PathSlice, object: &'render Value) -> Result<&'render Value> {"
+445,src/template.rs,64,0,0,1,2,0.0,0.0,0.0,let mut current = object;
+446,src/template.rs,65,0,0,1,2,0.0,0.0,0.0,for step in path.iter() {
+447,src/template.rs,66,0,0,1,2,0.0,0.0,0.0,"if let PathStep::Index(_, n) = step {"
+448,src/template.rs,67,0,0,1,2,0.0,0.0,0.0,if let Some(next) = current.get(n) {
+449,src/template.rs,68,0,0,1,2,0.0,0.0,0.0,current = next;
+450,src/template.rs,69,0,0,1,2,0.0,0.0,0.0,continue;
+451,src/template.rs,70,0,0,1,2,0.0,0.0,0.0,}
+452,src/template.rs,71,0,0,1,2,0.0,0.0,0.0,}
+453,src/template.rs,73,0,0,1,2,0.0,0.0,0.0,let step: &str = &*step;
+454,src/template.rs,75,0,0,1,2,0.0,0.0,0.0,match current.get(step) {
+455,src/template.rs,76,0,0,1,2,0.0,0.0,0.0,"Some(next) => current = next,"
+456,src/template.rs,77,0,0,1,2,0.0,0.0,0.0,"None => return Err(lookup_error(self.original_text, step, path, current)),"
+457,src/template.rs,80,0,0,1,2,0.0,0.0,0.0,Ok(current)
+458,src/template.rs,81,0,0,1,2,0.0,0.0,0.0,}
+459,src/template.rs,84,0,0,1,2,0.0,0.0,0.0,"fn lookup_index(&self) -> Result<(usize, usize)> {"
+460,src/template.rs,85,0,0,1,2,0.0,0.0,0.0,for stack_layer in self.context_stack.iter().rev() {
+461,src/template.rs,86,0,0,1,2,0.0,0.0,0.0,match stack_layer {
+462,src/template.rs,87,0,0,1,2,0.0,0.0,0.0,"ContextElement::Iteration(_, _, index, length, _) => return Ok((*index, *length)),"
+463,src/template.rs,88,0,0,1,2,0.0,0.0,0.0,"_ => continue,"
+464,src/template.rs,91,0,0,1,2,0.0,0.0,0.0,Err(GenericError {
+465,src/template.rs,94,0,0,1,2,0.0,0.0,0.0,}
+466,src/template.rs,97,0,0,1,2,0.0,0.0,0.0,fn lookup_root(&self) -> Result<&'render Value> {
+467,src/template.rs,98,0,0,1,2,0.0,0.0,0.0,match self.context_stack.get(0) {
+468,src/template.rs,99,0,0,1,2,0.0,0.0,0.0,"Some(ContextElement::Object(obj)) => Ok(obj),"
+469,src/template.rs,101,0,0,1,2,0.0,0.0,0.0,"panic!(""Expected Object value at root of context stack, but was something else."")"
+470,src/template.rs,103,0,0,1,2,0.0,0.0,0.0,None => panic!(
+471,src/template.rs,107,0,0,1,2,0.0,0.0,0.0,}
+472,src/template.rs,129,0,0,1,2,0.0,0.0,0.0,pub fn render(
+473,src/template.rs,138,0,0,1,2,0.0,0.0,0.0,let mut output = String::with_capacity(self.template_len);
+474,src/template.rs,139,0,0,1,2,0.0,0.0,0.0,self.render_into(
+475,src/template.rs,140,0,0,1,2,0.0,0.0,0.0,"context,"
+476,src/template.rs,141,0,0,1,2,0.0,0.0,0.0,"template_registry,"
+477,src/template.rs,142,0,0,1,2,0.0,0.0,0.0,"formatter_registry,"
+478,src/template.rs,143,0,0,1,2,0.0,0.0,0.0,"default_formatter,"
+479,src/template.rs,144,0,0,1,2,0.0,0.0,0.0,"&mut output,"
+480,src/template.rs,145,0,0,1,2,0.0,0.0,0.0,)?;
+481,src/template.rs,146,0,0,1,2,0.0,0.0,0.0,Ok(output)
+482,src/template.rs,147,0,0,1,2,0.0,0.0,0.0,}
+483,src/template.rs,150,0,0,1,2,0.0,0.0,0.0,pub fn render_into(
+484,src/template.rs,158,0,0,1,2,0.0,0.0,0.0,let mut program_counter = 0;
+485,src/template.rs,159,0,0,1,2,0.0,0.0,0.0,let mut render_context = RenderContext {
+486,src/template.rs,160,0,0,1,2,0.0,0.0,0.0,"original_text: self.original_text,"
+487,src/template.rs,164,0,0,1,2,0.0,0.0,0.0,while program_counter < self.instructions.len() {
+488,src/template.rs,165,0,0,1,2,0.0,0.0,0.0,match &self.instructions[program_counter] {
+489,src/template.rs,166,0,0,1,2,0.0,0.0,0.0,Instruction::Literal(text) => {
+490,src/template.rs,167,0,0,1,2,0.0,0.0,0.0,output.push_str(text);
+491,src/template.rs,170,0,0,1,2,0.0,0.0,0.0,Instruction::Value(path) => {
+492,src/template.rs,171,0,0,1,2,0.0,0.0,0.0,let first = path.first().unwrap();
+493,src/template.rs,172,0,0,1,2,0.0,0.0,0.0,if first.starts_with('@') {
+494,src/template.rs,176,0,0,1,2,0.0,0.0,0.0,let first: &str = &*first;
+495,src/template.rs,177,0,0,1,2,0.0,0.0,0.0,match first {
+496,src/template.rs,178,0,0,1,2,0.0,0.0,0.0,"""@index"" => {"
+497,src/template.rs,179,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", render_context.lookup_index()?.0).unwrap()"
+498,src/template.rs,181,0,0,1,2,0.0,0.0,0.0,"""@first"" => {"
+499,src/template.rs,182,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", render_context.lookup_index()?.0 == 0).unwrap()"
+500,src/template.rs,184,0,0,1,2,0.0,0.0,0.0,"""@last"" => {"
+501,src/template.rs,185,0,0,1,2,0.0,0.0,0.0,"let (index, length) = render_context.lookup_index()?;"
+502,src/template.rs,186,0,0,1,2,0.0,0.0,0.0,"write!(output, ""{}"", index == length - 1).unwrap()"
+503,src/template.rs,188,0,0,1,2,0.0,0.0,0.0,"""@root"" => {"
+504,src/template.rs,189,0,0,1,2,0.0,0.0,0.0,let value_to_render = render_context.lookup_root()?;
+505,src/template.rs,190,0,0,1,2,0.0,0.0,0.0,"default_formatter(value_to_render, output)?;"
+506,src/template.rs,192,0,0,1,2,0.0,0.0,0.0,"_ => panic!(), // This should have been caught by the parser."
+507,src/template.rs,195,0,0,1,2,0.0,0.0,0.0,let value_to_render = render_context.lookup(path)?;
+508,src/template.rs,196,0,0,1,2,0.0,0.0,0.0,"default_formatter(value_to_render, output)?;"
+509,src/template.rs,198,0,0,1,2,0.0,0.0,0.0,program_counter += 1;
+510,src/template.rs,200,0,0,1,2,0.0,0.0,0.0,"Instruction::FormattedValue(path, name) => {"
+511,src/template.rs,202,0,0,1,2,0.0,0.0,0.0,let value_to_render = render_context.lookup(path)?;
+512,src/template.rs,203,0,0,1,2,0.0,0.0,0.0,match formatter_registry.get(name) {
+513,src/template.rs,204,0,0,1,2,0.0,0.0,0.0,Some(formatter) => {
+514,src/template.rs,205,0,0,1,2,0.0,0.0,0.0,"let formatter_result = formatter(value_to_render, output);"
+515,src/template.rs,206,0,0,1,2,0.0,0.0,0.0,if let Err(err) = formatter_result {
+516,src/template.rs,207,0,0,1,2,0.0,0.0,0.0,"return Err(called_formatter_error(self.original_text, name, err));"
+517,src/template.rs,208,0,0,1,2,0.0,0.0,0.0,}
+518,src/template.rs,210,0,0,1,2,0.0,0.0,0.0,"None => return Err(unknown_formatter(self.original_text, name)),"
+519,src/template.rs,212,0,0,1,2,0.0,0.0,0.0,program_counter += 1;
+520,src/template.rs,214,0,0,1,2,0.0,0.0,0.0,"Instruction::Branch(path, negate, target) => {"
+521,src/template.rs,215,0,0,1,2,0.0,0.0,0.0,let first = path.first().unwrap();
+522,src/template.rs,216,0,0,1,2,0.0,0.0,0.0,let mut truthy = if first.starts_with('@') {
+523,src/template.rs,217,0,0,1,2,0.0,0.0,0.0,let first: &str = &*first;
+524,src/template.rs,218,0,0,1,2,0.0,0.0,0.0,match &*first {
+525,src/template.rs,219,0,0,1,2,0.0,0.0,0.0,"""@index"" => render_context.lookup_index()?.0 != 0,"
+526,src/template.rs,220,0,0,1,2,0.0,0.0,0.0,"""@first"" => render_context.lookup_index()?.0 == 0,"
+527,src/template.rs,221,0,0,1,2,0.0,0.0,0.0,"""@last"" => {"
+528,src/template.rs,222,0,0,1,2,0.0,0.0,0.0,"let (index, length) = render_context.lookup_index()?;"
+529,src/template.rs,223,0,0,1,2,0.0,0.0,0.0,index == (length - 1)
+530,src/template.rs,225,0,0,1,2,0.0,0.0,0.0,"""@root"" => self.value_is_truthy(render_context.lookup_root()?, path)?,"
+531,src/template.rs,226,0,0,1,2,0.0,0.0,0.0,"other => panic!(""Unknown keyword {}"", other), // This should have been caught by the parser."
+532,src/template.rs,229,0,0,1,2,0.0,0.0,0.0,let value_to_render = render_context.lookup(path)?;
+533,src/template.rs,230,0,0,1,2,0.0,0.0,0.0,"self.value_is_truthy(value_to_render, path)?"
+534,src/template.rs,232,0,0,1,2,0.0,0.0,0.0,if *negate {
+535,src/template.rs,234,0,0,1,2,0.0,0.0,0.0,}
+536,src/template.rs,236,0,0,1,2,0.0,0.0,0.0,if truthy {
+537,src/template.rs,238,0,0,1,2,0.0,0.0,0.0,} else {
+538,src/template.rs,242,0,0,1,2,0.0,0.0,0.0,"Instruction::PushNamedContext(path, name) => {"
+539,src/template.rs,243,0,0,1,2,0.0,0.0,0.0,let context_value = render_context.lookup(path)?;
+540,src/template.rs,244,0,0,1,2,0.0,0.0,0.0,render_context
+541,src/template.rs,246,0,0,1,2,0.0,0.0,0.0,".push(ContextElement::Named(name, context_value));"
+542,src/template.rs,247,0,0,1,2,0.0,0.0,0.0,program_counter += 1;
+543,src/template.rs,249,0,0,1,2,0.0,0.0,0.0,"Instruction::PushIterationContext(path, name) => {"
+544,src/template.rs,252,0,0,1,2,0.0,0.0,0.0,let first = path.first().unwrap();
+545,src/template.rs,253,0,0,1,2,0.0,0.0,0.0,let context_value = match first {
+546,src/template.rs,254,0,0,1,2,0.0,0.0,0.0,"PathStep::Name(""@root"") => render_context.lookup_root()?,"
+547,src/template.rs,255,0,0,1,2,0.0,0.0,0.0,PathStep::Name(other) if other.starts_with('@') => {
+548,src/template.rs,256,0,0,1,2,0.0,0.0,0.0,"return Err(not_iterable_error(self.original_text, path))"
+549,src/template.rs,258,0,0,1,2,0.0,0.0,0.0,"_ => render_context.lookup(path)?,"
+550,src/template.rs,260,0,0,1,2,0.0,0.0,0.0,match context_value {
+551,src/template.rs,261,0,0,1,2,0.0,0.0,0.0,Value::Array(ref arr) => {
+552,src/template.rs,262,0,0,1,2,0.0,0.0,0.0,render_context.context_stack.push(ContextElement::Iteration(
+553,src/template.rs,263,0,0,1,2,0.0,0.0,0.0,"name,"
+554,src/template.rs,264,0,0,1,2,0.0,0.0,0.0,"&Value::Null,"
+555,src/template.rs,266,0,0,1,2,0.0,0.0,0.0,"arr.len(),"
+556,src/template.rs,270,0,0,1,2,0.0,0.0,0.0,"_ => return Err(not_iterable_error(self.original_text, path)),"
+557,src/template.rs,272,0,0,1,2,0.0,0.0,0.0,program_counter += 1;
+558,src/template.rs,274,0,0,1,2,0.0,0.0,0.0,Instruction::PopContext => {
+559,src/template.rs,275,0,0,1,2,0.0,0.0,0.0,render_context.context_stack.pop();
+560,src/template.rs,278,0,0,1,2,0.0,0.0,0.0,Instruction::Goto(target) => {
+561,src/template.rs,281,0,0,1,2,0.0,0.0,0.0,Instruction::Iterate(target) => {
+562,src/template.rs,282,0,0,1,2,0.0,0.0,0.0,match render_context.context_stack.last_mut() {
+563,src/template.rs,283,0,0,1,2,0.0,0.0,0.0,"Some(ContextElement::Iteration(_, val, index, _, iter)) => {"
+564,src/template.rs,284,0,0,1,2,0.0,0.0,0.0,match iter.next() {
+565,src/template.rs,285,0,0,1,2,0.0,0.0,0.0,Some(new_val) => {
+566,src/template.rs,286,0,0,1,2,0.0,0.0,0.0,*val = new_val;
+567,src/template.rs,292,0,0,1,2,0.0,0.0,0.0,None => {
+568,src/template.rs,297,0,0,1,2,0.0,0.0,0.0,"_ => panic!(""Malformed program.""),"
+569,src/template.rs,300,0,0,1,2,0.0,0.0,0.0,"Instruction::Call(template_name, path) => {"
+570,src/template.rs,301,0,0,1,2,0.0,0.0,0.0,let context_value = render_context.lookup(path)?;
+571,src/template.rs,302,0,0,1,2,0.0,0.0,0.0,match template_registry.get(template_name) {
+572,src/template.rs,303,0,0,1,2,0.0,0.0,0.0,Some(templ) => {
+573,src/template.rs,304,0,0,1,2,0.0,0.0,0.0,let called_templ_result = templ.render_into(
+574,src/template.rs,305,0,0,1,2,0.0,0.0,0.0,"context_value,"
+575,src/template.rs,306,0,0,1,2,0.0,0.0,0.0,"template_registry,"
+576,src/template.rs,307,0,0,1,2,0.0,0.0,0.0,"formatter_registry,"
+577,src/template.rs,308,0,0,1,2,0.0,0.0,0.0,"default_formatter,"
+578,src/template.rs,309,0,0,1,2,0.0,0.0,0.0,"output,"
+579,src/template.rs,311,0,0,1,2,0.0,0.0,0.0,if let Err(err) = called_templ_result {
+580,src/template.rs,312,0,0,1,2,0.0,0.0,0.0,return Err(called_template_error(
+581,src/template.rs,313,0,0,1,2,0.0,0.0,0.0,"self.original_text,"
+582,src/template.rs,317,0,0,1,2,0.0,0.0,0.0,}
+583,src/template.rs,319,0,0,1,2,0.0,0.0,0.0,"None => return Err(unknown_template(self.original_text, template_name)),"
+584,src/template.rs,321,0,0,1,2,0.0,0.0,0.0,program_counter += 1;
+585,src/template.rs,325,0,0,1,2,0.0,0.0,0.0,Ok(())
+586,src/template.rs,326,0,0,1,2,0.0,0.0,0.0,}
+587,src/template.rs,328,0,0,1,2,0.0,0.0,0.0,"fn value_is_truthy(&self, value: &Value, path: PathSlice) -> Result<bool> {"
+588,src/template.rs,329,0,0,1,2,0.0,0.0,0.0,let truthy = match value {
+589,src/template.rs,330,0,0,1,2,0.0,0.0,0.0,"Value::Null => false,"
+590,src/template.rs,331,0,0,1,2,0.0,0.0,0.0,"Value::Bool(b) => *b,"
+591,src/template.rs,332,0,0,1,2,0.0,0.0,0.0,Value::Number(n) => match n.as_f64() {
+592,src/template.rs,333,0,0,1,2,0.0,0.0,0.0,"Some(float) => float != 0.0,"
+593,src/template.rs,335,0,0,1,2,0.0,0.0,0.0,"return Err(truthiness_error(self.original_text, path));"
+594,src/template.rs,338,0,0,1,2,0.0,0.0,0.0,"Value::String(s) => !s.is_empty(),"
+595,src/template.rs,339,0,0,1,2,0.0,0.0,0.0,"Value::Array(arr) => !arr.is_empty(),"
+596,src/template.rs,340,0,0,1,2,0.0,0.0,0.0,"Value::Object(_) => true,"
+597,src/template.rs,342,0,0,1,2,0.0,0.0,0.0,Ok(truthy)
+598,src/template.rs,343,0,0,1,2,0.0,0.0,0.0,}

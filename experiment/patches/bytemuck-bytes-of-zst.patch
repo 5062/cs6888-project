@@ -1,0 +1,29 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index ccbdbda..1d15943 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -440,3 +440,24 @@ pub fn try_cast_slice_mut<A: Pod, B: Pod>(
+     Err(PodCastError::OutputSliceWouldHaveSlop)
+   }
+ }
++
++#[test]
++fn manual_bytes_of_zst() {
++    let zst: [u32; 0] = [];
++    let result = bytes_of(&zst);
++    assert_eq!(result.len(), 0);
++}
++
++#[test]
++fn manual_bytes_of_nonempty_array() {
++    let arr: [u32; 3] = [1, 2, 3];
++    let result = bytes_of(&arr);
++    assert_eq!(result.len(), 12);
++}
++
++#[test]
++fn manual_bytes_of_scalar() {
++    let val: u32 = 42;
++    let result = bytes_of(&val);
++    assert_eq!(result.len(), 4);
++}

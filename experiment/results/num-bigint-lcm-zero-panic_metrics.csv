@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/bigint.rs:2191,true,16,63,38.0,51,0.005423728813559322,0.02135593220338983,15,false,false,false,false,2950,src/bigint.rs,2191,"BigInt::from_biguint(Plus, self.data.lcm(&other.data))"
+dstar2,src/bigint.rs:2191,true,16,63,38.0,51,0.005423728813559322,0.02135593220338983,15,false,false,false,false,2950,src/bigint.rs,2191,"BigInt::from_biguint(Plus, self.data.lcm(&other.data))"
+tarantula,src/bigint.rs:2191,true,16,63,38.0,51,0.005423728813559322,0.02135593220338983,15,false,false,false,false,2950,src/bigint.rs,2191,"BigInt::from_biguint(Plus, self.data.lcm(&other.data))"

@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,url/src/lib.rs:686;url/src/parser.rs:477;url/src/parser.rs:479;url/src/parser.rs:1357,true,39,102,51.5,102,0.011035653650254669,0.028862478777589132,38,false,false,false,false,3534,url/src/parser.rs,477,let path_start = self.serialization.len();
+dstar2,url/src/lib.rs:686;url/src/parser.rs:477;url/src/parser.rs:479;url/src/parser.rs:1357,true,39,102,51.5,102,0.011035653650254669,0.028862478777589132,38,false,false,false,false,3534,url/src/parser.rs,477,let path_start = self.serialization.len();
+tarantula,url/src/lib.rs:686;url/src/parser.rs:477;url/src/parser.rs:479;url/src/parser.rs:1357,true,39,102,51.5,102,0.011035653650254669,0.028862478777589132,38,false,false,false,false,3534,url/src/parser.rs,477,let path_start = self.serialization.len();

@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/compiler.rs:163,true,112,598,323.0,551,0.18729096989966554,1.0,111,false,false,false,false,598,src/compiler.rs,163,text = &text[..text.len() - 1];
+dstar2,src/compiler.rs:163,true,112,598,323.0,551,0.18729096989966554,1.0,111,false,false,false,false,598,src/compiler.rs,163,text = &text[..text.len() - 1];
+tarantula,src/compiler.rs:163,true,112,598,323.0,551,0.18729096989966554,1.0,111,false,false,false,false,598,src/compiler.rs,163,text = &text[..text.len() - 1];

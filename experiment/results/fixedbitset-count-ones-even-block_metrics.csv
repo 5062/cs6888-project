@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/lib.rs:174,true,28,32,18.5,28,0.11067193675889328,0.12648221343873517,27,false,false,false,false,253,src/lib.rs,174,sum += (self.data[last_block] & mask_last_block).count_ones() as usize;
+dstar2,src/lib.rs:174,true,28,32,18.5,28,0.11067193675889328,0.12648221343873517,27,false,false,false,false,253,src/lib.rs,174,sum += (self.data[last_block] & mask_last_block).count_ones() as usize;
+tarantula,src/lib.rs:174,true,28,32,18.5,28,0.11067193675889328,0.12648221343873517,27,false,false,false,false,253,src/lib.rs,174,sum += (self.data[last_block] & mask_last_block).count_ones() as usize;

@@ -1,0 +1,23 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index 797709e..5d869a3 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -697,3 +697,18 @@ mod tests {
+         assert!(equal_float_vecs(result, expected));
+     }
+ }
++
++#[test]
++fn manual_jaro_one_char() {
++    assert_eq!(0.0, jaro("a", "b"));
++}
++
++#[test]
++fn manual_jaro_diff_lengths() {
++    assert!((0.83 - jaro("a", "ab")).abs() < 0.01);
++}
++
++#[test]
++fn manual_jaro_winkler_one_char() {
++    assert_eq!(0.0, jaro_winkler("a", "b"));
++}

@@ -1,0 +1,29 @@
+bug_id,project,category,best_rank,tie_size,exam_best,top1,top3,top5,top10,oracle
+fixedbitset-count-ones-even-block,fixedbitset,generic-trait,28,28,0.110672,false,false,false,false,src/lib.rs:174
+num-bigint-lcm-zero-panic,num-bigint,generic-trait,16,51,0.005424,false,false,false,false,src/bigint.rs:2191
+rand-weighted-index-nan,rand,generic-trait,15,28,0.015213,false,false,false,false,src/distributions/weighted_index.rs:105; src/distributions/weighted_index.rs:111; src/distributions/weighted_index.rs:161
+tinytemplate-malformed-closing-tag,tinytemplate,generic-trait,112,551,0.187291,false,false,false,false,src/compiler.rs:163
+proc-macro2-cooked-byte-utf8,proc-macro2,macro-involved,7,11,0.010511,false,false,false,true,src/stable.rs:907
+proc-macro2-source-text-byte-offset,proc-macro2,macro-involved,63,402,0.030732,false,false,false,false,src/fallback.rs:367
+syn-float-e-suffix-panic,syn,macro-involved,6,10,0.000528,false,false,false,true,src/lit.rs:1434
+syn-qualified-path-span-panic,syn,macro-involved,309,534,0.027139,false,false,false,false,src/path.rs:712
+brotli-fill-bit-window-panic,brotli-decompressor,panic-error-handling,21,713,0.006054,false,false,false,false,src/bit_reader/mod.rs:137; src/bit_reader/mod.rs:575
+bytemuck-bytes-of-zst,bytemuck,panic-error-handling,8,7,0.047904,false,false,false,true,src/lib.rs:115; src/lib.rs:127
+cargo-metadata-root-package-no-deps,cargo_metadata,panic-error-handling,6,3,0.034682,false,false,false,true,src/lib.rs:160
+chrono-round-zero,chrono,panic-error-handling,155,121,0.037188,false,false,false,false,src/round.rs:191; src/round.rs:228
+gimli-dwarf-indirect-implicit-const,gimli,panic-error-handling,142,373,0.015889,false,false,false,false,src/read/abbrev.rs:413; src/read/mod.rs:385; src/read/mod.rs:529; src/read/unit.rs:2204
+md5-length-overflow,md5,panic-error-handling,20,90,0.134228,false,false,false,false,src/lib.rs:118
+rustc-demangle-long-symbol-panic,rustc-demangle,panic-error-handling,11,23,0.102804,false,false,false,false,src/lib.rs:122; src/lib.rs:124; src/lib.rs:135
+serde-json-i32-min-exponent,serde_json,panic-error-handling,82,113,0.028015,false,false,false,false,src/de.rs:679
+strsim-jaro-single-char-panic,strsim,panic-error-handling,5,21,0.039370,false,false,true,true,src/lib.rs:51; src/lib.rs:53
+time-negative-year-weekday,time,panic-error-handling,108,2520,0.042857,false,false,false,false,src/date.rs:545; src/date.rs:548; src/date.rs:549; src/date.rs:589
+nom-count-zero-sized,nom,parser-panic,13,12,0.004377,false,false,false,false,src/multi/mod.rs:582
+regex-literal-optimization-bug,regex,parser-panic,7,45,0.001666,false,false,false,true,src/exec.rs:1442
+regex-unicode-boundary-compile,regex,parser-panic,144,578,0.034335,false,false,false,false,src/compile.rs:146
+rust-url-anarchist-roundtrip,rust-url,parser-panic,39,102,0.011036,false,false,false,false,url/src/lib.rs:686; url/src/parser.rs:477; url/src/parser.rs:479; url/src/parser.rs:1357
+rust-url-file-set-path-panic,rust-url,parser-panic,67,83,0.018606,false,false,false,false,url/src/parser.rs:1206
+rust-url-username-oob-slicing,rust-url,parser-panic,93,13,0.040611,false,false,false,false,url/src/lib.rs:732
+toml-key-despan-release,toml,parser-panic,155,609,0.044681,false,false,false,false,crates/toml_edit/src/key.rs:131
+rust-url-roundtrip-control-host,rust-url,standard-logic,10,104,0.004088,false,false,false,true,url/src/host.rs:160
+toml-float-overflow,toml,standard-logic,6,44,0.001786,false,false,false,true,crates/toml_edit/src/parser/numbers.rs:158
+toml-unit-variant-map-key,toml,standard-logic,8,22,0.002435,false,false,false,true,src/ser/key.rs:99

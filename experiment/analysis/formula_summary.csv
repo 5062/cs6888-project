@@ -1,0 +1,4 @@
+formula,bugs,found,top1,top3,top5,top10,mean_exam,median_exam,mean_rank,median_rank,mean_tie_size,median_tie_size
+dstar2,28,28,0,0,1,9,0.037087,0.027577,58.89,20.50,257.54,67.00
+ochiai,28,28,0,0,1,9,0.037147,0.027577,59.14,20.50,257.54,67.00
+tarantula,28,28,0,0,1,9,0.037147,0.027577,59.14,20.50,257.54,67.00

@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/path.rs:712,true,309,534,267.5,534,0.02713859125241525,0.046899701387669065,308,false,false,false,false,11386,src/path.rs,712,let pos = if qself.position > 0 && qself.position >= path.segments.len() {
+dstar2,src/path.rs:712,true,309,534,267.5,534,0.02713859125241525,0.046899701387669065,308,false,false,false,false,11386,src/path.rs,712,let pos = if qself.position > 0 && qself.position >= path.segments.len() {
+tarantula,src/path.rs:712,true,309,534,267.5,534,0.02713859125241525,0.046899701387669065,308,false,false,false,false,11386,src/path.rs,712,let pos = if qself.position > 0 && qself.position >= path.segments.len() {

@@ -1,0 +1,39 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index 396be21..e67c55a 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -33,7 +33,7 @@
+ //! extern crate serde_derive;
+ //! extern crate tinytemplate;
+ //!
+-//! use tinytemplate::TinyTemplate;
++//! use TinyTemplate;
+ //! use std::error::Error;
+ //!
+ //! #[derive(Serialize)]
+@@ -258,3 +258,25 @@ mod test {
+         assert_eq!(rendered, "Hello <World>!")
+     }
+ }
++
++#[test]
++fn manual_malformed_closing_tag() {
++    let mut tpl = TinyTemplate::new();
++    let result = tpl.add_template("template", "{#}");
++    // Should return an error, not panic
++    assert!(result.is_err());
++}
++
++#[test]
++fn manual_valid_template() {
++    let mut tpl = TinyTemplate::new();
++    let result = tpl.add_template("template", "hello {name}");
++    assert!(result.is_ok());
++}
++
++#[test]
++fn manual_empty_template() {
++    let mut tpl = TinyTemplate::new();
++    let result = tpl.add_template("template", "");
++    assert!(result.is_ok());
++}

@@ -1,0 +1,44 @@
+diff --git a/tests/bigint.rs b/tests/bigint.rs
+index ba2e658..7d5c70b 100644
+--- a/tests/bigint.rs
++++ b/tests/bigint.rs
+@@ -1190,3 +1190,39 @@ fn test_pow() {
+     check!(u64);
+     check!(usize);
+ }
++
++#[test]
++fn manual_lcm_zero_zero() {
++    use num_bigint::BigInt;
++    use num_integer::Integer;
++    use num_traits::FromPrimitive;
++
++    let big_a: BigInt = FromPrimitive::from_isize(0).unwrap();
++    let big_b: BigInt = FromPrimitive::from_isize(0).unwrap();
++    let result = big_a.lcm(&big_b);
++    assert_eq!(result, FromPrimitive::from_isize(0).unwrap());
++}
++
++#[test]
++fn manual_lcm_nonzero() {
++    use num_bigint::BigInt;
++    use num_integer::Integer;
++    use num_traits::FromPrimitive;
++
++    let big_a: BigInt = FromPrimitive::from_isize(6).unwrap();
++    let big_b: BigInt = FromPrimitive::from_isize(8).unwrap();
++    let result = big_a.lcm(&big_b);
++    assert_eq!(result, FromPrimitive::from_isize(24).unwrap());
++}
++
++#[test]
++fn manual_lcm_one_zero() {
++    use num_bigint::BigInt;
++    use num_integer::Integer;
++    use num_traits::FromPrimitive;
++
++    let big_a: BigInt = FromPrimitive::from_isize(5).unwrap();
++    let big_b: BigInt = FromPrimitive::from_isize(0).unwrap();
++    let result = big_a.lcm(&big_b);
++    assert_eq!(result, FromPrimitive::from_isize(0).unwrap());
++}

@@ -1,0 +1,28 @@
+diff --git a/url/tests/unit.rs b/url/tests/unit.rs
+index 6cb0f37..b29903d 100644
+--- a/url/tests/unit.rs
++++ b/url/tests/unit.rs
+@@ -1298,3 +1298,23 @@ fn test_file_with_drive_and_path() {
+     let url2 = url::Url::join(&url, s2).unwrap();
+     assert_eq!(url2.to_string(), "file:///p:/a");
+ }
++
++#[test]
++fn manual_file_set_path_windows_drive() {
++    let mut url = url::Url::parse("file:///d:/test").unwrap();
++    url.set_path("d:\\test\\main.foo");
++}
++
++#[test]
++fn manual_file_set_path_no_drive() {
++    let mut url = url::Url::parse("file:///test").unwrap();
++    url.set_path("/other/file.txt");
++    assert_eq!(url.path(), "/other/file.txt");
++}
++
++#[test]
++fn manual_http_set_path() {
++    let mut url = url::Url::parse("http://example.com/old").unwrap();
++    url.set_path("/new/path");
++    assert_eq!(url.path(), "/new/path");
++}

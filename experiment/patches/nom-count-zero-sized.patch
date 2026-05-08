@@ -1,0 +1,42 @@
+diff --git a/tests/issues.rs b/tests/issues.rs
+index 4f7eaad..a2058af 100644
+--- a/tests/issues.rs
++++ b/tests/issues.rs
+@@ -229,3 +229,37 @@ fn issue_1459_clamp_capacity() {
+   let mut parser = count::<_, _, (), _>(char('a'), usize::MAX);
+   assert_eq!(parser("a"), Err(nom::Err::Error(())));
+ }
++
++#[test]
++fn manual_count_zero_sized_output() {
++    use nom::combinator::map;
++    use nom::bytes::complete::tag;
++    use nom::error::Error;
++    use nom::multi::count;
++
++    let parser = map(tag::<_, _, Error<&str>>("abc"), |_| ());
++    let result = count(parser, 3)("abcabcabcdef");
++    assert!(result.is_ok());
++}
++
++#[test]
++fn manual_count_nonzero_output() {
++    use nom::bytes::complete::tag;
++    use nom::multi::count;
++    use nom::IResult;
++
++    fn parser(s: &str) -> IResult<&str, &str> { tag("ab")(s) }
++    let result: IResult<&str, Vec<&str>> = count(parser, 2)("abab");
++    assert!(result.is_ok());
++}
++
++#[test]
++fn manual_count_one() {
++    use nom::bytes::complete::tag;
++    use nom::multi::count;
++    use nom::IResult;
++
++    fn parser(s: &str) -> IResult<&str, &str> { tag("x")(s) }
++    let result: IResult<&str, Vec<&str>> = count(parser, 1)("xyz");
++    assert!(result.is_ok());
++}

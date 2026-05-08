@@ -1,0 +1,37 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index e740125..0b08bfd 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -458,3 +458,32 @@ pub fn brotli_decode(
+   let return_info = BrotliDecoderReturnInfo::new(&brotli_state, result.into(), output_offset);
+   return_info
+ }
++
++#[test]
++fn manual_bit_window_overflow() {
++    use std::io;
++    let failing = vec![
++        17, 27, 17, 17, 17, 17, 149, 149, 37, 208, 17, 17, 149, 149,
++        236, 234, 0, 0, 0, 8, 0, 0, 32, 44, 32, 44, 255, 255, 255, 255,
++        61, 4, 103, 122, 0, 0, 247, 115, 105, 114, 0, 0, 8, 0, 0, 0, 0,
++        0, 0, 0, 252, 0, 0, 32, 0, 0, 0, 0, 33, 225, 252
++    ];
++    let result = BrotliDecompress(&mut failing.as_slice(), &mut io::sink());
++    // Should not panic; may return Ok or Err
++    let _ = result;
++}
++
++#[test]
++fn manual_empty_input() {
++    use std::io;
++    let result = BrotliDecompress(&mut &b""[..], &mut io::sink());
++    assert!(result.is_err());
++}
++
++#[test]
++fn manual_short_input() {
++    use std::io;
++    let short = vec![0u8; 10];
++    let result = BrotliDecompress(&mut short.as_slice(), &mut io::sink());
++    let _ = result;
++}

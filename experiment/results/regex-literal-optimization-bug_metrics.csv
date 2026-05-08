@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/exec.rs:1442,true,7,45,23.0,45,0.0016662699357295882,0.010711735301118781,6,false,false,false,true,4201,src/exec.rs,1442,Some(MatchType::Literal(MatchLiteralType::Unanchored))
+dstar2,src/exec.rs:1442,true,7,45,23.0,45,0.0016662699357295882,0.010711735301118781,6,false,false,false,true,4201,src/exec.rs,1442,Some(MatchType::Literal(MatchLiteralType::Unanchored))
+tarantula,src/exec.rs:1442,true,7,45,23.0,45,0.0016662699357295882,0.010711735301118781,6,false,false,false,true,4201,src/exec.rs,1442,Some(MatchType::Literal(MatchLiteralType::Unanchored))

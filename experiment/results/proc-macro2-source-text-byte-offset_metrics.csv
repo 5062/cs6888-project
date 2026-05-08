@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/fallback.rs:367,true,63,419,218.5,402,0.03073170731707317,0.204390243902439,62,false,false,false,false,2050,src/fallback.rs,367,let trunc_lo = &self.source_text[lo..];
+dstar2,src/fallback.rs:367,true,63,419,218.5,402,0.03073170731707317,0.204390243902439,62,false,false,false,false,2050,src/fallback.rs,367,let trunc_lo = &self.source_text[lo..];
+tarantula,src/fallback.rs:367,true,63,419,218.5,402,0.03073170731707317,0.204390243902439,62,false,false,false,false,2050,src/fallback.rs,367,let trunc_lo = &self.source_text[lo..];

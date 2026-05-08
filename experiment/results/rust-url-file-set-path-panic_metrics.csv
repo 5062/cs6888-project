@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,url/src/parser.rs:1206,true,67,83,42.0,83,0.018605942793668426,0.02304915301305193,66,false,false,false,false,3601,url/src/parser.rs,1206,"&self.serialization[path_start + 1..],"
+dstar2,url/src/parser.rs:1206,true,67,83,42.0,83,0.018605942793668426,0.02304915301305193,66,false,false,false,false,3601,url/src/parser.rs,1206,"&self.serialization[path_start + 1..],"
+tarantula,url/src/parser.rs:1206,true,67,83,42.0,83,0.018605942793668426,0.02304915301305193,66,false,false,false,false,3601,url/src/parser.rs,1206,"&self.serialization[path_start + 1..],"

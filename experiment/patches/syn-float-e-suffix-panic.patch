@@ -1,0 +1,26 @@
+diff --git a/tests/test_lit.rs b/tests/test_lit.rs
+index e995f228..f3c1226c 100644
+--- a/tests/test_lit.rs
++++ b/tests/test_lit.rs
+@@ -247,3 +247,21 @@ fn test_deep_group_empty() {
+ 
+     snapshot!(tokens as Lit, @r#""hi""# );
+ }
++
++#[test]
++fn manual_float_e_suffix() {
++    let lit: syn::LitFloat = syn::parse_str("9e99e99").unwrap();
++    let _ = lit.to_string();
++}
++
++#[test]
++fn manual_float_normal() {
++    let lit: syn::LitFloat = syn::parse_str("3.14").unwrap();
++    assert_eq!(lit.to_string(), "3.14");
++}
++
++#[test]
++fn manual_int_parsing() {
++    let lit: syn::LitInt = syn::parse_str("42").unwrap();
++    assert_eq!(lit.to_string(), "42");
++}

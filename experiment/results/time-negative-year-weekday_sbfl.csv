@@ -1,0 +1,2521 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/date.rs,33,0,0,1,2,0.0,0.0,0.0,"pub(crate) const fn div_floor(a: i64, b: i64) -> i64 {"
+2,src/date.rs,34,0,0,1,2,0.0,0.0,0.0,"let (quotient, remainder) = (a / b, a % b);"
+3,src/date.rs,36,0,0,1,2,0.0,0.0,0.0,if (remainder > 0 && b < 0) || (remainder < 0 && b > 0) {
+4,src/date.rs,37,0,0,1,2,0.0,0.0,0.0,quotient - 1
+5,src/date.rs,39,0,0,1,2,0.0,0.0,0.0,quotient
+6,src/date.rs,41,0,0,1,2,0.0,0.0,0.0,}
+7,src/date.rs,62,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> Result<(), fmt::Error> {"
+8,src/date.rs,63,0,0,1,2,0.0,0.0,0.0,"f.debug_struct(""Date"")"
+9,src/date.rs,64,0,0,1,2,0.0,0.0,0.0,".field(""year"", &self.year())"
+10,src/date.rs,65,0,0,1,2,0.0,0.0,0.0,".field(""ordinal"", &self.ordinal())"
+11,src/date.rs,66,0,0,1,2,0.0,0.0,0.0,.finish()
+12,src/date.rs,67,0,0,1,2,0.0,0.0,0.0,}
+13,src/date.rs,131,0,0,1,2,0.0,0.0,0.0,pub const fn try_from_ymd(
+14,src/date.rs,136,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(year in MIN_YEAR => MAX_YEAR);
+15,src/date.rs,137,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(month in 1 => 12);
+16,src/date.rs,138,0,0,1,2,0.0,0.0,0.0,"ensure_value_in_range!(day conditionally in 1 => days_in_year_month(year, month));"
+17,src/date.rs,140,0,0,1,2,0.0,0.0,0.0,"Ok(internals::Date::from_ymd_unchecked(year, month, day))"
+18,src/date.rs,141,0,0,1,2,0.0,0.0,0.0,}
+19,src/date.rs,189,0,0,1,2,0.0,0.0,0.0,"pub const fn try_from_yo(year: i32, ordinal: u16) -> Result<Self, error::ComponentRange> {"
+20,src/date.rs,190,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(year in MIN_YEAR => MAX_YEAR);
+21,src/date.rs,191,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(ordinal conditionally in 1 => days_in_year(year));
+22,src/date.rs,192,0,0,1,2,0.0,0.0,0.0,"Ok(internals::Date::from_yo_unchecked(year, ordinal))"
+23,src/date.rs,193,0,0,1,2,0.0,0.0,0.0,}
+24,src/date.rs,252,0,0,1,2,0.0,0.0,0.0,pub const fn try_from_iso_ywd(
+25,src/date.rs,257,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(year in MIN_YEAR => MAX_YEAR);
+26,src/date.rs,258,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(week conditionally in 1 => weeks_in_year(year));
+27,src/date.rs,259,0,0,1,2,0.0,0.0,0.0,"Ok(internals::Date::from_iso_ywd_unchecked(year, week, weekday))"
+28,src/date.rs,260,0,0,1,2,0.0,0.0,0.0,}
+29,src/date.rs,276,0,0,1,2,0.0,0.0,0.0,pub fn today() -> Self {
+30,src/date.rs,277,0,0,1,2,0.0,0.0,0.0,PrimitiveDateTime::now().date()
+31,src/date.rs,278,0,0,1,2,0.0,0.0,0.0,}
+32,src/date.rs,292,0,0,1,2,0.0,0.0,0.0,pub const fn year(self) -> i32 {
+33,src/date.rs,293,0,0,1,2,0.0,0.0,0.0,self.value >> 9
+34,src/date.rs,294,0,0,1,2,0.0,0.0,0.0,}
+35,src/date.rs,309,0,0,1,2,0.0,0.0,0.0,pub const fn month(self) -> u8 {
+36,src/date.rs,310,0,0,1,2,0.0,0.0,0.0,self.month_day().0
+37,src/date.rs,311,0,0,1,2,0.0,0.0,0.0,}
+38,src/date.rs,326,0,0,1,2,0.0,0.0,0.0,pub const fn day(self) -> u8 {
+39,src/date.rs,327,0,0,1,2,0.0,0.0,0.0,self.month_day().1
+40,src/date.rs,328,0,0,1,2,0.0,0.0,0.0,}
+41,src/date.rs,346,0,0,1,2,0.0,0.0,0.0,"pub const fn month_day(self) -> (u8, u8) {"
+42,src/date.rs,355,0,0,1,2,0.0,0.0,0.0,let days = CUMULATIVE_DAYS_IN_MONTH_COMMON_LEAP[is_leap_year(self.year()) as usize];
+43,src/date.rs,356,0,0,1,2,0.0,0.0,0.0,let ordinal = self.ordinal();
+44,src/date.rs,358,0,0,1,2,0.0,0.0,0.0,if ordinal > days[10] {
+45,src/date.rs,359,0,0,1,2,0.0,0.0,0.0,"(12, (ordinal - days[10]) as u8)"
+46,src/date.rs,360,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[9] {
+47,src/date.rs,361,0,0,1,2,0.0,0.0,0.0,"(11, (ordinal - days[9]) as u8)"
+48,src/date.rs,362,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[8] {
+49,src/date.rs,363,0,0,1,2,0.0,0.0,0.0,"(10, (ordinal - days[8]) as u8)"
+50,src/date.rs,364,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[7] {
+51,src/date.rs,365,0,0,1,2,0.0,0.0,0.0,"(9, (ordinal - days[7]) as u8)"
+52,src/date.rs,366,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[6] {
+53,src/date.rs,367,0,0,1,2,0.0,0.0,0.0,"(8, (ordinal - days[6]) as u8)"
+54,src/date.rs,368,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[5] {
+55,src/date.rs,369,0,0,1,2,0.0,0.0,0.0,"(7, (ordinal - days[5]) as u8)"
+56,src/date.rs,370,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[4] {
+57,src/date.rs,371,0,0,1,2,0.0,0.0,0.0,"(6, (ordinal - days[4]) as u8)"
+58,src/date.rs,372,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[3] {
+59,src/date.rs,373,0,0,1,2,0.0,0.0,0.0,"(5, (ordinal - days[3]) as u8)"
+60,src/date.rs,374,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[2] {
+61,src/date.rs,375,0,0,1,2,0.0,0.0,0.0,"(4, (ordinal - days[2]) as u8)"
+62,src/date.rs,376,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[1] {
+63,src/date.rs,377,0,0,1,2,0.0,0.0,0.0,"(3, (ordinal - days[1]) as u8)"
+64,src/date.rs,378,0,0,1,2,0.0,0.0,0.0,} else if ordinal > days[0] {
+65,src/date.rs,379,0,0,1,2,0.0,0.0,0.0,"(2, (ordinal - days[0]) as u8)"
+66,src/date.rs,381,0,0,1,2,0.0,0.0,0.0,"(1, ordinal as u8)"
+67,src/date.rs,383,0,0,1,2,0.0,0.0,0.0,}
+68,src/date.rs,399,0,0,1,2,0.0,0.0,0.0,pub const fn ordinal(self) -> u16 {
+69,src/date.rs,400,0,0,1,2,0.0,0.0,0.0,(self.value & 0x1FF) as u16
+70,src/date.rs,401,0,0,1,2,0.0,0.0,0.0,}
+71,src/date.rs,416,0,0,1,2,0.0,0.0,0.0,"pub const fn iso_year_week(self) -> (i32, u8) {"
+72,src/date.rs,417,0,0,1,2,0.0,0.0,0.0,"let (year, ordinal) = self.as_yo();"
+73,src/date.rs,419,0,0,1,2,0.0,0.0,0.0,match ((ordinal + 10 - self.iso_weekday_number() as u16) / 7) as u8 {
+74,src/date.rs,420,0,0,1,2,0.0,0.0,0.0,"0 => (year - 1, weeks_in_year(year - 1)),"
+75,src/date.rs,421,0,0,1,2,0.0,0.0,0.0,"53 if weeks_in_year(year) == 52 => (year + 1, 1),"
+76,src/date.rs,422,0,0,1,2,0.0,0.0,0.0,_ => (
+77,src/date.rs,423,0,0,1,2,0.0,0.0,0.0,"year,"
+78,src/date.rs,424,0,0,1,2,0.0,0.0,0.0,"((ordinal + 10 - self.iso_weekday_number() as u16) / 7) as u8,"
+79,src/date.rs,427,0,0,1,2,0.0,0.0,0.0,}
+80,src/date.rs,444,0,0,1,2,0.0,0.0,0.0,pub const fn week(self) -> u8 {
+81,src/date.rs,445,0,0,1,2,0.0,0.0,0.0,self.iso_year_week().1
+82,src/date.rs,446,0,0,1,2,0.0,0.0,0.0,}
+83,src/date.rs,462,0,0,1,2,0.0,0.0,0.0,pub const fn sunday_based_week(self) -> u8 {
+84,src/date.rs,463,0,0,1,2,0.0,0.0,0.0,((self.ordinal() as i16 - self.number_days_from_sunday() as i16 + 6) / 7) as u8
+85,src/date.rs,464,0,0,1,2,0.0,0.0,0.0,}
+86,src/date.rs,480,0,0,1,2,0.0,0.0,0.0,pub const fn monday_based_week(self) -> u8 {
+87,src/date.rs,481,0,0,1,2,0.0,0.0,0.0,((self.ordinal() as i16 - self.number_days_from_monday() as i16 + 6) / 7) as u8
+88,src/date.rs,482,0,0,1,2,0.0,0.0,0.0,}
+89,src/date.rs,493,0,0,1,2,0.0,0.0,0.0,"pub const fn as_ymd(self) -> (i32, u8, u8) {"
+90,src/date.rs,494,0,0,1,2,0.0,0.0,0.0,"let (month, day) = self.month_day();"
+91,src/date.rs,495,0,0,1,2,0.0,0.0,0.0,"(self.year(), month, day)"
+92,src/date.rs,496,0,0,1,2,0.0,0.0,0.0,}
+93,src/date.rs,508,0,0,1,2,0.0,0.0,0.0,"pub const fn as_yo(self) -> (i32, u16) {"
+94,src/date.rs,509,0,0,1,2,0.0,0.0,0.0,"(self.year(), self.ordinal())"
+95,src/date.rs,510,0,0,1,2,0.0,0.0,0.0,}
+96,src/date.rs,517,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn iso_weekday_number(self) -> u8 {
+97,src/date.rs,518,0,0,1,2,0.0,0.0,0.0,self.number_days_from_monday() + 1
+98,src/date.rs,519,0,0,1,2,0.0,0.0,0.0,}
+99,src/date.rs,526,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn number_days_from_sunday(self) -> u8 {
+100,src/date.rs,527,0,0,1,2,0.0,0.0,0.0,self.iso_weekday_number() % 7
+101,src/date.rs,528,0,0,1,2,0.0,0.0,0.0,}
+102,src/date.rs,535,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn number_days_from_monday(self) -> u8 {
+103,src/date.rs,536,0,0,1,2,0.0,0.0,0.0,"let (year, month, day) = self.as_ymd();"
+104,src/date.rs,538,0,0,1,2,0.0,0.0,0.0,"let (month, adjusted_year) = if month < 3 {"
+105,src/date.rs,539,0,0,1,2,0.0,0.0,0.0,"(month + 12, year - 1)"
+106,src/date.rs,541,0,0,1,2,0.0,0.0,0.0,"(month, year)"
+107,src/date.rs,544,0,0,1,2,0.0,0.0,0.0,let raw_weekday =
+108,src/date.rs,545,0,0,1,2,0.0,0.0,0.0,(day as i32 + (13 * (month as i32 + 1)) / 5 + adjusted_year + adjusted_year / 4
+109,src/date.rs,551,0,0,1,2,0.0,0.0,0.0,if raw_weekday < 0 {
+110,src/date.rs,552,0,0,1,2,0.0,0.0,0.0,(raw_weekday + 7) as u8
+111,src/date.rs,554,0,0,1,2,0.0,0.0,0.0,raw_weekday as u8
+112,src/date.rs,556,0,0,1,2,0.0,0.0,0.0,}
+113,src/date.rs,578,0,0,1,2,0.0,0.0,0.0,pub fn weekday(self) -> Weekday {
+114,src/date.rs,579,0,0,1,2,0.0,0.0,0.0,match self.number_days_from_monday() {
+115,src/date.rs,580,0,0,1,2,0.0,0.0,0.0,"0 => Weekday::Monday,"
+116,src/date.rs,581,0,0,1,2,0.0,0.0,0.0,"1 => Weekday::Tuesday,"
+117,src/date.rs,582,0,0,1,2,0.0,0.0,0.0,"2 => Weekday::Wednesday,"
+118,src/date.rs,583,0,0,1,2,0.0,0.0,0.0,"3 => Weekday::Thursday,"
+119,src/date.rs,584,0,0,1,2,0.0,0.0,0.0,"4 => Weekday::Friday,"
+120,src/date.rs,585,0,0,1,2,0.0,0.0,0.0,"5 => Weekday::Saturday,"
+121,src/date.rs,586,0,0,1,2,0.0,0.0,0.0,"6 => Weekday::Sunday,"
+122,src/date.rs,589,0,0,1,2,0.0,0.0,0.0,"_ => unreachable!(""A value mod 7 is always in the range 0..7""),"
+123,src/date.rs,591,0,0,1,2,0.0,0.0,0.0,}
+124,src/date.rs,601,0,0,1,2,0.0,0.0,0.0,pub fn next_day(self) -> Self {
+125,src/date.rs,602,0,0,1,2,0.0,0.0,0.0,"let (mut year, mut ordinal) = self.as_yo();"
+126,src/date.rs,604,0,0,1,2,0.0,0.0,0.0,ordinal += 1;
+127,src/date.rs,606,0,0,1,2,0.0,0.0,0.0,if ordinal > days_in_year(year) {
+128,src/date.rs,609,0,0,1,2,0.0,0.0,0.0,}
+129,src/date.rs,611,0,0,1,2,0.0,0.0,0.0,if year > MAX_YEAR {
+130,src/date.rs,612,0,0,1,2,0.0,0.0,0.0,"panic!(""overflow when fetching next day"");"
+131,src/date.rs,613,0,0,1,2,0.0,0.0,0.0,}
+132,src/date.rs,615,0,0,1,2,0.0,0.0,0.0,"internals::Date::from_yo_unchecked(year, ordinal)"
+133,src/date.rs,616,0,0,1,2,0.0,0.0,0.0,}
+134,src/date.rs,626,0,0,1,2,0.0,0.0,0.0,pub fn previous_day(self) -> Self {
+135,src/date.rs,627,0,0,1,2,0.0,0.0,0.0,"let (mut year, mut ordinal) = self.as_yo();"
+136,src/date.rs,629,0,0,1,2,0.0,0.0,0.0,ordinal -= 1;
+137,src/date.rs,631,0,0,1,2,0.0,0.0,0.0,if ordinal == 0 {
+138,src/date.rs,632,0,0,1,2,0.0,0.0,0.0,year -= 1;
+139,src/date.rs,634,0,0,1,2,0.0,0.0,0.0,}
+140,src/date.rs,636,0,0,1,2,0.0,0.0,0.0,if year < MIN_YEAR {
+141,src/date.rs,637,0,0,1,2,0.0,0.0,0.0,"panic!(""overflow when fetching previous day"");"
+142,src/date.rs,638,0,0,1,2,0.0,0.0,0.0,}
+143,src/date.rs,640,0,0,1,2,0.0,0.0,0.0,"internals::Date::from_yo_unchecked(year, ordinal)"
+144,src/date.rs,641,0,0,1,2,0.0,0.0,0.0,}
+145,src/date.rs,659,0,0,1,2,0.0,0.0,0.0,pub const fn julian_day(self) -> i64 {
+146,src/date.rs,660,0,0,1,2,0.0,0.0,0.0,"let (mut year, mut month, day) = self.as_ymd();"
+147,src/date.rs,662,0,0,1,2,0.0,0.0,0.0,if month < 3 {
+148,src/date.rs,665,0,0,1,2,0.0,0.0,0.0,}
+149,src/date.rs,667,0,0,1,2,0.0,0.0,0.0,let year = year as i64;
+150,src/date.rs,668,0,0,1,2,0.0,0.0,0.0,let month = month as i64;
+151,src/date.rs,669,0,0,1,2,0.0,0.0,0.0,let day = day as i64;
+152,src/date.rs,671,0,0,1,2,0.0,0.0,0.0,"day + (153 * month - 457) / 5 + 365 * year + div_floor(year, 4) - div_floor(year, 100)"
+153,src/date.rs,674,0,0,1,2,0.0,0.0,0.0,}
+154,src/date.rs,693,0,0,1,2,0.0,0.0,0.0,pub fn from_julian_day(julian_day: i64) -> Self {
+155,src/date.rs,695,0,0,1,2,0.0,0.0,0.0,let z = julian_day - 1_721_119;
+156,src/date.rs,696,0,0,1,2,0.0,0.0,0.0,let h = 100 * z - 25;
+157,src/date.rs,697,0,0,1,2,0.0,0.0,0.0,"let a = div_floor(h, 3_652_425);"
+158,src/date.rs,698,0,0,1,2,0.0,0.0,0.0,"let b = a - div_floor(a, 4);"
+159,src/date.rs,699,0,0,1,2,0.0,0.0,0.0,"let mut year = div_floor(100 * b + h, 36_525);"
+160,src/date.rs,700,0,0,1,2,0.0,0.0,0.0,"let c = b + z - 365 * year - div_floor(year, 4);"
+161,src/date.rs,701,0,0,1,2,0.0,0.0,0.0,let mut month = (5 * c + 456) / 153;
+162,src/date.rs,702,0,0,1,2,0.0,0.0,0.0,let day = c - (153 * month - 457) / 5;
+163,src/date.rs,704,0,0,1,2,0.0,0.0,0.0,if month > 12 {
+164,src/date.rs,707,0,0,1,2,0.0,0.0,0.0,}
+165,src/date.rs,709,0,0,1,2,0.0,0.0,0.0,"match Date::try_from_ymd(year as i32, month as u8, day as u8) {"
+166,src/date.rs,710,0,0,1,2,0.0,0.0,0.0,"Ok(date) => date,"
+167,src/date.rs,711,0,0,1,2,0.0,0.0,0.0,"Err(err) => panic!(""{}"", err),"
+168,src/date.rs,713,0,0,1,2,0.0,0.0,0.0,}
+169,src/date.rs,728,0,0,1,2,0.0,0.0,0.0,pub const fn midnight(self) -> PrimitiveDateTime {
+170,src/date.rs,729,0,0,1,2,0.0,0.0,0.0,"PrimitiveDateTime::new(self, Time::midnight())"
+171,src/date.rs,730,0,0,1,2,0.0,0.0,0.0,}
+172,src/date.rs,741,0,0,1,2,0.0,0.0,0.0,"pub const fn with_time(self, time: Time) -> PrimitiveDateTime {"
+173,src/date.rs,742,0,0,1,2,0.0,0.0,0.0,"PrimitiveDateTime::new(self, time)"
+174,src/date.rs,743,0,0,1,2,0.0,0.0,0.0,}
+175,src/date.rs,778,0,0,1,2,0.0,0.0,0.0,pub const fn try_with_hms(
+176,src/date.rs,784,0,0,1,2,0.0,0.0,0.0,Ok(PrimitiveDateTime::new(
+177,src/date.rs,785,0,0,1,2,0.0,0.0,0.0,"self,"
+178,src/date.rs,786,0,0,1,2,0.0,0.0,0.0,"const_try!(Time::try_from_hms(hour, minute, second)),"
+179,src/date.rs,788,0,0,1,2,0.0,0.0,0.0,}
+180,src/date.rs,832,0,0,1,2,0.0,0.0,0.0,pub const fn try_with_hms_milli(
+181,src/date.rs,839,0,0,1,2,0.0,0.0,0.0,Ok(PrimitiveDateTime::new(
+182,src/date.rs,840,0,0,1,2,0.0,0.0,0.0,"self,"
+183,src/date.rs,841,0,0,1,2,0.0,0.0,0.0,"const_try!(Time::try_from_hms_milli(hour, minute, second, millisecond)),"
+184,src/date.rs,843,0,0,1,2,0.0,0.0,0.0,}
+185,src/date.rs,891,0,0,1,2,0.0,0.0,0.0,pub const fn try_with_hms_micro(
+186,src/date.rs,898,0,0,1,2,0.0,0.0,0.0,Ok(PrimitiveDateTime::new(
+187,src/date.rs,899,0,0,1,2,0.0,0.0,0.0,"self,"
+188,src/date.rs,900,0,0,1,2,0.0,0.0,0.0,"const_try!(Time::try_from_hms_micro(hour, minute, second, microsecond)),"
+189,src/date.rs,902,0,0,1,2,0.0,0.0,0.0,}
+190,src/date.rs,942,0,0,1,2,0.0,0.0,0.0,pub const fn try_with_hms_nano(
+191,src/date.rs,949,0,0,1,2,0.0,0.0,0.0,Ok(PrimitiveDateTime::new(
+192,src/date.rs,950,0,0,1,2,0.0,0.0,0.0,"self,"
+193,src/date.rs,951,0,0,1,2,0.0,0.0,0.0,"const_try!(Time::try_from_hms_nano(hour, minute, second, nanosecond)),"
+194,src/date.rs,953,0,0,1,2,0.0,0.0,0.0,}
+195,src/date.rs,964,0,0,1,2,0.0,0.0,0.0,"pub fn format(self, format: impl AsRef<str>) -> String {"
+196,src/date.rs,965,0,0,1,2,0.0,0.0,0.0,self.lazy_format(format).to_string()
+197,src/date.rs,966,0,0,1,2,0.0,0.0,0.0,}
+198,src/date.rs,974,0,0,1,2,0.0,0.0,0.0,"pub fn lazy_format(self, format: impl AsRef<str>) -> impl Display {"
+199,src/date.rs,975,0,0,1,2,0.0,0.0,0.0,DeferredFormat::new(format.as_ref())
+200,src/date.rs,977,0,0,1,2,0.0,0.0,0.0,.to_owned()
+201,src/date.rs,978,0,0,1,2,0.0,0.0,0.0,}
+202,src/date.rs,997,0,0,1,2,0.0,0.0,0.0,"pub fn parse(s: impl AsRef<str>, format: impl AsRef<str>) -> ParseResult<Self> {"
+203,src/date.rs,998,0,0,1,2,0.0,0.0,0.0,"Self::try_from_parsed_items(parse(s.as_ref(), &format.into())?)"
+204,src/date.rs,999,0,0,1,2,0.0,0.0,0.0,}
+205,src/date.rs,1002,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_from_parsed_items(items: ParsedItems) -> ParseResult<Self> {
+206,src/date.rs,1011,0,0,1,2,0.0,0.0,0.0,fn adjustment(year: i32) -> i16 {
+207,src/date.rs,1012,0,0,1,2,0.0,0.0,0.0,"match internals::Date::from_yo_unchecked(year, 1).weekday() {"
+208,src/date.rs,1013,0,0,1,2,0.0,0.0,0.0,"Weekday::Monday => 7,"
+209,src/date.rs,1014,0,0,1,2,0.0,0.0,0.0,"Weekday::Tuesday => 1,"
+210,src/date.rs,1015,0,0,1,2,0.0,0.0,0.0,"Weekday::Wednesday => 2,"
+211,src/date.rs,1016,0,0,1,2,0.0,0.0,0.0,"Weekday::Thursday => 3,"
+212,src/date.rs,1017,0,0,1,2,0.0,0.0,0.0,"Weekday::Friday => 4,"
+213,src/date.rs,1018,0,0,1,2,0.0,0.0,0.0,"Weekday::Saturday => 5,"
+214,src/date.rs,1019,0,0,1,2,0.0,0.0,0.0,"Weekday::Sunday => 6,"
+215,src/date.rs,1021,0,0,1,2,0.0,0.0,0.0,}
+216,src/date.rs,1023,0,0,1,2,0.0,0.0,0.0,match items {
+217,src/date.rs,1024,0,0,1,2,0.0,0.0,0.0,"items!(year, month, day) => {"
+218,src/date.rs,1025,0,0,1,2,0.0,0.0,0.0,"Date::try_from_ymd(year, month.get(), day.get()).map_err(Into::into)"
+219,src/date.rs,1027,0,0,1,2,0.0,0.0,0.0,"items!(year, ordinal_day) => {"
+220,src/date.rs,1028,0,0,1,2,0.0,0.0,0.0,"Date::try_from_yo(year, ordinal_day.get()).map_err(Into::into)"
+221,src/date.rs,1030,0,0,1,2,0.0,0.0,0.0,"items!(week_based_year, iso_week, weekday) => {"
+222,src/date.rs,1031,0,0,1,2,0.0,0.0,0.0,"Date::try_from_iso_ywd(week_based_year, iso_week.get(), weekday).map_err(Into::into)"
+223,src/date.rs,1033,0,0,1,2,0.0,0.0,0.0,"items!(year, sunday_week, weekday) => Date::try_from_yo("
+224,src/date.rs,1034,0,0,1,2,0.0,0.0,0.0,"year,"
+225,src/date.rs,1035,0,0,1,2,0.0,0.0,0.0,(sunday_week as i16 * 7 + weekday.number_days_from_sunday() as i16
+226,src/date.rs,1039,0,0,1,2,0.0,0.0,0.0,".map_err(Into::into),"
+227,src/date.rs,1040,0,0,1,2,0.0,0.0,0.0,"items!(year, monday_week, weekday) => Date::try_from_yo("
+228,src/date.rs,1041,0,0,1,2,0.0,0.0,0.0,"year,"
+229,src/date.rs,1042,0,0,1,2,0.0,0.0,0.0,(monday_week as i16 * 7 + weekday.number_days_from_monday() as i16
+230,src/date.rs,1046,0,0,1,2,0.0,0.0,0.0,".map_err(Into::into),"
+231,src/date.rs,1047,0,0,1,2,0.0,0.0,0.0,"_ => Err(error::Parse::InsufficientInformation),"
+232,src/date.rs,1049,0,0,1,2,0.0,0.0,0.0,}
+233,src/date.rs,1053,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+234,src/date.rs,1056,0,0,1,2,0.0,0.0,0.0,"date::fmt_Y(f, *self, Padding::Zero)?;"
+235,src/date.rs,1057,0,0,1,2,0.0,0.0,0.0,"f.write_str(""-"")?;"
+236,src/date.rs,1058,0,0,1,2,0.0,0.0,0.0,"date::fmt_m(f, *self, Padding::Zero)?;"
+237,src/date.rs,1059,0,0,1,2,0.0,0.0,0.0,"f.write_str(""-"")?;"
+238,src/date.rs,1060,0,0,1,2,0.0,0.0,0.0,"date::fmt_d(f, *self, Padding::Zero)?;"
+239,src/date.rs,1062,0,0,1,2,0.0,0.0,0.0,Ok(())
+240,src/date.rs,1063,0,0,1,2,0.0,0.0,0.0,}
+241,src/date.rs,1069,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+242,src/date.rs,1070,0,0,1,2,0.0,0.0,0.0,Self::from_julian_day(self.julian_day() + duration.whole_days())
+243,src/date.rs,1071,0,0,1,2,0.0,0.0,0.0,}
+244,src/date.rs,1077,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: StdDuration) -> Self::Output {"
+245,src/date.rs,1078,0,0,1,2,0.0,0.0,0.0,Self::from_julian_day(self.julian_day() + (duration.as_secs() / 86_400) as i64)
+246,src/date.rs,1079,0,0,1,2,0.0,0.0,0.0,}
+247,src/date.rs,1083,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+248,src/date.rs,1084,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+249,src/date.rs,1085,0,0,1,2,0.0,0.0,0.0,}
+250,src/date.rs,1089,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: StdDuration) {"
+251,src/date.rs,1090,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+252,src/date.rs,1091,0,0,1,2,0.0,0.0,0.0,}
+253,src/date.rs,1097,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+254,src/date.rs,1098,0,0,1,2,0.0,0.0,0.0,self + -duration
+255,src/date.rs,1099,0,0,1,2,0.0,0.0,0.0,}
+256,src/date.rs,1105,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: StdDuration) -> Self::Output {"
+257,src/date.rs,1106,0,0,1,2,0.0,0.0,0.0,Self::from_julian_day(self.julian_day() - (duration.as_secs() / 86_400) as i64)
+258,src/date.rs,1107,0,0,1,2,0.0,0.0,0.0,}
+259,src/date.rs,1111,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+260,src/date.rs,1112,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+261,src/date.rs,1113,0,0,1,2,0.0,0.0,0.0,}
+262,src/date.rs,1117,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: StdDuration) {"
+263,src/date.rs,1118,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+264,src/date.rs,1119,0,0,1,2,0.0,0.0,0.0,}
+265,src/date.rs,1125,0,0,1,2,0.0,0.0,0.0,"fn sub(self, other: Self) -> Self::Output {"
+266,src/date.rs,1126,0,0,1,2,0.0,0.0,0.0,Duration::days(self.julian_day() - other.julian_day())
+267,src/date.rs,1127,0,0,1,2,0.0,0.0,0.0,}
+268,src/date.rs,1131,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &Self) -> Option<Ordering> {"
+269,src/date.rs,1132,0,0,1,2,0.0,0.0,0.0,Some(self.cmp(other))
+270,src/date.rs,1133,0,0,1,2,0.0,0.0,0.0,}
+271,src/date.rs,1137,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, other: &Self) -> Ordering {"
+272,src/date.rs,1138,0,0,1,2,0.0,0.0,0.0,self.year()
+273,src/date.rs,1139,0,0,1,2,0.0,0.0,0.0,.cmp(&other.year())
+274,src/date.rs,1140,0,0,1,2,0.0,0.0,0.0,.then_with(|| self.ordinal().cmp(&other.ordinal()))
+275,src/date.rs,1141,0,0,1,2,0.0,0.0,0.0,}
+276,src/duration.rs,57,0,0,1,2,0.0,0.0,0.0,pub const fn zero() -> Self {
+277,src/duration.rs,58,0,0,1,2,0.0,0.0,0.0,Self::seconds(0)
+278,src/duration.rs,59,0,0,1,2,0.0,0.0,0.0,}
+279,src/duration.rs,67,0,0,1,2,0.0,0.0,0.0,pub const fn nanosecond() -> Self {
+280,src/duration.rs,68,0,0,1,2,0.0,0.0,0.0,Self::nanoseconds(1)
+281,src/duration.rs,69,0,0,1,2,0.0,0.0,0.0,}
+282,src/duration.rs,77,0,0,1,2,0.0,0.0,0.0,pub const fn microsecond() -> Self {
+283,src/duration.rs,78,0,0,1,2,0.0,0.0,0.0,Self::microseconds(1)
+284,src/duration.rs,79,0,0,1,2,0.0,0.0,0.0,}
+285,src/duration.rs,87,0,0,1,2,0.0,0.0,0.0,pub const fn millisecond() -> Self {
+286,src/duration.rs,88,0,0,1,2,0.0,0.0,0.0,Self::milliseconds(1)
+287,src/duration.rs,89,0,0,1,2,0.0,0.0,0.0,}
+288,src/duration.rs,97,0,0,1,2,0.0,0.0,0.0,pub const fn second() -> Self {
+289,src/duration.rs,98,0,0,1,2,0.0,0.0,0.0,Self::seconds(1)
+290,src/duration.rs,99,0,0,1,2,0.0,0.0,0.0,}
+291,src/duration.rs,107,0,0,1,2,0.0,0.0,0.0,pub const fn minute() -> Self {
+292,src/duration.rs,108,0,0,1,2,0.0,0.0,0.0,Self::minutes(1)
+293,src/duration.rs,109,0,0,1,2,0.0,0.0,0.0,}
+294,src/duration.rs,117,0,0,1,2,0.0,0.0,0.0,pub const fn hour() -> Self {
+295,src/duration.rs,118,0,0,1,2,0.0,0.0,0.0,Self::hours(1)
+296,src/duration.rs,119,0,0,1,2,0.0,0.0,0.0,}
+297,src/duration.rs,127,0,0,1,2,0.0,0.0,0.0,pub const fn day() -> Self {
+298,src/duration.rs,128,0,0,1,2,0.0,0.0,0.0,Self::days(1)
+299,src/duration.rs,129,0,0,1,2,0.0,0.0,0.0,}
+300,src/duration.rs,137,0,0,1,2,0.0,0.0,0.0,pub const fn week() -> Self {
+301,src/duration.rs,138,0,0,1,2,0.0,0.0,0.0,Self::weeks(1)
+302,src/duration.rs,139,0,0,1,2,0.0,0.0,0.0,}
+303,src/duration.rs,145,0,0,1,2,0.0,0.0,0.0,pub const fn max_value() -> Self {
+304,src/duration.rs,146,0,0,1,2,0.0,0.0,0.0,"Self::new(i64::max_value(), 999_999_999)"
+305,src/duration.rs,147,0,0,1,2,0.0,0.0,0.0,}
+306,src/duration.rs,153,0,0,1,2,0.0,0.0,0.0,pub const fn min_value() -> Self {
+307,src/duration.rs,154,0,0,1,2,0.0,0.0,0.0,"Self::new(i64::min_value(), -999_999_999)"
+308,src/duration.rs,155,0,0,1,2,0.0,0.0,0.0,}
+309,src/duration.rs,164,0,0,1,2,0.0,0.0,0.0,pub const fn is_zero(self) -> bool {
+310,src/duration.rs,165,0,0,1,2,0.0,0.0,0.0,(self.seconds == 0) & (self.nanoseconds == 0)
+311,src/duration.rs,166,0,0,1,2,0.0,0.0,0.0,}
+312,src/duration.rs,176,0,0,1,2,0.0,0.0,0.0,pub const fn is_negative(self) -> bool {
+313,src/duration.rs,177,0,0,1,2,0.0,0.0,0.0,(self.seconds < 0) | (self.nanoseconds < 0)
+314,src/duration.rs,178,0,0,1,2,0.0,0.0,0.0,}
+315,src/duration.rs,188,0,0,1,2,0.0,0.0,0.0,pub const fn is_positive(self) -> bool {
+316,src/duration.rs,189,0,0,1,2,0.0,0.0,0.0,(self.seconds > 0) | (self.nanoseconds > 0)
+317,src/duration.rs,190,0,0,1,2,0.0,0.0,0.0,}
+318,src/duration.rs,207,0,0,1,2,0.0,0.0,0.0,pub fn sign(self) -> crate::Sign {
+319,src/duration.rs,210,0,0,1,2,0.0,0.0,0.0,if self.nanoseconds > 0 {
+320,src/duration.rs,211,0,0,1,2,0.0,0.0,0.0,Positive
+321,src/duration.rs,212,0,0,1,2,0.0,0.0,0.0,} else if self.nanoseconds < 0 {
+322,src/duration.rs,213,0,0,1,2,0.0,0.0,0.0,Negative
+323,src/duration.rs,214,0,0,1,2,0.0,0.0,0.0,} else if self.seconds > 0 {
+324,src/duration.rs,215,0,0,1,2,0.0,0.0,0.0,Positive
+325,src/duration.rs,216,0,0,1,2,0.0,0.0,0.0,} else if self.seconds < 0 {
+326,src/duration.rs,217,0,0,1,2,0.0,0.0,0.0,Negative
+327,src/duration.rs,219,0,0,1,2,0.0,0.0,0.0,Zero
+328,src/duration.rs,221,0,0,1,2,0.0,0.0,0.0,}
+329,src/duration.rs,234,0,0,1,2,0.0,0.0,0.0,pub const fn abs(self) -> Self {
+330,src/duration.rs,235,0,0,1,2,0.0,0.0,0.0,Self {
+331,src/duration.rs,236,0,0,1,2,0.0,0.0,0.0,"seconds: self.seconds.abs(),"
+332,src/duration.rs,239,0,0,1,2,0.0,0.0,0.0,}
+333,src/duration.rs,246,0,0,1,2,0.0,0.0,0.0,pub(crate) fn abs_std(self) -> StdDuration {
+334,src/duration.rs,247,0,0,1,2,0.0,0.0,0.0,"StdDuration::new(self.seconds.abs() as u64, self.nanoseconds.abs() as u32)"
+335,src/duration.rs,248,0,0,1,2,0.0,0.0,0.0,}
+336,src/duration.rs,264,0,0,1,2,0.0,0.0,0.0,"pub const fn new(seconds: i64, nanoseconds: i32) -> Self {"
+337,src/duration.rs,265,0,0,1,2,0.0,0.0,0.0,Self {
+338,src/duration.rs,266,0,0,1,2,0.0,0.0,0.0,seconds: (seconds + nanoseconds as i64 / 1_000_000_000)
+339,src/duration.rs,267,0,0,1,2,0.0,0.0,0.0,+ (((((seconds + nanoseconds as i64 / 1_000_000_000) > 0) as i8
+340,src/duration.rs,273,0,0,1,2,0.0,0.0,0.0,- (((((seconds + nanoseconds as i64 / 1_000_000_000) > 0) as i8
+341,src/duration.rs,279,0,0,1,2,0.0,0.0,0.0,nanoseconds: (nanoseconds % 1_000_000_000)
+342,src/duration.rs,281,0,0,1,2,0.0,0.0,0.0,* ((((((seconds + nanoseconds as i64 / 1_000_000_000) > 0) as i8
+343,src/duration.rs,287,0,0,1,2,0.0,0.0,0.0,- (((((seconds + nanoseconds as i64 / 1_000_000_000) > 0) as i8
+344,src/duration.rs,294,0,0,1,2,0.0,0.0,0.0,}
+345,src/duration.rs,334,0,0,1,2,0.0,0.0,0.0,pub const fn weeks(weeks: i64) -> Self {
+346,src/duration.rs,335,0,0,1,2,0.0,0.0,0.0,Self::seconds(weeks * SECONDS_PER_WEEK)
+347,src/duration.rs,336,0,0,1,2,0.0,0.0,0.0,}
+348,src/duration.rs,347,0,0,1,2,0.0,0.0,0.0,pub const fn whole_weeks(self) -> i64 {
+349,src/duration.rs,348,0,0,1,2,0.0,0.0,0.0,self.whole_seconds() / SECONDS_PER_WEEK
+350,src/duration.rs,349,0,0,1,2,0.0,0.0,0.0,}
+351,src/duration.rs,358,0,0,1,2,0.0,0.0,0.0,pub const fn days(days: i64) -> Self {
+352,src/duration.rs,359,0,0,1,2,0.0,0.0,0.0,Self::seconds(days * SECONDS_PER_DAY)
+353,src/duration.rs,360,0,0,1,2,0.0,0.0,0.0,}
+354,src/duration.rs,371,0,0,1,2,0.0,0.0,0.0,pub const fn whole_days(self) -> i64 {
+355,src/duration.rs,372,0,0,1,2,0.0,0.0,0.0,self.whole_seconds() / SECONDS_PER_DAY
+356,src/duration.rs,373,0,0,1,2,0.0,0.0,0.0,}
+357,src/duration.rs,382,0,0,1,2,0.0,0.0,0.0,pub const fn hours(hours: i64) -> Self {
+358,src/duration.rs,383,0,0,1,2,0.0,0.0,0.0,Self::seconds(hours * SECONDS_PER_HOUR)
+359,src/duration.rs,384,0,0,1,2,0.0,0.0,0.0,}
+360,src/duration.rs,395,0,0,1,2,0.0,0.0,0.0,pub const fn whole_hours(self) -> i64 {
+361,src/duration.rs,396,0,0,1,2,0.0,0.0,0.0,self.whole_seconds() / SECONDS_PER_HOUR
+362,src/duration.rs,397,0,0,1,2,0.0,0.0,0.0,}
+363,src/duration.rs,406,0,0,1,2,0.0,0.0,0.0,pub const fn minutes(minutes: i64) -> Self {
+364,src/duration.rs,407,0,0,1,2,0.0,0.0,0.0,Self::seconds(minutes * SECONDS_PER_MINUTE)
+365,src/duration.rs,408,0,0,1,2,0.0,0.0,0.0,}
+366,src/duration.rs,419,0,0,1,2,0.0,0.0,0.0,pub const fn whole_minutes(self) -> i64 {
+367,src/duration.rs,420,0,0,1,2,0.0,0.0,0.0,self.whole_seconds() / SECONDS_PER_MINUTE
+368,src/duration.rs,421,0,0,1,2,0.0,0.0,0.0,}
+369,src/duration.rs,429,0,0,1,2,0.0,0.0,0.0,pub const fn seconds(seconds: i64) -> Self {
+370,src/duration.rs,430,0,0,1,2,0.0,0.0,0.0,Self {
+371,src/duration.rs,434,0,0,1,2,0.0,0.0,0.0,}
+372,src/duration.rs,445,0,0,1,2,0.0,0.0,0.0,pub const fn whole_seconds(self) -> i64 {
+373,src/duration.rs,446,0,0,1,2,0.0,0.0,0.0,self.seconds
+374,src/duration.rs,447,0,0,1,2,0.0,0.0,0.0,}
+375,src/duration.rs,457,0,0,1,2,0.0,0.0,0.0,pub fn seconds_f64(seconds: f64) -> Self {
+376,src/duration.rs,458,0,0,1,2,0.0,0.0,0.0,Self {
+377,src/duration.rs,462,0,0,1,2,0.0,0.0,0.0,}
+378,src/duration.rs,471,0,0,1,2,0.0,0.0,0.0,pub fn as_seconds_f64(self) -> f64 {
+379,src/duration.rs,472,0,0,1,2,0.0,0.0,0.0,self.seconds as f64 + self.nanoseconds as f64 / 1_000_000_000.
+380,src/duration.rs,473,0,0,1,2,0.0,0.0,0.0,}
+381,src/duration.rs,483,0,0,1,2,0.0,0.0,0.0,pub fn seconds_f32(seconds: f32) -> Self {
+382,src/duration.rs,484,0,0,1,2,0.0,0.0,0.0,Self {
+383,src/duration.rs,488,0,0,1,2,0.0,0.0,0.0,}
+384,src/duration.rs,497,0,0,1,2,0.0,0.0,0.0,pub fn as_seconds_f32(self) -> f32 {
+385,src/duration.rs,498,0,0,1,2,0.0,0.0,0.0,self.seconds as f32 + self.nanoseconds as f32 / 1_000_000_000.
+386,src/duration.rs,499,0,0,1,2,0.0,0.0,0.0,}
+387,src/duration.rs,508,0,0,1,2,0.0,0.0,0.0,pub const fn milliseconds(milliseconds: i64) -> Self {
+388,src/duration.rs,509,0,0,1,2,0.0,0.0,0.0,Self {
+389,src/duration.rs,513,0,0,1,2,0.0,0.0,0.0,}
+390,src/duration.rs,524,0,0,1,2,0.0,0.0,0.0,pub const fn whole_milliseconds(self) -> i128 {
+391,src/duration.rs,525,0,0,1,2,0.0,0.0,0.0,self.seconds as i128 * 1_000 + self.nanoseconds as i128 / 1_000_000
+392,src/duration.rs,526,0,0,1,2,0.0,0.0,0.0,}
+393,src/duration.rs,538,0,0,1,2,0.0,0.0,0.0,pub const fn subsec_milliseconds(self) -> i16 {
+394,src/duration.rs,539,0,0,1,2,0.0,0.0,0.0,(self.nanoseconds / 1_000_000) as i16
+395,src/duration.rs,540,0,0,1,2,0.0,0.0,0.0,}
+396,src/duration.rs,549,0,0,1,2,0.0,0.0,0.0,pub const fn microseconds(microseconds: i64) -> Self {
+397,src/duration.rs,550,0,0,1,2,0.0,0.0,0.0,Self {
+398,src/duration.rs,554,0,0,1,2,0.0,0.0,0.0,}
+399,src/duration.rs,565,0,0,1,2,0.0,0.0,0.0,pub const fn whole_microseconds(self) -> i128 {
+400,src/duration.rs,566,0,0,1,2,0.0,0.0,0.0,self.seconds as i128 * 1_000_000 + self.nanoseconds as i128 / 1_000
+401,src/duration.rs,567,0,0,1,2,0.0,0.0,0.0,}
+402,src/duration.rs,578,0,0,1,2,0.0,0.0,0.0,pub const fn subsec_microseconds(self) -> i32 {
+403,src/duration.rs,579,0,0,1,2,0.0,0.0,0.0,self.nanoseconds / 1_000
+404,src/duration.rs,580,0,0,1,2,0.0,0.0,0.0,}
+405,src/duration.rs,589,0,0,1,2,0.0,0.0,0.0,pub const fn nanoseconds(nanoseconds: i64) -> Self {
+406,src/duration.rs,590,0,0,1,2,0.0,0.0,0.0,Self {
+407,src/duration.rs,594,0,0,1,2,0.0,0.0,0.0,}
+408,src/duration.rs,600,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn nanoseconds_i128(nanoseconds: i128) -> Self {
+409,src/duration.rs,601,0,0,1,2,0.0,0.0,0.0,Self {
+410,src/duration.rs,605,0,0,1,2,0.0,0.0,0.0,}
+411,src/duration.rs,616,0,0,1,2,0.0,0.0,0.0,pub const fn whole_nanoseconds(self) -> i128 {
+412,src/duration.rs,617,0,0,1,2,0.0,0.0,0.0,self.seconds as i128 * 1_000_000_000 + self.nanoseconds as i128
+413,src/duration.rs,618,0,0,1,2,0.0,0.0,0.0,}
+414,src/duration.rs,630,0,0,1,2,0.0,0.0,0.0,pub const fn subsec_nanoseconds(self) -> i32 {
+415,src/duration.rs,631,0,0,1,2,0.0,0.0,0.0,self.nanoseconds
+416,src/duration.rs,632,0,0,1,2,0.0,0.0,0.0,}
+417,src/duration.rs,642,0,0,1,2,0.0,0.0,0.0,"pub fn checked_add(self, rhs: Self) -> Option<Self> {"
+418,src/duration.rs,643,0,0,1,2,0.0,0.0,0.0,let mut seconds = self.seconds.checked_add(rhs.seconds)?;
+419,src/duration.rs,644,0,0,1,2,0.0,0.0,0.0,let mut nanoseconds = self.nanoseconds + rhs.nanoseconds;
+420,src/duration.rs,646,0,0,1,2,0.0,0.0,0.0,if nanoseconds >= 1_000_000_000 || seconds < 0 && nanoseconds > 0 {
+421,src/duration.rs,647,0,0,1,2,0.0,0.0,0.0,nanoseconds -= 1_000_000_000;
+422,src/duration.rs,648,0,0,1,2,0.0,0.0,0.0,seconds = seconds.checked_add(1)?;
+423,src/duration.rs,649,0,0,1,2,0.0,0.0,0.0,} else if nanoseconds <= -1_000_000_000 || seconds > 0 && nanoseconds < 0 {
+424,src/duration.rs,650,0,0,1,2,0.0,0.0,0.0,nanoseconds += 1_000_000_000;
+425,src/duration.rs,651,0,0,1,2,0.0,0.0,0.0,seconds = seconds.checked_sub(1)?;
+426,src/duration.rs,652,0,0,1,2,0.0,0.0,0.0,}
+427,src/duration.rs,655,0,0,1,2,0.0,0.0,0.0,"debug_assert_ne!(seconds.signum() * nanoseconds.signum() as i64, -1);"
+428,src/duration.rs,656,0,0,1,2,0.0,0.0,0.0,debug_assert!((-999_999_999..1_000_000_000).contains(&nanoseconds));
+429,src/duration.rs,658,0,0,1,2,0.0,0.0,0.0,Some(Self {
+430,src/duration.rs,662,0,0,1,2,0.0,0.0,0.0,}
+431,src/duration.rs,672,0,0,1,2,0.0,0.0,0.0,"pub fn checked_sub(self, rhs: Self) -> Option<Self> {"
+432,src/duration.rs,673,0,0,1,2,0.0,0.0,0.0,self.checked_add(-rhs)
+433,src/duration.rs,674,0,0,1,2,0.0,0.0,0.0,}
+434,src/duration.rs,686,0,0,1,2,0.0,0.0,0.0,"pub fn checked_mul(self, rhs: i32) -> Option<Self> {"
+435,src/duration.rs,688,0,0,1,2,0.0,0.0,0.0,let total_nanos = self.nanoseconds as i64 * rhs as i64;
+436,src/duration.rs,689,0,0,1,2,0.0,0.0,0.0,let extra_secs = total_nanos / 1_000_000_000;
+437,src/duration.rs,690,0,0,1,2,0.0,0.0,0.0,let nanoseconds = (total_nanos % 1_000_000_000) as i32;
+438,src/duration.rs,691,0,0,1,2,0.0,0.0,0.0,let seconds = self
+439,src/duration.rs,693,0,0,1,2,0.0,0.0,0.0,.checked_mul(rhs as i64)?
+440,src/duration.rs,694,0,0,1,2,0.0,0.0,0.0,.checked_add(extra_secs)?;
+441,src/duration.rs,696,0,0,1,2,0.0,0.0,0.0,Some(Self {
+442,src/duration.rs,700,0,0,1,2,0.0,0.0,0.0,}
+443,src/duration.rs,713,0,0,1,2,0.0,0.0,0.0,"pub const fn checked_div(self, rhs: i32) -> Option<Self> {"
+444,src/duration.rs,714,0,0,1,2,0.0,0.0,0.0,if rhs == 0 {
+445,src/duration.rs,715,0,0,1,2,0.0,0.0,0.0,return None;
+446,src/duration.rs,716,0,0,1,2,0.0,0.0,0.0,}
+447,src/duration.rs,718,0,0,1,2,0.0,0.0,0.0,let seconds = self.seconds / (rhs as i64);
+448,src/duration.rs,719,0,0,1,2,0.0,0.0,0.0,let carry = self.seconds - seconds * (rhs as i64);
+449,src/duration.rs,720,0,0,1,2,0.0,0.0,0.0,let extra_nanos = carry * 1_000_000_000 / (rhs as i64);
+450,src/duration.rs,721,0,0,1,2,0.0,0.0,0.0,let nanoseconds = self.nanoseconds / rhs + (extra_nanos as i32);
+451,src/duration.rs,723,0,0,1,2,0.0,0.0,0.0,Some(Self {
+452,src/duration.rs,727,0,0,1,2,0.0,0.0,0.0,}
+453,src/duration.rs,733,0,0,1,2,0.0,0.0,0.0,"pub fn time_fn<T>(f: impl FnOnce() -> T) -> (Self, T) {"
+454,src/duration.rs,734,0,0,1,2,0.0,0.0,0.0,let start = Instant::now();
+455,src/duration.rs,735,0,0,1,2,0.0,0.0,0.0,let return_value = f();
+456,src/duration.rs,736,0,0,1,2,0.0,0.0,0.0,let end = Instant::now();
+457,src/duration.rs,738,0,0,1,2,0.0,0.0,0.0,"(end - start, return_value)"
+458,src/duration.rs,739,0,0,1,2,0.0,0.0,0.0,}
+459,src/duration.rs,748,0,0,1,2,0.0,0.0,0.0,pub fn num_weeks(&self) -> i64 {
+460,src/duration.rs,749,0,0,1,2,0.0,0.0,0.0,self.whole_weeks()
+461,src/duration.rs,750,0,0,1,2,0.0,0.0,0.0,}
+462,src/duration.rs,753,0,0,1,2,0.0,0.0,0.0,pub fn num_days(&self) -> i64 {
+463,src/duration.rs,754,0,0,1,2,0.0,0.0,0.0,self.whole_days()
+464,src/duration.rs,755,0,0,1,2,0.0,0.0,0.0,}
+465,src/duration.rs,758,0,0,1,2,0.0,0.0,0.0,pub fn num_hours(&self) -> i64 {
+466,src/duration.rs,759,0,0,1,2,0.0,0.0,0.0,self.whole_hours()
+467,src/duration.rs,760,0,0,1,2,0.0,0.0,0.0,}
+468,src/duration.rs,763,0,0,1,2,0.0,0.0,0.0,pub fn num_minutes(&self) -> i64 {
+469,src/duration.rs,764,0,0,1,2,0.0,0.0,0.0,self.whole_minutes()
+470,src/duration.rs,765,0,0,1,2,0.0,0.0,0.0,}
+471,src/duration.rs,769,0,0,1,2,0.0,0.0,0.0,pub fn num_seconds(&self) -> i64 {
+472,src/duration.rs,770,0,0,1,2,0.0,0.0,0.0,self.whole_seconds()
+473,src/duration.rs,771,0,0,1,2,0.0,0.0,0.0,}
+474,src/duration.rs,781,0,0,1,2,0.0,0.0,0.0,pub fn num_milliseconds(&self) -> i64 {
+475,src/duration.rs,782,0,0,1,2,0.0,0.0,0.0,let millis = self.whole_milliseconds();
+476,src/duration.rs,784,0,0,1,2,0.0,0.0,0.0,if millis > i64::max_value() as i128 {
+477,src/duration.rs,785,0,0,1,2,0.0,0.0,0.0,return i64::max_value();
+478,src/duration.rs,786,0,0,1,2,0.0,0.0,0.0,}
+479,src/duration.rs,788,0,0,1,2,0.0,0.0,0.0,if millis < i64::min_value() as i128 {
+480,src/duration.rs,789,0,0,1,2,0.0,0.0,0.0,return i64::min_value();
+481,src/duration.rs,790,0,0,1,2,0.0,0.0,0.0,}
+482,src/duration.rs,792,0,0,1,2,0.0,0.0,0.0,millis as i64
+483,src/duration.rs,793,0,0,1,2,0.0,0.0,0.0,}
+484,src/duration.rs,798,0,0,1,2,0.0,0.0,0.0,pub fn num_microseconds(&self) -> Option<i64> {
+485,src/duration.rs,799,0,0,1,2,0.0,0.0,0.0,let micros = self.whole_microseconds();
+486,src/duration.rs,801,0,0,1,2,0.0,0.0,0.0,if micros.abs() > i64::max_value() as i128 {
+487,src/duration.rs,802,0,0,1,2,0.0,0.0,0.0,None
+488,src/duration.rs,804,0,0,1,2,0.0,0.0,0.0,Some(micros as i64)
+489,src/duration.rs,806,0,0,1,2,0.0,0.0,0.0,}
+490,src/duration.rs,811,0,0,1,2,0.0,0.0,0.0,pub fn num_nanoseconds(&self) -> Option<i64> {
+491,src/duration.rs,812,0,0,1,2,0.0,0.0,0.0,let nanos = self.whole_nanoseconds();
+492,src/duration.rs,814,0,0,1,2,0.0,0.0,0.0,if nanos.abs() > i64::max_value() as i128 {
+493,src/duration.rs,815,0,0,1,2,0.0,0.0,0.0,None
+494,src/duration.rs,817,0,0,1,2,0.0,0.0,0.0,Some(nanos as i64)
+495,src/duration.rs,819,0,0,1,2,0.0,0.0,0.0,}
+496,src/duration.rs,823,0,0,1,2,0.0,0.0,0.0,pub fn span<F: FnOnce()>(f: F) -> Self {
+497,src/duration.rs,824,0,0,1,2,0.0,0.0,0.0,Self::time_fn(f).0
+498,src/duration.rs,825,0,0,1,2,0.0,0.0,0.0,}
+499,src/duration.rs,832,0,0,1,2,0.0,0.0,0.0,"pub fn from_std(std: StdDuration) -> Result<Self, error::ConversionRange> {"
+500,src/duration.rs,833,0,0,1,2,0.0,0.0,0.0,std.try_into()
+501,src/duration.rs,834,0,0,1,2,0.0,0.0,0.0,}
+502,src/duration.rs,841,0,0,1,2,0.0,0.0,0.0,"pub fn to_std(&self) -> Result<StdDuration, error::ConversionRange> {"
+503,src/duration.rs,842,0,0,1,2,0.0,0.0,0.0,(*self).try_into()
+504,src/duration.rs,843,0,0,1,2,0.0,0.0,0.0,}
+505,src/duration.rs,849,0,0,1,2,0.0,0.0,0.0,"fn try_from(original: StdDuration) -> Result<Self, error::ConversionRange> {"
+506,src/duration.rs,850,0,0,1,2,0.0,0.0,0.0,Ok(Self::new(
+507,src/duration.rs,851,0,0,1,2,0.0,0.0,0.0,original
+508,src/duration.rs,852,0,0,1,2,0.0,0.0,0.0,.as_secs()
+509,src/duration.rs,853,0,0,1,2,0.0,0.0,0.0,.try_into()
+510,src/duration.rs,854,0,0,1,2,0.0,0.0,0.0,".map_err(|_| error::ConversionRange)?,"
+511,src/duration.rs,855,0,0,1,2,0.0,0.0,0.0,original
+512,src/duration.rs,856,0,0,1,2,0.0,0.0,0.0,.subsec_nanos()
+513,src/duration.rs,857,0,0,1,2,0.0,0.0,0.0,.try_into()
+514,src/duration.rs,858,0,0,1,2,0.0,0.0,0.0,".map_err(|_| error::ConversionRange)?,"
+515,src/duration.rs,860,0,0,1,2,0.0,0.0,0.0,}
+516,src/duration.rs,866,0,0,1,2,0.0,0.0,0.0,"fn try_from(duration: Duration) -> Result<Self, error::ConversionRange> {"
+517,src/duration.rs,867,0,0,1,2,0.0,0.0,0.0,Ok(Self::new(
+518,src/duration.rs,868,0,0,1,2,0.0,0.0,0.0,duration
+519,src/duration.rs,870,0,0,1,2,0.0,0.0,0.0,.try_into()
+520,src/duration.rs,871,0,0,1,2,0.0,0.0,0.0,".map_err(|_| error::ConversionRange)?,"
+521,src/duration.rs,872,0,0,1,2,0.0,0.0,0.0,duration
+522,src/duration.rs,874,0,0,1,2,0.0,0.0,0.0,.try_into()
+523,src/duration.rs,875,0,0,1,2,0.0,0.0,0.0,".map_err(|_| error::ConversionRange)?,"
+524,src/duration.rs,877,0,0,1,2,0.0,0.0,0.0,}
+525,src/duration.rs,883,0,0,1,2,0.0,0.0,0.0,"fn add(self, rhs: Self) -> Self::Output {"
+526,src/duration.rs,884,0,0,1,2,0.0,0.0,0.0,self.checked_add(rhs)
+527,src/duration.rs,885,0,0,1,2,0.0,0.0,0.0,".expect(""overflow when adding durations"")"
+528,src/duration.rs,886,0,0,1,2,0.0,0.0,0.0,}
+529,src/duration.rs,892,0,0,1,2,0.0,0.0,0.0,"fn add(self, std_duration: StdDuration) -> Self::Output {"
+530,src/duration.rs,893,0,0,1,2,0.0,0.0,0.0,self + Self::try_from(std_duration)
+531,src/duration.rs,895,0,0,1,2,0.0,0.0,0.0,}
+532,src/duration.rs,901,0,0,1,2,0.0,0.0,0.0,"fn add(self, rhs: Duration) -> Self::Output {"
+533,src/duration.rs,902,0,0,1,2,0.0,0.0,0.0,rhs + self
+534,src/duration.rs,903,0,0,1,2,0.0,0.0,0.0,}
+535,src/duration.rs,907,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, rhs: Self) {"
+536,src/duration.rs,908,0,0,1,2,0.0,0.0,0.0,*self = *self + rhs;
+537,src/duration.rs,909,0,0,1,2,0.0,0.0,0.0,}
+538,src/duration.rs,913,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, rhs: StdDuration) {"
+539,src/duration.rs,914,0,0,1,2,0.0,0.0,0.0,*self = *self + rhs;
+540,src/duration.rs,915,0,0,1,2,0.0,0.0,0.0,}
+541,src/duration.rs,921,0,0,1,2,0.0,0.0,0.0,fn neg(self) -> Self::Output {
+542,src/duration.rs,922,0,0,1,2,0.0,0.0,0.0,-1 * self
+543,src/duration.rs,923,0,0,1,2,0.0,0.0,0.0,}
+544,src/duration.rs,929,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: Self) -> Self::Output {"
+545,src/duration.rs,930,0,0,1,2,0.0,0.0,0.0,self.checked_sub(rhs)
+546,src/duration.rs,931,0,0,1,2,0.0,0.0,0.0,".expect(""overflow when subtracting durations"")"
+547,src/duration.rs,932,0,0,1,2,0.0,0.0,0.0,}
+548,src/duration.rs,938,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: StdDuration) -> Self::Output {"
+549,src/duration.rs,939,0,0,1,2,0.0,0.0,0.0,self - Self::try_from(rhs)
+550,src/duration.rs,941,0,0,1,2,0.0,0.0,0.0,}
+551,src/duration.rs,947,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: Duration) -> Self::Output {"
+552,src/duration.rs,948,0,0,1,2,0.0,0.0,0.0,Duration::try_from(self)
+553,src/duration.rs,949,0,0,1,2,0.0,0.0,0.0,".expect(""overflow converting `std::time::Duration` to `time::Duration`"")"
+554,src/duration.rs,951,0,0,1,2,0.0,0.0,0.0,}
+555,src/duration.rs,955,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, rhs: Self) {"
+556,src/duration.rs,956,0,0,1,2,0.0,0.0,0.0,*self = *self - rhs;
+557,src/duration.rs,957,0,0,1,2,0.0,0.0,0.0,}
+558,src/duration.rs,961,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, rhs: StdDuration) {"
+559,src/duration.rs,962,0,0,1,2,0.0,0.0,0.0,*self = *self - rhs;
+560,src/duration.rs,963,0,0,1,2,0.0,0.0,0.0,}
+561,src/duration.rs,967,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, rhs: Duration) {"
+562,src/duration.rs,968,0,0,1,2,0.0,0.0,0.0,*self = (*self - rhs).try_into().expect(
+563,src/duration.rs,972,0,0,1,2,0.0,0.0,0.0,}
+564,src/duration.rs,981,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: $type) -> Self::Output {"
+565,src/duration.rs,982,0,0,1,2,0.0,0.0,0.0,Self::nanoseconds_i128(
+566,src/duration.rs,983,0,0,1,2,0.0,0.0,0.0,self.whole_nanoseconds()
+567,src/duration.rs,984,0,0,1,2,0.0,0.0,0.0,.checked_mul(rhs as i128)
+568,src/duration.rs,985,0,0,1,2,0.0,0.0,0.0,".expect(""overflow when multiplying duration"")"
+569,src/duration.rs,987,0,0,1,2,0.0,0.0,0.0,}
+570,src/duration.rs,991,0,0,1,2,0.0,0.0,0.0,"fn mul_assign(&mut self, rhs: $type) {"
+571,src/duration.rs,992,0,0,1,2,0.0,0.0,0.0,*self = *self * rhs;
+572,src/duration.rs,993,0,0,1,2,0.0,0.0,0.0,}
+573,src/duration.rs,999,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: Duration) -> Self::Output {"
+574,src/duration.rs,1000,0,0,1,2,0.0,0.0,0.0,rhs * self
+575,src/duration.rs,1001,0,0,1,2,0.0,0.0,0.0,}
+576,src/duration.rs,1007,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: $type) -> Self::Output {"
+577,src/duration.rs,1008,0,0,1,2,0.0,0.0,0.0,Self::nanoseconds_i128(self.whole_nanoseconds() / rhs as i128)
+578,src/duration.rs,1009,0,0,1,2,0.0,0.0,0.0,}
+579,src/duration.rs,1013,0,0,1,2,0.0,0.0,0.0,"fn div_assign(&mut self, rhs: $type) {"
+580,src/duration.rs,1014,0,0,1,2,0.0,0.0,0.0,*self = *self / rhs;
+581,src/duration.rs,1015,0,0,1,2,0.0,0.0,0.0,}
+582,src/duration.rs,1025,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: f32) -> Self::Output {"
+583,src/duration.rs,1026,0,0,1,2,0.0,0.0,0.0,Self::seconds_f32(self.as_seconds_f32() * rhs)
+584,src/duration.rs,1027,0,0,1,2,0.0,0.0,0.0,}
+585,src/duration.rs,1031,0,0,1,2,0.0,0.0,0.0,"fn mul_assign(&mut self, rhs: f32) {"
+586,src/duration.rs,1032,0,0,1,2,0.0,0.0,0.0,*self = *self * rhs;
+587,src/duration.rs,1033,0,0,1,2,0.0,0.0,0.0,}
+588,src/duration.rs,1039,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: Duration) -> Self::Output {"
+589,src/duration.rs,1040,0,0,1,2,0.0,0.0,0.0,rhs * self
+590,src/duration.rs,1041,0,0,1,2,0.0,0.0,0.0,}
+591,src/duration.rs,1047,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: f64) -> Self::Output {"
+592,src/duration.rs,1048,0,0,1,2,0.0,0.0,0.0,Self::seconds_f64(self.as_seconds_f64() * rhs)
+593,src/duration.rs,1049,0,0,1,2,0.0,0.0,0.0,}
+594,src/duration.rs,1053,0,0,1,2,0.0,0.0,0.0,"fn mul_assign(&mut self, rhs: f64) {"
+595,src/duration.rs,1054,0,0,1,2,0.0,0.0,0.0,*self = *self * rhs;
+596,src/duration.rs,1055,0,0,1,2,0.0,0.0,0.0,}
+597,src/duration.rs,1061,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: Duration) -> Self::Output {"
+598,src/duration.rs,1062,0,0,1,2,0.0,0.0,0.0,rhs * self
+599,src/duration.rs,1063,0,0,1,2,0.0,0.0,0.0,}
+600,src/duration.rs,1069,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: f32) -> Self::Output {"
+601,src/duration.rs,1070,0,0,1,2,0.0,0.0,0.0,Self::seconds_f32(self.as_seconds_f32() / rhs)
+602,src/duration.rs,1071,0,0,1,2,0.0,0.0,0.0,}
+603,src/duration.rs,1075,0,0,1,2,0.0,0.0,0.0,"fn div_assign(&mut self, rhs: f32) {"
+604,src/duration.rs,1076,0,0,1,2,0.0,0.0,0.0,*self = *self / rhs;
+605,src/duration.rs,1077,0,0,1,2,0.0,0.0,0.0,}
+606,src/duration.rs,1083,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: f64) -> Self::Output {"
+607,src/duration.rs,1084,0,0,1,2,0.0,0.0,0.0,Self::seconds_f64(self.as_seconds_f64() / rhs)
+608,src/duration.rs,1085,0,0,1,2,0.0,0.0,0.0,}
+609,src/duration.rs,1089,0,0,1,2,0.0,0.0,0.0,"fn div_assign(&mut self, rhs: f64) {"
+610,src/duration.rs,1090,0,0,1,2,0.0,0.0,0.0,*self = *self / rhs;
+611,src/duration.rs,1091,0,0,1,2,0.0,0.0,0.0,}
+612,src/duration.rs,1097,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: Self) -> Self::Output {"
+613,src/duration.rs,1098,0,0,1,2,0.0,0.0,0.0,self.as_seconds_f64() / rhs.as_seconds_f64()
+614,src/duration.rs,1099,0,0,1,2,0.0,0.0,0.0,}
+615,src/duration.rs,1105,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: StdDuration) -> Self::Output {"
+616,src/duration.rs,1106,0,0,1,2,0.0,0.0,0.0,self.as_seconds_f64() / rhs.as_secs_f64()
+617,src/duration.rs,1107,0,0,1,2,0.0,0.0,0.0,}
+618,src/duration.rs,1113,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: Duration) -> Self::Output {"
+619,src/duration.rs,1114,0,0,1,2,0.0,0.0,0.0,self.as_secs_f64() / rhs.as_seconds_f64()
+620,src/duration.rs,1115,0,0,1,2,0.0,0.0,0.0,}
+621,src/duration.rs,1119,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &StdDuration) -> bool {"
+622,src/duration.rs,1120,0,0,1,2,0.0,0.0,0.0,Ok(*self) == Self::try_from(*rhs)
+623,src/duration.rs,1121,0,0,1,2,0.0,0.0,0.0,}
+624,src/duration.rs,1125,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &Duration) -> bool {"
+625,src/duration.rs,1126,0,0,1,2,0.0,0.0,0.0,rhs == self
+626,src/duration.rs,1127,0,0,1,2,0.0,0.0,0.0,}
+627,src/duration.rs,1131,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, rhs: &Self) -> Option<Ordering> {"
+628,src/duration.rs,1132,0,0,1,2,0.0,0.0,0.0,Some(self.cmp(rhs))
+629,src/duration.rs,1133,0,0,1,2,0.0,0.0,0.0,}
+630,src/duration.rs,1137,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, rhs: &StdDuration) -> Option<Ordering> {"
+631,src/duration.rs,1138,0,0,1,2,0.0,0.0,0.0,if rhs.as_secs() > i64::max_value() as u64 {
+632,src/duration.rs,1139,0,0,1,2,0.0,0.0,0.0,return Some(Ordering::Less);
+633,src/duration.rs,1140,0,0,1,2,0.0,0.0,0.0,}
+634,src/duration.rs,1143,0,0,1,2,0.0,0.0,0.0,self.seconds
+635,src/duration.rs,1144,0,0,1,2,0.0,0.0,0.0,.cmp(&(rhs.as_secs() as i64))
+636,src/duration.rs,1145,0,0,1,2,0.0,0.0,0.0,".then_with(|| self.nanoseconds.cmp(&(rhs.subsec_nanos() as i32))),"
+637,src/duration.rs,1147,0,0,1,2,0.0,0.0,0.0,}
+638,src/duration.rs,1151,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, rhs: &Duration) -> Option<Ordering> {"
+639,src/duration.rs,1152,0,0,1,2,0.0,0.0,0.0,rhs.partial_cmp(self).map(Ordering::reverse)
+640,src/duration.rs,1153,0,0,1,2,0.0,0.0,0.0,}
+641,src/duration.rs,1157,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, rhs: &Self) -> Ordering {"
+642,src/duration.rs,1158,0,0,1,2,0.0,0.0,0.0,self.seconds
+643,src/duration.rs,1159,0,0,1,2,0.0,0.0,0.0,.cmp(&rhs.seconds)
+644,src/duration.rs,1160,0,0,1,2,0.0,0.0,0.0,.then_with(|| self.nanoseconds.cmp(&rhs.nanoseconds))
+645,src/duration.rs,1161,0,0,1,2,0.0,0.0,0.0,}
+646,src/error.rs,27,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+647,src/error.rs,28,0,0,1,2,0.0,0.0,0.0,match self {
+648,src/error.rs,29,0,0,1,2,0.0,0.0,0.0,"Error::ConversionRange(e) => e.fmt(f),"
+649,src/error.rs,30,0,0,1,2,0.0,0.0,0.0,"Error::ComponentRange(e) => e.fmt(f),"
+650,src/error.rs,31,0,0,1,2,0.0,0.0,0.0,"Error::Parse(e) => e.fmt(f),"
+651,src/error.rs,32,0,0,1,2,0.0,0.0,0.0,"Error::IndeterminateOffset(e) => e.fmt(f),"
+652,src/error.rs,33,0,0,1,2,0.0,0.0,0.0,"Error::Format(e) => e.fmt(f),"
+653,src/error.rs,37,0,0,1,2,0.0,0.0,0.0,}
+654,src/error.rs,42,0,0,1,2,0.0,0.0,0.0,fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+655,src/error.rs,43,0,0,1,2,0.0,0.0,0.0,match self {
+656,src/error.rs,44,0,0,1,2,0.0,0.0,0.0,"Error::ConversionRange(err) => Some(err),"
+657,src/error.rs,45,0,0,1,2,0.0,0.0,0.0,"Error::ComponentRange(box_err) => Some(box_err.as_ref()),"
+658,src/error.rs,46,0,0,1,2,0.0,0.0,0.0,"Error::Parse(err) => Some(err),"
+659,src/error.rs,47,0,0,1,2,0.0,0.0,0.0,"Error::IndeterminateOffset(err) => Some(err),"
+660,src/error.rs,48,0,0,1,2,0.0,0.0,0.0,"Error::Format(err) => Some(err),"
+661,src/error.rs,52,0,0,1,2,0.0,0.0,0.0,}
+662,src/error.rs,61,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+663,src/error.rs,62,0,0,1,2,0.0,0.0,0.0,"f.write_str(""Source value is out of range for the target type"")"
+664,src/error.rs,63,0,0,1,2,0.0,0.0,0.0,}
+665,src/error.rs,70,0,0,1,2,0.0,0.0,0.0,fn from(original: ConversionRange) -> Self {
+666,src/error.rs,71,0,0,1,2,0.0,0.0,0.0,Error::ConversionRange(original)
+667,src/error.rs,72,0,0,1,2,0.0,0.0,0.0,}
+668,src/error.rs,99,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+669,src/error.rs,100,0,0,1,2,0.0,0.0,0.0,write!(
+670,src/error.rs,101,0,0,1,2,0.0,0.0,0.0,"f,"
+671,src/error.rs,104,0,0,1,2,0.0,0.0,0.0,)?;
+672,src/error.rs,106,0,0,1,2,0.0,0.0,0.0,if self.conditional_range {
+673,src/error.rs,107,0,0,1,2,0.0,0.0,0.0,"write!(f, "", given values of other parameters"")?;"
+674,src/error.rs,108,0,0,1,2,0.0,0.0,0.0,}
+675,src/error.rs,110,0,0,1,2,0.0,0.0,0.0,Ok(())
+676,src/error.rs,111,0,0,1,2,0.0,0.0,0.0,}
+677,src/error.rs,115,0,0,1,2,0.0,0.0,0.0,fn from(original: ComponentRange) -> Self {
+678,src/error.rs,116,0,0,1,2,0.0,0.0,0.0,Error::ComponentRange(Box::new(original))
+679,src/error.rs,117,0,0,1,2,0.0,0.0,0.0,}
+680,src/error.rs,124,0,0,1,2,0.0,0.0,0.0,fn from(original: Parse) -> Self {
+681,src/error.rs,125,0,0,1,2,0.0,0.0,0.0,Error::Parse(original)
+682,src/error.rs,126,0,0,1,2,0.0,0.0,0.0,}
+683,src/error.rs,134,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+684,src/error.rs,135,0,0,1,2,0.0,0.0,0.0,"f.write_str(""The system's UTC offset could not be determined"")"
+685,src/error.rs,136,0,0,1,2,0.0,0.0,0.0,}
+686,src/error.rs,143,0,0,1,2,0.0,0.0,0.0,fn from(original: IndeterminateOffset) -> Self {
+687,src/error.rs,144,0,0,1,2,0.0,0.0,0.0,Error::IndeterminateOffset(original)
+688,src/error.rs,145,0,0,1,2,0.0,0.0,0.0,}
+689,src/error.rs,161,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+690,src/error.rs,162,0,0,1,2,0.0,0.0,0.0,match self {
+691,src/error.rs,164,0,0,1,2,0.0,0.0,0.0,"f.write_str(""The format provided requires more information than the type provides."")"
+692,src/error.rs,166,0,0,1,2,0.0,0.0,0.0,"Format::StdFmtError => fmt::Error.fmt(f),"
+693,src/error.rs,170,0,0,1,2,0.0,0.0,0.0,}
+694,src/error.rs,175,0,0,1,2,0.0,0.0,0.0,fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+695,src/error.rs,176,0,0,1,2,0.0,0.0,0.0,match self {
+696,src/error.rs,177,0,0,1,2,0.0,0.0,0.0,"Format::StdFmtError => Some(&fmt::Error),"
+697,src/error.rs,178,0,0,1,2,0.0,0.0,0.0,"_ => None,"
+698,src/error.rs,180,0,0,1,2,0.0,0.0,0.0,}
+699,src/error.rs,185,0,0,1,2,0.0,0.0,0.0,fn from(_: fmt::Error) -> Self {
+700,src/error.rs,186,0,0,1,2,0.0,0.0,0.0,Format::StdFmtError
+701,src/error.rs,187,0,0,1,2,0.0,0.0,0.0,}
+702,src/error.rs,191,0,0,1,2,0.0,0.0,0.0,fn from(error: Format) -> Self {
+703,src/error.rs,192,0,0,1,2,0.0,0.0,0.0,Error::Format(error)
+704,src/error.rs,193,0,0,1,2,0.0,0.0,0.0,}
+705,src/error.rs,202,0,0,1,2,0.0,0.0,0.0,fn indeterminate_offset() {
+706,src/error.rs,203,0,0,1,2,0.0,0.0,0.0,assert_eq!(
+707,src/error.rs,204,0,0,1,2,0.0,0.0,0.0,"IndeterminateOffset.to_string(),"
+708,src/error.rs,205,0,0,1,2,0.0,0.0,0.0,Error::IndeterminateOffset(IndeterminateOffset).to_string()
+709,src/error.rs,207,0,0,1,2,0.0,0.0,0.0,assert!(match Error::from(IndeterminateOffset).source() {
+710,src/error.rs,208,0,0,1,2,0.0,0.0,0.0,"Some(error) => error.is::<IndeterminateOffset>(),"
+711,src/error.rs,209,0,0,1,2,0.0,0.0,0.0,"None => false,"
+712,src/error.rs,211,0,0,1,2,0.0,0.0,0.0,}
+713,src/ext.rs,77,0,0,1,2,0.0,0.0,0.0,fn nanoseconds(self) -> Duration {
+714,src/ext.rs,78,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds(self as i64)
+715,src/ext.rs,79,0,0,1,2,0.0,0.0,0.0,}
+716,src/ext.rs,81,0,0,1,2,0.0,0.0,0.0,fn microseconds(self) -> Duration {
+717,src/ext.rs,82,0,0,1,2,0.0,0.0,0.0,Duration::microseconds(self as i64)
+718,src/ext.rs,83,0,0,1,2,0.0,0.0,0.0,}
+719,src/ext.rs,85,0,0,1,2,0.0,0.0,0.0,fn milliseconds(self) -> Duration {
+720,src/ext.rs,86,0,0,1,2,0.0,0.0,0.0,Duration::milliseconds(self as i64)
+721,src/ext.rs,87,0,0,1,2,0.0,0.0,0.0,}
+722,src/ext.rs,89,0,0,1,2,0.0,0.0,0.0,fn seconds(self) -> Duration {
+723,src/ext.rs,90,0,0,1,2,0.0,0.0,0.0,Duration::seconds(self as i64)
+724,src/ext.rs,91,0,0,1,2,0.0,0.0,0.0,}
+725,src/ext.rs,93,0,0,1,2,0.0,0.0,0.0,fn minutes(self) -> Duration {
+726,src/ext.rs,94,0,0,1,2,0.0,0.0,0.0,Duration::minutes(self as i64)
+727,src/ext.rs,95,0,0,1,2,0.0,0.0,0.0,}
+728,src/ext.rs,97,0,0,1,2,0.0,0.0,0.0,fn hours(self) -> Duration {
+729,src/ext.rs,98,0,0,1,2,0.0,0.0,0.0,Duration::hours(self as i64)
+730,src/ext.rs,99,0,0,1,2,0.0,0.0,0.0,}
+731,src/ext.rs,101,0,0,1,2,0.0,0.0,0.0,fn days(self) -> Duration {
+732,src/ext.rs,102,0,0,1,2,0.0,0.0,0.0,Duration::days(self as i64)
+733,src/ext.rs,103,0,0,1,2,0.0,0.0,0.0,}
+734,src/ext.rs,105,0,0,1,2,0.0,0.0,0.0,fn weeks(self) -> Duration {
+735,src/ext.rs,106,0,0,1,2,0.0,0.0,0.0,Duration::weeks(self as i64)
+736,src/ext.rs,107,0,0,1,2,0.0,0.0,0.0,}
+737,src/ext.rs,117,0,0,1,2,0.0,0.0,0.0,fn nanoseconds(self) -> Duration {
+738,src/ext.rs,118,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds(self.get() as i64)
+739,src/ext.rs,119,0,0,1,2,0.0,0.0,0.0,}
+740,src/ext.rs,121,0,0,1,2,0.0,0.0,0.0,fn microseconds(self) -> Duration {
+741,src/ext.rs,122,0,0,1,2,0.0,0.0,0.0,Duration::microseconds(self.get() as i64)
+742,src/ext.rs,123,0,0,1,2,0.0,0.0,0.0,}
+743,src/ext.rs,125,0,0,1,2,0.0,0.0,0.0,fn milliseconds(self) -> Duration {
+744,src/ext.rs,126,0,0,1,2,0.0,0.0,0.0,Duration::milliseconds(self.get() as i64)
+745,src/ext.rs,127,0,0,1,2,0.0,0.0,0.0,}
+746,src/ext.rs,129,0,0,1,2,0.0,0.0,0.0,fn seconds(self) -> Duration {
+747,src/ext.rs,130,0,0,1,2,0.0,0.0,0.0,Duration::seconds(self.get() as i64)
+748,src/ext.rs,131,0,0,1,2,0.0,0.0,0.0,}
+749,src/ext.rs,133,0,0,1,2,0.0,0.0,0.0,fn minutes(self) -> Duration {
+750,src/ext.rs,134,0,0,1,2,0.0,0.0,0.0,Duration::minutes(self.get() as i64)
+751,src/ext.rs,135,0,0,1,2,0.0,0.0,0.0,}
+752,src/ext.rs,137,0,0,1,2,0.0,0.0,0.0,fn hours(self) -> Duration {
+753,src/ext.rs,138,0,0,1,2,0.0,0.0,0.0,Duration::hours(self.get() as i64)
+754,src/ext.rs,139,0,0,1,2,0.0,0.0,0.0,}
+755,src/ext.rs,141,0,0,1,2,0.0,0.0,0.0,fn days(self) -> Duration {
+756,src/ext.rs,142,0,0,1,2,0.0,0.0,0.0,Duration::days(self.get() as i64)
+757,src/ext.rs,143,0,0,1,2,0.0,0.0,0.0,}
+758,src/ext.rs,145,0,0,1,2,0.0,0.0,0.0,fn weeks(self) -> Duration {
+759,src/ext.rs,146,0,0,1,2,0.0,0.0,0.0,Duration::weeks(self.get() as i64)
+760,src/ext.rs,147,0,0,1,2,0.0,0.0,0.0,}
+761,src/ext.rs,157,0,0,1,2,0.0,0.0,0.0,fn nanoseconds(self) -> Duration {
+762,src/ext.rs,158,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds(self as i64)
+763,src/ext.rs,159,0,0,1,2,0.0,0.0,0.0,}
+764,src/ext.rs,161,0,0,1,2,0.0,0.0,0.0,fn microseconds(self) -> Duration {
+765,src/ext.rs,162,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 1_000.) as i64)
+766,src/ext.rs,163,0,0,1,2,0.0,0.0,0.0,}
+767,src/ext.rs,165,0,0,1,2,0.0,0.0,0.0,fn milliseconds(self) -> Duration {
+768,src/ext.rs,166,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 1_000_000.) as i64)
+769,src/ext.rs,167,0,0,1,2,0.0,0.0,0.0,}
+770,src/ext.rs,169,0,0,1,2,0.0,0.0,0.0,fn seconds(self) -> Duration {
+771,src/ext.rs,170,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 1_000_000_000.) as i64)
+772,src/ext.rs,171,0,0,1,2,0.0,0.0,0.0,}
+773,src/ext.rs,173,0,0,1,2,0.0,0.0,0.0,fn minutes(self) -> Duration {
+774,src/ext.rs,174,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 60_000_000_000.) as i64)
+775,src/ext.rs,175,0,0,1,2,0.0,0.0,0.0,}
+776,src/ext.rs,177,0,0,1,2,0.0,0.0,0.0,fn hours(self) -> Duration {
+777,src/ext.rs,178,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 3_600_000_000_000.) as i64)
+778,src/ext.rs,179,0,0,1,2,0.0,0.0,0.0,}
+779,src/ext.rs,181,0,0,1,2,0.0,0.0,0.0,fn days(self) -> Duration {
+780,src/ext.rs,182,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 86_400_000_000_000.) as i64)
+781,src/ext.rs,183,0,0,1,2,0.0,0.0,0.0,}
+782,src/ext.rs,185,0,0,1,2,0.0,0.0,0.0,fn weeks(self) -> Duration {
+783,src/ext.rs,186,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds((self * 604_800_000_000_000.) as i64)
+784,src/ext.rs,187,0,0,1,2,0.0,0.0,0.0,}
+785,src/ext.rs,273,0,0,1,2,0.0,0.0,0.0,fn std_nanoseconds(self) -> StdDuration {
+786,src/ext.rs,274,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos(self as u64)
+787,src/ext.rs,275,0,0,1,2,0.0,0.0,0.0,}
+788,src/ext.rs,277,0,0,1,2,0.0,0.0,0.0,fn std_microseconds(self) -> StdDuration {
+789,src/ext.rs,278,0,0,1,2,0.0,0.0,0.0,StdDuration::from_micros(self as u64)
+790,src/ext.rs,279,0,0,1,2,0.0,0.0,0.0,}
+791,src/ext.rs,281,0,0,1,2,0.0,0.0,0.0,fn std_milliseconds(self) -> StdDuration {
+792,src/ext.rs,282,0,0,1,2,0.0,0.0,0.0,StdDuration::from_millis(self as u64)
+793,src/ext.rs,283,0,0,1,2,0.0,0.0,0.0,}
+794,src/ext.rs,285,0,0,1,2,0.0,0.0,0.0,fn std_seconds(self) -> StdDuration {
+795,src/ext.rs,286,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64)
+796,src/ext.rs,287,0,0,1,2,0.0,0.0,0.0,}
+797,src/ext.rs,289,0,0,1,2,0.0,0.0,0.0,fn std_minutes(self) -> StdDuration {
+798,src/ext.rs,290,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 60)
+799,src/ext.rs,291,0,0,1,2,0.0,0.0,0.0,}
+800,src/ext.rs,293,0,0,1,2,0.0,0.0,0.0,fn std_hours(self) -> StdDuration {
+801,src/ext.rs,294,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 3_600)
+802,src/ext.rs,295,0,0,1,2,0.0,0.0,0.0,}
+803,src/ext.rs,297,0,0,1,2,0.0,0.0,0.0,fn std_days(self) -> StdDuration {
+804,src/ext.rs,298,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 86_400)
+805,src/ext.rs,299,0,0,1,2,0.0,0.0,0.0,}
+806,src/ext.rs,301,0,0,1,2,0.0,0.0,0.0,fn std_weeks(self) -> StdDuration {
+807,src/ext.rs,302,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 604_800)
+808,src/ext.rs,303,0,0,1,2,0.0,0.0,0.0,}
+809,src/ext.rs,313,0,0,1,2,0.0,0.0,0.0,fn std_nanoseconds(self) -> StdDuration {
+810,src/ext.rs,314,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos(self.get() as u64)
+811,src/ext.rs,315,0,0,1,2,0.0,0.0,0.0,}
+812,src/ext.rs,317,0,0,1,2,0.0,0.0,0.0,fn std_microseconds(self) -> StdDuration {
+813,src/ext.rs,318,0,0,1,2,0.0,0.0,0.0,StdDuration::from_micros(self.get() as u64)
+814,src/ext.rs,319,0,0,1,2,0.0,0.0,0.0,}
+815,src/ext.rs,321,0,0,1,2,0.0,0.0,0.0,fn std_milliseconds(self) -> StdDuration {
+816,src/ext.rs,322,0,0,1,2,0.0,0.0,0.0,StdDuration::from_millis(self.get() as u64)
+817,src/ext.rs,323,0,0,1,2,0.0,0.0,0.0,}
+818,src/ext.rs,325,0,0,1,2,0.0,0.0,0.0,fn std_seconds(self) -> StdDuration {
+819,src/ext.rs,326,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self.get() as u64)
+820,src/ext.rs,327,0,0,1,2,0.0,0.0,0.0,}
+821,src/ext.rs,329,0,0,1,2,0.0,0.0,0.0,fn std_minutes(self) -> StdDuration {
+822,src/ext.rs,330,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self.get() as u64 * 60)
+823,src/ext.rs,331,0,0,1,2,0.0,0.0,0.0,}
+824,src/ext.rs,333,0,0,1,2,0.0,0.0,0.0,fn std_hours(self) -> StdDuration {
+825,src/ext.rs,334,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self.get() as u64 * 3_600)
+826,src/ext.rs,335,0,0,1,2,0.0,0.0,0.0,}
+827,src/ext.rs,337,0,0,1,2,0.0,0.0,0.0,fn std_days(self) -> StdDuration {
+828,src/ext.rs,338,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self.get() as u64 * 86_400)
+829,src/ext.rs,339,0,0,1,2,0.0,0.0,0.0,}
+830,src/ext.rs,341,0,0,1,2,0.0,0.0,0.0,fn std_weeks(self) -> StdDuration {
+831,src/ext.rs,342,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self.get() as u64 * 604_800)
+832,src/ext.rs,343,0,0,1,2,0.0,0.0,0.0,}
+833,src/ext.rs,360,0,0,1,2,0.0,0.0,0.0,fn std_nanoseconds(self) -> StdDuration {
+834,src/ext.rs,361,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+835,src/ext.rs,362,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos(self as u64)
+836,src/ext.rs,363,0,0,1,2,0.0,0.0,0.0,}
+837,src/ext.rs,365,0,0,1,2,0.0,0.0,0.0,fn std_microseconds(self) -> StdDuration {
+838,src/ext.rs,366,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+839,src/ext.rs,367,0,0,1,2,0.0,0.0,0.0,StdDuration::from_micros(self as u64)
+840,src/ext.rs,368,0,0,1,2,0.0,0.0,0.0,}
+841,src/ext.rs,370,0,0,1,2,0.0,0.0,0.0,fn std_milliseconds(self) -> StdDuration {
+842,src/ext.rs,371,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+843,src/ext.rs,372,0,0,1,2,0.0,0.0,0.0,StdDuration::from_millis(self as u64)
+844,src/ext.rs,373,0,0,1,2,0.0,0.0,0.0,}
+845,src/ext.rs,375,0,0,1,2,0.0,0.0,0.0,fn std_seconds(self) -> StdDuration {
+846,src/ext.rs,376,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+847,src/ext.rs,377,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64)
+848,src/ext.rs,378,0,0,1,2,0.0,0.0,0.0,}
+849,src/ext.rs,380,0,0,1,2,0.0,0.0,0.0,fn std_minutes(self) -> StdDuration {
+850,src/ext.rs,381,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+851,src/ext.rs,382,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 60)
+852,src/ext.rs,383,0,0,1,2,0.0,0.0,0.0,}
+853,src/ext.rs,385,0,0,1,2,0.0,0.0,0.0,fn std_hours(self) -> StdDuration {
+854,src/ext.rs,386,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+855,src/ext.rs,387,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 3_600)
+856,src/ext.rs,388,0,0,1,2,0.0,0.0,0.0,}
+857,src/ext.rs,390,0,0,1,2,0.0,0.0,0.0,fn std_days(self) -> StdDuration {
+858,src/ext.rs,391,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+859,src/ext.rs,392,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 86_400)
+860,src/ext.rs,393,0,0,1,2,0.0,0.0,0.0,}
+861,src/ext.rs,395,0,0,1,2,0.0,0.0,0.0,fn std_weeks(self) -> StdDuration {
+862,src/ext.rs,396,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0);
+863,src/ext.rs,397,0,0,1,2,0.0,0.0,0.0,StdDuration::from_secs(self as u64 * 604_800)
+864,src/ext.rs,398,0,0,1,2,0.0,0.0,0.0,}
+865,src/ext.rs,404,0,0,1,2,0.0,0.0,0.0,fn std_nanoseconds(self) -> StdDuration {
+866,src/ext.rs,405,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+867,src/ext.rs,406,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos(self as u64)
+868,src/ext.rs,407,0,0,1,2,0.0,0.0,0.0,}
+869,src/ext.rs,409,0,0,1,2,0.0,0.0,0.0,fn std_microseconds(self) -> StdDuration {
+870,src/ext.rs,410,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+871,src/ext.rs,411,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 1_000.) as u64)
+872,src/ext.rs,412,0,0,1,2,0.0,0.0,0.0,}
+873,src/ext.rs,414,0,0,1,2,0.0,0.0,0.0,fn std_milliseconds(self) -> StdDuration {
+874,src/ext.rs,415,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+875,src/ext.rs,416,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 1_000_000.) as u64)
+876,src/ext.rs,417,0,0,1,2,0.0,0.0,0.0,}
+877,src/ext.rs,419,0,0,1,2,0.0,0.0,0.0,fn std_seconds(self) -> StdDuration {
+878,src/ext.rs,420,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+879,src/ext.rs,421,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 1_000_000_000.) as u64)
+880,src/ext.rs,422,0,0,1,2,0.0,0.0,0.0,}
+881,src/ext.rs,424,0,0,1,2,0.0,0.0,0.0,fn std_minutes(self) -> StdDuration {
+882,src/ext.rs,425,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+883,src/ext.rs,426,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 60_000_000_000.) as u64)
+884,src/ext.rs,427,0,0,1,2,0.0,0.0,0.0,}
+885,src/ext.rs,429,0,0,1,2,0.0,0.0,0.0,fn std_hours(self) -> StdDuration {
+886,src/ext.rs,430,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+887,src/ext.rs,431,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 3_600_000_000_000.) as u64)
+888,src/ext.rs,432,0,0,1,2,0.0,0.0,0.0,}
+889,src/ext.rs,434,0,0,1,2,0.0,0.0,0.0,fn std_days(self) -> StdDuration {
+890,src/ext.rs,435,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+891,src/ext.rs,436,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 86_400_000_000_000.) as u64)
+892,src/ext.rs,437,0,0,1,2,0.0,0.0,0.0,}
+893,src/ext.rs,439,0,0,1,2,0.0,0.0,0.0,fn std_weeks(self) -> StdDuration {
+894,src/ext.rs,440,0,0,1,2,0.0,0.0,0.0,assert!(self >= 0.);
+895,src/ext.rs,441,0,0,1,2,0.0,0.0,0.0,StdDuration::from_nanos((self * 604_800_000_000_000.) as u64)
+896,src/ext.rs,442,0,0,1,2,0.0,0.0,0.0,}
+897,src/ext.rs,501,0,0,1,2,0.0,0.0,0.0,fn nanoseconds(self) -> StdDuration {
+898,src/ext.rs,502,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_nanoseconds(self)
+899,src/ext.rs,503,0,0,1,2,0.0,0.0,0.0,}
+900,src/ext.rs,505,0,0,1,2,0.0,0.0,0.0,fn microseconds(self) -> StdDuration {
+901,src/ext.rs,506,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_microseconds(self)
+902,src/ext.rs,507,0,0,1,2,0.0,0.0,0.0,}
+903,src/ext.rs,509,0,0,1,2,0.0,0.0,0.0,fn milliseconds(self) -> StdDuration {
+904,src/ext.rs,510,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_milliseconds(self)
+905,src/ext.rs,511,0,0,1,2,0.0,0.0,0.0,}
+906,src/ext.rs,513,0,0,1,2,0.0,0.0,0.0,fn seconds(self) -> StdDuration {
+907,src/ext.rs,514,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_seconds(self)
+908,src/ext.rs,515,0,0,1,2,0.0,0.0,0.0,}
+909,src/ext.rs,517,0,0,1,2,0.0,0.0,0.0,fn minutes(self) -> StdDuration {
+910,src/ext.rs,518,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_minutes(self)
+911,src/ext.rs,519,0,0,1,2,0.0,0.0,0.0,}
+912,src/ext.rs,521,0,0,1,2,0.0,0.0,0.0,fn hours(self) -> StdDuration {
+913,src/ext.rs,522,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_hours(self)
+914,src/ext.rs,523,0,0,1,2,0.0,0.0,0.0,}
+915,src/ext.rs,525,0,0,1,2,0.0,0.0,0.0,fn days(self) -> StdDuration {
+916,src/ext.rs,526,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_days(self)
+917,src/ext.rs,527,0,0,1,2,0.0,0.0,0.0,}
+918,src/ext.rs,529,0,0,1,2,0.0,0.0,0.0,fn weeks(self) -> StdDuration {
+919,src/ext.rs,530,0,0,1,2,0.0,0.0,0.0,<Self as NumericalStdDuration>::std_weeks(self)
+920,src/ext.rs,531,0,0,1,2,0.0,0.0,0.0,}
+921,src/format/date.rs,72,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_a(f: &mut Formatter<'_>, date: Date) -> fmt::Result {"
+922,src/format/date.rs,73,0,0,1,2,0.0,0.0,0.0,f.write_str(WEEKDAYS_ABBR[date.weekday().number_days_from_monday() as usize])
+923,src/format/date.rs,74,0,0,1,2,0.0,0.0,0.0,}
+924,src/format/date.rs,77,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_a(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+925,src/format/date.rs,79,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, WEEKDAYS_ABBR.iter().zip(WEEKDAYS.iter().cloned()))"
+926,src/format/date.rs,80,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidDayOfWeek)?,"
+927,src/format/date.rs,83,0,0,1,2,0.0,0.0,0.0,Ok(())
+928,src/format/date.rs,84,0,0,1,2,0.0,0.0,0.0,}
+929,src/format/date.rs,87,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_A(f: &mut Formatter<'_>, date: Date) -> fmt::Result {"
+930,src/format/date.rs,88,0,0,1,2,0.0,0.0,0.0,f.write_str(WEEKDAYS_FULL[date.weekday().number_days_from_monday() as usize])
+931,src/format/date.rs,89,0,0,1,2,0.0,0.0,0.0,}
+932,src/format/date.rs,92,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_A(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+933,src/format/date.rs,94,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, WEEKDAYS_FULL.iter().zip(WEEKDAYS.iter().cloned()))"
+934,src/format/date.rs,95,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidDayOfWeek)?,"
+935,src/format/date.rs,98,0,0,1,2,0.0,0.0,0.0,Ok(())
+936,src/format/date.rs,99,0,0,1,2,0.0,0.0,0.0,}
+937,src/format/date.rs,102,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_b(f: &mut Formatter<'_>, date: Date) -> fmt::Result {"
+938,src/format/date.rs,103,0,0,1,2,0.0,0.0,0.0,f.write_str(MONTHS_ABBR[date.month() as usize - 1])
+939,src/format/date.rs,104,0,0,1,2,0.0,0.0,0.0,}
+940,src/format/date.rs,107,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_b(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+941,src/format/date.rs,109,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, MONTHS_ABBR.iter().cloned().zip(1..))"
+942,src/format/date.rs,110,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU8::new)
+943,src/format/date.rs,111,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidMonth)?,"
+944,src/format/date.rs,114,0,0,1,2,0.0,0.0,0.0,Ok(())
+945,src/format/date.rs,115,0,0,1,2,0.0,0.0,0.0,}
+946,src/format/date.rs,118,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_B(f: &mut Formatter<'_>, date: Date) -> fmt::Result {"
+947,src/format/date.rs,119,0,0,1,2,0.0,0.0,0.0,f.write_str(MONTHS_FULL[date.month() as usize - 1])
+948,src/format/date.rs,120,0,0,1,2,0.0,0.0,0.0,}
+949,src/format/date.rs,123,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_B(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+950,src/format/date.rs,125,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, MONTHS_FULL.iter().cloned().zip(1..))"
+951,src/format/date.rs,126,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU8::new)
+952,src/format/date.rs,127,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidMonth)?,"
+953,src/format/date.rs,130,0,0,1,2,0.0,0.0,0.0,Ok(())
+954,src/format/date.rs,131,0,0,1,2,0.0,0.0,0.0,}
+955,src/format/date.rs,134,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_C(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+956,src/format/date.rs,135,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.year() / 100)"
+957,src/format/date.rs,136,0,0,1,2,0.0,0.0,0.0,}
+958,src/format/date.rs,139,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_C(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+959,src/format/date.rs,140,0,0,1,2,0.0,0.0,0.0,"let padding_length = consume_padding(s, padding, 1);"
+960,src/format/date.rs,142,0,0,1,2,0.0,0.0,0.0,"try_consume_digits::<i32>(s, 2 - padding_length, 3 - padding_length)"
+961,src/format/date.rs,143,0,0,1,2,0.0,0.0,0.0,.ok_or(error::Parse::InvalidYear)?
+962,src/format/date.rs,145,0,0,1,2,0.0,0.0,0.0,"+ items.year.unwrap_or(0).rem_euclid(100),"
+963,src/format/date.rs,148,0,0,1,2,0.0,0.0,0.0,Ok(())
+964,src/format/date.rs,149,0,0,1,2,0.0,0.0,0.0,}
+965,src/format/date.rs,152,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_d(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+966,src/format/date.rs,153,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.day())"
+967,src/format/date.rs,154,0,0,1,2,0.0,0.0,0.0,}
+968,src/format/date.rs,157,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_d(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+969,src/format/date.rs,159,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, padding)"
+970,src/format/date.rs,160,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU8::new)
+971,src/format/date.rs,161,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidDayOfMonth)?,"
+972,src/format/date.rs,164,0,0,1,2,0.0,0.0,0.0,Ok(())
+973,src/format/date.rs,165,0,0,1,2,0.0,0.0,0.0,}
+974,src/format/date.rs,168,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_g(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+975,src/format/date.rs,169,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.iso_year_week().0.rem_euclid(100))"
+976,src/format/date.rs,170,0,0,1,2,0.0,0.0,0.0,}
+977,src/format/date.rs,173,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_g(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+978,src/format/date.rs,175,0,0,1,2,0.0,0.0,0.0,items.week_based_year.unwrap_or(0) / 100 * 100
+979,src/format/date.rs,176,0,0,1,2,0.0,0.0,0.0,"+ try_consume_exact_digits::<i32>(s, 2, padding).ok_or(error::Parse::InvalidYear)?,"
+980,src/format/date.rs,179,0,0,1,2,0.0,0.0,0.0,Ok(())
+981,src/format/date.rs,180,0,0,1,2,0.0,0.0,0.0,}
+982,src/format/date.rs,183,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_G(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+983,src/format/date.rs,184,0,0,1,2,0.0,0.0,0.0,let year = date.iso_year_week().0;
+984,src/format/date.rs,186,0,0,1,2,0.0,0.0,0.0,if year >= 10_000 {
+985,src/format/date.rs,187,0,0,1,2,0.0,0.0,0.0,"f.write_str(""+"")?;"
+986,src/format/date.rs,188,0,0,1,2,0.0,0.0,0.0,}
+987,src/format/date.rs,190,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 4, year)"
+988,src/format/date.rs,191,0,0,1,2,0.0,0.0,0.0,}
+989,src/format/date.rs,194,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_G(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+990,src/format/date.rs,195,0,0,1,2,0.0,0.0,0.0,"let sign = try_consume_first_match(s, [(""+"", 1), (""-"", -1)].iter().cloned()).unwrap_or(1);"
+991,src/format/date.rs,197,0,0,1,2,0.0,0.0,0.0,"consume_padding(s, padding, 4);"
+992,src/format/date.rs,200,0,0,1,2,0.0,0.0,0.0,"try_consume_digits(s, 1, 6)"
+993,src/format/date.rs,201,0,0,1,2,0.0,0.0,0.0,.map(|v: i32| sign * v)
+994,src/format/date.rs,202,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidYear)?,"
+995,src/format/date.rs,205,0,0,1,2,0.0,0.0,0.0,Ok(())
+996,src/format/date.rs,206,0,0,1,2,0.0,0.0,0.0,}
+997,src/format/date.rs,209,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_j(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+998,src/format/date.rs,210,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 3, date.ordinal())"
+999,src/format/date.rs,211,0,0,1,2,0.0,0.0,0.0,}
+1000,src/format/date.rs,214,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_j(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1001,src/format/date.rs,216,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 3, padding)"
+1002,src/format/date.rs,217,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU16::new)
+1003,src/format/date.rs,218,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidDayOfYear)?,"
+1004,src/format/date.rs,221,0,0,1,2,0.0,0.0,0.0,Ok(())
+1005,src/format/date.rs,222,0,0,1,2,0.0,0.0,0.0,}
+1006,src/format/date.rs,225,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_m(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+1007,src/format/date.rs,226,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.month())"
+1008,src/format/date.rs,227,0,0,1,2,0.0,0.0,0.0,}
+1009,src/format/date.rs,230,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_m(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1010,src/format/date.rs,232,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, padding)"
+1011,src/format/date.rs,233,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU8::new)
+1012,src/format/date.rs,234,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidMonth)?,"
+1013,src/format/date.rs,237,0,0,1,2,0.0,0.0,0.0,Ok(())
+1014,src/format/date.rs,238,0,0,1,2,0.0,0.0,0.0,}
+1015,src/format/date.rs,241,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_u(f: &mut Formatter<'_>, date: Date) -> fmt::Result {"
+1016,src/format/date.rs,242,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{}"", date.weekday().iso_weekday_number())"
+1017,src/format/date.rs,243,0,0,1,2,0.0,0.0,0.0,}
+1018,src/format/date.rs,246,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_u(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1019,src/format/date.rs,248,0,0,1,2,0.0,0.0,0.0,try_consume_first_match(
+1020,src/format/date.rs,249,0,0,1,2,0.0,0.0,0.0,"s,"
+1021,src/format/date.rs,250,0,0,1,2,0.0,0.0,0.0,"(1..).map(|d| d.to_string()).zip(WEEKDAYS.iter().cloned()),"
+1022,src/format/date.rs,252,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidDayOfWeek)?,"
+1023,src/format/date.rs,255,0,0,1,2,0.0,0.0,0.0,Ok(())
+1024,src/format/date.rs,256,0,0,1,2,0.0,0.0,0.0,}
+1025,src/format/date.rs,259,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_U(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+1026,src/format/date.rs,260,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.sunday_based_week())"
+1027,src/format/date.rs,261,0,0,1,2,0.0,0.0,0.0,}
+1028,src/format/date.rs,264,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_U(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1029,src/format/date.rs,266,0,0,1,2,0.0,0.0,0.0,"Some(try_consume_exact_digits(s, 2, padding).ok_or(error::Parse::InvalidWeek)?);"
+1030,src/format/date.rs,268,0,0,1,2,0.0,0.0,0.0,Ok(())
+1031,src/format/date.rs,269,0,0,1,2,0.0,0.0,0.0,}
+1032,src/format/date.rs,272,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_V(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+1033,src/format/date.rs,273,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.week())"
+1034,src/format/date.rs,274,0,0,1,2,0.0,0.0,0.0,}
+1035,src/format/date.rs,277,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_V(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1036,src/format/date.rs,279,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, padding)"
+1037,src/format/date.rs,280,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU8::new)
+1038,src/format/date.rs,281,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidWeek)?,"
+1039,src/format/date.rs,284,0,0,1,2,0.0,0.0,0.0,Ok(())
+1040,src/format/date.rs,285,0,0,1,2,0.0,0.0,0.0,}
+1041,src/format/date.rs,288,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_w(f: &mut Formatter<'_>, date: Date) -> fmt::Result {"
+1042,src/format/date.rs,289,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{}"", date.weekday().number_days_from_sunday())"
+1043,src/format/date.rs,290,0,0,1,2,0.0,0.0,0.0,}
+1044,src/format/date.rs,293,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_w(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1045,src/format/date.rs,294,0,0,1,2,0.0,0.0,0.0,let mut weekdays = WEEKDAYS;
+1046,src/format/date.rs,295,0,0,1,2,0.0,0.0,0.0,weekdays.rotate_left(1);
+1047,src/format/date.rs,298,0,0,1,2,0.0,0.0,0.0,try_consume_first_match(
+1048,src/format/date.rs,299,0,0,1,2,0.0,0.0,0.0,"s,"
+1049,src/format/date.rs,300,0,0,1,2,0.0,0.0,0.0,(0..)
+1050,src/format/date.rs,301,0,0,1,2,0.0,0.0,0.0,.map(|d: u8| d.to_string())
+1051,src/format/date.rs,302,0,0,1,2,0.0,0.0,0.0,".zip(weekdays.iter().cloned()),"
+1052,src/format/date.rs,304,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidDayOfWeek)?,"
+1053,src/format/date.rs,307,0,0,1,2,0.0,0.0,0.0,Ok(())
+1054,src/format/date.rs,308,0,0,1,2,0.0,0.0,0.0,}
+1055,src/format/date.rs,311,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_W(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+1056,src/format/date.rs,312,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.monday_based_week())"
+1057,src/format/date.rs,313,0,0,1,2,0.0,0.0,0.0,}
+1058,src/format/date.rs,316,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_W(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1059,src/format/date.rs,318,0,0,1,2,0.0,0.0,0.0,"Some(try_consume_exact_digits(s, 2, padding).ok_or(error::Parse::InvalidWeek)?);"
+1060,src/format/date.rs,320,0,0,1,2,0.0,0.0,0.0,Ok(())
+1061,src/format/date.rs,321,0,0,1,2,0.0,0.0,0.0,}
+1062,src/format/date.rs,324,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_y(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+1063,src/format/date.rs,325,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, date.year().rem_euclid(100))"
+1064,src/format/date.rs,326,0,0,1,2,0.0,0.0,0.0,}
+1065,src/format/date.rs,329,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_y(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1066,src/format/date.rs,331,0,0,1,2,0.0,0.0,0.0,items.year.unwrap_or(0) / 100 * 100
+1067,src/format/date.rs,332,0,0,1,2,0.0,0.0,0.0,"+ try_consume_exact_digits::<i32>(s, 2, padding).ok_or(error::Parse::InvalidYear)?,"
+1068,src/format/date.rs,335,0,0,1,2,0.0,0.0,0.0,Ok(())
+1069,src/format/date.rs,336,0,0,1,2,0.0,0.0,0.0,}
+1070,src/format/date.rs,339,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_Y(f: &mut Formatter<'_>, date: Date, padding: Padding) -> fmt::Result {"
+1071,src/format/date.rs,340,0,0,1,2,0.0,0.0,0.0,let year = date.year();
+1072,src/format/date.rs,342,0,0,1,2,0.0,0.0,0.0,if year >= 10_000 {
+1073,src/format/date.rs,343,0,0,1,2,0.0,0.0,0.0,"f.write_str(""+"")?;"
+1074,src/format/date.rs,344,0,0,1,2,0.0,0.0,0.0,}
+1075,src/format/date.rs,346,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 4, year)"
+1076,src/format/date.rs,347,0,0,1,2,0.0,0.0,0.0,}
+1077,src/format/date.rs,350,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_Y(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1078,src/format/date.rs,351,0,0,1,2,0.0,0.0,0.0,"let (sign, max_digits) ="
+1079,src/format/date.rs,352,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, [(""+"", (1, 6)), (""-"", (-1, 6))].iter().cloned())"
+1080,src/format/date.rs,355,0,0,1,2,0.0,0.0,0.0,"consume_padding(s, padding, 3);"
+1081,src/format/date.rs,358,0,0,1,2,0.0,0.0,0.0,"try_consume_digits(s, 1, max_digits)"
+1082,src/format/date.rs,359,0,0,1,2,0.0,0.0,0.0,.map(|v: i32| sign * v)
+1083,src/format/date.rs,360,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidYear)?,"
+1084,src/format/date.rs,363,0,0,1,2,0.0,0.0,0.0,Ok(())
+1085,src/format/date.rs,364,0,0,1,2,0.0,0.0,0.0,}
+1086,src/format/deferred_format.rs,25,0,0,1,2,0.0,0.0,0.0,pub(crate) fn new(format: impl Into<Format>) -> Self {
+1087,src/format/deferred_format.rs,26,0,0,1,2,0.0,0.0,0.0,Self {
+1088,src/format/deferred_format.rs,27,0,0,1,2,0.0,0.0,0.0,"date: None,"
+1089,src/format/deferred_format.rs,28,0,0,1,2,0.0,0.0,0.0,"time: None,"
+1090,src/format/deferred_format.rs,29,0,0,1,2,0.0,0.0,0.0,"offset: None,"
+1091,src/format/deferred_format.rs,32,0,0,1,2,0.0,0.0,0.0,}
+1092,src/format/deferred_format.rs,35,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn with_date(&mut self, date: Date) -> &mut Self {"
+1093,src/format/deferred_format.rs,36,0,0,1,2,0.0,0.0,0.0,self.date = Some(date);
+1094,src/format/deferred_format.rs,37,0,0,1,2,0.0,0.0,0.0,self
+1095,src/format/deferred_format.rs,38,0,0,1,2,0.0,0.0,0.0,}
+1096,src/format/deferred_format.rs,41,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn with_time(&mut self, time: Time) -> &mut Self {"
+1097,src/format/deferred_format.rs,42,0,0,1,2,0.0,0.0,0.0,self.time = Some(time);
+1098,src/format/deferred_format.rs,43,0,0,1,2,0.0,0.0,0.0,self
+1099,src/format/deferred_format.rs,44,0,0,1,2,0.0,0.0,0.0,}
+1100,src/format/deferred_format.rs,47,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn with_offset(&mut self, offset: UtcOffset) -> &mut Self {"
+1101,src/format/deferred_format.rs,48,0,0,1,2,0.0,0.0,0.0,self.offset = Some(offset);
+1102,src/format/deferred_format.rs,49,0,0,1,2,0.0,0.0,0.0,self
+1103,src/format/deferred_format.rs,50,0,0,1,2,0.0,0.0,0.0,}
+1104,src/format/deferred_format.rs,53,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn date(&self) -> Option<Date> {
+1105,src/format/deferred_format.rs,54,0,0,1,2,0.0,0.0,0.0,self.date
+1106,src/format/deferred_format.rs,55,0,0,1,2,0.0,0.0,0.0,}
+1107,src/format/deferred_format.rs,58,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn time(&self) -> Option<Time> {
+1108,src/format/deferred_format.rs,59,0,0,1,2,0.0,0.0,0.0,self.time
+1109,src/format/deferred_format.rs,60,0,0,1,2,0.0,0.0,0.0,}
+1110,src/format/deferred_format.rs,63,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn offset(&self) -> Option<UtcOffset> {
+1111,src/format/deferred_format.rs,64,0,0,1,2,0.0,0.0,0.0,self.offset
+1112,src/format/deferred_format.rs,65,0,0,1,2,0.0,0.0,0.0,}
+1113,src/format/deferred_format.rs,69,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {"
+1114,src/format/deferred_format.rs,70,0,0,1,2,0.0,0.0,0.0,match &self.format {
+1115,src/format/deferred_format.rs,71,0,0,1,2,0.0,0.0,0.0,Format::Custom(s) => {
+1116,src/format/deferred_format.rs,72,0,0,1,2,0.0,0.0,0.0,for item in parse_fmt_string(s) {
+1117,src/format/deferred_format.rs,73,0,0,1,2,0.0,0.0,0.0,match item {
+1118,src/format/deferred_format.rs,74,0,0,1,2,0.0,0.0,0.0,"FormatItem::Literal(value) => f.write_str(value)?,"
+1119,src/format/deferred_format.rs,75,0,0,1,2,0.0,0.0,0.0,FormatItem::Specifier(specifier) => {
+1120,src/format/deferred_format.rs,76,0,0,1,2,0.0,0.0,0.0,"format_specifier(f, self.date, self.time, self.offset, specifier)"
+1121,src/format/deferred_format.rs,77,0,0,1,2,0.0,0.0,0.0,.map_err(|_| fmt::Error)?
+1122,src/format/deferred_format.rs,82,0,0,1,2,0.0,0.0,0.0,Ok(())
+1123,src/format/deferred_format.rs,84,0,0,1,2,0.0,0.0,0.0,"Format::Rfc3339 => well_known::rfc3339::fmt(self, f).map_err(|_| fmt::Error),"
+1124,src/format/deferred_format.rs,88,0,0,1,2,0.0,0.0,0.0,}
+1125,src/format/format.rs,25,0,0,1,2,0.0,0.0,0.0,fn from(s: T) -> Self {
+1126,src/format/format.rs,26,0,0,1,2,0.0,0.0,0.0,Format::Custom(s.as_ref().to_owned())
+1127,src/format/format.rs,27,0,0,1,2,0.0,0.0,0.0,}
+1128,src/format/mod.rs,89,0,0,1,2,0.0,0.0,0.0,fn format_specifier(
+1129,src/format/mod.rs,117,0,0,1,2,0.0,0.0,0.0,match specifier {
+1130,src/format/mod.rs,118,0,0,1,2,0.0,0.0,0.0,"a => specifier!(date::fmt_a(a)),"
+1131,src/format/mod.rs,119,0,0,1,2,0.0,0.0,0.0,"A => specifier!(date::fmt_A(A)),"
+1132,src/format/mod.rs,120,0,0,1,2,0.0,0.0,0.0,"b => specifier!(date::fmt_b(b)),"
+1133,src/format/mod.rs,121,0,0,1,2,0.0,0.0,0.0,"B => specifier!(date::fmt_B(B)),"
+1134,src/format/mod.rs,123,0,0,1,2,0.0,0.0,0.0,specifier!(date::fmt_a(a));
+1135,src/format/mod.rs,124,0,0,1,2,0.0,0.0,0.0,"literal!("" "");"
+1136,src/format/mod.rs,125,0,0,1,2,0.0,0.0,0.0,specifier!(date::fmt_b(b));
+1137,src/format/mod.rs,126,0,0,1,2,0.0,0.0,0.0,"literal!("" "");"
+1138,src/format/mod.rs,127,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_d(d, Padding::None));"
+1139,src/format/mod.rs,128,0,0,1,2,0.0,0.0,0.0,"literal!("" "");"
+1140,src/format/mod.rs,129,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_H(H, Padding::None));"
+1141,src/format/mod.rs,130,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1142,src/format/mod.rs,131,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_M(M, Padding::Zero));"
+1143,src/format/mod.rs,132,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1144,src/format/mod.rs,133,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_S(S, Padding::Zero));"
+1145,src/format/mod.rs,134,0,0,1,2,0.0,0.0,0.0,"literal!("" "");"
+1146,src/format/mod.rs,135,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_Y(Y, Padding::None));"
+1147,src/format/mod.rs,137,0,0,1,2,0.0,0.0,0.0,"C { padding } => specifier!(date::fmt_C(C, padding)),"
+1148,src/format/mod.rs,138,0,0,1,2,0.0,0.0,0.0,"d { padding } => specifier!(date::fmt_d(d, padding)),"
+1149,src/format/mod.rs,140,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_m(m, Padding::None));"
+1150,src/format/mod.rs,141,0,0,1,2,0.0,0.0,0.0,"literal!(""/"");"
+1151,src/format/mod.rs,142,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_d(d, Padding::Zero));"
+1152,src/format/mod.rs,143,0,0,1,2,0.0,0.0,0.0,"literal!(""/"");"
+1153,src/format/mod.rs,144,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_y(y, Padding::Zero));"
+1154,src/format/mod.rs,147,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_Y(Y, Padding::None));"
+1155,src/format/mod.rs,148,0,0,1,2,0.0,0.0,0.0,"literal!(""-"");"
+1156,src/format/mod.rs,149,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_m(m, Padding::Zero));"
+1157,src/format/mod.rs,150,0,0,1,2,0.0,0.0,0.0,"literal!(""-"");"
+1158,src/format/mod.rs,151,0,0,1,2,0.0,0.0,0.0,"specifier!(date::fmt_d(d, Padding::Zero));"
+1159,src/format/mod.rs,153,0,0,1,2,0.0,0.0,0.0,"g { padding } => specifier!(date::fmt_g(g, padding)),"
+1160,src/format/mod.rs,154,0,0,1,2,0.0,0.0,0.0,"G { padding } => specifier!(date::fmt_G(G, padding)),"
+1161,src/format/mod.rs,155,0,0,1,2,0.0,0.0,0.0,"H { padding } => specifier!(time::fmt_H(H, padding)),"
+1162,src/format/mod.rs,156,0,0,1,2,0.0,0.0,0.0,"I { padding } => specifier!(time::fmt_I(I, padding)),"
+1163,src/format/mod.rs,157,0,0,1,2,0.0,0.0,0.0,"j { padding } => specifier!(date::fmt_j(j, padding)),"
+1164,src/format/mod.rs,158,0,0,1,2,0.0,0.0,0.0,"m { padding } => specifier!(date::fmt_m(m, padding)),"
+1165,src/format/mod.rs,159,0,0,1,2,0.0,0.0,0.0,"M { padding } => specifier!(time::fmt_M(M, padding)),"
+1166,src/format/mod.rs,160,0,0,1,2,0.0,0.0,0.0,"N => specifier!(time::fmt_N(N)),"
+1167,src/format/mod.rs,161,0,0,1,2,0.0,0.0,0.0,"p => specifier!(time::fmt_p(p)),"
+1168,src/format/mod.rs,162,0,0,1,2,0.0,0.0,0.0,"P => specifier!(time::fmt_P(P)),"
+1169,src/format/mod.rs,164,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_I(I, Padding::None));"
+1170,src/format/mod.rs,165,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1171,src/format/mod.rs,166,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_M(M, Padding::Zero));"
+1172,src/format/mod.rs,167,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1173,src/format/mod.rs,168,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_S(S, Padding::Zero));"
+1174,src/format/mod.rs,169,0,0,1,2,0.0,0.0,0.0,"literal!("" "");"
+1175,src/format/mod.rs,170,0,0,1,2,0.0,0.0,0.0,specifier!(time::fmt_p(p));
+1176,src/format/mod.rs,173,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_H(H, Padding::None));"
+1177,src/format/mod.rs,174,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1178,src/format/mod.rs,175,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_M(M, Padding::Zero));"
+1179,src/format/mod.rs,177,0,0,1,2,0.0,0.0,0.0,"S { padding } => specifier!(time::fmt_S(S, padding)),"
+1180,src/format/mod.rs,179,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_H(H, Padding::None));"
+1181,src/format/mod.rs,180,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1182,src/format/mod.rs,181,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_M(M, Padding::Zero));"
+1183,src/format/mod.rs,182,0,0,1,2,0.0,0.0,0.0,"literal!("":"");"
+1184,src/format/mod.rs,183,0,0,1,2,0.0,0.0,0.0,"specifier!(time::fmt_S(S, Padding::Zero));"
+1185,src/format/mod.rs,185,0,0,1,2,0.0,0.0,0.0,"u => specifier!(date::fmt_u(u)),"
+1186,src/format/mod.rs,186,0,0,1,2,0.0,0.0,0.0,"U { padding } => specifier!(date::fmt_U(U, padding)),"
+1187,src/format/mod.rs,187,0,0,1,2,0.0,0.0,0.0,"V { padding } => specifier!(date::fmt_V(V, padding)),"
+1188,src/format/mod.rs,188,0,0,1,2,0.0,0.0,0.0,"w => specifier!(date::fmt_w(w)),"
+1189,src/format/mod.rs,189,0,0,1,2,0.0,0.0,0.0,"W { padding } => specifier!(date::fmt_W(W, padding)),"
+1190,src/format/mod.rs,190,0,0,1,2,0.0,0.0,0.0,"y { padding } => specifier!(date::fmt_y(y, padding)),"
+1191,src/format/mod.rs,191,0,0,1,2,0.0,0.0,0.0,"Y { padding } => specifier!(date::fmt_Y(Y, padding)),"
+1192,src/format/mod.rs,192,0,0,1,2,0.0,0.0,0.0,"z => specifier!(offset::fmt_z(z)),"
+1193,src/format/mod.rs,195,0,0,1,2,0.0,0.0,0.0,Ok(())
+1194,src/format/mod.rs,196,0,0,1,2,0.0,0.0,0.0,}
+1195,src/format/offset.rs,16,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_z(f: &mut Formatter<'_>, offset: UtcOffset) -> fmt::Result {"
+1196,src/format/offset.rs,17,0,0,1,2,0.0,0.0,0.0,let offset = offset.as_duration();
+1197,src/format/offset.rs,19,0,0,1,2,0.0,0.0,0.0,write!(
+1198,src/format/offset.rs,20,0,0,1,2,0.0,0.0,0.0,"f,"
+1199,src/format/offset.rs,22,0,0,1,2,0.0,0.0,0.0,"if offset.is_negative() { '-' } else { '+' },"
+1200,src/format/offset.rs,23,0,0,1,2,0.0,0.0,0.0,"offset.whole_hours().abs(),"
+1201,src/format/offset.rs,24,0,0,1,2,0.0,0.0,0.0,(offset.whole_minutes() - 60 * offset.whole_hours()).abs()
+1202,src/format/offset.rs,26,0,0,1,2,0.0,0.0,0.0,}
+1203,src/format/offset.rs,29,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_z(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1204,src/format/offset.rs,30,0,0,1,2,0.0,0.0,0.0,"let sign = try_consume_first_match(s, [(""+"", 1), (""-"", -1)].iter().cloned())"
+1205,src/format/offset.rs,31,0,0,1,2,0.0,0.0,0.0,.ok_or(error::Parse::InvalidOffset)?;
+1206,src/format/offset.rs,33,0,0,1,2,0.0,0.0,0.0,let hours: i16 =
+1207,src/format/offset.rs,34,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, Padding::Zero).ok_or(error::Parse::InvalidOffset)?;"
+1208,src/format/offset.rs,36,0,0,1,2,0.0,0.0,0.0,let minutes: i16 =
+1209,src/format/offset.rs,37,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, Padding::Zero).ok_or(error::Parse::InvalidOffset)?;"
+1210,src/format/offset.rs,39,0,0,1,2,0.0,0.0,0.0,items.offset = UtcOffset::minutes(sign * (hours * 60 + minutes)).into();
+1211,src/format/offset.rs,40,0,0,1,2,0.0,0.0,0.0,Ok(())
+1212,src/format/offset.rs,41,0,0,1,2,0.0,0.0,0.0,}
+1213,src/format/parse.rs,70,0,0,1,2,0.0,0.0,0.0,fn from(error: error::ComponentRange) -> Self {
+1214,src/format/parse.rs,71,0,0,1,2,0.0,0.0,0.0,Error::ComponentOutOfRange(Box::new(error))
+1215,src/format/parse.rs,72,0,0,1,2,0.0,0.0,0.0,}
+1216,src/format/parse.rs,76,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {"
+1217,src/format/parse.rs,78,0,0,1,2,0.0,0.0,0.0,match self {
+1218,src/format/parse.rs,79,0,0,1,2,0.0,0.0,0.0,"InvalidNanosecond => f.write_str(""invalid nanosecond""),"
+1219,src/format/parse.rs,80,0,0,1,2,0.0,0.0,0.0,"InvalidSecond => f.write_str(""invalid second""),"
+1220,src/format/parse.rs,81,0,0,1,2,0.0,0.0,0.0,"InvalidMinute => f.write_str(""invalid minute""),"
+1221,src/format/parse.rs,82,0,0,1,2,0.0,0.0,0.0,"InvalidHour => f.write_str(""invalid hour""),"
+1222,src/format/parse.rs,83,0,0,1,2,0.0,0.0,0.0,"InvalidAmPm => f.write_str(""invalid am/pm""),"
+1223,src/format/parse.rs,84,0,0,1,2,0.0,0.0,0.0,"InvalidMonth => f.write_str(""invalid month""),"
+1224,src/format/parse.rs,85,0,0,1,2,0.0,0.0,0.0,"InvalidYear => f.write_str(""invalid year""),"
+1225,src/format/parse.rs,86,0,0,1,2,0.0,0.0,0.0,"InvalidWeek => f.write_str(""invalid week""),"
+1226,src/format/parse.rs,87,0,0,1,2,0.0,0.0,0.0,"InvalidDayOfWeek => f.write_str(""invalid day of week""),"
+1227,src/format/parse.rs,88,0,0,1,2,0.0,0.0,0.0,"InvalidDayOfMonth => f.write_str(""invalid day of month""),"
+1228,src/format/parse.rs,89,0,0,1,2,0.0,0.0,0.0,"InvalidDayOfYear => f.write_str(""invalid day of year""),"
+1229,src/format/parse.rs,90,0,0,1,2,0.0,0.0,0.0,"InvalidOffset => f.write_str(""invalid offset""),"
+1230,src/format/parse.rs,91,0,0,1,2,0.0,0.0,0.0,"MissingFormatSpecifier => f.write_str(""missing format specifier after `%`""),"
+1231,src/format/parse.rs,92,0,0,1,2,0.0,0.0,0.0,"InvalidFormatSpecifier(c) => write!(f, ""invalid format specifier `{}` after `%`"", c),"
+1232,src/format/parse.rs,93,0,0,1,2,0.0,0.0,0.0,"UnexpectedCharacter { expected, actual } => {"
+1233,src/format/parse.rs,94,0,0,1,2,0.0,0.0,0.0,"write!(f, ""expected character `{}`, found `{}`"", expected, actual)"
+1234,src/format/parse.rs,96,0,0,1,2,0.0,0.0,0.0,"UnexpectedEndOfString => f.write_str(""unexpected end of string""),"
+1235,src/format/parse.rs,98,0,0,1,2,0.0,0.0,0.0,"f.write_str(""insufficient information provided to create the requested type"")"
+1236,src/format/parse.rs,100,0,0,1,2,0.0,0.0,0.0,"ComponentOutOfRange(e) => write!(f, ""{}"", e),"
+1237,src/format/parse.rs,104,0,0,1,2,0.0,0.0,0.0,}
+1238,src/format/parse.rs,109,0,0,1,2,0.0,0.0,0.0,fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+1239,src/format/parse.rs,110,0,0,1,2,0.0,0.0,0.0,match self {
+1240,src/format/parse.rs,111,0,0,1,2,0.0,0.0,0.0,"Error::ComponentOutOfRange(e) => Some(e.as_ref()),"
+1241,src/format/parse.rs,112,0,0,1,2,0.0,0.0,0.0,"_ => None,"
+1242,src/format/parse.rs,114,0,0,1,2,0.0,0.0,0.0,}
+1243,src/format/parse.rs,165,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn new() -> Self {
+1244,src/format/parse.rs,166,0,0,1,2,0.0,0.0,0.0,Self {
+1245,src/format/parse.rs,167,0,0,1,2,0.0,0.0,0.0,"week_based_year: None,"
+1246,src/format/parse.rs,168,0,0,1,2,0.0,0.0,0.0,"year: None,"
+1247,src/format/parse.rs,169,0,0,1,2,0.0,0.0,0.0,"month: None,"
+1248,src/format/parse.rs,170,0,0,1,2,0.0,0.0,0.0,"day: None,"
+1249,src/format/parse.rs,171,0,0,1,2,0.0,0.0,0.0,"weekday: None,"
+1250,src/format/parse.rs,172,0,0,1,2,0.0,0.0,0.0,"ordinal_day: None,"
+1251,src/format/parse.rs,173,0,0,1,2,0.0,0.0,0.0,"iso_week: None,"
+1252,src/format/parse.rs,174,0,0,1,2,0.0,0.0,0.0,"sunday_week: None,"
+1253,src/format/parse.rs,175,0,0,1,2,0.0,0.0,0.0,"monday_week: None,"
+1254,src/format/parse.rs,176,0,0,1,2,0.0,0.0,0.0,"hour_12: None,"
+1255,src/format/parse.rs,177,0,0,1,2,0.0,0.0,0.0,"hour_24: None,"
+1256,src/format/parse.rs,178,0,0,1,2,0.0,0.0,0.0,"minute: None,"
+1257,src/format/parse.rs,179,0,0,1,2,0.0,0.0,0.0,"second: None,"
+1258,src/format/parse.rs,180,0,0,1,2,0.0,0.0,0.0,"nanosecond: None,"
+1259,src/format/parse.rs,184,0,0,1,2,0.0,0.0,0.0,}
+1260,src/format/parse.rs,188,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn try_consume_char(s: &mut &str, expected: char) -> ParseResult<()> {"
+1261,src/format/parse.rs,189,0,0,1,2,0.0,0.0,0.0,match s.char_indices().next() {
+1262,src/format/parse.rs,190,0,0,1,2,0.0,0.0,0.0,"Some((index, actual_char)) if actual_char == expected => {"
+1263,src/format/parse.rs,191,0,0,1,2,0.0,0.0,0.0,*s = &s[(index + actual_char.len_utf8())..];
+1264,src/format/parse.rs,192,0,0,1,2,0.0,0.0,0.0,Ok(())
+1265,src/format/parse.rs,194,0,0,1,2,0.0,0.0,0.0,"Some((_, actual)) => Err(Error::UnexpectedCharacter { expected, actual }),"
+1266,src/format/parse.rs,195,0,0,1,2,0.0,0.0,0.0,"None => Err(Error::UnexpectedEndOfString),"
+1267,src/format/parse.rs,197,0,0,1,2,0.0,0.0,0.0,}
+1268,src/format/parse.rs,200,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn try_consume_char_case_insensitive(s: &mut &str, expected: char) -> ParseResult<()> {"
+1269,src/format/parse.rs,201,0,0,1,2,0.0,0.0,0.0,match s.char_indices().next() {
+1270,src/format/parse.rs,202,0,0,1,2,0.0,0.0,0.0,"Some((index, actual_char)) if actual_char.eq_ignore_ascii_case(&expected) => {"
+1271,src/format/parse.rs,203,0,0,1,2,0.0,0.0,0.0,*s = &s[(index + actual_char.len_utf8())..];
+1272,src/format/parse.rs,204,0,0,1,2,0.0,0.0,0.0,Ok(())
+1273,src/format/parse.rs,206,0,0,1,2,0.0,0.0,0.0,"Some((_, actual)) => Err(Error::UnexpectedCharacter { expected, actual }),"
+1274,src/format/parse.rs,207,0,0,1,2,0.0,0.0,0.0,"None => Err(Error::UnexpectedEndOfString),"
+1275,src/format/parse.rs,209,0,0,1,2,0.0,0.0,0.0,}
+1276,src/format/parse.rs,212,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn try_consume_str(s: &mut &str, expected: &str) -> ParseResult<()> {"
+1277,src/format/parse.rs,213,0,0,1,2,0.0,0.0,0.0,if s.starts_with(expected) {
+1278,src/format/parse.rs,214,0,0,1,2,0.0,0.0,0.0,*s = &s[expected.len()..];
+1279,src/format/parse.rs,215,0,0,1,2,0.0,0.0,0.0,Ok(())
+1280,src/format/parse.rs,218,0,0,1,2,0.0,0.0,0.0,for c in expected.chars() {
+1281,src/format/parse.rs,219,0,0,1,2,0.0,0.0,0.0,"try_consume_char(s, c)?;"
+1282,src/format/parse.rs,223,0,0,1,2,0.0,0.0,0.0,"unreachable!(""The previous loop should always cause the function to return."");"
+1283,src/format/parse.rs,225,0,0,1,2,0.0,0.0,0.0,}
+1284,src/format/parse.rs,228,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_consume_first_match<T: Copy>(
+1285,src/format/parse.rs,232,0,0,1,2,0.0,0.0,0.0,"opts.into_iter().find_map(|(expected, value)| {"
+1286,src/format/parse.rs,233,0,0,1,2,0.0,0.0,0.0,if s.starts_with(expected.as_ref()) {
+1287,src/format/parse.rs,234,0,0,1,2,0.0,0.0,0.0,*s = &s[expected.as_ref().len()..];
+1288,src/format/parse.rs,235,0,0,1,2,0.0,0.0,0.0,Some(value)
+1289,src/format/parse.rs,237,0,0,1,2,0.0,0.0,0.0,None
+1290,src/format/parse.rs,239,0,0,1,2,0.0,0.0,0.0,})
+1291,src/format/parse.rs,240,0,0,1,2,0.0,0.0,0.0,}
+1292,src/format/parse.rs,244,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_consume_digits<T: FromStr>(
+1293,src/format/parse.rs,251,0,0,1,2,0.0,0.0,0.0,let len = s
+1294,src/format/parse.rs,252,0,0,1,2,0.0,0.0,0.0,.chars()
+1295,src/format/parse.rs,253,0,0,1,2,0.0,0.0,0.0,.take(max_digits)
+1296,src/format/parse.rs,254,0,0,1,2,0.0,0.0,0.0,.take_while(char::is_ascii_digit)
+1297,src/format/parse.rs,255,0,0,1,2,0.0,0.0,0.0,.count();
+1298,src/format/parse.rs,258,0,0,1,2,0.0,0.0,0.0,if len < min_digits {
+1299,src/format/parse.rs,259,0,0,1,2,0.0,0.0,0.0,return None;
+1300,src/format/parse.rs,260,0,0,1,2,0.0,0.0,0.0,}
+1301,src/format/parse.rs,265,0,0,1,2,0.0,0.0,0.0,let digits = &s[..len];
+1302,src/format/parse.rs,266,0,0,1,2,0.0,0.0,0.0,*s = &s[len..];
+1303,src/format/parse.rs,267,0,0,1,2,0.0,0.0,0.0,digits.parse::<T>().ok()
+1304,src/format/parse.rs,268,0,0,1,2,0.0,0.0,0.0,}
+1305,src/format/parse.rs,271,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_consume_exact_digits<T: FromStr>(
+1306,src/format/parse.rs,276,0,0,1,2,0.0,0.0,0.0,let pad_size = match padding {
+1307,src/format/parse.rs,277,0,0,1,2,0.0,0.0,0.0,"Padding::Space => consume_padding(s, padding, num_digits - 1),"
+1308,src/format/parse.rs,278,0,0,1,2,0.0,0.0,0.0,"_ => 0,"
+1309,src/format/parse.rs,281,0,0,1,2,0.0,0.0,0.0,if padding == Padding::None {
+1310,src/format/parse.rs,282,0,0,1,2,0.0,0.0,0.0,"try_consume_digits(s, 1, num_digits - pad_size)"
+1311,src/format/parse.rs,285,0,0,1,2,0.0,0.0,0.0,if !s
+1312,src/format/parse.rs,286,0,0,1,2,0.0,0.0,0.0,.chars()
+1313,src/format/parse.rs,287,0,0,1,2,0.0,0.0,0.0,.take(num_digits - pad_size)
+1314,src/format/parse.rs,288,0,0,1,2,0.0,0.0,0.0,.all(|c| c.is_ascii_digit())
+1315,src/format/parse.rs,290,0,0,1,2,0.0,0.0,0.0,return None;
+1316,src/format/parse.rs,291,0,0,1,2,0.0,0.0,0.0,}
+1317,src/format/parse.rs,294,0,0,1,2,0.0,0.0,0.0,if (num_digits - pad_size) > s.len() {
+1318,src/format/parse.rs,295,0,0,1,2,0.0,0.0,0.0,return None;
+1319,src/format/parse.rs,296,0,0,1,2,0.0,0.0,0.0,}
+1320,src/format/parse.rs,301,0,0,1,2,0.0,0.0,0.0,let digits = &s[..(num_digits - pad_size)];
+1321,src/format/parse.rs,302,0,0,1,2,0.0,0.0,0.0,*s = &s[(num_digits - pad_size)..];
+1322,src/format/parse.rs,303,0,0,1,2,0.0,0.0,0.0,digits.parse::<T>().ok()
+1323,src/format/parse.rs,305,0,0,1,2,0.0,0.0,0.0,}
+1324,src/format/parse.rs,310,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn consume_padding(s: &mut &str, padding: Padding, max_chars: usize) -> usize {"
+1325,src/format/parse.rs,311,0,0,1,2,0.0,0.0,0.0,let pad_char = match padding {
+1326,src/format/parse.rs,312,0,0,1,2,0.0,0.0,0.0,"Padding::Space => ' ',"
+1327,src/format/parse.rs,313,0,0,1,2,0.0,0.0,0.0,"Padding::Zero => '0',"
+1328,src/format/parse.rs,314,0,0,1,2,0.0,0.0,0.0,"Padding::None => return 0,"
+1329,src/format/parse.rs,317,0,0,1,2,0.0,0.0,0.0,let pad_width = s
+1330,src/format/parse.rs,318,0,0,1,2,0.0,0.0,0.0,.chars()
+1331,src/format/parse.rs,319,0,0,1,2,0.0,0.0,0.0,.take(max_chars)
+1332,src/format/parse.rs,320,0,0,1,2,0.0,0.0,0.0,.take_while(|&c| c == pad_char)
+1333,src/format/parse.rs,321,0,0,1,2,0.0,0.0,0.0,.count();
+1334,src/format/parse.rs,322,0,0,1,2,0.0,0.0,0.0,*s = &s[pad_width..];
+1335,src/format/parse.rs,323,0,0,1,2,0.0,0.0,0.0,pad_width
+1336,src/format/parse.rs,324,0,0,1,2,0.0,0.0,0.0,}
+1337,src/format/parse.rs,329,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse(s: &str, format: &Format) -> ParseResult<ParsedItems> {"
+1338,src/format/parse.rs,333,0,0,1,2,0.0,0.0,0.0,let mut s = <&str>::clone(&s);
+1339,src/format/parse.rs,335,0,0,1,2,0.0,0.0,0.0,let mut items = ParsedItems::new();
+1340,src/format/parse.rs,350,0,0,1,2,0.0,0.0,0.0,match &format {
+1341,src/format/parse.rs,351,0,0,1,2,0.0,0.0,0.0,"Format::Rfc3339 => well_known::rfc3339::parse(&mut items, &mut s)?,"
+1342,src/format/parse.rs,352,0,0,1,2,0.0,0.0,0.0,Format::Custom(format) => {
+1343,src/format/parse.rs,353,0,0,1,2,0.0,0.0,0.0,for item in parse_fmt_string(format) {
+1344,src/format/parse.rs,354,0,0,1,2,0.0,0.0,0.0,match item {
+1345,src/format/parse.rs,355,0,0,1,2,0.0,0.0,0.0,"FormatItem::Literal(expected) => try_consume_str(&mut s, expected)?,"
+1346,src/format/parse.rs,356,0,0,1,2,0.0,0.0,0.0,FormatItem::Specifier(specifier) => {
+1347,src/format/parse.rs,358,0,0,1,2,0.0,0.0,0.0,match specifier {
+1348,src/format/parse.rs,359,0,0,1,2,0.0,0.0,0.0,"a => parse!(date::parse_a),"
+1349,src/format/parse.rs,360,0,0,1,2,0.0,0.0,0.0,"A => parse!(date::parse_A),"
+1350,src/format/parse.rs,361,0,0,1,2,0.0,0.0,0.0,"b => parse!(date::parse_b),"
+1351,src/format/parse.rs,362,0,0,1,2,0.0,0.0,0.0,"B => parse!(date::parse_B),"
+1352,src/format/parse.rs,364,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_a);
+1353,src/format/parse.rs,365,0,0,1,2,0.0,0.0,0.0,parse_char!(' ');
+1354,src/format/parse.rs,366,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_b);
+1355,src/format/parse.rs,367,0,0,1,2,0.0,0.0,0.0,parse_char!(' ');
+1356,src/format/parse.rs,368,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_d(Padding::None));
+1357,src/format/parse.rs,369,0,0,1,2,0.0,0.0,0.0,parse_char!(' ');
+1358,src/format/parse.rs,370,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_H(Padding::None));
+1359,src/format/parse.rs,371,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1360,src/format/parse.rs,372,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_M(Padding::Zero));
+1361,src/format/parse.rs,373,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1362,src/format/parse.rs,374,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_S(Padding::Zero));
+1363,src/format/parse.rs,375,0,0,1,2,0.0,0.0,0.0,parse_char!(' ');
+1364,src/format/parse.rs,376,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_Y(Padding::None));
+1365,src/format/parse.rs,378,0,0,1,2,0.0,0.0,0.0,"C { padding } => parse!(date::parse_C(padding)),"
+1366,src/format/parse.rs,379,0,0,1,2,0.0,0.0,0.0,"d { padding } => parse!(date::parse_d(padding)),"
+1367,src/format/parse.rs,381,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_m(Padding::None));
+1368,src/format/parse.rs,382,0,0,1,2,0.0,0.0,0.0,parse_char!('/');
+1369,src/format/parse.rs,383,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_d(Padding::Zero));
+1370,src/format/parse.rs,384,0,0,1,2,0.0,0.0,0.0,parse_char!('/');
+1371,src/format/parse.rs,385,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_y(Padding::Zero));
+1372,src/format/parse.rs,388,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_Y(Padding::None));
+1373,src/format/parse.rs,389,0,0,1,2,0.0,0.0,0.0,parse_char!('-');
+1374,src/format/parse.rs,390,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_m(Padding::Zero));
+1375,src/format/parse.rs,391,0,0,1,2,0.0,0.0,0.0,parse_char!('-');
+1376,src/format/parse.rs,392,0,0,1,2,0.0,0.0,0.0,parse!(date::parse_d(Padding::Zero));
+1377,src/format/parse.rs,394,0,0,1,2,0.0,0.0,0.0,"g { padding } => parse!(date::parse_g(padding)),"
+1378,src/format/parse.rs,395,0,0,1,2,0.0,0.0,0.0,"G { padding } => parse!(date::parse_G(padding)),"
+1379,src/format/parse.rs,396,0,0,1,2,0.0,0.0,0.0,"H { padding } => parse!(time::parse_H(padding)),"
+1380,src/format/parse.rs,397,0,0,1,2,0.0,0.0,0.0,"I { padding } => parse!(time::parse_I(padding)),"
+1381,src/format/parse.rs,398,0,0,1,2,0.0,0.0,0.0,"j { padding } => parse!(date::parse_j(padding)),"
+1382,src/format/parse.rs,399,0,0,1,2,0.0,0.0,0.0,"M { padding } => parse!(time::parse_M(padding)),"
+1383,src/format/parse.rs,400,0,0,1,2,0.0,0.0,0.0,"m { padding } => parse!(date::parse_m(padding)),"
+1384,src/format/parse.rs,401,0,0,1,2,0.0,0.0,0.0,"N => parse!(time::parse_N),"
+1385,src/format/parse.rs,402,0,0,1,2,0.0,0.0,0.0,"p => parse!(time::parse_p),"
+1386,src/format/parse.rs,403,0,0,1,2,0.0,0.0,0.0,"P => parse!(time::parse_P),"
+1387,src/format/parse.rs,405,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_I(Padding::None));
+1388,src/format/parse.rs,406,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1389,src/format/parse.rs,407,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_M(Padding::Zero));
+1390,src/format/parse.rs,408,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1391,src/format/parse.rs,409,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_S(Padding::Zero));
+1392,src/format/parse.rs,410,0,0,1,2,0.0,0.0,0.0,parse_char!(' ');
+1393,src/format/parse.rs,411,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_p);
+1394,src/format/parse.rs,414,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_H(Padding::None));
+1395,src/format/parse.rs,415,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1396,src/format/parse.rs,416,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_M(Padding::Zero));
+1397,src/format/parse.rs,418,0,0,1,2,0.0,0.0,0.0,"S { padding } => parse!(time::parse_S(padding)),"
+1398,src/format/parse.rs,420,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_H(Padding::None));
+1399,src/format/parse.rs,421,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1400,src/format/parse.rs,422,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_M(Padding::Zero));
+1401,src/format/parse.rs,423,0,0,1,2,0.0,0.0,0.0,parse_char!(':');
+1402,src/format/parse.rs,424,0,0,1,2,0.0,0.0,0.0,parse!(time::parse_S(Padding::Zero));
+1403,src/format/parse.rs,426,0,0,1,2,0.0,0.0,0.0,"u => parse!(date::parse_u),"
+1404,src/format/parse.rs,427,0,0,1,2,0.0,0.0,0.0,"U { padding } => parse!(date::parse_U(padding)),"
+1405,src/format/parse.rs,428,0,0,1,2,0.0,0.0,0.0,"V { padding } => parse!(date::parse_V(padding)),"
+1406,src/format/parse.rs,429,0,0,1,2,0.0,0.0,0.0,"w => parse!(date::parse_w),"
+1407,src/format/parse.rs,430,0,0,1,2,0.0,0.0,0.0,"W { padding } => parse!(date::parse_W(padding)),"
+1408,src/format/parse.rs,431,0,0,1,2,0.0,0.0,0.0,"y { padding } => parse!(date::parse_y(padding)),"
+1409,src/format/parse.rs,432,0,0,1,2,0.0,0.0,0.0,"z => parse!(offset::parse_z),"
+1410,src/format/parse.rs,433,0,0,1,2,0.0,0.0,0.0,"Y { padding } => parse!(date::parse_Y(padding)),"
+1411,src/format/parse.rs,443,0,0,1,2,0.0,0.0,0.0,Ok(items)
+1412,src/format/parse.rs,444,0,0,1,2,0.0,0.0,0.0,}
+1413,src/format/parse_items.rs,8,0,0,1,2,0.0,0.0,0.0,pub(crate) fn parse_fmt_string<'a>(s: &'a str) -> Vec<FormatItem<'a>> {
+1414,src/format/parse_items.rs,9,0,0,1,2,0.0,0.0,0.0,match try_parse_fmt_string(s) {
+1415,src/format/parse_items.rs,10,0,0,1,2,0.0,0.0,0.0,"Ok(items) => items,"
+1416,src/format/parse_items.rs,11,0,0,1,2,0.0,0.0,0.0,"Err(err) => panic!(""{}"", err),"
+1417,src/format/parse_items.rs,13,0,0,1,2,0.0,0.0,0.0,}
+1418,src/format/parse_items.rs,17,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn try_parse_fmt_string<'a>(s: &'a str) -> Result<Vec<FormatItem<'a>>, String> {"
+1419,src/format/parse_items.rs,18,0,0,1,2,0.0,0.0,0.0,let mut items = Vec::new();
+1420,src/format/parse_items.rs,19,0,0,1,2,0.0,0.0,0.0,let mut literal_start = 0;
+1421,src/format/parse_items.rs,20,0,0,1,2,0.0,0.0,0.0,let mut chars = s.char_indices().peekable();
+1422,src/format/parse_items.rs,22,0,0,1,2,0.0,0.0,0.0,"while let Some((i, c)) = chars.next() {"
+1423,src/format/parse_items.rs,31,0,0,1,2,0.0,0.0,0.0,if c == '%' {
+1424,src/format/parse_items.rs,33,0,0,1,2,0.0,0.0,0.0,if literal_start != i {
+1425,src/format/parse_items.rs,34,0,0,1,2,0.0,0.0,0.0,items.push(FormatItem::Literal(&s[literal_start..i]));
+1426,src/format/parse_items.rs,35,0,0,1,2,0.0,0.0,0.0,}
+1427,src/format/parse_items.rs,39,0,0,1,2,0.0,0.0,0.0,let padding = match chars.peek().map(|v| v.1) {
+1428,src/format/parse_items.rs,41,0,0,1,2,0.0,0.0,0.0,let _ = chars.next();
+1429,src/format/parse_items.rs,42,0,0,1,2,0.0,0.0,0.0,Some(Padding::None)
+1430,src/format/parse_items.rs,45,0,0,1,2,0.0,0.0,0.0,let _ = chars.next();
+1431,src/format/parse_items.rs,46,0,0,1,2,0.0,0.0,0.0,Some(Padding::Space)
+1432,src/format/parse_items.rs,49,0,0,1,2,0.0,0.0,0.0,let _ = chars.next();
+1433,src/format/parse_items.rs,50,0,0,1,2,0.0,0.0,0.0,Some(Padding::Zero)
+1434,src/format/parse_items.rs,52,0,0,1,2,0.0,0.0,0.0,"_ => None,"
+1435,src/format/parse_items.rs,55,0,0,1,2,0.0,0.0,0.0,match chars.next() {
+1436,src/format/parse_items.rs,56,0,0,1,2,0.0,0.0,0.0,"Some((i, 'a')) => push_specifier!(i, Specifier::a),"
+1437,src/format/parse_items.rs,57,0,0,1,2,0.0,0.0,0.0,"Some((i, 'A')) => push_specifier!(i, Specifier::A),"
+1438,src/format/parse_items.rs,58,0,0,1,2,0.0,0.0,0.0,"Some((i, 'b')) => push_specifier!(i, Specifier::b),"
+1439,src/format/parse_items.rs,59,0,0,1,2,0.0,0.0,0.0,"Some((i, 'B')) => push_specifier!(i, Specifier::B),"
+1440,src/format/parse_items.rs,60,0,0,1,2,0.0,0.0,0.0,"Some((i, 'c')) => push_specifier!(i, Specifier::c),"
+1441,src/format/parse_items.rs,61,0,0,1,2,0.0,0.0,0.0,"Some((i, 'C')) => push_specifier!("
+1442,src/format/parse_items.rs,63,0,0,1,2,0.0,0.0,0.0,Specifier::C {
+1443,src/format/parse_items.rs,64,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1444,src/format/parse_items.rs,67,0,0,1,2,0.0,0.0,0.0,"Some((i, 'd')) => push_specifier!("
+1445,src/format/parse_items.rs,69,0,0,1,2,0.0,0.0,0.0,Specifier::d {
+1446,src/format/parse_items.rs,70,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1447,src/format/parse_items.rs,73,0,0,1,2,0.0,0.0,0.0,"Some((i, 'D')) => push_specifier!(i, Specifier::D),"
+1448,src/format/parse_items.rs,74,0,0,1,2,0.0,0.0,0.0,"Some((i, 'F')) => push_specifier!(i, Specifier::F),"
+1449,src/format/parse_items.rs,75,0,0,1,2,0.0,0.0,0.0,"Some((i, 'g')) => push_specifier!("
+1450,src/format/parse_items.rs,77,0,0,1,2,0.0,0.0,0.0,Specifier::g {
+1451,src/format/parse_items.rs,78,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1452,src/format/parse_items.rs,81,0,0,1,2,0.0,0.0,0.0,"Some((i, 'G')) => push_specifier!("
+1453,src/format/parse_items.rs,83,0,0,1,2,0.0,0.0,0.0,Specifier::G {
+1454,src/format/parse_items.rs,84,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1455,src/format/parse_items.rs,87,0,0,1,2,0.0,0.0,0.0,"Some((i, 'H')) => push_specifier!("
+1456,src/format/parse_items.rs,89,0,0,1,2,0.0,0.0,0.0,Specifier::H {
+1457,src/format/parse_items.rs,90,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1458,src/format/parse_items.rs,93,0,0,1,2,0.0,0.0,0.0,"Some((i, 'I')) => push_specifier!("
+1459,src/format/parse_items.rs,95,0,0,1,2,0.0,0.0,0.0,Specifier::I {
+1460,src/format/parse_items.rs,96,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1461,src/format/parse_items.rs,99,0,0,1,2,0.0,0.0,0.0,"Some((i, 'j')) => push_specifier!("
+1462,src/format/parse_items.rs,101,0,0,1,2,0.0,0.0,0.0,Specifier::j {
+1463,src/format/parse_items.rs,102,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1464,src/format/parse_items.rs,105,0,0,1,2,0.0,0.0,0.0,"Some((i, 'm')) => push_specifier!("
+1465,src/format/parse_items.rs,107,0,0,1,2,0.0,0.0,0.0,Specifier::m {
+1466,src/format/parse_items.rs,108,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1467,src/format/parse_items.rs,111,0,0,1,2,0.0,0.0,0.0,"Some((i, 'M')) => push_specifier!("
+1468,src/format/parse_items.rs,113,0,0,1,2,0.0,0.0,0.0,Specifier::M {
+1469,src/format/parse_items.rs,114,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1470,src/format/parse_items.rs,117,0,0,1,2,0.0,0.0,0.0,"Some((i, 'N')) => push_specifier!(i, Specifier::N),"
+1471,src/format/parse_items.rs,118,0,0,1,2,0.0,0.0,0.0,"Some((i, 'p')) => push_specifier!(i, Specifier::p),"
+1472,src/format/parse_items.rs,119,0,0,1,2,0.0,0.0,0.0,"Some((i, 'P')) => push_specifier!(i, Specifier::P),"
+1473,src/format/parse_items.rs,120,0,0,1,2,0.0,0.0,0.0,"Some((i, 'r')) => push_specifier!(i, Specifier::r),"
+1474,src/format/parse_items.rs,121,0,0,1,2,0.0,0.0,0.0,"Some((i, 'R')) => push_specifier!(i, Specifier::R),"
+1475,src/format/parse_items.rs,122,0,0,1,2,0.0,0.0,0.0,"Some((i, 'S')) => push_specifier!("
+1476,src/format/parse_items.rs,124,0,0,1,2,0.0,0.0,0.0,Specifier::S {
+1477,src/format/parse_items.rs,125,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1478,src/format/parse_items.rs,128,0,0,1,2,0.0,0.0,0.0,"Some((i, 'T')) => push_specifier!(i, Specifier::T),"
+1479,src/format/parse_items.rs,129,0,0,1,2,0.0,0.0,0.0,"Some((i, 'u')) => push_specifier!(i, Specifier::u),"
+1480,src/format/parse_items.rs,130,0,0,1,2,0.0,0.0,0.0,"Some((i, 'U')) => push_specifier!("
+1481,src/format/parse_items.rs,132,0,0,1,2,0.0,0.0,0.0,Specifier::U {
+1482,src/format/parse_items.rs,133,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1483,src/format/parse_items.rs,136,0,0,1,2,0.0,0.0,0.0,"Some((i, 'V')) => push_specifier!("
+1484,src/format/parse_items.rs,138,0,0,1,2,0.0,0.0,0.0,Specifier::V {
+1485,src/format/parse_items.rs,139,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1486,src/format/parse_items.rs,142,0,0,1,2,0.0,0.0,0.0,"Some((i, 'w')) => push_specifier!(i, Specifier::w),"
+1487,src/format/parse_items.rs,143,0,0,1,2,0.0,0.0,0.0,"Some((i, 'W')) => push_specifier!("
+1488,src/format/parse_items.rs,145,0,0,1,2,0.0,0.0,0.0,Specifier::W {
+1489,src/format/parse_items.rs,146,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1490,src/format/parse_items.rs,149,0,0,1,2,0.0,0.0,0.0,"Some((i, 'y')) => push_specifier!("
+1491,src/format/parse_items.rs,151,0,0,1,2,0.0,0.0,0.0,Specifier::y {
+1492,src/format/parse_items.rs,152,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1493,src/format/parse_items.rs,155,0,0,1,2,0.0,0.0,0.0,"Some((i, 'Y')) => push_specifier!("
+1494,src/format/parse_items.rs,157,0,0,1,2,0.0,0.0,0.0,Specifier::Y {
+1495,src/format/parse_items.rs,158,0,0,1,2,0.0,0.0,0.0,padding: padding.unwrap_or(Padding::Zero)
+1496,src/format/parse_items.rs,161,0,0,1,2,0.0,0.0,0.0,"Some((i, 'z')) => push_specifier!(i, Specifier::z),"
+1497,src/format/parse_items.rs,162,0,0,1,2,0.0,0.0,0.0,"Some((i, '%')) => literal_start = i,"
+1498,src/format/parse_items.rs,163,0,0,1,2,0.0,0.0,0.0,"Some((_, c)) => return Err(format!(""Invalid specifier `{}`"", c)),"
+1499,src/format/parse_items.rs,165,0,0,1,2,0.0,0.0,0.0,return Err(String::from(
+1500,src/format/parse_items.rs,171,0,0,1,2,0.0,0.0,0.0,}
+1501,src/format/parse_items.rs,174,0,0,1,2,0.0,0.0,0.0,if literal_start < s.len() {
+1502,src/format/parse_items.rs,175,0,0,1,2,0.0,0.0,0.0,items.push(FormatItem::Literal(&s[literal_start..]));
+1503,src/format/parse_items.rs,176,0,0,1,2,0.0,0.0,0.0,}
+1504,src/format/parse_items.rs,178,0,0,1,2,0.0,0.0,0.0,Ok(items)
+1505,src/format/parse_items.rs,179,0,0,1,2,0.0,0.0,0.0,}
+1506,src/format/time.rs,24,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_H(f: &mut Formatter<'_>, time: Time, padding: Padding) -> fmt::Result {"
+1507,src/format/time.rs,25,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, time.hour())"
+1508,src/format/time.rs,26,0,0,1,2,0.0,0.0,0.0,}
+1509,src/format/time.rs,29,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_H(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1510,src/format/time.rs,30,0,0,1,2,0.0,0.0,0.0,"items.hour_24 = Some(try_consume_exact_digits(s, 2, padding).ok_or(error::Parse::InvalidHour)?);"
+1511,src/format/time.rs,31,0,0,1,2,0.0,0.0,0.0,Ok(())
+1512,src/format/time.rs,32,0,0,1,2,0.0,0.0,0.0,}
+1513,src/format/time.rs,35,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_I(f: &mut Formatter<'_>, time: Time, padding: Padding) -> fmt::Result {"
+1514,src/format/time.rs,36,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, (time.hour() as i8 - 1).rem_euclid(12) + 1)"
+1515,src/format/time.rs,37,0,0,1,2,0.0,0.0,0.0,}
+1516,src/format/time.rs,40,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_I(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1517,src/format/time.rs,42,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, padding)"
+1518,src/format/time.rs,43,0,0,1,2,0.0,0.0,0.0,.and_then(NonZeroU8::new)
+1519,src/format/time.rs,44,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidHour)?,"
+1520,src/format/time.rs,46,0,0,1,2,0.0,0.0,0.0,Ok(())
+1521,src/format/time.rs,47,0,0,1,2,0.0,0.0,0.0,}
+1522,src/format/time.rs,50,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_M(f: &mut Formatter<'_>, time: Time, padding: Padding) -> fmt::Result {"
+1523,src/format/time.rs,51,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, time.minute())"
+1524,src/format/time.rs,52,0,0,1,2,0.0,0.0,0.0,}
+1525,src/format/time.rs,55,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_M(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1526,src/format/time.rs,57,0,0,1,2,0.0,0.0,0.0,"Some(try_consume_exact_digits(s, 2, padding).ok_or(error::Parse::InvalidMinute)?);"
+1527,src/format/time.rs,58,0,0,1,2,0.0,0.0,0.0,Ok(())
+1528,src/format/time.rs,59,0,0,1,2,0.0,0.0,0.0,}
+1529,src/format/time.rs,62,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_N(f: &mut Formatter<'_>, time: Time) -> fmt::Result {"
+1530,src/format/time.rs,63,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{:09}"", time.nanosecond)"
+1531,src/format/time.rs,64,0,0,1,2,0.0,0.0,0.0,}
+1532,src/format/time.rs,67,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_N(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1533,src/format/time.rs,69,0,0,1,2,0.0,0.0,0.0,"Some(try_consume_exact_digits(s, 9, Padding::None).ok_or(error::Parse::InvalidNanosecond)?);"
+1534,src/format/time.rs,70,0,0,1,2,0.0,0.0,0.0,Ok(())
+1535,src/format/time.rs,71,0,0,1,2,0.0,0.0,0.0,}
+1536,src/format/time.rs,74,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_p(f: &mut Formatter<'_>, time: Time) -> fmt::Result {"
+1537,src/format/time.rs,75,0,0,1,2,0.0,0.0,0.0,if time.hour() < 12 {
+1538,src/format/time.rs,76,0,0,1,2,0.0,0.0,0.0,"f.write_str(""am"")"
+1539,src/format/time.rs,78,0,0,1,2,0.0,0.0,0.0,"f.write_str(""pm"")"
+1540,src/format/time.rs,80,0,0,1,2,0.0,0.0,0.0,}
+1541,src/format/time.rs,83,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_p(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1542,src/format/time.rs,85,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, [(""am"", AM), (""pm"", PM)].iter().cloned())"
+1543,src/format/time.rs,86,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidAmPm)?,"
+1544,src/format/time.rs,88,0,0,1,2,0.0,0.0,0.0,Ok(())
+1545,src/format/time.rs,89,0,0,1,2,0.0,0.0,0.0,}
+1546,src/format/time.rs,92,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_P(f: &mut Formatter<'_>, time: Time) -> fmt::Result {"
+1547,src/format/time.rs,93,0,0,1,2,0.0,0.0,0.0,if time.hour() < 12 {
+1548,src/format/time.rs,94,0,0,1,2,0.0,0.0,0.0,"f.write_str(""AM"")"
+1549,src/format/time.rs,96,0,0,1,2,0.0,0.0,0.0,"f.write_str(""PM"")"
+1550,src/format/time.rs,98,0,0,1,2,0.0,0.0,0.0,}
+1551,src/format/time.rs,101,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_P(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1552,src/format/time.rs,103,0,0,1,2,0.0,0.0,0.0,"try_consume_first_match(s, [(""AM"", AM), (""PM"", PM)].iter().cloned())"
+1553,src/format/time.rs,104,0,0,1,2,0.0,0.0,0.0,".ok_or(error::Parse::InvalidAmPm)?,"
+1554,src/format/time.rs,106,0,0,1,2,0.0,0.0,0.0,Ok(())
+1555,src/format/time.rs,107,0,0,1,2,0.0,0.0,0.0,}
+1556,src/format/time.rs,110,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt_S(f: &mut Formatter<'_>, time: Time, padding: Padding) -> fmt::Result {"
+1557,src/format/time.rs,111,0,0,1,2,0.0,0.0,0.0,"pad!(f, padding, 2, time.second())"
+1558,src/format/time.rs,112,0,0,1,2,0.0,0.0,0.0,}
+1559,src/format/time.rs,115,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse_S(items: &mut ParsedItems, s: &mut &str, padding: Padding) -> ParseResult<()> {"
+1560,src/format/time.rs,117,0,0,1,2,0.0,0.0,0.0,"Some(try_consume_exact_digits(s, 2, padding).ok_or(error::Parse::InvalidSecond)?);"
+1561,src/format/time.rs,118,0,0,1,2,0.0,0.0,0.0,Ok(())
+1562,src/format/time.rs,119,0,0,1,2,0.0,0.0,0.0,}
+1563,src/format/well_known.rs,26,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn fmt(df: &DeferredFormat, f: &mut Formatter<'_>) -> Result<(), error::Format> {"
+1564,src/format/well_known.rs,27,0,0,1,2,0.0,0.0,0.0,"let (date, time, offset) = match (df.date(), df.time(), df.offset()) {"
+1565,src/format/well_known.rs,28,0,0,1,2,0.0,0.0,0.0,"(Some(date), Some(time), Some(offset)) => (date, time, offset),"
+1566,src/format/well_known.rs,29,0,0,1,2,0.0,0.0,0.0,"_ => return Err(error::Format::InsufficientTypeInformation),"
+1567,src/format/well_known.rs,32,0,0,1,2,0.0,0.0,0.0,"date::fmt_Y(f, date, Padding::Zero)?;"
+1568,src/format/well_known.rs,33,0,0,1,2,0.0,0.0,0.0,"f.write_str(""-"")?;"
+1569,src/format/well_known.rs,34,0,0,1,2,0.0,0.0,0.0,"date::fmt_m(f, date, Padding::Zero)?;"
+1570,src/format/well_known.rs,35,0,0,1,2,0.0,0.0,0.0,"f.write_str(""-"")?;"
+1571,src/format/well_known.rs,36,0,0,1,2,0.0,0.0,0.0,"date::fmt_d(f, date, Padding::Zero)?;"
+1572,src/format/well_known.rs,37,0,0,1,2,0.0,0.0,0.0,"f.write_str(""T"")?;"
+1573,src/format/well_known.rs,38,0,0,1,2,0.0,0.0,0.0,"time::fmt_H(f, time, Padding::Zero)?;"
+1574,src/format/well_known.rs,39,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+1575,src/format/well_known.rs,40,0,0,1,2,0.0,0.0,0.0,"time::fmt_M(f, time, Padding::Zero)?;"
+1576,src/format/well_known.rs,41,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+1577,src/format/well_known.rs,42,0,0,1,2,0.0,0.0,0.0,"time::fmt_S(f, time, Padding::Zero)?;"
+1578,src/format/well_known.rs,43,0,0,1,2,0.0,0.0,0.0,write!(
+1579,src/format/well_known.rs,44,0,0,1,2,0.0,0.0,0.0,"f,"
+1580,src/format/well_known.rs,46,0,0,1,2,0.0,0.0,0.0,"offset.as_hours(),"
+1581,src/format/well_known.rs,47,0,0,1,2,0.0,0.0,0.0,offset.as_minutes().rem_euclid(60)
+1582,src/format/well_known.rs,48,0,0,1,2,0.0,0.0,0.0,)?;
+1583,src/format/well_known.rs,50,0,0,1,2,0.0,0.0,0.0,Ok(())
+1584,src/format/well_known.rs,51,0,0,1,2,0.0,0.0,0.0,}
+1585,src/format/well_known.rs,54,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn parse(items: &mut ParsedItems, s: &mut &str) -> ParseResult<()> {"
+1586,src/format/well_known.rs,55,0,0,1,2,0.0,0.0,0.0,"items.year = try_consume_exact_digits::<i32>(s, 4, Padding::None)"
+1587,src/format/well_known.rs,56,0,0,1,2,0.0,0.0,0.0,.ok_or(error::Parse::InvalidYear)?
+1588,src/format/well_known.rs,57,0,0,1,2,0.0,0.0,0.0,.into();
+1589,src/format/well_known.rs,58,0,0,1,2,0.0,0.0,0.0,"try_consume_char(s, '-')?;"
+1590,src/format/well_known.rs,59,0,0,1,2,0.0,0.0,0.0,"date::parse_m(items, s, Padding::Zero)?;"
+1591,src/format/well_known.rs,60,0,0,1,2,0.0,0.0,0.0,"try_consume_char(s, '-')?;"
+1592,src/format/well_known.rs,61,0,0,1,2,0.0,0.0,0.0,"date::parse_d(items, s, Padding::Zero)?;"
+1593,src/format/well_known.rs,62,0,0,1,2,0.0,0.0,0.0,"try_consume_char_case_insensitive(s, 'T')?;"
+1594,src/format/well_known.rs,63,0,0,1,2,0.0,0.0,0.0,"time::parse_H(items, s, Padding::Zero)?;"
+1595,src/format/well_known.rs,64,0,0,1,2,0.0,0.0,0.0,"try_consume_char(s, ':')?;"
+1596,src/format/well_known.rs,65,0,0,1,2,0.0,0.0,0.0,"time::parse_M(items, s, Padding::Zero)?;"
+1597,src/format/well_known.rs,66,0,0,1,2,0.0,0.0,0.0,"try_consume_char(s, ':')?;"
+1598,src/format/well_known.rs,67,0,0,1,2,0.0,0.0,0.0,"time::parse_S(items, s, Padding::Zero)?;"
+1599,src/format/well_known.rs,69,0,0,1,2,0.0,0.0,0.0,"if try_consume_char(s, '.').is_ok() {"
+1600,src/format/well_known.rs,70,0,0,1,2,0.0,0.0,0.0,let num_digits = s.chars().take_while(char::is_ascii_digit).count();
+1601,src/format/well_known.rs,71,0,0,1,2,0.0,0.0,0.0,if num_digits == 0 {
+1602,src/format/well_known.rs,72,0,0,1,2,0.0,0.0,0.0,return Err(error::Parse::InvalidNanosecond);
+1603,src/format/well_known.rs,73,0,0,1,2,0.0,0.0,0.0,}
+1604,src/format/well_known.rs,74,0,0,1,2,0.0,0.0,0.0,"let num_digits_used = core::cmp::min(num_digits, 9);"
+1605,src/format/well_known.rs,76,0,0,1,2,0.0,0.0,0.0,let nanos_raw: String = s.chars().take(num_digits_used).collect();
+1606,src/format/well_known.rs,80,0,0,1,2,0.0,0.0,0.0,let nanos = nanos_raw.parse::<u32>().unwrap() * 10_u32.pow(9 - num_digits_used as u32);
+1607,src/format/well_known.rs,81,0,0,1,2,0.0,0.0,0.0,items.nanosecond = Some(nanos);
+1608,src/format/well_known.rs,82,0,0,1,2,0.0,0.0,0.0,*s = &s[num_digits..];
+1609,src/format/well_known.rs,83,0,0,1,2,0.0,0.0,0.0,}
+1610,src/format/well_known.rs,85,0,0,1,2,0.0,0.0,0.0,"if try_consume_char_case_insensitive(s, 'Z').is_ok() {"
+1611,src/format/well_known.rs,88,0,0,1,2,0.0,0.0,0.0,let offset_sign =
+1612,src/format/well_known.rs,89,0,0,1,2,0.0,0.0,0.0,"match try_consume_first_match(s, [(""+"", 1), (""-"", -1)].iter().cloned()) {"
+1613,src/format/well_known.rs,90,0,0,1,2,0.0,0.0,0.0,"Some(sign) => sign,"
+1614,src/format/well_known.rs,92,0,0,1,2,0.0,0.0,0.0,return Err(match s.chars().next() {
+1615,src/format/well_known.rs,93,0,0,1,2,0.0,0.0,0.0,Some(actual) => error::Parse::UnexpectedCharacter {
+1616,src/format/well_known.rs,97,0,0,1,2,0.0,0.0,0.0,"None => error::Parse::UnexpectedEndOfString,"
+1617,src/format/well_known.rs,101,0,0,1,2,0.0,0.0,0.0,let offset_hour: i16 =
+1618,src/format/well_known.rs,102,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, Padding::Zero).ok_or(error::Parse::InvalidOffset)?;"
+1619,src/format/well_known.rs,103,0,0,1,2,0.0,0.0,0.0,"try_consume_char(s, ':')?;"
+1620,src/format/well_known.rs,104,0,0,1,2,0.0,0.0,0.0,let offset_minute: i16 =
+1621,src/format/well_known.rs,105,0,0,1,2,0.0,0.0,0.0,"try_consume_exact_digits(s, 2, Padding::Zero).ok_or(error::Parse::InvalidOffset)?;"
+1622,src/format/well_known.rs,106,0,0,1,2,0.0,0.0,0.0,items.offset = Some(UtcOffset::minutes(
+1623,src/format/well_known.rs,107,0,0,1,2,0.0,0.0,0.0,"offset_sign * (offset_hour * 60 + offset_minute),"
+1624,src/format/well_known.rs,111,0,0,1,2,0.0,0.0,0.0,Ok(())
+1625,src/format/well_known.rs,112,0,0,1,2,0.0,0.0,0.0,}
+1626,src/instant.rs,44,0,0,1,2,0.0,0.0,0.0,pub fn now() -> Self {
+1627,src/instant.rs,45,0,0,1,2,0.0,0.0,0.0,Self {
+1628,src/instant.rs,48,0,0,1,2,0.0,0.0,0.0,}
+1629,src/instant.rs,61,0,0,1,2,0.0,0.0,0.0,pub fn elapsed(self) -> Duration {
+1630,src/instant.rs,62,0,0,1,2,0.0,0.0,0.0,Self::now() - self
+1631,src/instant.rs,63,0,0,1,2,0.0,0.0,0.0,}
+1632,src/instant.rs,84,0,0,1,2,0.0,0.0,0.0,"pub fn checked_add(self, duration: Duration) -> Option<Self> {"
+1633,src/instant.rs,85,0,0,1,2,0.0,0.0,0.0,if duration.is_zero() {
+1634,src/instant.rs,86,0,0,1,2,0.0,0.0,0.0,Some(self)
+1635,src/instant.rs,87,0,0,1,2,0.0,0.0,0.0,} else if duration.is_positive() {
+1636,src/instant.rs,88,0,0,1,2,0.0,0.0,0.0,self.inner.checked_add(duration.abs_std()).map(From::from)
+1637,src/instant.rs,91,0,0,1,2,0.0,0.0,0.0,self.inner.checked_sub(duration.abs_std()).map(From::from)
+1638,src/instant.rs,93,0,0,1,2,0.0,0.0,0.0,}
+1639,src/instant.rs,114,0,0,1,2,0.0,0.0,0.0,"pub fn checked_sub(self, duration: Duration) -> Option<Self> {"
+1640,src/instant.rs,115,0,0,1,2,0.0,0.0,0.0,self.checked_add(-duration)
+1641,src/instant.rs,116,0,0,1,2,0.0,0.0,0.0,}
+1642,src/instant.rs,123,0,0,1,2,0.0,0.0,0.0,"pub fn to(&self, later: Self) -> Duration {"
+1643,src/instant.rs,124,0,0,1,2,0.0,0.0,0.0,later - *self
+1644,src/instant.rs,125,0,0,1,2,0.0,0.0,0.0,}
+1645,src/instant.rs,129,0,0,1,2,0.0,0.0,0.0,fn from(instant: StdInstant) -> Self {
+1646,src/instant.rs,130,0,0,1,2,0.0,0.0,0.0,Self { inner: instant }
+1647,src/instant.rs,131,0,0,1,2,0.0,0.0,0.0,}
+1648,src/instant.rs,135,0,0,1,2,0.0,0.0,0.0,fn from(instant: Instant) -> Self {
+1649,src/instant.rs,136,0,0,1,2,0.0,0.0,0.0,instant.inner
+1650,src/instant.rs,137,0,0,1,2,0.0,0.0,0.0,}
+1651,src/instant.rs,143,0,0,1,2,0.0,0.0,0.0,"fn sub(self, other: Self) -> Self::Output {"
+1652,src/instant.rs,144,0,0,1,2,0.0,0.0,0.0,match self.inner.cmp(&other.inner) {
+1653,src/instant.rs,145,0,0,1,2,0.0,0.0,0.0,"Ordering::Equal => Duration::zero(),"
+1654,src/instant.rs,146,0,0,1,2,0.0,0.0,0.0,Ordering::Greater => (self.inner - other.inner)
+1655,src/instant.rs,147,0,0,1,2,0.0,0.0,0.0,.try_into()
+1656,src/instant.rs,148,0,0,1,2,0.0,0.0,0.0,".expect(""overflow converting `std::time::Duration` to `time::Duration`""),"
+1657,src/instant.rs,149,0,0,1,2,0.0,0.0,0.0,Ordering::Less => -Duration::try_from(other.inner - self.inner)
+1658,src/instant.rs,152,0,0,1,2,0.0,0.0,0.0,}
+1659,src/instant.rs,158,0,0,1,2,0.0,0.0,0.0,"fn sub(self, other: StdInstant) -> Self::Output {"
+1660,src/instant.rs,159,0,0,1,2,0.0,0.0,0.0,self - Self::from(other)
+1661,src/instant.rs,160,0,0,1,2,0.0,0.0,0.0,}
+1662,src/instant.rs,166,0,0,1,2,0.0,0.0,0.0,"fn sub(self, other: Instant) -> Self::Output {"
+1663,src/instant.rs,167,0,0,1,2,0.0,0.0,0.0,Instant::from(self) - other
+1664,src/instant.rs,168,0,0,1,2,0.0,0.0,0.0,}
+1665,src/instant.rs,174,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+1666,src/instant.rs,175,0,0,1,2,0.0,0.0,0.0,if duration.is_positive() {
+1667,src/instant.rs,176,0,0,1,2,0.0,0.0,0.0,(self.inner + duration.abs_std()).into()
+1668,src/instant.rs,177,0,0,1,2,0.0,0.0,0.0,} else if duration.is_negative() {
+1669,src/instant.rs,178,0,0,1,2,0.0,0.0,0.0,(self.inner - duration.abs_std()).into()
+1670,src/instant.rs,180,0,0,1,2,0.0,0.0,0.0,self
+1671,src/instant.rs,182,0,0,1,2,0.0,0.0,0.0,}
+1672,src/instant.rs,188,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+1673,src/instant.rs,189,0,0,1,2,0.0,0.0,0.0,(Instant::from(self) + duration).into()
+1674,src/instant.rs,190,0,0,1,2,0.0,0.0,0.0,}
+1675,src/instant.rs,196,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: StdDuration) -> Self::Output {"
+1676,src/instant.rs,197,0,0,1,2,0.0,0.0,0.0,Self {
+1677,src/instant.rs,200,0,0,1,2,0.0,0.0,0.0,}
+1678,src/instant.rs,204,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+1679,src/instant.rs,205,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+1680,src/instant.rs,206,0,0,1,2,0.0,0.0,0.0,}
+1681,src/instant.rs,210,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+1682,src/instant.rs,211,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+1683,src/instant.rs,212,0,0,1,2,0.0,0.0,0.0,}
+1684,src/instant.rs,216,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: StdDuration) {"
+1685,src/instant.rs,217,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+1686,src/instant.rs,218,0,0,1,2,0.0,0.0,0.0,}
+1687,src/instant.rs,224,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+1688,src/instant.rs,225,0,0,1,2,0.0,0.0,0.0,self + -duration
+1689,src/instant.rs,226,0,0,1,2,0.0,0.0,0.0,}
+1690,src/instant.rs,232,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+1691,src/instant.rs,233,0,0,1,2,0.0,0.0,0.0,(Instant::from(self) - duration).into()
+1692,src/instant.rs,234,0,0,1,2,0.0,0.0,0.0,}
+1693,src/instant.rs,240,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: StdDuration) -> Self::Output {"
+1694,src/instant.rs,241,0,0,1,2,0.0,0.0,0.0,Self {
+1695,src/instant.rs,244,0,0,1,2,0.0,0.0,0.0,}
+1696,src/instant.rs,248,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+1697,src/instant.rs,249,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+1698,src/instant.rs,250,0,0,1,2,0.0,0.0,0.0,}
+1699,src/instant.rs,254,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+1700,src/instant.rs,255,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+1701,src/instant.rs,256,0,0,1,2,0.0,0.0,0.0,}
+1702,src/instant.rs,260,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: StdDuration) {"
+1703,src/instant.rs,261,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+1704,src/instant.rs,262,0,0,1,2,0.0,0.0,0.0,}
+1705,src/instant.rs,266,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &StdInstant) -> bool {"
+1706,src/instant.rs,267,0,0,1,2,0.0,0.0,0.0,self.inner.eq(rhs)
+1707,src/instant.rs,268,0,0,1,2,0.0,0.0,0.0,}
+1708,src/instant.rs,272,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &Instant) -> bool {"
+1709,src/instant.rs,273,0,0,1,2,0.0,0.0,0.0,self.eq(&rhs.inner)
+1710,src/instant.rs,274,0,0,1,2,0.0,0.0,0.0,}
+1711,src/instant.rs,278,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, rhs: &StdInstant) -> Option<Ordering> {"
+1712,src/instant.rs,279,0,0,1,2,0.0,0.0,0.0,self.inner.partial_cmp(rhs)
+1713,src/instant.rs,280,0,0,1,2,0.0,0.0,0.0,}
+1714,src/instant.rs,284,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, rhs: &Instant) -> Option<Ordering> {"
+1715,src/instant.rs,285,0,0,1,2,0.0,0.0,0.0,self.partial_cmp(&rhs.inner)
+1716,src/instant.rs,286,0,0,1,2,0.0,0.0,0.0,}
+1717,src/internals.rs,21,0,0,1,2,0.0,0.0,0.0,pub const fn from_hms_nanos_unchecked(
+1718,src/internals.rs,27,0,0,1,2,0.0,0.0,0.0,crate::Time {
+1719,src/internals.rs,28,0,0,1,2,0.0,0.0,0.0,"hour,"
+1720,src/internals.rs,29,0,0,1,2,0.0,0.0,0.0,"minute,"
+1721,src/internals.rs,33,0,0,1,2,0.0,0.0,0.0,}
+1722,src/internals.rs,40,0,0,1,2,0.0,0.0,0.0,"pub const fn from_yo_unchecked(year: i32, ordinal: u16) -> crate::Date {"
+1723,src/internals.rs,41,0,0,1,2,0.0,0.0,0.0,crate::Date {
+1724,src/internals.rs,44,0,0,1,2,0.0,0.0,0.0,}
+1725,src/internals.rs,47,0,0,1,2,0.0,0.0,0.0,"pub(crate) const fn from_ymd_unchecked(year: i32, month: u8, day: u8) -> crate::Date {"
+1726,src/internals.rs,55,0,0,1,2,0.0,0.0,0.0,Date::from_yo_unchecked(
+1727,src/internals.rs,56,0,0,1,2,0.0,0.0,0.0,"year,"
+1728,src/internals.rs,57,0,0,1,2,0.0,0.0,0.0,DAYS_CUMULATIVE_COMMON_LEAP[is_leap_year(year) as usize][month as usize - 1]
+1729,src/internals.rs,60,0,0,1,2,0.0,0.0,0.0,}
+1730,src/internals.rs,64,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn from_iso_ywd_unchecked(
+1731,src/internals.rs,69,0,0,1,2,0.0,0.0,0.0,"let (ordinal, overflow) = (week as u16 * 7 + weekday.iso_weekday_number() as u16)"
+1732,src/internals.rs,70,0,0,1,2,0.0,0.0,0.0,".overflowing_sub(jan_weekday(year, 4) as u16 + 4);"
+1733,src/internals.rs,72,0,0,1,2,0.0,0.0,0.0,if overflow || ordinal == 0 {
+1734,src/internals.rs,73,0,0,1,2,0.0,0.0,0.0,"return Self::from_yo_unchecked(year - 1, ordinal.wrapping_add(days_in_year(year - 1)));"
+1735,src/internals.rs,74,0,0,1,2,0.0,0.0,0.0,}
+1736,src/internals.rs,76,0,0,1,2,0.0,0.0,0.0,let days_in_cur_year = days_in_year(year);
+1737,src/internals.rs,77,0,0,1,2,0.0,0.0,0.0,if ordinal > days_in_cur_year {
+1738,src/internals.rs,78,0,0,1,2,0.0,0.0,0.0,"Self::from_yo_unchecked(year + 1, ordinal - days_in_cur_year)"
+1739,src/internals.rs,80,0,0,1,2,0.0,0.0,0.0,"Self::from_yo_unchecked(year, ordinal)"
+1740,src/internals.rs,82,0,0,1,2,0.0,0.0,0.0,}
+1741,src/internals.rs,87,0,0,1,2,0.0,0.0,0.0,"pub(crate) const fn jan_weekday(year: i32, ordinal: i32) -> u8 {"
+1742,src/internals.rs,88,0,0,1,2,0.0,0.0,0.0,let adj_year = year - 1;
+1743,src/internals.rs,89,0,0,1,2,0.0,0.0,0.0,let rem = (ordinal + adj_year + adj_year / 4 - adj_year / 100 + adj_year / 400 + 6) % 7;
+1744,src/internals.rs,90,0,0,1,2,0.0,0.0,0.0,if rem < 0 {
+1745,src/internals.rs,91,0,0,1,2,0.0,0.0,0.0,(rem + 7) as u8
+1746,src/internals.rs,93,0,0,1,2,0.0,0.0,0.0,rem as u8
+1747,src/internals.rs,95,0,0,1,2,0.0,0.0,0.0,}
+1748,src/lib.rs,391,0,0,1,2,0.0,0.0,0.0,"fn parse(s: impl AsRef<str>, format: impl AsRef<str>) -> ParseResult<Self> {"
+1749,src/lib.rs,392,0,0,1,2,0.0,0.0,0.0,"Self::parse(s, format)"
+1750,src/lib.rs,393,0,0,1,2,0.0,0.0,0.0,}
+1751,src/lib.rs,424,0,0,1,2,0.0,0.0,0.0,"pub fn parse<T: private::Parsable>(s: impl AsRef<str>, format: impl AsRef<str>) -> ParseResult<T> {"
+1752,src/lib.rs,425,0,0,1,2,0.0,0.0,0.0,"private::Parsable::parse(s, format)"
+1753,src/lib.rs,426,0,0,1,2,0.0,0.0,0.0,}
+1754,src/lib.rs,519,0,0,1,2,0.0,0.0,0.0,pub fn precise_time_ns() -> u64 {
+1755,src/lib.rs,523,0,0,1,2,0.0,0.0,0.0,(SystemTime::now().duration_since(SystemTime::UNIX_EPOCH))
+1756,src/lib.rs,525,0,0,1,2,0.0,0.0,0.0,.as_nanos()
+1757,src/lib.rs,526,0,0,1,2,0.0,0.0,0.0,.try_into()
+1758,src/lib.rs,527,0,0,1,2,0.0,0.0,0.0,".expect(""This function will be removed long before this is an issue."")"
+1759,src/lib.rs,528,0,0,1,2,0.0,0.0,0.0,}
+1760,src/lib.rs,537,0,0,1,2,0.0,0.0,0.0,pub fn precise_time_s() -> f64 {
+1761,src/lib.rs,540,0,0,1,2,0.0,0.0,0.0,(SystemTime::now().duration_since(SystemTime::UNIX_EPOCH))
+1762,src/lib.rs,542,0,0,1,2,0.0,0.0,0.0,.as_secs_f64()
+1763,src/lib.rs,543,0,0,1,2,0.0,0.0,0.0,}
+1764,src/offset_date_time.rs,63,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn new_assuming_offset(utc_datetime: PrimitiveDateTime, offset: UtcOffset) -> Self {"
+1765,src/offset_date_time.rs,64,0,0,1,2,0.0,0.0,0.0,Self {
+1766,src/offset_date_time.rs,65,0,0,1,2,0.0,0.0,0.0,"utc_datetime: utc_datetime - offset.as_duration(),"
+1767,src/offset_date_time.rs,68,0,0,1,2,0.0,0.0,0.0,}
+1768,src/offset_date_time.rs,73,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn new_assuming_utc(utc_datetime: PrimitiveDateTime) -> Self {
+1769,src/offset_date_time.rs,74,0,0,1,2,0.0,0.0,0.0,Self {
+1770,src/offset_date_time.rs,78,0,0,1,2,0.0,0.0,0.0,}
+1771,src/offset_date_time.rs,95,0,0,1,2,0.0,0.0,0.0,pub fn now() -> Self {
+1772,src/offset_date_time.rs,96,0,0,1,2,0.0,0.0,0.0,SystemTime::now().into()
+1773,src/offset_date_time.rs,97,0,0,1,2,0.0,0.0,0.0,}
+1774,src/offset_date_time.rs,108,0,0,1,2,0.0,0.0,0.0,pub fn now_utc() -> Self {
+1775,src/offset_date_time.rs,109,0,0,1,2,0.0,0.0,0.0,SystemTime::now().into()
+1776,src/offset_date_time.rs,110,0,0,1,2,0.0,0.0,0.0,}
+1777,src/offset_date_time.rs,127,0,0,1,2,0.0,0.0,0.0,pub fn now_local() -> Self {
+1778,src/offset_date_time.rs,128,0,0,1,2,0.0,0.0,0.0,let t = Self::now_utc();
+1779,src/offset_date_time.rs,129,0,0,1,2,0.0,0.0,0.0,t.to_offset(UtcOffset::local_offset_at(t))
+1780,src/offset_date_time.rs,130,0,0,1,2,0.0,0.0,0.0,}
+1781,src/offset_date_time.rs,145,0,0,1,2,0.0,0.0,0.0,"pub fn try_now_local() -> Result<Self, error::IndeterminateOffset> {"
+1782,src/offset_date_time.rs,146,0,0,1,2,0.0,0.0,0.0,let t = Self::now_utc();
+1783,src/offset_date_time.rs,147,0,0,1,2,0.0,0.0,0.0,Ok(t.to_offset(UtcOffset::try_local_offset_at(t)?))
+1784,src/offset_date_time.rs,148,0,0,1,2,0.0,0.0,0.0,}
+1785,src/offset_date_time.rs,176,0,0,1,2,0.0,0.0,0.0,"pub const fn to_offset(self, offset: UtcOffset) -> Self {"
+1786,src/offset_date_time.rs,177,0,0,1,2,0.0,0.0,0.0,Self {
+1787,src/offset_date_time.rs,181,0,0,1,2,0.0,0.0,0.0,}
+1788,src/offset_date_time.rs,194,0,0,1,2,0.0,0.0,0.0,pub const fn unix_epoch() -> Self {
+1789,src/offset_date_time.rs,195,0,0,1,2,0.0,0.0,0.0,"internals::Date::from_yo_unchecked(1970, 1)"
+1790,src/offset_date_time.rs,196,0,0,1,2,0.0,0.0,0.0,.midnight()
+1791,src/offset_date_time.rs,197,0,0,1,2,0.0,0.0,0.0,.assume_utc()
+1792,src/offset_date_time.rs,198,0,0,1,2,0.0,0.0,0.0,}
+1793,src/offset_date_time.rs,227,0,0,1,2,0.0,0.0,0.0,pub fn from_unix_timestamp(timestamp: i64) -> Self {
+1794,src/offset_date_time.rs,228,0,0,1,2,0.0,0.0,0.0,OffsetDateTime::unix_epoch() + Duration::seconds(timestamp)
+1795,src/offset_date_time.rs,229,0,0,1,2,0.0,0.0,0.0,}
+1796,src/offset_date_time.rs,253,0,0,1,2,0.0,0.0,0.0,pub fn from_unix_timestamp_nanos(timestamp: i128) -> Self {
+1797,src/offset_date_time.rs,254,0,0,1,2,0.0,0.0,0.0,OffsetDateTime::unix_epoch() + Duration::nanoseconds_i128(timestamp)
+1798,src/offset_date_time.rs,255,0,0,1,2,0.0,0.0,0.0,}
+1799,src/offset_date_time.rs,276,0,0,1,2,0.0,0.0,0.0,pub const fn offset(self) -> UtcOffset {
+1800,src/offset_date_time.rs,277,0,0,1,2,0.0,0.0,0.0,self.offset
+1801,src/offset_date_time.rs,278,0,0,1,2,0.0,0.0,0.0,}
+1802,src/offset_date_time.rs,300,0,0,1,2,0.0,0.0,0.0,pub fn unix_timestamp(self) -> i64 {
+1803,src/offset_date_time.rs,301,0,0,1,2,0.0,0.0,0.0,let days = (self.utc_datetime.date.julian_day()
+1804,src/offset_date_time.rs,304,0,0,1,2,0.0,0.0,0.0,let hours = self.utc_datetime.hour() as i64 * 3_600;
+1805,src/offset_date_time.rs,305,0,0,1,2,0.0,0.0,0.0,let minutes = self.utc_datetime.minute() as i64 * 60;
+1806,src/offset_date_time.rs,306,0,0,1,2,0.0,0.0,0.0,let seconds = self.utc_datetime.second() as i64;
+1807,src/offset_date_time.rs,307,0,0,1,2,0.0,0.0,0.0,days + hours + minutes + seconds
+1808,src/offset_date_time.rs,308,0,0,1,2,0.0,0.0,0.0,}
+1809,src/offset_date_time.rs,335,0,0,1,2,0.0,0.0,0.0,pub fn timestamp(self) -> i64 {
+1810,src/offset_date_time.rs,336,0,0,1,2,0.0,0.0,0.0,self.unix_timestamp()
+1811,src/offset_date_time.rs,337,0,0,1,2,0.0,0.0,0.0,}
+1812,src/offset_date_time.rs,359,0,0,1,2,0.0,0.0,0.0,pub fn unix_timestamp_nanos(self) -> i128 {
+1813,src/offset_date_time.rs,360,0,0,1,2,0.0,0.0,0.0,(self - Self::unix_epoch()).whole_nanoseconds()
+1814,src/offset_date_time.rs,361,0,0,1,2,0.0,0.0,0.0,}
+1815,src/offset_date_time.rs,388,0,0,1,2,0.0,0.0,0.0,pub fn timestamp_nanos(self) -> i128 {
+1816,src/offset_date_time.rs,389,0,0,1,2,0.0,0.0,0.0,self.unix_timestamp_nanos()
+1817,src/offset_date_time.rs,390,0,0,1,2,0.0,0.0,0.0,}
+1818,src/offset_date_time.rs,412,0,0,1,2,0.0,0.0,0.0,pub fn date(self) -> Date {
+1819,src/offset_date_time.rs,413,0,0,1,2,0.0,0.0,0.0,(self.utc_datetime + self.offset.as_duration()).date()
+1820,src/offset_date_time.rs,414,0,0,1,2,0.0,0.0,0.0,}
+1821,src/offset_date_time.rs,436,0,0,1,2,0.0,0.0,0.0,pub fn time(self) -> Time {
+1822,src/offset_date_time.rs,437,0,0,1,2,0.0,0.0,0.0,(self.utc_datetime + self.offset.as_duration()).time()
+1823,src/offset_date_time.rs,438,0,0,1,2,0.0,0.0,0.0,}
+1824,src/offset_date_time.rs,467,0,0,1,2,0.0,0.0,0.0,pub fn year(self) -> i32 {
+1825,src/offset_date_time.rs,468,0,0,1,2,0.0,0.0,0.0,self.date().year()
+1826,src/offset_date_time.rs,469,0,0,1,2,0.0,0.0,0.0,}
+1827,src/offset_date_time.rs,495,0,0,1,2,0.0,0.0,0.0,pub fn month(self) -> u8 {
+1828,src/offset_date_time.rs,496,0,0,1,2,0.0,0.0,0.0,self.date().month()
+1829,src/offset_date_time.rs,497,0,0,1,2,0.0,0.0,0.0,}
+1830,src/offset_date_time.rs,522,0,0,1,2,0.0,0.0,0.0,pub fn day(self) -> u8 {
+1831,src/offset_date_time.rs,523,0,0,1,2,0.0,0.0,0.0,self.date().day()
+1832,src/offset_date_time.rs,524,0,0,1,2,0.0,0.0,0.0,}
+1833,src/offset_date_time.rs,549,0,0,1,2,0.0,0.0,0.0,"pub fn month_day(self) -> (u8, u8) {"
+1834,src/offset_date_time.rs,550,0,0,1,2,0.0,0.0,0.0,self.date().month_day()
+1835,src/offset_date_time.rs,551,0,0,1,2,0.0,0.0,0.0,}
+1836,src/offset_date_time.rs,575,0,0,1,2,0.0,0.0,0.0,pub fn ordinal(self) -> u16 {
+1837,src/offset_date_time.rs,576,0,0,1,2,0.0,0.0,0.0,self.date().ordinal()
+1838,src/offset_date_time.rs,577,0,0,1,2,0.0,0.0,0.0,}
+1839,src/offset_date_time.rs,619,0,0,1,2,0.0,0.0,0.0,"pub fn iso_year_week(self) -> (i32, u8) {"
+1840,src/offset_date_time.rs,620,0,0,1,2,0.0,0.0,0.0,self.date().iso_year_week()
+1841,src/offset_date_time.rs,621,0,0,1,2,0.0,0.0,0.0,}
+1842,src/offset_date_time.rs,658,0,0,1,2,0.0,0.0,0.0,pub fn week(self) -> u8 {
+1843,src/offset_date_time.rs,659,0,0,1,2,0.0,0.0,0.0,self.date().week()
+1844,src/offset_date_time.rs,660,0,0,1,2,0.0,0.0,0.0,}
+1845,src/offset_date_time.rs,691,0,0,1,2,0.0,0.0,0.0,pub fn weekday(self) -> Weekday {
+1846,src/offset_date_time.rs,692,0,0,1,2,0.0,0.0,0.0,self.date().weekday()
+1847,src/offset_date_time.rs,693,0,0,1,2,0.0,0.0,0.0,}
+1848,src/offset_date_time.rs,717,0,0,1,2,0.0,0.0,0.0,pub fn hour(self) -> u8 {
+1849,src/offset_date_time.rs,718,0,0,1,2,0.0,0.0,0.0,self.time().hour()
+1850,src/offset_date_time.rs,719,0,0,1,2,0.0,0.0,0.0,}
+1851,src/offset_date_time.rs,743,0,0,1,2,0.0,0.0,0.0,pub fn minute(self) -> u8 {
+1852,src/offset_date_time.rs,744,0,0,1,2,0.0,0.0,0.0,self.time().minute()
+1853,src/offset_date_time.rs,745,0,0,1,2,0.0,0.0,0.0,}
+1854,src/offset_date_time.rs,769,0,0,1,2,0.0,0.0,0.0,pub fn second(self) -> u8 {
+1855,src/offset_date_time.rs,770,0,0,1,2,0.0,0.0,0.0,self.time().second()
+1856,src/offset_date_time.rs,771,0,0,1,2,0.0,0.0,0.0,}
+1857,src/offset_date_time.rs,794,0,0,1,2,0.0,0.0,0.0,pub fn millisecond(self) -> u16 {
+1858,src/offset_date_time.rs,795,0,0,1,2,0.0,0.0,0.0,self.time().millisecond()
+1859,src/offset_date_time.rs,796,0,0,1,2,0.0,0.0,0.0,}
+1860,src/offset_date_time.rs,819,0,0,1,2,0.0,0.0,0.0,pub fn microsecond(self) -> u32 {
+1861,src/offset_date_time.rs,820,0,0,1,2,0.0,0.0,0.0,self.time().microsecond()
+1862,src/offset_date_time.rs,821,0,0,1,2,0.0,0.0,0.0,}
+1863,src/offset_date_time.rs,844,0,0,1,2,0.0,0.0,0.0,pub fn nanosecond(self) -> u32 {
+1864,src/offset_date_time.rs,845,0,0,1,2,0.0,0.0,0.0,self.time().nanosecond()
+1865,src/offset_date_time.rs,846,0,0,1,2,0.0,0.0,0.0,}
+1866,src/offset_date_time.rs,863,0,0,1,2,0.0,0.0,0.0,"pub fn format(self, format: impl Into<Format>) -> String {"
+1867,src/offset_date_time.rs,864,0,0,1,2,0.0,0.0,0.0,self.lazy_format(format).to_string()
+1868,src/offset_date_time.rs,865,0,0,1,2,0.0,0.0,0.0,}
+1869,src/offset_date_time.rs,880,0,0,1,2,0.0,0.0,0.0,"pub fn lazy_format(self, format: impl Into<Format>) -> impl Display {"
+1870,src/offset_date_time.rs,881,0,0,1,2,0.0,0.0,0.0,DeferredFormat::new(format)
+1871,src/offset_date_time.rs,882,0,0,1,2,0.0,0.0,0.0,.with_date(self.date())
+1872,src/offset_date_time.rs,883,0,0,1,2,0.0,0.0,0.0,.with_time(self.time())
+1873,src/offset_date_time.rs,884,0,0,1,2,0.0,0.0,0.0,.with_offset(self.offset())
+1874,src/offset_date_time.rs,885,0,0,1,2,0.0,0.0,0.0,.to_owned()
+1875,src/offset_date_time.rs,886,0,0,1,2,0.0,0.0,0.0,}
+1876,src/offset_date_time.rs,905,0,0,1,2,0.0,0.0,0.0,"pub fn parse(s: impl AsRef<str>, format: impl Into<Format>) -> ParseResult<Self> {"
+1877,src/offset_date_time.rs,906,0,0,1,2,0.0,0.0,0.0,"Self::try_from_parsed_items(parse(s.as_ref(), &format.into())?)"
+1878,src/offset_date_time.rs,907,0,0,1,2,0.0,0.0,0.0,}
+1879,src/offset_date_time.rs,910,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_from_parsed_items(items: ParsedItems) -> ParseResult<Self> {
+1880,src/offset_date_time.rs,911,0,0,1,2,0.0,0.0,0.0,let offset = UtcOffset::try_from_parsed_items(items)?;
+1881,src/offset_date_time.rs,912,0,0,1,2,0.0,0.0,0.0,Ok(PrimitiveDateTime::try_from_parsed_items(items)?.assume_offset(offset))
+1882,src/offset_date_time.rs,913,0,0,1,2,0.0,0.0,0.0,}
+1883,src/offset_date_time.rs,917,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+1884,src/offset_date_time.rs,918,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{} {} {}"", self.date(), self.time(), self.offset())"
+1885,src/offset_date_time.rs,919,0,0,1,2,0.0,0.0,0.0,}
+1886,src/offset_date_time.rs,923,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &Self) -> bool {"
+1887,src/offset_date_time.rs,924,0,0,1,2,0.0,0.0,0.0,self.utc_datetime.eq(&rhs.utc_datetime)
+1888,src/offset_date_time.rs,925,0,0,1,2,0.0,0.0,0.0,}
+1889,src/offset_date_time.rs,929,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, rhs: &Self) -> Option<Ordering> {"
+1890,src/offset_date_time.rs,930,0,0,1,2,0.0,0.0,0.0,Some(self.cmp(rhs))
+1891,src/offset_date_time.rs,931,0,0,1,2,0.0,0.0,0.0,}
+1892,src/offset_date_time.rs,935,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, rhs: &Self) -> Ordering {"
+1893,src/offset_date_time.rs,936,0,0,1,2,0.0,0.0,0.0,self.utc_datetime.cmp(&rhs.utc_datetime)
+1894,src/offset_date_time.rs,937,0,0,1,2,0.0,0.0,0.0,}
+1895,src/offset_date_time.rs,941,0,0,1,2,0.0,0.0,0.0,"fn hash<H: Hasher>(&self, hasher: &mut H) {"
+1896,src/offset_date_time.rs,944,0,0,1,2,0.0,0.0,0.0,"hasher.write(b""OffsetDateTime"");"
+1897,src/offset_date_time.rs,945,0,0,1,2,0.0,0.0,0.0,self.utc_datetime.hash(hasher);
+1898,src/offset_date_time.rs,946,0,0,1,2,0.0,0.0,0.0,}
+1899,src/offset_date_time.rs,952,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+1900,src/offset_date_time.rs,953,0,0,1,2,0.0,0.0,0.0,Self {
+1901,src/offset_date_time.rs,957,0,0,1,2,0.0,0.0,0.0,}
+1902,src/offset_date_time.rs,963,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: StdDuration) -> Self::Output {"
+1903,src/offset_date_time.rs,964,0,0,1,2,0.0,0.0,0.0,Self {
+1904,src/offset_date_time.rs,968,0,0,1,2,0.0,0.0,0.0,}
+1905,src/offset_date_time.rs,972,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+1906,src/offset_date_time.rs,973,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+1907,src/offset_date_time.rs,974,0,0,1,2,0.0,0.0,0.0,}
+1908,src/offset_date_time.rs,978,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: StdDuration) {"
+1909,src/offset_date_time.rs,979,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+1910,src/offset_date_time.rs,980,0,0,1,2,0.0,0.0,0.0,}
+1911,src/offset_date_time.rs,986,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+1912,src/offset_date_time.rs,987,0,0,1,2,0.0,0.0,0.0,Self {
+1913,src/offset_date_time.rs,991,0,0,1,2,0.0,0.0,0.0,}
+1914,src/offset_date_time.rs,997,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: StdDuration) -> Self::Output {"
+1915,src/offset_date_time.rs,998,0,0,1,2,0.0,0.0,0.0,Self {
+1916,src/offset_date_time.rs,1002,0,0,1,2,0.0,0.0,0.0,}
+1917,src/offset_date_time.rs,1006,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+1918,src/offset_date_time.rs,1007,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+1919,src/offset_date_time.rs,1008,0,0,1,2,0.0,0.0,0.0,}
+1920,src/offset_date_time.rs,1012,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: StdDuration) {"
+1921,src/offset_date_time.rs,1013,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+1922,src/offset_date_time.rs,1014,0,0,1,2,0.0,0.0,0.0,}
+1923,src/offset_date_time.rs,1020,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: Self) -> Self::Output {"
+1924,src/offset_date_time.rs,1021,0,0,1,2,0.0,0.0,0.0,self.utc_datetime - rhs.utc_datetime
+1925,src/offset_date_time.rs,1022,0,0,1,2,0.0,0.0,0.0,}
+1926,src/offset_date_time.rs,1029,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+1927,src/offset_date_time.rs,1030,0,0,1,2,0.0,0.0,0.0,if duration.is_zero() {
+1928,src/offset_date_time.rs,1031,0,0,1,2,0.0,0.0,0.0,self
+1929,src/offset_date_time.rs,1032,0,0,1,2,0.0,0.0,0.0,} else if duration.is_positive() {
+1930,src/offset_date_time.rs,1033,0,0,1,2,0.0,0.0,0.0,self + duration.abs_std()
+1931,src/offset_date_time.rs,1036,0,0,1,2,0.0,0.0,0.0,self - duration.abs_std()
+1932,src/offset_date_time.rs,1038,0,0,1,2,0.0,0.0,0.0,}
+1933,src/offset_date_time.rs,1043,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+1934,src/offset_date_time.rs,1044,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+1935,src/offset_date_time.rs,1045,0,0,1,2,0.0,0.0,0.0,}
+1936,src/offset_date_time.rs,1052,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+1937,src/offset_date_time.rs,1053,0,0,1,2,0.0,0.0,0.0,(OffsetDateTime::from(self) - duration).into()
+1938,src/offset_date_time.rs,1054,0,0,1,2,0.0,0.0,0.0,}
+1939,src/offset_date_time.rs,1059,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+1940,src/offset_date_time.rs,1060,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+1941,src/offset_date_time.rs,1061,0,0,1,2,0.0,0.0,0.0,}
+1942,src/offset_date_time.rs,1068,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: SystemTime) -> Self::Output {"
+1943,src/offset_date_time.rs,1069,0,0,1,2,0.0,0.0,0.0,self - Self::from(rhs)
+1944,src/offset_date_time.rs,1070,0,0,1,2,0.0,0.0,0.0,}
+1945,src/offset_date_time.rs,1077,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: OffsetDateTime) -> Self::Output {"
+1946,src/offset_date_time.rs,1078,0,0,1,2,0.0,0.0,0.0,OffsetDateTime::from(self) - rhs
+1947,src/offset_date_time.rs,1079,0,0,1,2,0.0,0.0,0.0,}
+1948,src/offset_date_time.rs,1084,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &SystemTime) -> bool {"
+1949,src/offset_date_time.rs,1085,0,0,1,2,0.0,0.0,0.0,self == &Self::from(*rhs)
+1950,src/offset_date_time.rs,1086,0,0,1,2,0.0,0.0,0.0,}
+1951,src/offset_date_time.rs,1091,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &OffsetDateTime) -> bool {"
+1952,src/offset_date_time.rs,1092,0,0,1,2,0.0,0.0,0.0,&OffsetDateTime::from(*self) == rhs
+1953,src/offset_date_time.rs,1093,0,0,1,2,0.0,0.0,0.0,}
+1954,src/offset_date_time.rs,1098,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &SystemTime) -> Option<Ordering> {"
+1955,src/offset_date_time.rs,1099,0,0,1,2,0.0,0.0,0.0,self.partial_cmp(&Self::from(*other))
+1956,src/offset_date_time.rs,1100,0,0,1,2,0.0,0.0,0.0,}
+1957,src/offset_date_time.rs,1105,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &OffsetDateTime) -> Option<Ordering> {"
+1958,src/offset_date_time.rs,1106,0,0,1,2,0.0,0.0,0.0,OffsetDateTime::from(*self).partial_cmp(other)
+1959,src/offset_date_time.rs,1107,0,0,1,2,0.0,0.0,0.0,}
+1960,src/offset_date_time.rs,1114,0,0,1,2,0.0,0.0,0.0,fn from(system_time: SystemTime) -> Self {
+1961,src/offset_date_time.rs,1115,0,0,1,2,0.0,0.0,0.0,let duration = match system_time.duration_since(SystemTime::UNIX_EPOCH) {
+1962,src/offset_date_time.rs,1116,0,0,1,2,0.0,0.0,0.0,Ok(duration) => Duration::try_from(duration)
+1963,src/offset_date_time.rs,1117,0,0,1,2,0.0,0.0,0.0,".expect(""overflow converting `std::time::Duration` to `time::Duration`""),"
+1964,src/offset_date_time.rs,1118,0,0,1,2,0.0,0.0,0.0,Err(err) => -Duration::try_from(err.duration())
+1965,src/offset_date_time.rs,1122,0,0,1,2,0.0,0.0,0.0,Self::unix_epoch() + duration
+1966,src/offset_date_time.rs,1123,0,0,1,2,0.0,0.0,0.0,}
+1967,src/offset_date_time.rs,1128,0,0,1,2,0.0,0.0,0.0,fn from(datetime: OffsetDateTime) -> Self {
+1968,src/offset_date_time.rs,1129,0,0,1,2,0.0,0.0,0.0,let duration = datetime - OffsetDateTime::unix_epoch();
+1969,src/offset_date_time.rs,1131,0,0,1,2,0.0,0.0,0.0,if duration.is_zero() {
+1970,src/offset_date_time.rs,1132,0,0,1,2,0.0,0.0,0.0,Self::UNIX_EPOCH
+1971,src/offset_date_time.rs,1133,0,0,1,2,0.0,0.0,0.0,} else if duration.is_positive() {
+1972,src/offset_date_time.rs,1134,0,0,1,2,0.0,0.0,0.0,Self::UNIX_EPOCH + duration.abs_std()
+1973,src/offset_date_time.rs,1137,0,0,1,2,0.0,0.0,0.0,Self::UNIX_EPOCH - duration.abs_std()
+1974,src/offset_date_time.rs,1139,0,0,1,2,0.0,0.0,0.0,}
+1975,src/primitive_date_time.rs,61,0,0,1,2,0.0,0.0,0.0,"pub const fn new(date: Date, time: Time) -> Self {"
+1976,src/primitive_date_time.rs,62,0,0,1,2,0.0,0.0,0.0,"Self { date, time }"
+1977,src/primitive_date_time.rs,63,0,0,1,2,0.0,0.0,0.0,}
+1978,src/primitive_date_time.rs,78,0,0,1,2,0.0,0.0,0.0,pub fn now() -> Self {
+1979,src/primitive_date_time.rs,79,0,0,1,2,0.0,0.0,0.0,SystemTime::now().into()
+1980,src/primitive_date_time.rs,80,0,0,1,2,0.0,0.0,0.0,}
+1981,src/primitive_date_time.rs,93,0,0,1,2,0.0,0.0,0.0,pub const fn unix_epoch() -> Self {
+1982,src/primitive_date_time.rs,94,0,0,1,2,0.0,0.0,0.0,Self {
+1983,src/primitive_date_time.rs,98,0,0,1,2,0.0,0.0,0.0,}
+1984,src/primitive_date_time.rs,119,0,0,1,2,0.0,0.0,0.0,pub fn from_unix_timestamp(timestamp: i64) -> Self {
+1985,src/primitive_date_time.rs,120,0,0,1,2,0.0,0.0,0.0,Self::unix_epoch() + Duration::seconds(timestamp)
+1986,src/primitive_date_time.rs,121,0,0,1,2,0.0,0.0,0.0,}
+1987,src/primitive_date_time.rs,134,0,0,1,2,0.0,0.0,0.0,pub fn timestamp(self) -> i64 {
+1988,src/primitive_date_time.rs,135,0,0,1,2,0.0,0.0,0.0,let days = (self.date.julian_day()
+1989,src/primitive_date_time.rs,138,0,0,1,2,0.0,0.0,0.0,let hours = self.hour() as i64 * 3_600;
+1990,src/primitive_date_time.rs,139,0,0,1,2,0.0,0.0,0.0,let minutes = self.minute() as i64 * 60;
+1991,src/primitive_date_time.rs,140,0,0,1,2,0.0,0.0,0.0,let seconds = self.second() as i64;
+1992,src/primitive_date_time.rs,141,0,0,1,2,0.0,0.0,0.0,days + hours + minutes + seconds
+1993,src/primitive_date_time.rs,142,0,0,1,2,0.0,0.0,0.0,}
+1994,src/primitive_date_time.rs,153,0,0,1,2,0.0,0.0,0.0,pub const fn date(self) -> Date {
+1995,src/primitive_date_time.rs,154,0,0,1,2,0.0,0.0,0.0,self.date
+1996,src/primitive_date_time.rs,155,0,0,1,2,0.0,0.0,0.0,}
+1997,src/primitive_date_time.rs,162,0,0,1,2,0.0,0.0,0.0,pub const fn time(self) -> Time {
+1998,src/primitive_date_time.rs,163,0,0,1,2,0.0,0.0,0.0,self.time
+1999,src/primitive_date_time.rs,164,0,0,1,2,0.0,0.0,0.0,}
+2000,src/primitive_date_time.rs,177,0,0,1,2,0.0,0.0,0.0,pub const fn year(self) -> i32 {
+2001,src/primitive_date_time.rs,178,0,0,1,2,0.0,0.0,0.0,self.date().year()
+2002,src/primitive_date_time.rs,179,0,0,1,2,0.0,0.0,0.0,}
+2003,src/primitive_date_time.rs,194,0,0,1,2,0.0,0.0,0.0,pub const fn month(self) -> u8 {
+2004,src/primitive_date_time.rs,195,0,0,1,2,0.0,0.0,0.0,self.date().month()
+2005,src/primitive_date_time.rs,196,0,0,1,2,0.0,0.0,0.0,}
+2006,src/primitive_date_time.rs,211,0,0,1,2,0.0,0.0,0.0,pub const fn day(self) -> u8 {
+2007,src/primitive_date_time.rs,212,0,0,1,2,0.0,0.0,0.0,self.date().day()
+2008,src/primitive_date_time.rs,213,0,0,1,2,0.0,0.0,0.0,}
+2009,src/primitive_date_time.rs,229,0,0,1,2,0.0,0.0,0.0,"pub const fn month_day(self) -> (u8, u8) {"
+2010,src/primitive_date_time.rs,230,0,0,1,2,0.0,0.0,0.0,self.date().month_day()
+2011,src/primitive_date_time.rs,231,0,0,1,2,0.0,0.0,0.0,}
+2012,src/primitive_date_time.rs,246,0,0,1,2,0.0,0.0,0.0,pub const fn ordinal(self) -> u16 {
+2013,src/primitive_date_time.rs,247,0,0,1,2,0.0,0.0,0.0,self.date().ordinal()
+2014,src/primitive_date_time.rs,248,0,0,1,2,0.0,0.0,0.0,}
+2015,src/primitive_date_time.rs,263,0,0,1,2,0.0,0.0,0.0,"pub const fn iso_year_week(self) -> (i32, u8) {"
+2016,src/primitive_date_time.rs,264,0,0,1,2,0.0,0.0,0.0,self.date().iso_year_week()
+2017,src/primitive_date_time.rs,265,0,0,1,2,0.0,0.0,0.0,}
+2018,src/primitive_date_time.rs,282,0,0,1,2,0.0,0.0,0.0,pub const fn week(self) -> u8 {
+2019,src/primitive_date_time.rs,283,0,0,1,2,0.0,0.0,0.0,self.date().week()
+2020,src/primitive_date_time.rs,284,0,0,1,2,0.0,0.0,0.0,}
+2021,src/primitive_date_time.rs,300,0,0,1,2,0.0,0.0,0.0,pub const fn sunday_based_week(self) -> u8 {
+2022,src/primitive_date_time.rs,301,0,0,1,2,0.0,0.0,0.0,self.date().sunday_based_week()
+2023,src/primitive_date_time.rs,302,0,0,1,2,0.0,0.0,0.0,}
+2024,src/primitive_date_time.rs,318,0,0,1,2,0.0,0.0,0.0,pub const fn monday_based_week(self) -> u8 {
+2025,src/primitive_date_time.rs,319,0,0,1,2,0.0,0.0,0.0,self.date().monday_based_week()
+2026,src/primitive_date_time.rs,320,0,0,1,2,0.0,0.0,0.0,}
+2027,src/primitive_date_time.rs,342,0,0,1,2,0.0,0.0,0.0,pub fn weekday(self) -> Weekday {
+2028,src/primitive_date_time.rs,343,0,0,1,2,0.0,0.0,0.0,self.date().weekday()
+2029,src/primitive_date_time.rs,344,0,0,1,2,0.0,0.0,0.0,}
+2030,src/primitive_date_time.rs,355,0,0,1,2,0.0,0.0,0.0,pub const fn hour(self) -> u8 {
+2031,src/primitive_date_time.rs,356,0,0,1,2,0.0,0.0,0.0,self.time().hour()
+2032,src/primitive_date_time.rs,357,0,0,1,2,0.0,0.0,0.0,}
+2033,src/primitive_date_time.rs,368,0,0,1,2,0.0,0.0,0.0,pub const fn minute(self) -> u8 {
+2034,src/primitive_date_time.rs,369,0,0,1,2,0.0,0.0,0.0,self.time().minute()
+2035,src/primitive_date_time.rs,370,0,0,1,2,0.0,0.0,0.0,}
+2036,src/primitive_date_time.rs,381,0,0,1,2,0.0,0.0,0.0,pub const fn second(self) -> u8 {
+2037,src/primitive_date_time.rs,382,0,0,1,2,0.0,0.0,0.0,self.time().second()
+2038,src/primitive_date_time.rs,383,0,0,1,2,0.0,0.0,0.0,}
+2039,src/primitive_date_time.rs,394,0,0,1,2,0.0,0.0,0.0,pub const fn millisecond(self) -> u16 {
+2040,src/primitive_date_time.rs,395,0,0,1,2,0.0,0.0,0.0,self.time().millisecond()
+2041,src/primitive_date_time.rs,396,0,0,1,2,0.0,0.0,0.0,}
+2042,src/primitive_date_time.rs,407,0,0,1,2,0.0,0.0,0.0,pub const fn microsecond(self) -> u32 {
+2043,src/primitive_date_time.rs,408,0,0,1,2,0.0,0.0,0.0,self.time().microsecond()
+2044,src/primitive_date_time.rs,409,0,0,1,2,0.0,0.0,0.0,}
+2045,src/primitive_date_time.rs,423,0,0,1,2,0.0,0.0,0.0,pub const fn nanosecond(self) -> u32 {
+2046,src/primitive_date_time.rs,424,0,0,1,2,0.0,0.0,0.0,self.time().nanosecond()
+2047,src/primitive_date_time.rs,425,0,0,1,2,0.0,0.0,0.0,}
+2048,src/primitive_date_time.rs,450,0,0,1,2,0.0,0.0,0.0,"pub const fn using_offset(self, offset: UtcOffset) -> OffsetDateTime {"
+2049,src/primitive_date_time.rs,451,0,0,1,2,0.0,0.0,0.0,self.assume_utc().to_offset(offset)
+2050,src/primitive_date_time.rs,452,0,0,1,2,0.0,0.0,0.0,}
+2051,src/primitive_date_time.rs,468,0,0,1,2,0.0,0.0,0.0,"pub fn assume_offset(self, offset: UtcOffset) -> OffsetDateTime {"
+2052,src/primitive_date_time.rs,469,0,0,1,2,0.0,0.0,0.0,"OffsetDateTime::new_assuming_offset(self, offset)"
+2053,src/primitive_date_time.rs,470,0,0,1,2,0.0,0.0,0.0,}
+2054,src/primitive_date_time.rs,485,0,0,1,2,0.0,0.0,0.0,pub const fn assume_utc(self) -> OffsetDateTime {
+2055,src/primitive_date_time.rs,486,0,0,1,2,0.0,0.0,0.0,OffsetDateTime::new_assuming_utc(self)
+2056,src/primitive_date_time.rs,487,0,0,1,2,0.0,0.0,0.0,}
+2057,src/primitive_date_time.rs,501,0,0,1,2,0.0,0.0,0.0,"pub fn format(self, format: impl AsRef<str>) -> String {"
+2058,src/primitive_date_time.rs,502,0,0,1,2,0.0,0.0,0.0,self.lazy_format(format).to_string()
+2059,src/primitive_date_time.rs,503,0,0,1,2,0.0,0.0,0.0,}
+2060,src/primitive_date_time.rs,514,0,0,1,2,0.0,0.0,0.0,"pub fn lazy_format(self, format: impl AsRef<str>) -> impl Display {"
+2061,src/primitive_date_time.rs,515,0,0,1,2,0.0,0.0,0.0,DeferredFormat::new(format.as_ref())
+2062,src/primitive_date_time.rs,516,0,0,1,2,0.0,0.0,0.0,.with_date(self.date())
+2063,src/primitive_date_time.rs,517,0,0,1,2,0.0,0.0,0.0,.with_time(self.time())
+2064,src/primitive_date_time.rs,518,0,0,1,2,0.0,0.0,0.0,.to_owned()
+2065,src/primitive_date_time.rs,519,0,0,1,2,0.0,0.0,0.0,}
+2066,src/primitive_date_time.rs,538,0,0,1,2,0.0,0.0,0.0,"pub fn parse(s: impl AsRef<str>, format: impl AsRef<str>) -> ParseResult<Self> {"
+2067,src/primitive_date_time.rs,539,0,0,1,2,0.0,0.0,0.0,"Self::try_from_parsed_items(parse(s.as_ref(), &format.into())?)"
+2068,src/primitive_date_time.rs,540,0,0,1,2,0.0,0.0,0.0,}
+2069,src/primitive_date_time.rs,543,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_from_parsed_items(items: ParsedItems) -> ParseResult<Self> {
+2070,src/primitive_date_time.rs,545,0,0,1,2,0.0,0.0,0.0,"date: Date::try_from_parsed_items(items)?,"
+2071,src/primitive_date_time.rs,546,0,0,1,2,0.0,0.0,0.0,"time: Time::try_from_parsed_items(items)?,"
+2072,src/primitive_date_time.rs,548,0,0,1,2,0.0,0.0,0.0,}
+2073,src/primitive_date_time.rs,552,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+2074,src/primitive_date_time.rs,553,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{} {}"", self.date(), self.time())"
+2075,src/primitive_date_time.rs,554,0,0,1,2,0.0,0.0,0.0,}
+2076,src/primitive_date_time.rs,560,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+2077,src/primitive_date_time.rs,561,0,0,1,2,0.0,0.0,0.0,let nanos = self.time.nanoseconds_since_midnight() as i64
+2078,src/primitive_date_time.rs,564,0,0,1,2,0.0,0.0,0.0,let date_modifier = if nanos < 0 {
+2079,src/primitive_date_time.rs,565,0,0,1,2,0.0,0.0,0.0,Duration::days(-1)
+2080,src/primitive_date_time.rs,566,0,0,1,2,0.0,0.0,0.0,} else if nanos >= 86_400_000_000_000 {
+2081,src/primitive_date_time.rs,567,0,0,1,2,0.0,0.0,0.0,Duration::day()
+2082,src/primitive_date_time.rs,569,0,0,1,2,0.0,0.0,0.0,Duration::zero()
+2083,src/primitive_date_time.rs,572,0,0,1,2,0.0,0.0,0.0,"Self::new(self.date + duration + date_modifier, self.time + duration)"
+2084,src/primitive_date_time.rs,573,0,0,1,2,0.0,0.0,0.0,}
+2085,src/primitive_date_time.rs,579,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: StdDuration) -> Self::Output {"
+2086,src/primitive_date_time.rs,580,0,0,1,2,0.0,0.0,0.0,let nanos = self.time.nanoseconds_since_midnight()
+2087,src/primitive_date_time.rs,583,0,0,1,2,0.0,0.0,0.0,let date_modifier = if nanos >= 86_400_000_000_000 {
+2088,src/primitive_date_time.rs,584,0,0,1,2,0.0,0.0,0.0,Duration::day()
+2089,src/primitive_date_time.rs,586,0,0,1,2,0.0,0.0,0.0,Duration::zero()
+2090,src/primitive_date_time.rs,589,0,0,1,2,0.0,0.0,0.0,"Self::new(self.date + duration + date_modifier, self.time + duration)"
+2091,src/primitive_date_time.rs,590,0,0,1,2,0.0,0.0,0.0,}
+2092,src/primitive_date_time.rs,594,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+2093,src/primitive_date_time.rs,595,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+2094,src/primitive_date_time.rs,596,0,0,1,2,0.0,0.0,0.0,}
+2095,src/primitive_date_time.rs,600,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: StdDuration) {"
+2096,src/primitive_date_time.rs,601,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+2097,src/primitive_date_time.rs,602,0,0,1,2,0.0,0.0,0.0,}
+2098,src/primitive_date_time.rs,608,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+2099,src/primitive_date_time.rs,609,0,0,1,2,0.0,0.0,0.0,self + -duration
+2100,src/primitive_date_time.rs,610,0,0,1,2,0.0,0.0,0.0,}
+2101,src/primitive_date_time.rs,616,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: StdDuration) -> Self::Output {"
+2102,src/primitive_date_time.rs,617,0,0,1,2,0.0,0.0,0.0,let nanos = self.time.nanoseconds_since_midnight() as i64
+2103,src/primitive_date_time.rs,620,0,0,1,2,0.0,0.0,0.0,let date_modifier = if nanos < 0 {
+2104,src/primitive_date_time.rs,621,0,0,1,2,0.0,0.0,0.0,Duration::days(-1)
+2105,src/primitive_date_time.rs,623,0,0,1,2,0.0,0.0,0.0,Duration::zero()
+2106,src/primitive_date_time.rs,626,0,0,1,2,0.0,0.0,0.0,"Self::new(self.date - duration + date_modifier, self.time - duration)"
+2107,src/primitive_date_time.rs,627,0,0,1,2,0.0,0.0,0.0,}
+2108,src/primitive_date_time.rs,631,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+2109,src/primitive_date_time.rs,632,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+2110,src/primitive_date_time.rs,633,0,0,1,2,0.0,0.0,0.0,}
+2111,src/primitive_date_time.rs,637,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: StdDuration) {"
+2112,src/primitive_date_time.rs,638,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+2113,src/primitive_date_time.rs,639,0,0,1,2,0.0,0.0,0.0,}
+2114,src/primitive_date_time.rs,645,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: Self) -> Self::Output {"
+2115,src/primitive_date_time.rs,646,0,0,1,2,0.0,0.0,0.0,(self.date - rhs.date) + (self.time - rhs.time)
+2116,src/primitive_date_time.rs,647,0,0,1,2,0.0,0.0,0.0,}
+2117,src/primitive_date_time.rs,655,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: SystemTime) -> Self::Output {"
+2118,src/primitive_date_time.rs,656,0,0,1,2,0.0,0.0,0.0,self - Self::from(rhs)
+2119,src/primitive_date_time.rs,657,0,0,1,2,0.0,0.0,0.0,}
+2120,src/primitive_date_time.rs,665,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: PrimitiveDateTime) -> Self::Output {"
+2121,src/primitive_date_time.rs,666,0,0,1,2,0.0,0.0,0.0,PrimitiveDateTime::from(self) - rhs
+2122,src/primitive_date_time.rs,667,0,0,1,2,0.0,0.0,0.0,}
+2123,src/primitive_date_time.rs,671,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &Self) -> Option<Ordering> {"
+2124,src/primitive_date_time.rs,672,0,0,1,2,0.0,0.0,0.0,Some(self.cmp(other))
+2125,src/primitive_date_time.rs,673,0,0,1,2,0.0,0.0,0.0,}
+2126,src/primitive_date_time.rs,679,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &SystemTime) -> bool {"
+2127,src/primitive_date_time.rs,680,0,0,1,2,0.0,0.0,0.0,self == &Self::from(*rhs)
+2128,src/primitive_date_time.rs,681,0,0,1,2,0.0,0.0,0.0,}
+2129,src/primitive_date_time.rs,687,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, rhs: &PrimitiveDateTime) -> bool {"
+2130,src/primitive_date_time.rs,688,0,0,1,2,0.0,0.0,0.0,&PrimitiveDateTime::from(*self) == rhs
+2131,src/primitive_date_time.rs,689,0,0,1,2,0.0,0.0,0.0,}
+2132,src/primitive_date_time.rs,695,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &SystemTime) -> Option<Ordering> {"
+2133,src/primitive_date_time.rs,696,0,0,1,2,0.0,0.0,0.0,self.partial_cmp(&Self::from(*other))
+2134,src/primitive_date_time.rs,697,0,0,1,2,0.0,0.0,0.0,}
+2135,src/primitive_date_time.rs,703,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &PrimitiveDateTime) -> Option<Ordering> {"
+2136,src/primitive_date_time.rs,704,0,0,1,2,0.0,0.0,0.0,PrimitiveDateTime::from(*self).partial_cmp(other)
+2137,src/primitive_date_time.rs,705,0,0,1,2,0.0,0.0,0.0,}
+2138,src/primitive_date_time.rs,709,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, other: &Self) -> Ordering {"
+2139,src/primitive_date_time.rs,710,0,0,1,2,0.0,0.0,0.0,self.date
+2140,src/primitive_date_time.rs,711,0,0,1,2,0.0,0.0,0.0,.cmp(&other.date)
+2141,src/primitive_date_time.rs,712,0,0,1,2,0.0,0.0,0.0,.then_with(|| self.time.cmp(&other.time))
+2142,src/primitive_date_time.rs,713,0,0,1,2,0.0,0.0,0.0,}
+2143,src/primitive_date_time.rs,722,0,0,1,2,0.0,0.0,0.0,fn from(system_time: SystemTime) -> Self {
+2144,src/primitive_date_time.rs,723,0,0,1,2,0.0,0.0,0.0,let duration = match system_time.duration_since(SystemTime::UNIX_EPOCH) {
+2145,src/primitive_date_time.rs,724,0,0,1,2,0.0,0.0,0.0,Ok(duration) => Duration::try_from(duration)
+2146,src/primitive_date_time.rs,725,0,0,1,2,0.0,0.0,0.0,".expect(""overflow converting `std::time::Duration` to `time::Duration`""),"
+2147,src/primitive_date_time.rs,726,0,0,1,2,0.0,0.0,0.0,Err(err) => -Duration::try_from(err.duration())
+2148,src/primitive_date_time.rs,730,0,0,1,2,0.0,0.0,0.0,Self::unix_epoch() + duration
+2149,src/primitive_date_time.rs,731,0,0,1,2,0.0,0.0,0.0,}
+2150,src/primitive_date_time.rs,738,0,0,1,2,0.0,0.0,0.0,fn from(datetime: PrimitiveDateTime) -> Self {
+2151,src/primitive_date_time.rs,739,0,0,1,2,0.0,0.0,0.0,let duration = datetime - PrimitiveDateTime::unix_epoch();
+2152,src/primitive_date_time.rs,741,0,0,1,2,0.0,0.0,0.0,if duration.is_zero() {
+2153,src/primitive_date_time.rs,742,0,0,1,2,0.0,0.0,0.0,Self::UNIX_EPOCH
+2154,src/primitive_date_time.rs,743,0,0,1,2,0.0,0.0,0.0,} else if duration.is_positive() {
+2155,src/primitive_date_time.rs,744,0,0,1,2,0.0,0.0,0.0,Self::UNIX_EPOCH + duration.abs_std()
+2156,src/primitive_date_time.rs,747,0,0,1,2,0.0,0.0,0.0,Self::UNIX_EPOCH - duration.abs_std()
+2157,src/primitive_date_time.rs,749,0,0,1,2,0.0,0.0,0.0,}
+2158,src/sign.rs,52,0,0,1,2,0.0,0.0,0.0,fn default() -> Self {
+2159,src/sign.rs,53,0,0,1,2,0.0,0.0,0.0,Zero
+2160,src/sign.rs,54,0,0,1,2,0.0,0.0,0.0,}
+2161,src/sign.rs,64,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: $type) -> Self::Output {"
+2162,src/sign.rs,65,0,0,1,2,0.0,0.0,0.0,(self as i8) as $type * rhs
+2163,src/sign.rs,66,0,0,1,2,0.0,0.0,0.0,}
+2164,src/sign.rs,72,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: Sign) -> Self::Output {"
+2165,src/sign.rs,73,0,0,1,2,0.0,0.0,0.0,rhs * self
+2166,src/sign.rs,74,0,0,1,2,0.0,0.0,0.0,}
+2167,src/sign.rs,79,0,0,1,2,0.0,0.0,0.0,"fn mul_assign(&mut self, rhs: Sign) {"
+2168,src/sign.rs,80,0,0,1,2,0.0,0.0,0.0,*self *= rhs as i8 as $type;
+2169,src/sign.rs,81,0,0,1,2,0.0,0.0,0.0,}
+2170,src/sign.rs,87,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: Sign) -> Self::Output {"
+2171,src/sign.rs,88,0,0,1,2,0.0,0.0,0.0,self * rhs
+2172,src/sign.rs,89,0,0,1,2,0.0,0.0,0.0,}
+2173,src/sign.rs,93,0,0,1,2,0.0,0.0,0.0,"fn div_assign(&mut self, rhs: Sign) {"
+2174,src/sign.rs,94,0,0,1,2,0.0,0.0,0.0,*self *= rhs
+2175,src/sign.rs,95,0,0,1,2,0.0,0.0,0.0,}
+2176,src/sign.rs,105,0,0,1,2,0.0,0.0,0.0,"fn mul(self, rhs: Self) -> Self::Output {"
+2177,src/sign.rs,106,0,0,1,2,0.0,0.0,0.0,"match (self, rhs) {"
+2178,src/sign.rs,107,0,0,1,2,0.0,0.0,0.0,"(Zero, _) | (_, Zero) => Zero,"
+2179,src/sign.rs,108,0,0,1,2,0.0,0.0,0.0,"(Positive, Positive) | (Negative, Negative) => Positive,"
+2180,src/sign.rs,109,0,0,1,2,0.0,0.0,0.0,"(Positive, Negative) | (Negative, Positive) => Negative,"
+2181,src/sign.rs,111,0,0,1,2,0.0,0.0,0.0,}
+2182,src/sign.rs,115,0,0,1,2,0.0,0.0,0.0,"fn mul_assign(&mut self, rhs: Self) {"
+2183,src/sign.rs,116,0,0,1,2,0.0,0.0,0.0,*self = *self * rhs;
+2184,src/sign.rs,117,0,0,1,2,0.0,0.0,0.0,}
+2185,src/sign.rs,123,0,0,1,2,0.0,0.0,0.0,"fn div(self, rhs: Self) -> Self::Output {"
+2186,src/sign.rs,124,0,0,1,2,0.0,0.0,0.0,self * rhs
+2187,src/sign.rs,125,0,0,1,2,0.0,0.0,0.0,}
+2188,src/sign.rs,129,0,0,1,2,0.0,0.0,0.0,"fn div_assign(&mut self, rhs: Self) {"
+2189,src/sign.rs,130,0,0,1,2,0.0,0.0,0.0,*self *= rhs
+2190,src/sign.rs,131,0,0,1,2,0.0,0.0,0.0,}
+2191,src/sign.rs,137,0,0,1,2,0.0,0.0,0.0,fn neg(self) -> Self::Output {
+2192,src/sign.rs,138,0,0,1,2,0.0,0.0,0.0,self.negate()
+2193,src/sign.rs,139,0,0,1,2,0.0,0.0,0.0,}
+2194,src/sign.rs,145,0,0,1,2,0.0,0.0,0.0,fn not(self) -> Self::Output {
+2195,src/sign.rs,146,0,0,1,2,0.0,0.0,0.0,self.negate()
+2196,src/sign.rs,147,0,0,1,2,0.0,0.0,0.0,}
+2197,src/sign.rs,160,0,0,1,2,0.0,0.0,0.0,pub fn negate(self) -> Self {
+2198,src/sign.rs,161,0,0,1,2,0.0,0.0,0.0,match self {
+2199,src/sign.rs,162,0,0,1,2,0.0,0.0,0.0,"Positive => Negative,"
+2200,src/sign.rs,163,0,0,1,2,0.0,0.0,0.0,"Negative => Positive,"
+2201,src/sign.rs,164,0,0,1,2,0.0,0.0,0.0,"Zero => Zero,"
+2202,src/sign.rs,166,0,0,1,2,0.0,0.0,0.0,}
+2203,src/sign.rs,177,0,0,1,2,0.0,0.0,0.0,pub const fn is_positive(self) -> bool {
+2204,src/sign.rs,178,0,0,1,2,0.0,0.0,0.0,self as u8 == Positive as u8
+2205,src/sign.rs,179,0,0,1,2,0.0,0.0,0.0,}
+2206,src/sign.rs,190,0,0,1,2,0.0,0.0,0.0,pub const fn is_negative(self) -> bool {
+2207,src/sign.rs,191,0,0,1,2,0.0,0.0,0.0,self as u8 == Negative as u8
+2208,src/sign.rs,192,0,0,1,2,0.0,0.0,0.0,}
+2209,src/sign.rs,203,0,0,1,2,0.0,0.0,0.0,pub const fn is_zero(self) -> bool {
+2210,src/sign.rs,204,0,0,1,2,0.0,0.0,0.0,self as u8 == Zero as u8
+2211,src/sign.rs,205,0,0,1,2,0.0,0.0,0.0,}
+2212,src/time_mod.rs,59,0,0,1,2,0.0,0.0,0.0,pub const fn midnight() -> Self {
+2213,src/time_mod.rs,60,0,0,1,2,0.0,0.0,0.0,Time {
+2214,src/time_mod.rs,66,0,0,1,2,0.0,0.0,0.0,}
+2215,src/time_mod.rs,136,0,0,1,2,0.0,0.0,0.0,pub const fn try_from_hms(
+2216,src/time_mod.rs,141,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(hour in 0 => 23);
+2217,src/time_mod.rs,142,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(minute in 0 => 59);
+2218,src/time_mod.rs,143,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(second in 0 => 59);
+2219,src/time_mod.rs,144,0,0,1,2,0.0,0.0,0.0,Ok(Self {
+2220,src/time_mod.rs,145,0,0,1,2,0.0,0.0,0.0,"hour,"
+2221,src/time_mod.rs,150,0,0,1,2,0.0,0.0,0.0,}
+2222,src/time_mod.rs,229,0,0,1,2,0.0,0.0,0.0,pub const fn try_from_hms_milli(
+2223,src/time_mod.rs,235,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(hour in 0 => 23);
+2224,src/time_mod.rs,236,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(minute in 0 => 59);
+2225,src/time_mod.rs,237,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(second in 0 => 59);
+2226,src/time_mod.rs,238,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(millisecond in 0 => 999);
+2227,src/time_mod.rs,239,0,0,1,2,0.0,0.0,0.0,Ok(Self {
+2228,src/time_mod.rs,240,0,0,1,2,0.0,0.0,0.0,"hour,"
+2229,src/time_mod.rs,241,0,0,1,2,0.0,0.0,0.0,"minute,"
+2230,src/time_mod.rs,245,0,0,1,2,0.0,0.0,0.0,}
+2231,src/time_mod.rs,324,0,0,1,2,0.0,0.0,0.0,pub const fn try_from_hms_micro(
+2232,src/time_mod.rs,330,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(hour in 0 => 23);
+2233,src/time_mod.rs,331,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(minute in 0 => 59);
+2234,src/time_mod.rs,332,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(second in 0 => 59);
+2235,src/time_mod.rs,333,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(microsecond in 0 => 999_999);
+2236,src/time_mod.rs,334,0,0,1,2,0.0,0.0,0.0,Ok(Self {
+2237,src/time_mod.rs,335,0,0,1,2,0.0,0.0,0.0,"hour,"
+2238,src/time_mod.rs,336,0,0,1,2,0.0,0.0,0.0,"minute,"
+2239,src/time_mod.rs,340,0,0,1,2,0.0,0.0,0.0,}
+2240,src/time_mod.rs,418,0,0,1,2,0.0,0.0,0.0,pub const fn try_from_hms_nano(
+2241,src/time_mod.rs,424,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(hour in 0 => 23);
+2242,src/time_mod.rs,425,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(minute in 0 => 59);
+2243,src/time_mod.rs,426,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(second in 0 => 59);
+2244,src/time_mod.rs,427,0,0,1,2,0.0,0.0,0.0,ensure_value_in_range!(nanosecond in 0 => 999_999_999);
+2245,src/time_mod.rs,428,0,0,1,2,0.0,0.0,0.0,Ok(Self {
+2246,src/time_mod.rs,429,0,0,1,2,0.0,0.0,0.0,"hour,"
+2247,src/time_mod.rs,430,0,0,1,2,0.0,0.0,0.0,"minute,"
+2248,src/time_mod.rs,434,0,0,1,2,0.0,0.0,0.0,}
+2249,src/time_mod.rs,450,0,0,1,2,0.0,0.0,0.0,pub fn now() -> Self {
+2250,src/time_mod.rs,451,0,0,1,2,0.0,0.0,0.0,PrimitiveDateTime::now().time()
+2251,src/time_mod.rs,452,0,0,1,2,0.0,0.0,0.0,}
+2252,src/time_mod.rs,463,0,0,1,2,0.0,0.0,0.0,pub const fn hour(self) -> u8 {
+2253,src/time_mod.rs,464,0,0,1,2,0.0,0.0,0.0,self.hour
+2254,src/time_mod.rs,465,0,0,1,2,0.0,0.0,0.0,}
+2255,src/time_mod.rs,476,0,0,1,2,0.0,0.0,0.0,pub const fn minute(self) -> u8 {
+2256,src/time_mod.rs,477,0,0,1,2,0.0,0.0,0.0,self.minute
+2257,src/time_mod.rs,478,0,0,1,2,0.0,0.0,0.0,}
+2258,src/time_mod.rs,489,0,0,1,2,0.0,0.0,0.0,pub const fn second(self) -> u8 {
+2259,src/time_mod.rs,490,0,0,1,2,0.0,0.0,0.0,self.second
+2260,src/time_mod.rs,491,0,0,1,2,0.0,0.0,0.0,}
+2261,src/time_mod.rs,502,0,0,1,2,0.0,0.0,0.0,pub const fn millisecond(self) -> u16 {
+2262,src/time_mod.rs,503,0,0,1,2,0.0,0.0,0.0,(self.nanosecond() / 1_000_000) as u16
+2263,src/time_mod.rs,504,0,0,1,2,0.0,0.0,0.0,}
+2264,src/time_mod.rs,515,0,0,1,2,0.0,0.0,0.0,pub const fn microsecond(self) -> u32 {
+2265,src/time_mod.rs,516,0,0,1,2,0.0,0.0,0.0,self.nanosecond() / 1_000
+2266,src/time_mod.rs,517,0,0,1,2,0.0,0.0,0.0,}
+2267,src/time_mod.rs,528,0,0,1,2,0.0,0.0,0.0,pub const fn nanosecond(self) -> u32 {
+2268,src/time_mod.rs,529,0,0,1,2,0.0,0.0,0.0,self.nanosecond
+2269,src/time_mod.rs,530,0,0,1,2,0.0,0.0,0.0,}
+2270,src/time_mod.rs,533,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn nanoseconds_since_midnight(self) -> u64 {
+2271,src/time_mod.rs,534,0,0,1,2,0.0,0.0,0.0,self.hour() as u64 * 60 * 60 * 1_000_000_000
+2272,src/time_mod.rs,538,0,0,1,2,0.0,0.0,0.0,}
+2273,src/time_mod.rs,541,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn from_nanoseconds_since_midnight(nanosecond: u64) -> Self {
+2274,src/time_mod.rs,542,0,0,1,2,0.0,0.0,0.0,Self {
+2275,src/time_mod.rs,543,0,0,1,2,0.0,0.0,0.0,"hour: (nanosecond / 1_000_000_000 / 60 / 60 % 24) as u8,"
+2276,src/time_mod.rs,544,0,0,1,2,0.0,0.0,0.0,"minute: (nanosecond / 1_000_000_000 / 60 % 60) as u8,"
+2277,src/time_mod.rs,548,0,0,1,2,0.0,0.0,0.0,}
+2278,src/time_mod.rs,559,0,0,1,2,0.0,0.0,0.0,"pub fn format(self, format: impl AsRef<str>) -> String {"
+2279,src/time_mod.rs,560,0,0,1,2,0.0,0.0,0.0,self.lazy_format(format).to_string()
+2280,src/time_mod.rs,561,0,0,1,2,0.0,0.0,0.0,}
+2281,src/time_mod.rs,569,0,0,1,2,0.0,0.0,0.0,"pub fn lazy_format(self, format: impl AsRef<str>) -> impl Display {"
+2282,src/time_mod.rs,570,0,0,1,2,0.0,0.0,0.0,DeferredFormat::new(format.as_ref())
+2283,src/time_mod.rs,572,0,0,1,2,0.0,0.0,0.0,.to_owned()
+2284,src/time_mod.rs,573,0,0,1,2,0.0,0.0,0.0,}
+2285,src/time_mod.rs,600,0,0,1,2,0.0,0.0,0.0,"pub fn parse(s: impl AsRef<str>, format: impl AsRef<str>) -> ParseResult<Self> {"
+2286,src/time_mod.rs,601,0,0,1,2,0.0,0.0,0.0,"Self::try_from_parsed_items(parse(s.as_ref(), &format.into())?)"
+2287,src/time_mod.rs,602,0,0,1,2,0.0,0.0,0.0,}
+2288,src/time_mod.rs,605,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_from_parsed_items(items: ParsedItems) -> ParseResult<Self> {
+2289,src/time_mod.rs,614,0,0,1,2,0.0,0.0,0.0,"fn hour_12_to_24(hour: NonZeroU8, am_pm: AmPm) -> u8 {"
+2290,src/time_mod.rs,616,0,0,1,2,0.0,0.0,0.0,"match (hour.get(), am_pm) {"
+2291,src/time_mod.rs,617,0,0,1,2,0.0,0.0,0.0,"(12, AM) => 0,"
+2292,src/time_mod.rs,618,0,0,1,2,0.0,0.0,0.0,"(12, PM) => 12,"
+2293,src/time_mod.rs,619,0,0,1,2,0.0,0.0,0.0,"(h, AM) => h,"
+2294,src/time_mod.rs,620,0,0,1,2,0.0,0.0,0.0,"(h, PM) => h + 12,"
+2295,src/time_mod.rs,622,0,0,1,2,0.0,0.0,0.0,}
+2296,src/time_mod.rs,624,0,0,1,2,0.0,0.0,0.0,match items {
+2297,src/time_mod.rs,625,0,0,1,2,0.0,0.0,0.0,"items!(hour_24, minute, second, nanosecond) => {"
+2298,src/time_mod.rs,626,0,0,1,2,0.0,0.0,0.0,"Self::try_from_hms_nano(hour_24, minute, second, nanosecond).map_err(Into::into)"
+2299,src/time_mod.rs,628,0,0,1,2,0.0,0.0,0.0,"items!(hour_12, minute, second, nanosecond, am_pm) => {"
+2300,src/time_mod.rs,629,0,0,1,2,0.0,0.0,0.0,"Self::try_from_hms_nano(hour_12_to_24(hour_12, am_pm), minute, second, nanosecond)"
+2301,src/time_mod.rs,630,0,0,1,2,0.0,0.0,0.0,.map_err(Into::into)
+2302,src/time_mod.rs,632,0,0,1,2,0.0,0.0,0.0,"items!(hour_24, minute, second) => {"
+2303,src/time_mod.rs,633,0,0,1,2,0.0,0.0,0.0,"Self::try_from_hms(hour_24, minute, second).map_err(Into::into)"
+2304,src/time_mod.rs,635,0,0,1,2,0.0,0.0,0.0,"items!(hour_12, minute, second, am_pm) => {"
+2305,src/time_mod.rs,636,0,0,1,2,0.0,0.0,0.0,"Self::try_from_hms(hour_12_to_24(hour_12, am_pm), minute, second)"
+2306,src/time_mod.rs,637,0,0,1,2,0.0,0.0,0.0,.map_err(Into::into)
+2307,src/time_mod.rs,639,0,0,1,2,0.0,0.0,0.0,"items!(hour_24, minute) => Self::try_from_hms(hour_24, minute, 0).map_err(Into::into),"
+2308,src/time_mod.rs,640,0,0,1,2,0.0,0.0,0.0,"items!(hour_12, minute, am_pm) => {"
+2309,src/time_mod.rs,641,0,0,1,2,0.0,0.0,0.0,"Self::try_from_hms(hour_12_to_24(hour_12, am_pm), minute, 0).map_err(Into::into)"
+2310,src/time_mod.rs,643,0,0,1,2,0.0,0.0,0.0,"items!(hour_24) => Self::try_from_hms(hour_24, 0, 0).map_err(Into::into),"
+2311,src/time_mod.rs,644,0,0,1,2,0.0,0.0,0.0,"items!(hour_12, am_pm) => {"
+2312,src/time_mod.rs,645,0,0,1,2,0.0,0.0,0.0,"Self::try_from_hms(hour_12_to_24(hour_12, am_pm), 0, 0).map_err(Into::into)"
+2313,src/time_mod.rs,647,0,0,1,2,0.0,0.0,0.0,"_ => Err(error::Parse::InsufficientInformation),"
+2314,src/time_mod.rs,649,0,0,1,2,0.0,0.0,0.0,}
+2315,src/time_mod.rs,653,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+2316,src/time_mod.rs,656,0,0,1,2,0.0,0.0,0.0,"time::fmt_H(f, *self, Padding::None)?;"
+2317,src/time_mod.rs,657,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+2318,src/time_mod.rs,658,0,0,1,2,0.0,0.0,0.0,"time::fmt_M(f, *self, Padding::Zero)?;"
+2319,src/time_mod.rs,660,0,0,1,2,0.0,0.0,0.0,if self.second != 0 || self.nanosecond != 0 {
+2320,src/time_mod.rs,661,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+2321,src/time_mod.rs,662,0,0,1,2,0.0,0.0,0.0,"time::fmt_S(f, *self, Padding::Zero)?;"
+2322,src/time_mod.rs,663,0,0,1,2,0.0,0.0,0.0,}
+2323,src/time_mod.rs,665,0,0,1,2,0.0,0.0,0.0,if self.nanosecond != 0 {
+2324,src/time_mod.rs,666,0,0,1,2,0.0,0.0,0.0,"f.write_str(""."")?;"
+2325,src/time_mod.rs,668,0,0,1,2,0.0,0.0,0.0,if self.nanosecond % 1_000_000 == 0 {
+2326,src/time_mod.rs,669,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{:03}"", self.nanosecond / 1_000_000)?;"
+2327,src/time_mod.rs,670,0,0,1,2,0.0,0.0,0.0,} else if self.nanosecond % 1_000 == 0 {
+2328,src/time_mod.rs,671,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{:06}"", self.nanosecond / 1_000)?;"
+2329,src/time_mod.rs,673,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{:09}"", self.nanosecond)?;"
+2330,src/time_mod.rs,675,0,0,1,2,0.0,0.0,0.0,}
+2331,src/time_mod.rs,677,0,0,1,2,0.0,0.0,0.0,Ok(())
+2332,src/time_mod.rs,678,0,0,1,2,0.0,0.0,0.0,}
+2333,src/time_mod.rs,692,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: Duration) -> Self::Output {"
+2334,src/time_mod.rs,693,0,0,1,2,0.0,0.0,0.0,Self::from_nanoseconds_since_midnight(
+2335,src/time_mod.rs,694,0,0,1,2,0.0,0.0,0.0,self.nanoseconds_since_midnight()
+2336,src/time_mod.rs,695,0,0,1,2,0.0,0.0,0.0,+ duration
+2337,src/time_mod.rs,696,0,0,1,2,0.0,0.0,0.0,.whole_nanoseconds()
+2338,src/time_mod.rs,699,0,0,1,2,0.0,0.0,0.0,}
+2339,src/time_mod.rs,714,0,0,1,2,0.0,0.0,0.0,"fn add(self, duration: StdDuration) -> Self::Output {"
+2340,src/time_mod.rs,715,0,0,1,2,0.0,0.0,0.0,self + Duration::try_from(duration)
+2341,src/time_mod.rs,717,0,0,1,2,0.0,0.0,0.0,}
+2342,src/time_mod.rs,735,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: Duration) {"
+2343,src/time_mod.rs,736,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+2344,src/time_mod.rs,737,0,0,1,2,0.0,0.0,0.0,}
+2345,src/time_mod.rs,755,0,0,1,2,0.0,0.0,0.0,"fn add_assign(&mut self, duration: StdDuration) {"
+2346,src/time_mod.rs,756,0,0,1,2,0.0,0.0,0.0,*self = *self + duration;
+2347,src/time_mod.rs,757,0,0,1,2,0.0,0.0,0.0,}
+2348,src/time_mod.rs,778,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: Duration) -> Self::Output {"
+2349,src/time_mod.rs,779,0,0,1,2,0.0,0.0,0.0,self + -duration
+2350,src/time_mod.rs,780,0,0,1,2,0.0,0.0,0.0,}
+2351,src/time_mod.rs,795,0,0,1,2,0.0,0.0,0.0,"fn sub(self, duration: StdDuration) -> Self::Output {"
+2352,src/time_mod.rs,796,0,0,1,2,0.0,0.0,0.0,self - Duration::try_from(duration)
+2353,src/time_mod.rs,798,0,0,1,2,0.0,0.0,0.0,}
+2354,src/time_mod.rs,816,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: Duration) {"
+2355,src/time_mod.rs,817,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+2356,src/time_mod.rs,818,0,0,1,2,0.0,0.0,0.0,}
+2357,src/time_mod.rs,836,0,0,1,2,0.0,0.0,0.0,"fn sub_assign(&mut self, duration: StdDuration) {"
+2358,src/time_mod.rs,837,0,0,1,2,0.0,0.0,0.0,*self = *self - duration;
+2359,src/time_mod.rs,838,0,0,1,2,0.0,0.0,0.0,}
+2360,src/time_mod.rs,855,0,0,1,2,0.0,0.0,0.0,"fn sub(self, rhs: Self) -> Self::Output {"
+2361,src/time_mod.rs,856,0,0,1,2,0.0,0.0,0.0,Duration::nanoseconds(
+2362,src/time_mod.rs,857,0,0,1,2,0.0,0.0,0.0,"self.nanoseconds_since_midnight() as i64 - rhs.nanoseconds_since_midnight() as i64,"
+2363,src/time_mod.rs,859,0,0,1,2,0.0,0.0,0.0,}
+2364,src/time_mod.rs,863,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &Self) -> Option<Ordering> {"
+2365,src/time_mod.rs,864,0,0,1,2,0.0,0.0,0.0,self.cmp(other).into()
+2366,src/time_mod.rs,865,0,0,1,2,0.0,0.0,0.0,}
+2367,src/time_mod.rs,869,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, other: &Self) -> Ordering {"
+2368,src/time_mod.rs,870,0,0,1,2,0.0,0.0,0.0,self.hour
+2369,src/time_mod.rs,871,0,0,1,2,0.0,0.0,0.0,.cmp(&other.hour)
+2370,src/time_mod.rs,872,0,0,1,2,0.0,0.0,0.0,.then_with(|| self.minute.cmp(&other.minute))
+2371,src/time_mod.rs,873,0,0,1,2,0.0,0.0,0.0,.then_with(|| self.second.cmp(&other.second))
+2372,src/time_mod.rs,874,0,0,1,2,0.0,0.0,0.0,.then_with(|| self.nanosecond.cmp(&other.nanosecond))
+2373,src/time_mod.rs,875,0,0,1,2,0.0,0.0,0.0,}
+2374,src/utc_offset.rs,50,0,0,1,2,0.0,0.0,0.0,pub const fn east_hours(hours: u8) -> Self {
+2375,src/utc_offset.rs,51,0,0,1,2,0.0,0.0,0.0,Self::hours(hours as i8)
+2376,src/utc_offset.rs,52,0,0,1,2,0.0,0.0,0.0,}
+2377,src/utc_offset.rs,62,0,0,1,2,0.0,0.0,0.0,pub const fn west_hours(hours: u8) -> Self {
+2378,src/utc_offset.rs,63,0,0,1,2,0.0,0.0,0.0,Self::hours(-(hours as i8))
+2379,src/utc_offset.rs,64,0,0,1,2,0.0,0.0,0.0,}
+2380,src/utc_offset.rs,74,0,0,1,2,0.0,0.0,0.0,pub const fn hours(hours: i8) -> Self {
+2381,src/utc_offset.rs,75,0,0,1,2,0.0,0.0,0.0,Self::seconds(hours as i32 * 3_600)
+2382,src/utc_offset.rs,76,0,0,1,2,0.0,0.0,0.0,}
+2383,src/utc_offset.rs,85,0,0,1,2,0.0,0.0,0.0,pub const fn east_minutes(minutes: u16) -> Self {
+2384,src/utc_offset.rs,86,0,0,1,2,0.0,0.0,0.0,Self::minutes(minutes as i16)
+2385,src/utc_offset.rs,87,0,0,1,2,0.0,0.0,0.0,}
+2386,src/utc_offset.rs,96,0,0,1,2,0.0,0.0,0.0,pub const fn west_minutes(minutes: u16) -> Self {
+2387,src/utc_offset.rs,97,0,0,1,2,0.0,0.0,0.0,Self::minutes(-(minutes as i16))
+2388,src/utc_offset.rs,98,0,0,1,2,0.0,0.0,0.0,}
+2389,src/utc_offset.rs,108,0,0,1,2,0.0,0.0,0.0,pub const fn minutes(minutes: i16) -> Self {
+2390,src/utc_offset.rs,109,0,0,1,2,0.0,0.0,0.0,Self::seconds(minutes as i32 * 60)
+2391,src/utc_offset.rs,110,0,0,1,2,0.0,0.0,0.0,}
+2392,src/utc_offset.rs,120,0,0,1,2,0.0,0.0,0.0,pub const fn east_seconds(seconds: u32) -> Self {
+2393,src/utc_offset.rs,121,0,0,1,2,0.0,0.0,0.0,Self::seconds(seconds as i32)
+2394,src/utc_offset.rs,122,0,0,1,2,0.0,0.0,0.0,}
+2395,src/utc_offset.rs,132,0,0,1,2,0.0,0.0,0.0,pub const fn west_seconds(seconds: u32) -> Self {
+2396,src/utc_offset.rs,133,0,0,1,2,0.0,0.0,0.0,Self::seconds(-(seconds as i32))
+2397,src/utc_offset.rs,134,0,0,1,2,0.0,0.0,0.0,}
+2398,src/utc_offset.rs,144,0,0,1,2,0.0,0.0,0.0,pub const fn seconds(seconds: i32) -> Self {
+2399,src/utc_offset.rs,145,0,0,1,2,0.0,0.0,0.0,Self { seconds }
+2400,src/utc_offset.rs,146,0,0,1,2,0.0,0.0,0.0,}
+2401,src/utc_offset.rs,157,0,0,1,2,0.0,0.0,0.0,pub const fn as_seconds(self) -> i32 {
+2402,src/utc_offset.rs,158,0,0,1,2,0.0,0.0,0.0,self.seconds
+2403,src/utc_offset.rs,159,0,0,1,2,0.0,0.0,0.0,}
+2404,src/utc_offset.rs,170,0,0,1,2,0.0,0.0,0.0,pub const fn as_minutes(self) -> i16 {
+2405,src/utc_offset.rs,171,0,0,1,2,0.0,0.0,0.0,(self.as_seconds() / 60) as i16
+2406,src/utc_offset.rs,172,0,0,1,2,0.0,0.0,0.0,}
+2407,src/utc_offset.rs,183,0,0,1,2,0.0,0.0,0.0,pub const fn as_hours(self) -> i8 {
+2408,src/utc_offset.rs,184,0,0,1,2,0.0,0.0,0.0,(self.as_seconds() / 3_600) as i8
+2409,src/utc_offset.rs,185,0,0,1,2,0.0,0.0,0.0,}
+2410,src/utc_offset.rs,188,0,0,1,2,0.0,0.0,0.0,pub(crate) const fn as_duration(self) -> Duration {
+2411,src/utc_offset.rs,189,0,0,1,2,0.0,0.0,0.0,Duration::seconds(self.seconds as i64)
+2412,src/utc_offset.rs,190,0,0,1,2,0.0,0.0,0.0,}
+2413,src/utc_offset.rs,208,0,0,1,2,0.0,0.0,0.0,pub fn local_offset_at(datetime: OffsetDateTime) -> Self {
+2414,src/utc_offset.rs,209,0,0,1,2,0.0,0.0,0.0,try_local_offset_at(datetime).unwrap_or(Self::UTC)
+2415,src/utc_offset.rs,210,0,0,1,2,0.0,0.0,0.0,}
+2416,src/utc_offset.rs,225,0,0,1,2,0.0,0.0,0.0,pub fn try_local_offset_at(
+2417,src/utc_offset.rs,228,0,0,1,2,0.0,0.0,0.0,try_local_offset_at(datetime).ok_or(error::IndeterminateOffset)
+2418,src/utc_offset.rs,229,0,0,1,2,0.0,0.0,0.0,}
+2419,src/utc_offset.rs,246,0,0,1,2,0.0,0.0,0.0,pub fn current_local_offset() -> Self {
+2420,src/utc_offset.rs,247,0,0,1,2,0.0,0.0,0.0,let now = OffsetDateTime::now_utc();
+2421,src/utc_offset.rs,248,0,0,1,2,0.0,0.0,0.0,try_local_offset_at(now).unwrap_or(Self::UTC)
+2422,src/utc_offset.rs,249,0,0,1,2,0.0,0.0,0.0,}
+2423,src/utc_offset.rs,263,0,0,1,2,0.0,0.0,0.0,"pub fn try_current_local_offset() -> Result<Self, error::IndeterminateOffset> {"
+2424,src/utc_offset.rs,264,0,0,1,2,0.0,0.0,0.0,let now = OffsetDateTime::now_utc();
+2425,src/utc_offset.rs,265,0,0,1,2,0.0,0.0,0.0,try_local_offset_at(now).ok_or(error::IndeterminateOffset)
+2426,src/utc_offset.rs,266,0,0,1,2,0.0,0.0,0.0,}
+2427,src/utc_offset.rs,278,0,0,1,2,0.0,0.0,0.0,"pub fn format(self, format: impl AsRef<str>) -> String {"
+2428,src/utc_offset.rs,279,0,0,1,2,0.0,0.0,0.0,self.lazy_format(format).to_string()
+2429,src/utc_offset.rs,280,0,0,1,2,0.0,0.0,0.0,}
+2430,src/utc_offset.rs,289,0,0,1,2,0.0,0.0,0.0,"pub fn lazy_format(self, format: impl AsRef<str>) -> impl Display {"
+2431,src/utc_offset.rs,290,0,0,1,2,0.0,0.0,0.0,DeferredFormat::new(format.as_ref())
+2432,src/utc_offset.rs,292,0,0,1,2,0.0,0.0,0.0,.to_owned()
+2433,src/utc_offset.rs,293,0,0,1,2,0.0,0.0,0.0,}
+2434,src/utc_offset.rs,302,0,0,1,2,0.0,0.0,0.0,"pub fn parse(s: impl AsRef<str>, format: impl AsRef<str>) -> ParseResult<Self> {"
+2435,src/utc_offset.rs,303,0,0,1,2,0.0,0.0,0.0,"Self::try_from_parsed_items(parse(s.as_ref(), &format.into())?)"
+2436,src/utc_offset.rs,304,0,0,1,2,0.0,0.0,0.0,}
+2437,src/utc_offset.rs,307,0,0,1,2,0.0,0.0,0.0,pub(crate) fn try_from_parsed_items(items: ParsedItems) -> ParseResult<Self> {
+2438,src/utc_offset.rs,308,0,0,1,2,0.0,0.0,0.0,items.offset.ok_or(error::Parse::InsufficientInformation)
+2439,src/utc_offset.rs,309,0,0,1,2,0.0,0.0,0.0,}
+2440,src/utc_offset.rs,313,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+2441,src/utc_offset.rs,314,0,0,1,2,0.0,0.0,0.0,let sign = if self.seconds < 0 { '-' } else { '+' };
+2442,src/utc_offset.rs,315,0,0,1,2,0.0,0.0,0.0,let hours = self.as_hours().abs();
+2443,src/utc_offset.rs,316,0,0,1,2,0.0,0.0,0.0,let minutes = self.as_minutes().abs() - hours as i16 * 60;
+2444,src/utc_offset.rs,317,0,0,1,2,0.0,0.0,0.0,let seconds = self.as_seconds().abs() - hours as i32 * 3_600 - minutes as i32 * 60;
+2445,src/utc_offset.rs,319,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{}{}"", sign, hours)?;"
+2446,src/utc_offset.rs,321,0,0,1,2,0.0,0.0,0.0,if minutes != 0 || seconds != 0 {
+2447,src/utc_offset.rs,322,0,0,1,2,0.0,0.0,0.0,"write!(f, "":{:02}"", minutes)?;"
+2448,src/utc_offset.rs,323,0,0,1,2,0.0,0.0,0.0,}
+2449,src/utc_offset.rs,325,0,0,1,2,0.0,0.0,0.0,if seconds != 0 {
+2450,src/utc_offset.rs,326,0,0,1,2,0.0,0.0,0.0,"write!(f, "":{:02}"", seconds)?;"
+2451,src/utc_offset.rs,327,0,0,1,2,0.0,0.0,0.0,}
+2452,src/utc_offset.rs,329,0,0,1,2,0.0,0.0,0.0,Ok(())
+2453,src/utc_offset.rs,330,0,0,1,2,0.0,0.0,0.0,}
+2454,src/utc_offset.rs,337,0,0,1,2,0.0,0.0,0.0,fn try_local_offset_at(datetime: OffsetDateTime) -> Option<UtcOffset> {
+2455,src/utc_offset.rs,341,0,0,1,2,0.0,0.0,0.0,let _ = datetime;
+2456,src/utc_offset.rs,342,0,0,1,2,0.0,0.0,0.0,None
+2457,src/utc_offset.rs,527,0,0,1,2,0.0,0.0,0.0,}
+2458,src/util.rs,10,0,0,1,2,0.0,0.0,0.0,"pub fn validate_format_string(s: impl AsRef<str>) -> Result<(), String> {"
+2459,src/util.rs,11,0,0,1,2,0.0,0.0,0.0,try_parse_fmt_string(s.as_ref()).map(|_| ())
+2460,src/util.rs,12,0,0,1,2,0.0,0.0,0.0,}
+2461,src/util.rs,21,0,0,1,2,0.0,0.0,0.0,"pub(crate) const fn days_in_year_month(year: i32, month: u8) -> u8 {"
+2462,src/util.rs,22,0,0,1,2,0.0,0.0,0.0,DAYS_IN_MONTH_COMMON_LEAP[is_leap_year(year) as usize][month as usize - 1] as u8
+2463,src/util.rs,23,0,0,1,2,0.0,0.0,0.0,}
+2464,src/util.rs,36,0,0,1,2,0.0,0.0,0.0,pub const fn is_leap_year(year: i32) -> bool {
+2465,src/util.rs,37,0,0,1,2,0.0,0.0,0.0,(year % 4 == 0) & ((year % 100 != 0) | (year % 400 == 0))
+2466,src/util.rs,38,0,0,1,2,0.0,0.0,0.0,}
+2467,src/util.rs,52,0,0,1,2,0.0,0.0,0.0,pub const fn days_in_year(year: i32) -> u16 {
+2468,src/util.rs,53,0,0,1,2,0.0,0.0,0.0,365 + is_leap_year(year) as u16
+2469,src/util.rs,54,0,0,1,2,0.0,0.0,0.0,}
+2470,src/util.rs,68,0,0,1,2,0.0,0.0,0.0,pub const fn weeks_in_year(year: i32) -> u8 {
+2471,src/util.rs,69,0,0,1,2,0.0,0.0,0.0,"let weekday = internals::Date::from_yo_unchecked(year, 1).iso_weekday_number();"
+2472,src/util.rs,71,0,0,1,2,0.0,0.0,0.0,if weekday == 4 || weekday == 3 && is_leap_year(year) {
+2473,src/util.rs,72,0,0,1,2,0.0,0.0,0.0,53
+2474,src/util.rs,74,0,0,1,2,0.0,0.0,0.0,52
+2475,src/util.rs,76,0,0,1,2,0.0,0.0,0.0,}
+2476,src/weekday.rs,54,0,0,1,2,0.0,0.0,0.0,pub const fn previous(self) -> Self {
+2477,src/weekday.rs,55,0,0,1,2,0.0,0.0,0.0,match self {
+2478,src/weekday.rs,56,0,0,1,2,0.0,0.0,0.0,"Monday => Sunday,"
+2479,src/weekday.rs,57,0,0,1,2,0.0,0.0,0.0,"Tuesday => Monday,"
+2480,src/weekday.rs,58,0,0,1,2,0.0,0.0,0.0,"Wednesday => Tuesday,"
+2481,src/weekday.rs,59,0,0,1,2,0.0,0.0,0.0,"Thursday => Wednesday,"
+2482,src/weekday.rs,60,0,0,1,2,0.0,0.0,0.0,"Friday => Thursday,"
+2483,src/weekday.rs,61,0,0,1,2,0.0,0.0,0.0,"Saturday => Friday,"
+2484,src/weekday.rs,62,0,0,1,2,0.0,0.0,0.0,"Sunday => Saturday,"
+2485,src/weekday.rs,64,0,0,1,2,0.0,0.0,0.0,}
+2486,src/weekday.rs,75,0,0,1,2,0.0,0.0,0.0,pub const fn next(self) -> Self {
+2487,src/weekday.rs,76,0,0,1,2,0.0,0.0,0.0,match self {
+2488,src/weekday.rs,77,0,0,1,2,0.0,0.0,0.0,"Monday => Tuesday,"
+2489,src/weekday.rs,78,0,0,1,2,0.0,0.0,0.0,"Tuesday => Wednesday,"
+2490,src/weekday.rs,79,0,0,1,2,0.0,0.0,0.0,"Wednesday => Thursday,"
+2491,src/weekday.rs,80,0,0,1,2,0.0,0.0,0.0,"Thursday => Friday,"
+2492,src/weekday.rs,81,0,0,1,2,0.0,0.0,0.0,"Friday => Saturday,"
+2493,src/weekday.rs,82,0,0,1,2,0.0,0.0,0.0,"Saturday => Sunday,"
+2494,src/weekday.rs,83,0,0,1,2,0.0,0.0,0.0,"Sunday => Monday,"
+2495,src/weekday.rs,85,0,0,1,2,0.0,0.0,0.0,}
+2496,src/weekday.rs,94,0,0,1,2,0.0,0.0,0.0,pub const fn iso_weekday_number(self) -> u8 {
+2497,src/weekday.rs,95,0,0,1,2,0.0,0.0,0.0,self.number_from_monday()
+2498,src/weekday.rs,96,0,0,1,2,0.0,0.0,0.0,}
+2499,src/weekday.rs,104,0,0,1,2,0.0,0.0,0.0,pub const fn number_from_monday(self) -> u8 {
+2500,src/weekday.rs,105,0,0,1,2,0.0,0.0,0.0,self.number_days_from_monday() + 1
+2501,src/weekday.rs,106,0,0,1,2,0.0,0.0,0.0,}
+2502,src/weekday.rs,114,0,0,1,2,0.0,0.0,0.0,pub const fn number_from_sunday(self) -> u8 {
+2503,src/weekday.rs,115,0,0,1,2,0.0,0.0,0.0,self.number_days_from_sunday() + 1
+2504,src/weekday.rs,116,0,0,1,2,0.0,0.0,0.0,}
+2505,src/weekday.rs,124,0,0,1,2,0.0,0.0,0.0,pub const fn number_days_from_monday(self) -> u8 {
+2506,src/weekday.rs,125,0,0,1,2,0.0,0.0,0.0,self as u8
+2507,src/weekday.rs,126,0,0,1,2,0.0,0.0,0.0,}
+2508,src/weekday.rs,134,0,0,1,2,0.0,0.0,0.0,pub const fn number_days_from_sunday(self) -> u8 {
+2509,src/weekday.rs,135,0,0,1,2,0.0,0.0,0.0,(self as u8 + 1) % 7
+2510,src/weekday.rs,136,0,0,1,2,0.0,0.0,0.0,}
+2511,src/weekday.rs,140,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+2512,src/weekday.rs,141,0,0,1,2,0.0,0.0,0.0,f.write_str(match self {
+2513,src/weekday.rs,142,0,0,1,2,0.0,0.0,0.0,"Monday => ""Monday"","
+2514,src/weekday.rs,143,0,0,1,2,0.0,0.0,0.0,"Tuesday => ""Tuesday"","
+2515,src/weekday.rs,144,0,0,1,2,0.0,0.0,0.0,"Wednesday => ""Wednesday"","
+2516,src/weekday.rs,145,0,0,1,2,0.0,0.0,0.0,"Thursday => ""Thursday"","
+2517,src/weekday.rs,146,0,0,1,2,0.0,0.0,0.0,"Friday => ""Friday"","
+2518,src/weekday.rs,147,0,0,1,2,0.0,0.0,0.0,"Saturday => ""Saturday"","
+2519,src/weekday.rs,148,0,0,1,2,0.0,0.0,0.0,"Sunday => ""Sunday"","
+2520,src/weekday.rs,150,0,0,1,2,0.0,0.0,0.0,}

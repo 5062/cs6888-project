@@ -1,0 +1,37 @@
+diff --git a/tests/test_samples.rs b/tests/test_samples.rs
+index a5c15b0..c773c30 100644
+--- a/tests/test_samples.rs
++++ b/tests/test_samples.rs
+@@ -623,3 +623,32 @@ fn depkind_to_string() {
+     assert_eq!(DependencyKind::Build.to_string(), "build");
+     assert_eq!(DependencyKind::Unknown.to_string(), "Unknown");
+ }
++
++#[test]
++fn manual_root_package_no_deps() {
++    use cargo_metadata::MetadataCommand;
++    // This test requires a Cargo project; skip in non-project contexts
++    if !std::path::Path::new("Cargo.toml").exists() {
++        return;
++    }
++    let metadata = MetadataCommand::new().no_deps().exec().unwrap();
++    metadata.root_package().expect("root package exists w/ no_deps");
++}
++
++#[test]
++fn manual_root_package_with_deps() {
++    if !std::path::Path::new("Cargo.toml").exists() {
++        return;
++    }
++    let metadata = cargo_metadata::MetadataCommand::new().exec().unwrap();
++    metadata.root_package().expect("root package exists");
++}
++
++#[test]
++fn manual_workspace_packages() {
++    if !std::path::Path::new("Cargo.toml").exists() {
++        return;
++    }
++    let metadata = cargo_metadata::MetadataCommand::new().exec().unwrap();
++    let _packages = metadata.packages;
++}

@@ -1,0 +1,667 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/stable.rs,887,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,fn cooked_byte(input: Cursor) -> PResult<()> {
+2,src/stable.rs,888,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,let mut bytes = input.bytes().enumerate();
+3,src/stable.rs,889,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"let ok = match bytes.next().map(|(_, b)| b) {"
+4,src/stable.rs,903,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"b => b.is_some(),"
+5,src/stable.rs,905,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,if ok {
+6,src/stable.rs,906,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,match bytes.next() {
+7,src/stable.rs,907,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"Some((offset, _)) => Ok((input.advance(offset), ())),"
+8,src/stable.rs,913,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+9,src/strnom.rs,51,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,pub fn bytes(&self) -> Bytes<'a> {
+10,src/strnom.rs,52,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,self.rest.bytes()
+11,src/strnom.rs,53,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+12,src/lib.rs,58,1,2,0,0,0.5,0.5773502691896258,0.5,"fn from_str(src: &str) -> Result<TokenStream, LexError> {"
+13,src/lib.rs,59,1,2,0,0,0.5,0.5773502691896258,0.5,match src.parse() {
+14,src/lib.rs,60,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok(e) => Ok(TokenStream(e)),"
+15,src/lib.rs,63,1,2,0,0,0.5,0.5773502691896258,0.5,}
+16,src/stable.rs,53,1,2,0,0,0.5,0.5773502691896258,0.5,fn get_cursor(src: &str) -> Cursor {
+17,src/stable.rs,54,1,2,0,0,0.5,0.5773502691896258,0.5,Cursor {
+18,src/stable.rs,57,1,2,0,0,0.5,0.5773502691896258,0.5,}
+19,src/stable.rs,62,1,2,0,0,0.5,0.5773502691896258,0.5,"fn from_str(src: &str) -> Result<TokenStream, LexError> {"
+20,src/stable.rs,64,1,2,0,0,0.5,0.5773502691896258,0.5,let cursor = get_cursor(src);
+21,src/stable.rs,66,1,2,0,0,0.5,0.5773502691896258,0.5,match token_stream(cursor) {
+22,src/stable.rs,67,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((input, output)) => {"
+23,src/stable.rs,68,1,2,0,0,0.5,0.5773502691896258,0.5,if skip_whitespace(input).len() != 0 {
+24,src/stable.rs,71,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(output.0)
+25,src/stable.rs,76,1,2,0,0,0.5,0.5773502691896258,0.5,}
+26,src/stable.rs,595,1,2,0,0,0.5,0.5773502691896258,0.5,fn token_tree(input: Cursor) -> PResult<TokenTree> {
+27,src/stable.rs,596,1,2,0,0,0.5,0.5773502691896258,0.5,"let (input, kind) = token_kind(input)?;"
+28,src/stable.rs,597,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((input, TokenTree {"
+29,src/stable.rs,601,1,2,0,0,0.5,0.5773502691896258,0.5,}
+30,src/stable.rs,694,1,2,0,0,0.5,0.5773502691896258,0.5,fn literal(input: Cursor) -> PResult<::Literal> {
+31,src/stable.rs,695,1,2,0,0,0.5,0.5773502691896258,0.5,let input_no_ws = skip_whitespace(input);
+32,src/stable.rs,697,1,2,0,0,0.5,0.5773502691896258,0.5,match literal_nocapture(input_no_ws) {
+33,src/stable.rs,698,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((a, ())) => {"
+34,src/stable.rs,699,1,2,0,0,0.5,0.5773502691896258,0.5,let start = input.len() - input_no_ws.len();
+35,src/stable.rs,700,1,2,0,0,0.5,0.5773502691896258,0.5,let len = input_no_ws.len() - a.len();
+36,src/stable.rs,701,1,2,0,0,0.5,0.5773502691896258,0.5,let end = start + len;
+37,src/stable.rs,702,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((a, ::Literal(Literal(input.rest[start..end].to_string()))))"
+38,src/stable.rs,706,1,2,0,0,0.5,0.5773502691896258,0.5,}
+39,src/strnom.rs,18,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn advance(&self, amt: usize) -> Cursor<'a> {"
+40,src/strnom.rs,19,1,2,0,0,0.5,0.5773502691896258,0.5,Cursor {
+41,src/strnom.rs,22,1,2,0,0,0.5,0.5773502691896258,0.5,}
+42,src/strnom.rs,35,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn starts_with(&self, s: &str) -> bool {"
+43,src/strnom.rs,36,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.starts_with(s)
+44,src/strnom.rs,37,1,2,0,0,0.5,0.5773502691896258,0.5,}
+45,src/strnom.rs,39,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn is_empty(&self) -> bool {
+46,src/strnom.rs,40,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.is_empty()
+47,src/strnom.rs,41,1,2,0,0,0.5,0.5773502691896258,0.5,}
+48,src/strnom.rs,47,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn as_bytes(&self) -> &'a [u8] {
+49,src/strnom.rs,48,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.as_bytes()
+50,src/strnom.rs,49,1,2,0,0,0.5,0.5773502691896258,0.5,}
+51,src/strnom.rs,66,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn whitespace(input: Cursor) -> PResult<()> {
+52,src/strnom.rs,67,1,2,0,0,0.5,0.5773502691896258,0.5,if input.is_empty() {
+53,src/strnom.rs,69,1,2,0,0,0.5,0.5773502691896258,0.5,}
+54,src/strnom.rs,71,1,2,0,0,0.5,0.5773502691896258,0.5,let bytes = input.as_bytes();
+55,src/strnom.rs,72,1,2,0,0,0.5,0.5773502691896258,0.5,let mut i = 0;
+56,src/strnom.rs,73,1,2,0,0,0.5,0.5773502691896258,0.5,while i < bytes.len() {
+57,src/strnom.rs,74,1,2,0,0,0.5,0.5773502691896258,0.5,let s = input.advance(i);
+58,src/strnom.rs,75,1,2,0,0,0.5,0.5773502691896258,0.5,if bytes[i] == b'/' {
+59,src/strnom.rs,89,1,2,0,0,0.5,0.5773502691896258,0.5,}
+60,src/strnom.rs,90,1,2,0,0,0.5,0.5773502691896258,0.5,match bytes[i] {
+61,src/strnom.rs,91,1,2,0,0,0.5,0.5773502691896258,0.5,b' ' | 0x09...0x0d => {
+62,src/strnom.rs,95,1,2,0,0,0.5,0.5773502691896258,0.5,b if b <= 0x7f => {}
+63,src/strnom.rs,104,1,2,0,0,0.5,0.5773502691896258,0.5,return if i > 0 {
+64,src/strnom.rs,107,1,2,0,0,0.5,0.5773502691896258,0.5,Err(LexError)
+65,src/strnom.rs,111,1,2,0,0,0.5,0.5773502691896258,0.5,}
+66,src/strnom.rs,138,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn skip_whitespace(input: Cursor) -> Cursor {
+67,src/strnom.rs,139,1,2,0,0,0.5,0.5773502691896258,0.5,match whitespace(input) {
+68,src/strnom.rs,141,1,2,0,0,0.5,0.5773502691896258,0.5,"Err(LexError) => input,"
+69,src/strnom.rs,143,1,2,0,0,0.5,0.5773502691896258,0.5,}
+70,src/strnom.rs,159,1,2,0,0,0.5,0.5773502691896258,0.5,"fn $name<'a>(i: Cursor<'a>) -> $crate::strnom::PResult<'a, $o> {"
+71,src/strnom.rs,160,1,2,0,0,0.5,0.5773502691896258,0.5,"$submac!(i, $($args)*)"
+72,src/strnom.rs,161,1,2,0,0,0.5,0.5773502691896258,0.5,}
+73,src/strnom.rs,368,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn punct<'a>(input: Cursor<'a>, token: &'static str) -> PResult<'a, &'a str> {"
+74,src/strnom.rs,369,1,2,0,0,0.5,0.5773502691896258,0.5,let input = skip_whitespace(input);
+75,src/strnom.rs,370,1,2,0,0,0.5,0.5773502691896258,0.5,if input.starts_with(token) {
+76,src/strnom.rs,371,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((input.advance(token.len()), token))"
+77,src/strnom.rs,373,1,2,0,0,0.5,0.5773502691896258,0.5,Err(LexError)
+78,src/strnom.rs,375,1,2,0,0,0.5,0.5773502691896258,0.5,}
+79,src/lib.rs,61,0,0,1,2,0.0,0.0,0.0,"Err(e) => Err(LexError(e)),"
+80,src/lib.rs,67,0,0,1,2,0.0,0.0,0.0,fn from(inner: proc_macro::TokenStream) -> TokenStream {
+81,src/lib.rs,68,0,0,1,2,0.0,0.0,0.0,TokenStream(inner.into())
+82,src/lib.rs,69,0,0,1,2,0.0,0.0,0.0,}
+83,src/lib.rs,73,0,0,1,2,0.0,0.0,0.0,fn from(inner: TokenStream) -> proc_macro::TokenStream {
+84,src/lib.rs,74,0,0,1,2,0.0,0.0,0.0,inner.0.into()
+85,src/lib.rs,75,0,0,1,2,0.0,0.0,0.0,}
+86,src/lib.rs,79,0,0,1,2,0.0,0.0,0.0,fn from(tree: TokenTree) -> TokenStream {
+87,src/lib.rs,80,0,0,1,2,0.0,0.0,0.0,TokenStream(tree.into())
+88,src/lib.rs,81,0,0,1,2,0.0,0.0,0.0,}
+89,src/lib.rs,85,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = T>>(streams: I) -> Self {
+90,src/lib.rs,86,0,0,1,2,0.0,0.0,0.0,TokenStream(streams.into_iter().map(|t| t.into().0).collect())
+91,src/lib.rs,87,0,0,1,2,0.0,0.0,0.0,}
+92,src/lib.rs,94,0,0,1,2,0.0,0.0,0.0,fn into_iter(self) -> TokenTreeIter {
+93,src/lib.rs,95,0,0,1,2,0.0,0.0,0.0,TokenTreeIter(self.0.into_iter())
+94,src/lib.rs,96,0,0,1,2,0.0,0.0,0.0,}
+95,src/lib.rs,100,0,0,1,2,0.0,0.0,0.0,pub fn empty() -> TokenStream {
+96,src/lib.rs,101,0,0,1,2,0.0,0.0,0.0,TokenStream(imp::TokenStream::empty())
+97,src/lib.rs,102,0,0,1,2,0.0,0.0,0.0,}
+98,src/lib.rs,104,0,1,1,1,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+99,src/lib.rs,105,0,1,1,1,0.0,0.0,0.0,self.0.is_empty()
+100,src/lib.rs,106,0,1,1,1,0.0,0.0,0.0,}
+101,src/lib.rs,153,0,0,1,2,0.0,0.0,0.0,pub fn call_site() -> Span {
+102,src/lib.rs,154,0,0,1,2,0.0,0.0,0.0,Span(imp::Span::call_site())
+103,src/lib.rs,155,0,0,1,2,0.0,0.0,0.0,}
+104,src/lib.rs,157,0,0,1,2,0.0,0.0,0.0,pub fn def_site() -> Span {
+105,src/lib.rs,158,0,0,1,2,0.0,0.0,0.0,Span(imp::Span::def_site())
+106,src/lib.rs,159,0,0,1,2,0.0,0.0,0.0,}
+107,src/lib.rs,163,0,0,1,2,0.0,0.0,0.0,"pub fn resolved_at(&self, other: Span) -> Span {"
+108,src/lib.rs,164,0,0,1,2,0.0,0.0,0.0,Span(self.0.resolved_at(other.0))
+109,src/lib.rs,165,0,0,1,2,0.0,0.0,0.0,}
+110,src/lib.rs,169,0,0,1,2,0.0,0.0,0.0,"pub fn located_at(&self, other: Span) -> Span {"
+111,src/lib.rs,170,0,0,1,2,0.0,0.0,0.0,Span(self.0.located_at(other.0))
+112,src/lib.rs,171,0,0,1,2,0.0,0.0,0.0,}
+113,src/lib.rs,209,0,0,1,2,0.0,0.0,0.0,fn from(kind: TokenNode) -> TokenTree {
+114,src/lib.rs,210,0,0,1,2,0.0,0.0,0.0,"TokenTree { span: Span::def_site(), kind: kind }"
+115,src/lib.rs,211,0,0,1,2,0.0,0.0,0.0,}
+116,src/lib.rs,215,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+117,src/lib.rs,216,0,0,1,2,0.0,0.0,0.0,TokenStream::from(self.clone()).fmt(f)
+118,src/lib.rs,217,0,0,1,2,0.0,0.0,0.0,}
+119,src/lib.rs,240,0,0,1,2,0.0,0.0,0.0,pub fn intern(string: &str) -> Term {
+120,src/lib.rs,241,0,0,1,2,0.0,0.0,0.0,Term(imp::Term::intern(string))
+121,src/lib.rs,242,0,0,1,2,0.0,0.0,0.0,}
+122,src/lib.rs,244,0,0,1,2,0.0,0.0,0.0,pub fn as_str(&self) -> &str {
+123,src/lib.rs,245,0,0,1,2,0.0,0.0,0.0,self.0.as_str()
+124,src/lib.rs,246,0,0,1,2,0.0,0.0,0.0,}
+125,src/lib.rs,260,0,0,1,2,0.0,0.0,0.0,pub fn $kind(n: $kind) -> Literal {
+126,src/lib.rs,261,0,0,1,2,0.0,0.0,0.0,Literal(n.into())
+127,src/lib.rs,262,0,0,1,2,0.0,0.0,0.0,}
+128,src/lib.rs,267,0,0,1,2,0.0,0.0,0.0,pub fn integer(s: i64) -> Literal {
+129,src/lib.rs,268,0,0,1,2,0.0,0.0,0.0,Literal(imp::Literal::integer(s))
+130,src/lib.rs,269,0,0,1,2,0.0,0.0,0.0,}
+131,src/lib.rs,276,0,0,1,2,0.0,0.0,0.0,pub fn float(f: f64) -> Literal {
+132,src/lib.rs,277,0,0,1,2,0.0,0.0,0.0,Literal(imp::Literal::float(f))
+133,src/lib.rs,278,0,0,1,2,0.0,0.0,0.0,}
+134,src/lib.rs,280,0,0,1,2,0.0,0.0,0.0,pub fn f64(f: f64) -> Literal {
+135,src/lib.rs,281,0,0,1,2,0.0,0.0,0.0,Literal(f.into())
+136,src/lib.rs,282,0,0,1,2,0.0,0.0,0.0,}
+137,src/lib.rs,284,0,0,1,2,0.0,0.0,0.0,pub fn f32(f: f32) -> Literal {
+138,src/lib.rs,285,0,0,1,2,0.0,0.0,0.0,Literal(f.into())
+139,src/lib.rs,286,0,0,1,2,0.0,0.0,0.0,}
+140,src/lib.rs,288,0,0,1,2,0.0,0.0,0.0,pub fn string(string: &str) -> Literal {
+141,src/lib.rs,289,0,0,1,2,0.0,0.0,0.0,Literal(string.into())
+142,src/lib.rs,290,0,0,1,2,0.0,0.0,0.0,}
+143,src/lib.rs,292,0,0,1,2,0.0,0.0,0.0,pub fn character(ch: char) -> Literal {
+144,src/lib.rs,293,0,0,1,2,0.0,0.0,0.0,Literal(ch.into())
+145,src/lib.rs,294,0,0,1,2,0.0,0.0,0.0,}
+146,src/lib.rs,296,0,0,1,2,0.0,0.0,0.0,pub fn byte_string(s: &[u8]) -> Literal {
+147,src/lib.rs,297,0,0,1,2,0.0,0.0,0.0,Literal(imp::Literal::byte_string(s))
+148,src/lib.rs,298,0,0,1,2,0.0,0.0,0.0,}
+149,src/lib.rs,303,0,0,1,2,0.0,0.0,0.0,pub fn byte_char(b: u8) -> Literal {
+150,src/lib.rs,304,0,0,1,2,0.0,0.0,0.0,Literal(imp::Literal::byte_char(b))
+151,src/lib.rs,305,0,0,1,2,0.0,0.0,0.0,}
+152,src/lib.rs,307,0,0,1,2,0.0,0.0,0.0,pub fn doccomment(s: &str) -> Literal {
+153,src/lib.rs,308,0,0,1,2,0.0,0.0,0.0,Literal(imp::Literal::doccomment(s))
+154,src/lib.rs,309,0,0,1,2,0.0,0.0,0.0,}
+155,src/lib.rs,311,0,0,1,2,0.0,0.0,0.0,"pub fn raw_string(s: &str, pounds: usize) -> Literal {"
+156,src/lib.rs,312,0,0,1,2,0.0,0.0,0.0,"Literal(imp::Literal::raw_string(s, pounds))"
+157,src/lib.rs,313,0,0,1,2,0.0,0.0,0.0,}
+158,src/lib.rs,315,0,0,1,2,0.0,0.0,0.0,"pub fn raw_byte_string(s: &str, pounds: usize) -> Literal {"
+159,src/lib.rs,316,0,0,1,2,0.0,0.0,0.0,"Literal(imp::Literal::raw_byte_string(s, pounds))"
+160,src/lib.rs,317,0,0,1,2,0.0,0.0,0.0,}
+161,src/lib.rs,325,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<TokenTree> {
+162,src/lib.rs,326,0,0,1,2,0.0,0.0,0.0,self.0.next()
+163,src/lib.rs,327,0,0,1,2,0.0,0.0,0.0,}
+164,src/macros.rs,4,0,1,1,1,0.0,0.0,0.0,"fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {"
+165,src/macros.rs,5,0,1,1,1,0.0,0.0,0.0,"::std::fmt::$tr::fmt(&self.0, f)"
+166,src/macros.rs,6,0,1,1,1,0.0,0.0,0.0,}
+167,src/stable.rs,29,0,0,1,2,0.0,0.0,0.0,pub fn empty() -> TokenStream {
+168,src/stable.rs,30,0,0,1,2,0.0,0.0,0.0,TokenStream { inner: Vec::new() }
+169,src/stable.rs,31,0,0,1,2,0.0,0.0,0.0,}
+170,src/stable.rs,33,0,1,1,1,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+171,src/stable.rs,34,0,1,1,1,0.0,0.0,0.0,self.inner.len() == 0
+172,src/stable.rs,35,0,1,1,1,0.0,0.0,0.0,}
+173,src/stable.rs,69,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+174,src/stable.rs,74,0,0,1,2,0.0,0.0,0.0,"Err(LexError) => Err(LexError),"
+175,src/stable.rs,80,0,1,1,1,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+176,src/stable.rs,81,0,1,1,1,0.0,0.0,0.0,let mut joint = false;
+177,src/stable.rs,82,0,1,1,1,0.0,0.0,0.0,"for (i, tt) in self.inner.iter().enumerate() {"
+178,src/stable.rs,83,0,1,1,1,0.0,0.0,0.0,if i != 0 && !joint {
+179,src/stable.rs,84,0,0,1,2,0.0,0.0,0.0,"write!(f, "" "")?;"
+180,src/stable.rs,85,0,1,1,1,0.0,0.0,0.0,}
+181,src/stable.rs,86,0,1,1,1,0.0,0.0,0.0,joint = false;
+182,src/stable.rs,87,0,1,1,1,0.0,0.0,0.0,match tt.kind {
+183,src/stable.rs,88,0,0,1,2,0.0,0.0,0.0,"TokenNode::Group(delim, ref stream) => {"
+184,src/stable.rs,89,0,0,1,2,0.0,0.0,0.0,"let (start, end) = match delim {"
+185,src/stable.rs,90,0,0,1,2,0.0,0.0,0.0,"Delimiter::Parenthesis => (""("", "")""),"
+186,src/stable.rs,91,0,0,1,2,0.0,0.0,0.0,"Delimiter::Brace => (""{"", ""}""),"
+187,src/stable.rs,92,0,0,1,2,0.0,0.0,0.0,"Delimiter::Bracket => (""["", ""]""),"
+188,src/stable.rs,93,0,0,1,2,0.0,0.0,0.0,"Delimiter::None => ("""", """"),"
+189,src/stable.rs,95,0,0,1,2,0.0,0.0,0.0,if stream.0.inner.len() == 0 {
+190,src/stable.rs,96,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{} {}"", start, end)?"
+191,src/stable.rs,98,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{} {} {}"", start, stream, end)?"
+192,src/stable.rs,101,0,0,1,2,0.0,0.0,0.0,"TokenNode::Term(ref sym) => write!(f, ""{}"", sym.as_str())?,"
+193,src/stable.rs,102,0,0,1,2,0.0,0.0,0.0,"TokenNode::Op(ch, ref op) => {"
+194,src/stable.rs,103,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{}"", ch)?;"
+195,src/stable.rs,104,0,0,1,2,0.0,0.0,0.0,match *op {
+196,src/stable.rs,105,0,0,1,2,0.0,0.0,0.0,Spacing::Alone => {}
+197,src/stable.rs,106,0,0,1,2,0.0,0.0,0.0,"Spacing::Joint => joint = true,"
+198,src/stable.rs,109,0,1,1,1,0.0,0.0,0.0,TokenNode::Literal(ref literal) => {
+199,src/stable.rs,110,0,1,1,1,0.0,0.0,0.0,"write!(f, ""{}"", literal)?;"
+200,src/stable.rs,112,0,1,1,1,0.0,0.0,0.0,"if (literal.0).0.starts_with(""/"") {"
+201,src/stable.rs,113,0,0,1,2,0.0,0.0,0.0,"write!(f, ""\n"")?;"
+202,src/stable.rs,114,0,1,1,1,0.0,0.0,0.0,}
+203,src/stable.rs,119,0,1,1,1,0.0,0.0,0.0,Ok(())
+204,src/stable.rs,120,0,1,1,1,0.0,0.0,0.0,}
+205,src/stable.rs,124,0,0,1,2,0.0,0.0,0.0,fn from(inner: proc_macro::TokenStream) -> TokenStream {
+206,src/stable.rs,125,0,0,1,2,0.0,0.0,0.0,"inner.to_string().parse().expect(""compiler token stream parse failed"")"
+207,src/stable.rs,126,0,0,1,2,0.0,0.0,0.0,}
+208,src/stable.rs,130,0,0,1,2,0.0,0.0,0.0,fn from(inner: TokenStream) -> proc_macro::TokenStream {
+209,src/stable.rs,131,0,0,1,2,0.0,0.0,0.0,"inner.to_string().parse().expect(""failed to parse to compiler tokens"")"
+210,src/stable.rs,132,0,0,1,2,0.0,0.0,0.0,}
+211,src/stable.rs,137,0,0,1,2,0.0,0.0,0.0,fn from(tree: TokenTree) -> TokenStream {
+212,src/stable.rs,138,0,0,1,2,0.0,0.0,0.0,TokenStream { inner: vec![tree] }
+213,src/stable.rs,139,0,0,1,2,0.0,0.0,0.0,}
+214,src/stable.rs,143,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item=TokenStream>>(streams: I) -> Self {
+215,src/stable.rs,144,0,0,1,2,0.0,0.0,0.0,let mut v = Vec::new();
+216,src/stable.rs,146,0,0,1,2,0.0,0.0,0.0,for stream in streams.into_iter() {
+217,src/stable.rs,147,0,0,1,2,0.0,0.0,0.0,v.extend(stream.inner);
+218,src/stable.rs,150,0,0,1,2,0.0,0.0,0.0,TokenStream { inner: v }
+219,src/stable.rs,151,0,0,1,2,0.0,0.0,0.0,}
+220,src/stable.rs,160,0,0,1,2,0.0,0.0,0.0,fn into_iter(self) -> TokenTreeIter {
+221,src/stable.rs,161,0,0,1,2,0.0,0.0,0.0,self.inner.into_iter()
+222,src/stable.rs,162,0,0,1,2,0.0,0.0,0.0,}
+223,src/stable.rs,323,0,0,1,2,0.0,0.0,0.0,pub fn call_site() -> Span {
+224,src/stable.rs,324,0,0,1,2,0.0,0.0,0.0,Span {}
+225,src/stable.rs,325,0,0,1,2,0.0,0.0,0.0,}
+226,src/stable.rs,332,0,0,1,2,0.0,0.0,0.0,pub fn def_site() -> Span {
+227,src/stable.rs,333,0,0,1,2,0.0,0.0,0.0,Span::call_site()
+228,src/stable.rs,334,0,0,1,2,0.0,0.0,0.0,}
+229,src/stable.rs,336,0,0,1,2,0.0,0.0,0.0,"pub fn resolved_at(&self, _other: Span) -> Span {"
+230,src/stable.rs,340,0,0,1,2,0.0,0.0,0.0,*self
+231,src/stable.rs,341,0,0,1,2,0.0,0.0,0.0,}
+232,src/stable.rs,343,0,0,1,2,0.0,0.0,0.0,"pub fn located_at(&self, other: Span) -> Span {"
+233,src/stable.rs,344,0,0,1,2,0.0,0.0,0.0,other
+234,src/stable.rs,345,0,0,1,2,0.0,0.0,0.0,}
+235,src/stable.rs,401,0,0,1,2,0.0,0.0,0.0,pub fn intern(string: &str) -> Term {
+236,src/stable.rs,403,0,0,1,2,0.0,0.0,0.0,"intern: SYMBOLS.with(|s| s.borrow_mut().intern(string)),"
+237,src/stable.rs,404,0,0,1,2,0.0,0.0,0.0,"not_send_sync: PhantomData,"
+238,src/stable.rs,406,0,0,1,2,0.0,0.0,0.0,}
+239,src/stable.rs,408,0,0,1,2,0.0,0.0,0.0,pub fn as_str(&self) -> &str {
+240,src/stable.rs,409,0,0,1,2,0.0,0.0,0.0,SYMBOLS.with(|interner| {
+241,src/stable.rs,410,0,0,1,2,0.0,0.0,0.0,let interner = interner.borrow();
+242,src/stable.rs,411,0,0,1,2,0.0,0.0,0.0,let s = interner.get(self.intern);
+243,src/stable.rs,413,0,0,1,2,0.0,0.0,0.0,&*(s as *const str)
+244,src/stable.rs,415,0,0,1,2,0.0,0.0,0.0,})
+245,src/stable.rs,416,0,0,1,2,0.0,0.0,0.0,}
+246,src/stable.rs,420,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+247,src/stable.rs,421,0,0,1,2,0.0,0.0,0.0,"f.debug_tuple(""Term"").field(&self.as_str()).finish()"
+248,src/stable.rs,422,0,0,1,2,0.0,0.0,0.0,}
+249,src/stable.rs,434,0,0,1,2,0.0,0.0,0.0,fn borrow(&self) -> &str {
+250,src/stable.rs,435,0,0,1,2,0.0,0.0,0.0,&self.0
+251,src/stable.rs,436,0,0,1,2,0.0,0.0,0.0,}
+252,src/stable.rs,440,0,0,1,2,0.0,0.0,0.0,fn new() -> Interner {
+253,src/stable.rs,441,0,0,1,2,0.0,0.0,0.0,Interner {
+254,src/stable.rs,445,0,0,1,2,0.0,0.0,0.0,}
+255,src/stable.rs,447,0,0,1,2,0.0,0.0,0.0,"fn intern(&mut self, s: &str) -> usize {"
+256,src/stable.rs,448,0,0,1,2,0.0,0.0,0.0,if let Some(&idx) = self.string_to_index.get(s) {
+257,src/stable.rs,449,0,0,1,2,0.0,0.0,0.0,return idx
+258,src/stable.rs,450,0,0,1,2,0.0,0.0,0.0,}
+259,src/stable.rs,451,0,0,1,2,0.0,0.0,0.0,let s = Rc::new(s.to_string());
+260,src/stable.rs,452,0,0,1,2,0.0,0.0,0.0,self.index_to_string.push(s.clone());
+261,src/stable.rs,453,0,0,1,2,0.0,0.0,0.0,"self.string_to_index.insert(MyRc(s), self.index_to_string.len() - 1);"
+262,src/stable.rs,454,0,0,1,2,0.0,0.0,0.0,self.index_to_string.len() - 1
+263,src/stable.rs,455,0,0,1,2,0.0,0.0,0.0,}
+264,src/stable.rs,457,0,0,1,2,0.0,0.0,0.0,"fn get(&self, idx: usize) -> &str {"
+265,src/stable.rs,458,0,0,1,2,0.0,0.0,0.0,&self.index_to_string[idx]
+266,src/stable.rs,459,0,0,1,2,0.0,0.0,0.0,}
+267,src/stable.rs,466,0,0,1,2,0.0,0.0,0.0,pub fn byte_char(byte: u8) -> Literal {
+268,src/stable.rs,467,0,0,1,2,0.0,0.0,0.0,match byte {
+269,src/stable.rs,468,0,0,1,2,0.0,0.0,0.0,"0 => Literal(format!(""b'\\0'"")),"
+270,src/stable.rs,469,0,0,1,2,0.0,0.0,0.0,"b'\""' => Literal(format!(""b'\""'"")),"
+271,src/stable.rs,470,0,0,1,2,0.0,0.0,0.0,n => {
+272,src/stable.rs,471,0,0,1,2,0.0,0.0,0.0,"let mut escaped = ""b'"".to_string();"
+273,src/stable.rs,472,0,0,1,2,0.0,0.0,0.0,escaped.extend(ascii::escape_default(n).map(|c| c as char));
+274,src/stable.rs,473,0,0,1,2,0.0,0.0,0.0,escaped.push('\'');
+275,src/stable.rs,474,0,0,1,2,0.0,0.0,0.0,Literal(escaped)
+276,src/stable.rs,477,0,0,1,2,0.0,0.0,0.0,}
+277,src/stable.rs,479,0,0,1,2,0.0,0.0,0.0,pub fn byte_string(bytes: &[u8]) -> Literal {
+278,src/stable.rs,480,0,0,1,2,0.0,0.0,0.0,"let mut escaped = ""b\"""".to_string();"
+279,src/stable.rs,481,0,0,1,2,0.0,0.0,0.0,for b in bytes {
+280,src/stable.rs,482,0,0,1,2,0.0,0.0,0.0,match *b {
+281,src/stable.rs,483,0,0,1,2,0.0,0.0,0.0,"b'\0' => escaped.push_str(r""\0""),"
+282,src/stable.rs,484,0,0,1,2,0.0,0.0,0.0,"b'\t' => escaped.push_str(r""\t""),"
+283,src/stable.rs,485,0,0,1,2,0.0,0.0,0.0,"b'\n' => escaped.push_str(r""\n""),"
+284,src/stable.rs,486,0,0,1,2,0.0,0.0,0.0,"b'\r' => escaped.push_str(r""\r""),"
+285,src/stable.rs,487,0,0,1,2,0.0,0.0,0.0,"b'""' => escaped.push_str(""\\\""""),"
+286,src/stable.rs,488,0,0,1,2,0.0,0.0,0.0,"b'\\' => escaped.push_str(""\\\\""),"
+287,src/stable.rs,489,0,0,1,2,0.0,0.0,0.0,"b'\x20' ... b'\x7E' => escaped.push(*b as char),"
+288,src/stable.rs,490,0,0,1,2,0.0,0.0,0.0,"_ => escaped.push_str(&format!(""\\x{:02X}"", b)),"
+289,src/stable.rs,493,0,0,1,2,0.0,0.0,0.0,"escaped.push('""');"
+290,src/stable.rs,494,0,0,1,2,0.0,0.0,0.0,Literal(escaped)
+291,src/stable.rs,495,0,0,1,2,0.0,0.0,0.0,}
+292,src/stable.rs,497,0,0,1,2,0.0,0.0,0.0,pub fn doccomment(s: &str) -> Literal {
+293,src/stable.rs,498,0,0,1,2,0.0,0.0,0.0,Literal(s.to_string())
+294,src/stable.rs,499,0,0,1,2,0.0,0.0,0.0,}
+295,src/stable.rs,501,0,0,1,2,0.0,0.0,0.0,pub fn float(n: f64) -> Literal {
+296,src/stable.rs,502,0,0,1,2,0.0,0.0,0.0,if !n.is_finite() {
+297,src/stable.rs,503,0,0,1,2,0.0,0.0,0.0,"panic!(""Invalid float literal {}"", n);"
+298,src/stable.rs,504,0,0,1,2,0.0,0.0,0.0,}
+299,src/stable.rs,505,0,0,1,2,0.0,0.0,0.0,let mut s = n.to_string();
+300,src/stable.rs,506,0,0,1,2,0.0,0.0,0.0,if !s.contains('.') {
+301,src/stable.rs,508,0,0,1,2,0.0,0.0,0.0,}
+302,src/stable.rs,509,0,0,1,2,0.0,0.0,0.0,Literal(s)
+303,src/stable.rs,510,0,0,1,2,0.0,0.0,0.0,}
+304,src/stable.rs,512,0,0,1,2,0.0,0.0,0.0,pub fn integer(s: i64) -> Literal {
+305,src/stable.rs,513,0,0,1,2,0.0,0.0,0.0,Literal(s.to_string())
+306,src/stable.rs,514,0,0,1,2,0.0,0.0,0.0,}
+307,src/stable.rs,516,0,0,1,2,0.0,0.0,0.0,"pub fn raw_string(s: &str, pounds: usize) -> Literal {"
+308,src/stable.rs,517,0,0,1,2,0.0,0.0,0.0,"let mut ret = format!(""r"");"
+309,src/stable.rs,518,0,0,1,2,0.0,0.0,0.0,"ret.extend((0..pounds).map(|_| ""#""));"
+310,src/stable.rs,519,0,0,1,2,0.0,0.0,0.0,"ret.push('""');"
+311,src/stable.rs,520,0,0,1,2,0.0,0.0,0.0,ret.push_str(s);
+312,src/stable.rs,521,0,0,1,2,0.0,0.0,0.0,"ret.push('""');"
+313,src/stable.rs,522,0,0,1,2,0.0,0.0,0.0,"ret.extend((0..pounds).map(|_| ""#""));"
+314,src/stable.rs,523,0,0,1,2,0.0,0.0,0.0,Literal(ret)
+315,src/stable.rs,524,0,0,1,2,0.0,0.0,0.0,}
+316,src/stable.rs,526,0,0,1,2,0.0,0.0,0.0,"pub fn raw_byte_string(s: &str, pounds: usize) -> Literal {"
+317,src/stable.rs,527,0,0,1,2,0.0,0.0,0.0,"let mut ret = format!(""br"");"
+318,src/stable.rs,528,0,0,1,2,0.0,0.0,0.0,"ret.extend((0..pounds).map(|_| ""#""));"
+319,src/stable.rs,529,0,0,1,2,0.0,0.0,0.0,"ret.push('""');"
+320,src/stable.rs,530,0,0,1,2,0.0,0.0,0.0,ret.push_str(s);
+321,src/stable.rs,531,0,0,1,2,0.0,0.0,0.0,"ret.push('""');"
+322,src/stable.rs,532,0,0,1,2,0.0,0.0,0.0,"ret.extend((0..pounds).map(|_| ""#""));"
+323,src/stable.rs,533,0,0,1,2,0.0,0.0,0.0,Literal(ret)
+324,src/stable.rs,534,0,0,1,2,0.0,0.0,0.0,}
+325,src/stable.rs,538,0,1,1,1,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+326,src/stable.rs,539,0,1,1,1,0.0,0.0,0.0,self.0.fmt(f)
+327,src/stable.rs,540,0,1,1,1,0.0,0.0,0.0,}
+328,src/stable.rs,546,0,0,1,2,0.0,0.0,0.0,fn from(t: $t) -> Literal {
+329,src/stable.rs,547,0,0,1,2,0.0,0.0,0.0,"Literal(format!(concat!(""{}"", stringify!($t)), t))"
+330,src/stable.rs,548,0,0,1,2,0.0,0.0,0.0,}
+331,src/stable.rs,561,0,0,1,2,0.0,0.0,0.0,fn from(t: $t) -> Literal {
+332,src/stable.rs,562,0,0,1,2,0.0,0.0,0.0,assert!(!t.is_nan());
+333,src/stable.rs,563,0,0,1,2,0.0,0.0,0.0,assert!(!t.is_infinite());
+334,src/stable.rs,564,0,0,1,2,0.0,0.0,0.0,"Literal(format!(concat!(""{}"", stringify!($t)), t))"
+335,src/stable.rs,565,0,0,1,2,0.0,0.0,0.0,}
+336,src/stable.rs,575,0,0,1,2,0.0,0.0,0.0,fn from(t: &'a str) -> Literal {
+337,src/stable.rs,576,0,0,1,2,0.0,0.0,0.0,let mut s = t.chars().flat_map(|c| c.escape_default()).collect::<String>();
+338,src/stable.rs,577,0,0,1,2,0.0,0.0,0.0,"s.push('""');"
+339,src/stable.rs,578,0,0,1,2,0.0,0.0,0.0,"s.insert(0, '""');"
+340,src/stable.rs,579,0,0,1,2,0.0,0.0,0.0,Literal(s)
+341,src/stable.rs,580,0,0,1,2,0.0,0.0,0.0,}
+342,src/stable.rs,584,0,0,1,2,0.0,0.0,0.0,fn from(t: char) -> Literal {
+343,src/stable.rs,585,0,0,1,2,0.0,0.0,0.0,"Literal(format!(""'{}'"", t.escape_default().collect::<String>()))"
+344,src/stable.rs,586,0,0,1,2,0.0,0.0,0.0,}
+345,src/stable.rs,591,0,2,1,0,0.0,0.0,0.0,|trees| ::TokenStream(TokenStream { inner: trees })
+346,src/stable.rs,619,0,0,1,2,0.0,0.0,0.0,"map!(delimited, |(d, s)| TokenNode::Group(d, s))"
+347,src/stable.rs,625,0,0,1,2,0.0,0.0,0.0,"map!(op, |(op, kind)| TokenNode::Op(op, kind))"
+348,src/stable.rs,633,0,0,1,2,0.0,0.0,0.0,") => { |ts| (Delimiter::Parenthesis, ts) }"
+349,src/stable.rs,639,0,0,1,2,0.0,0.0,0.0,") => { |ts| (Delimiter::Bracket, ts) }"
+350,src/stable.rs,645,0,0,1,2,0.0,0.0,0.0,") => { |ts| (Delimiter::Brace, ts) }"
+351,src/stable.rs,648,0,0,1,2,0.0,0.0,0.0,fn symbol(mut input: Cursor) -> PResult<TokenNode> {
+352,src/stable.rs,649,0,0,1,2,0.0,0.0,0.0,input = skip_whitespace(input);
+353,src/stable.rs,651,0,0,1,2,0.0,0.0,0.0,let mut chars = input.char_indices();
+354,src/stable.rs,653,0,0,1,2,0.0,0.0,0.0,"let lifetime = input.starts_with(""'"");"
+355,src/stable.rs,654,0,0,1,2,0.0,0.0,0.0,if lifetime {
+356,src/stable.rs,656,0,0,1,2,0.0,0.0,0.0,}
+357,src/stable.rs,658,0,0,1,2,0.0,0.0,0.0,match chars.next() {
+358,src/stable.rs,659,0,0,1,2,0.0,0.0,0.0,"Some((_, ch)) if UnicodeXID::is_xid_start(ch) || ch == '_' => {}"
+359,src/stable.rs,660,0,0,1,2,0.0,0.0,0.0,"_ => return Err(LexError),"
+360,src/stable.rs,663,0,0,1,2,0.0,0.0,0.0,let mut end = input.len();
+361,src/stable.rs,664,0,0,1,2,0.0,0.0,0.0,"for (i, ch) in chars {"
+362,src/stable.rs,665,0,0,1,2,0.0,0.0,0.0,if !UnicodeXID::is_xid_continue(ch) {
+363,src/stable.rs,666,0,0,1,2,0.0,0.0,0.0,end = i;
+364,src/stable.rs,667,0,0,1,2,0.0,0.0,0.0,break;
+365,src/stable.rs,668,0,0,1,2,0.0,0.0,0.0,}
+366,src/stable.rs,671,0,0,1,2,0.0,0.0,0.0,"if lifetime && &input.rest[..end] != ""'static"" && KEYWORDS.contains(&&input.rest[1..end]) {"
+367,src/stable.rs,672,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+368,src/stable.rs,674,0,0,1,2,0.0,0.0,0.0,let a = &input.rest[..end];
+369,src/stable.rs,675,0,0,1,2,0.0,0.0,0.0,"if a == ""_"" {"
+370,src/stable.rs,676,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(end), TokenNode::Op('_', Spacing::Alone)))"
+371,src/stable.rs,678,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(end), TokenNode::Term(::Term::intern(a))))"
+372,src/stable.rs,681,0,0,1,2,0.0,0.0,0.0,}
+373,src/stable.rs,704,0,0,1,2,0.0,0.0,0.0,"Err(LexError) => Err(LexError),"
+374,src/stable.rs,739,0,0,1,2,0.0,0.0,0.0,fn cooked_string(input: Cursor) -> PResult<()> {
+375,src/stable.rs,740,0,0,1,2,0.0,0.0,0.0,let mut chars = input.char_indices().peekable();
+376,src/stable.rs,741,0,0,1,2,0.0,0.0,0.0,"while let Some((byte_offset, ch)) = chars.next() {"
+377,src/stable.rs,742,0,0,1,2,0.0,0.0,0.0,match ch {
+378,src/stable.rs,744,0,0,1,2,0.0,0.0,0.0,"return Ok((input.advance(byte_offset), ()));"
+379,src/stable.rs,747,0,0,1,2,0.0,0.0,0.0,"if let Some((_, '\n')) = chars.next() {"
+380,src/stable.rs,750,0,0,1,2,0.0,0.0,0.0,break;
+381,src/stable.rs,754,0,0,1,2,0.0,0.0,0.0,match chars.next() {
+382,src/stable.rs,756,0,0,1,2,0.0,0.0,0.0,if !backslash_x_char(&mut chars) {
+383,src/stable.rs,757,0,0,1,2,0.0,0.0,0.0,break
+384,src/stable.rs,758,0,0,1,2,0.0,0.0,0.0,}
+385,src/stable.rs,766,0,0,1,2,0.0,0.0,0.0,"Some((_, '0')) => {}"
+386,src/stable.rs,768,0,0,1,2,0.0,0.0,0.0,if !backslash_u(&mut chars) {
+387,src/stable.rs,769,0,0,1,2,0.0,0.0,0.0,break
+388,src/stable.rs,770,0,0,1,2,0.0,0.0,0.0,}
+389,src/stable.rs,773,0,0,1,2,0.0,0.0,0.0,"while let Some(&(_, ch)) = chars.peek() {"
+390,src/stable.rs,774,0,0,1,2,0.0,0.0,0.0,if ch.is_whitespace() {
+391,src/stable.rs,777,0,0,1,2,0.0,0.0,0.0,break;
+392,src/stable.rs,781,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+393,src/stable.rs,784,0,0,1,2,0.0,0.0,0.0,_ch => {}
+394,src/stable.rs,787,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+395,src/stable.rs,788,0,0,1,2,0.0,0.0,0.0,}
+396,src/stable.rs,803,0,0,1,2,0.0,0.0,0.0,fn cooked_byte_string(mut input: Cursor) -> PResult<()> {
+397,src/stable.rs,804,0,0,1,2,0.0,0.0,0.0,let mut bytes = input.bytes().enumerate();
+398,src/stable.rs,805,0,0,1,2,0.0,0.0,0.0,"'outer: while let Some((offset, b)) = bytes.next() {"
+399,src/stable.rs,806,0,0,1,2,0.0,0.0,0.0,match b {
+400,src/stable.rs,808,0,0,1,2,0.0,0.0,0.0,"return Ok((input.advance(offset), ()));"
+401,src/stable.rs,811,0,0,1,2,0.0,0.0,0.0,"if let Some((_, b'\n')) = bytes.next() {"
+402,src/stable.rs,814,0,0,1,2,0.0,0.0,0.0,break;
+403,src/stable.rs,818,0,0,1,2,0.0,0.0,0.0,match bytes.next() {
+404,src/stable.rs,820,0,0,1,2,0.0,0.0,0.0,if !backslash_x_byte(&mut bytes) {
+405,src/stable.rs,821,0,0,1,2,0.0,0.0,0.0,break
+406,src/stable.rs,822,0,0,1,2,0.0,0.0,0.0,}
+407,src/stable.rs,830,0,0,1,2,0.0,0.0,0.0,"Some((_, b'""'))  => {}"
+408,src/stable.rs,831,0,0,1,2,0.0,0.0,0.0,"Some((newline, b'\n')) |"
+409,src/stable.rs,832,0,0,1,2,0.0,0.0,0.0,"Some((newline, b'\r')) => {"
+410,src/stable.rs,833,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(newline + 1);
+411,src/stable.rs,834,0,0,1,2,0.0,0.0,0.0,"for (offset, ch) in rest.char_indices() {"
+412,src/stable.rs,835,0,0,1,2,0.0,0.0,0.0,if !ch.is_whitespace() {
+413,src/stable.rs,836,0,0,1,2,0.0,0.0,0.0,input = rest.advance(offset);
+414,src/stable.rs,837,0,0,1,2,0.0,0.0,0.0,bytes = input.bytes().enumerate();
+415,src/stable.rs,838,0,0,1,2,0.0,0.0,0.0,continue 'outer;
+416,src/stable.rs,839,0,0,1,2,0.0,0.0,0.0,}
+417,src/stable.rs,841,0,0,1,2,0.0,0.0,0.0,break;
+418,src/stable.rs,843,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+419,src/stable.rs,846,0,0,1,2,0.0,0.0,0.0,b if b < 0x80 => {}
+420,src/stable.rs,847,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+421,src/stable.rs,850,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+422,src/stable.rs,851,0,0,1,2,0.0,0.0,0.0,}
+423,src/stable.rs,853,0,0,1,2,0.0,0.0,0.0,fn raw_string(input: Cursor) -> PResult<()> {
+424,src/stable.rs,854,0,0,1,2,0.0,0.0,0.0,let mut chars = input.char_indices();
+425,src/stable.rs,855,0,0,1,2,0.0,0.0,0.0,let mut n = 0;
+426,src/stable.rs,856,0,0,1,2,0.0,0.0,0.0,"while let Some((byte_offset, ch)) = chars.next() {"
+427,src/stable.rs,857,0,0,1,2,0.0,0.0,0.0,match ch {
+428,src/stable.rs,859,0,0,1,2,0.0,0.0,0.0,n = byte_offset;
+429,src/stable.rs,860,0,0,1,2,0.0,0.0,0.0,break;
+430,src/stable.rs,862,0,0,1,2,0.0,0.0,0.0,'#' => {}
+431,src/stable.rs,863,0,0,1,2,0.0,0.0,0.0,"_ => return Err(LexError),"
+432,src/stable.rs,866,0,0,1,2,0.0,0.0,0.0,"for (byte_offset, ch) in chars {"
+433,src/stable.rs,867,0,0,1,2,0.0,0.0,0.0,match ch {
+434,src/stable.rs,868,0,0,1,2,0.0,0.0,0.0,"'""' if input.advance(byte_offset + 1).starts_with(&input.rest[..n]) => {"
+435,src/stable.rs,869,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(byte_offset + 1 + n);
+436,src/stable.rs,870,0,0,1,2,0.0,0.0,0.0,"return Ok((rest, ()))"
+437,src/stable.rs,872,0,0,1,2,0.0,0.0,0.0,'\r' => {}
+438,src/stable.rs,873,0,0,1,2,0.0,0.0,0.0,_ => {}
+439,src/stable.rs,876,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+440,src/stable.rs,877,0,0,1,2,0.0,0.0,0.0,}
+441,src/stable.rs,891,0,0,1,2,0.0,0.0,0.0,"match bytes.next().map(|(_, b)| b) {"
+442,src/stable.rs,892,0,0,1,2,0.0,0.0,0.0,"Some(b'x') => backslash_x_byte(&mut bytes),"
+443,src/stable.rs,899,0,0,1,2,0.0,0.0,0.0,"Some(b'""') => true,"
+444,src/stable.rs,900,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+445,src/stable.rs,908,0,0,1,2,0.0,0.0,0.0,"None => Ok((input.advance(input.len()), ())),"
+446,src/stable.rs,911,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+447,src/stable.rs,922,0,1,1,1,0.0,0.0,0.0,fn cooked_char(input: Cursor) -> PResult<()> {
+448,src/stable.rs,923,0,1,1,1,0.0,0.0,0.0,let mut chars = input.char_indices();
+449,src/stable.rs,924,0,1,1,1,0.0,0.0,0.0,"let ok = match chars.next().map(|(_, ch)| ch) {"
+450,src/stable.rs,926,0,0,1,2,0.0,0.0,0.0,"match chars.next().map(|(_, ch)| ch) {"
+451,src/stable.rs,927,0,0,1,2,0.0,0.0,0.0,"Some('x') => backslash_x_char(&mut chars),"
+452,src/stable.rs,928,0,0,1,2,0.0,0.0,0.0,"Some('u') => backslash_u(&mut chars),"
+453,src/stable.rs,935,0,0,1,2,0.0,0.0,0.0,"Some('""') => true,"
+454,src/stable.rs,936,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+455,src/stable.rs,939,0,1,1,1,0.0,0.0,0.0,"ch => ch.is_some(),"
+456,src/stable.rs,941,0,1,1,1,0.0,0.0,0.0,if ok {
+457,src/stable.rs,942,0,1,1,1,0.0,0.0,0.0,match chars.next() {
+458,src/stable.rs,943,0,1,1,1,0.0,0.0,0.0,"Some((idx, _)) => Ok((input.advance(idx), ())),"
+459,src/stable.rs,944,0,0,1,2,0.0,0.0,0.0,"None => Ok((input.advance(input.len()), ())),"
+460,src/stable.rs,947,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+461,src/stable.rs,949,0,1,1,1,0.0,0.0,0.0,}
+462,src/stable.rs,963,0,0,1,2,0.0,0.0,0.0,fn backslash_x_char<I>(chars: &mut I) -> bool
+463,src/stable.rs,966,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '0'...'7');
+464,src/stable.rs,967,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '0'...'9' | 'a'...'f' | 'A'...'F');
+465,src/stable.rs,968,0,0,1,2,0.0,0.0,0.0,true
+466,src/stable.rs,969,0,0,1,2,0.0,0.0,0.0,}
+467,src/stable.rs,971,0,0,1,2,0.0,0.0,0.0,fn backslash_x_byte<I>(chars: &mut I) -> bool
+468,src/stable.rs,974,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ b'0'...b'9' | b'a'...b'f' | b'A'...b'F');
+469,src/stable.rs,975,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ b'0'...b'9' | b'a'...b'f' | b'A'...b'F');
+470,src/stable.rs,976,0,0,1,2,0.0,0.0,0.0,true
+471,src/stable.rs,977,0,0,1,2,0.0,0.0,0.0,}
+472,src/stable.rs,979,0,0,1,2,0.0,0.0,0.0,fn backslash_u<I>(chars: &mut I) -> bool
+473,src/stable.rs,982,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '{');
+474,src/stable.rs,983,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '0'...'9' | 'a'...'f' | 'A'...'F');
+475,src/stable.rs,985,0,0,1,2,0.0,0.0,0.0,let c = next_ch!(chars @ '0'...'9' | 'a'...'f' | 'A'...'F' | '_' | '}');
+476,src/stable.rs,986,0,0,1,2,0.0,0.0,0.0,if c == '}' {
+477,src/stable.rs,987,0,0,1,2,0.0,0.0,0.0,return true;
+478,src/stable.rs,988,0,0,1,2,0.0,0.0,0.0,}
+479,src/stable.rs,990,0,0,1,2,0.0,0.0,0.0,}
+480,src/stable.rs,992,0,0,1,2,0.0,0.0,0.0,fn float(input: Cursor) -> PResult<()> {
+481,src/stable.rs,993,0,0,1,2,0.0,0.0,0.0,"let (rest, ()) = float_digits(input)?;"
+482,src/stable.rs,994,0,0,1,2,0.0,0.0,0.0,"for suffix in &[""f32"", ""f64""] {"
+483,src/stable.rs,995,0,0,1,2,0.0,0.0,0.0,if rest.starts_with(suffix) {
+484,src/stable.rs,996,0,0,1,2,0.0,0.0,0.0,return word_break(rest.advance(suffix.len()));
+485,src/stable.rs,997,0,0,1,2,0.0,0.0,0.0,}
+486,src/stable.rs,999,0,0,1,2,0.0,0.0,0.0,word_break(rest)
+487,src/stable.rs,1000,0,0,1,2,0.0,0.0,0.0,}
+488,src/stable.rs,1002,0,0,1,2,0.0,0.0,0.0,fn float_digits(input: Cursor) -> PResult<()> {
+489,src/stable.rs,1003,0,0,1,2,0.0,0.0,0.0,let mut chars = input.chars().peekable();
+490,src/stable.rs,1004,0,0,1,2,0.0,0.0,0.0,match chars.next() {
+491,src/stable.rs,1005,0,0,1,2,0.0,0.0,0.0,Some(ch) if ch >= '0' && ch <= '9' => {}
+492,src/stable.rs,1006,0,0,1,2,0.0,0.0,0.0,"_ => return Err(LexError),"
+493,src/stable.rs,1009,0,0,1,2,0.0,0.0,0.0,let mut len = 1;
+494,src/stable.rs,1010,0,0,1,2,0.0,0.0,0.0,let mut has_dot = false;
+495,src/stable.rs,1011,0,0,1,2,0.0,0.0,0.0,let mut has_exp = false;
+496,src/stable.rs,1012,0,0,1,2,0.0,0.0,0.0,while let Some(&ch) = chars.peek() {
+497,src/stable.rs,1013,0,0,1,2,0.0,0.0,0.0,match ch {
+498,src/stable.rs,1014,0,0,1,2,0.0,0.0,0.0,'0'...'9' | '_' => {
+499,src/stable.rs,1015,0,0,1,2,0.0,0.0,0.0,chars.next();
+500,src/stable.rs,1019,0,0,1,2,0.0,0.0,0.0,if has_dot {
+501,src/stable.rs,1020,0,0,1,2,0.0,0.0,0.0,break;
+502,src/stable.rs,1021,0,0,1,2,0.0,0.0,0.0,}
+503,src/stable.rs,1022,0,0,1,2,0.0,0.0,0.0,chars.next();
+504,src/stable.rs,1023,0,0,1,2,0.0,0.0,0.0,if chars.peek()
+505,src/stable.rs,1024,0,0,1,2,0.0,0.0,0.0,.map(|&ch| ch == '.' || UnicodeXID::is_xid_start(ch))
+506,src/stable.rs,1025,0,0,1,2,0.0,0.0,0.0,.unwrap_or(false) {
+507,src/stable.rs,1026,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+508,src/stable.rs,1027,0,0,1,2,0.0,0.0,0.0,}
+509,src/stable.rs,1028,0,0,1,2,0.0,0.0,0.0,len += 1;
+510,src/stable.rs,1029,0,0,1,2,0.0,0.0,0.0,has_dot = true;
+511,src/stable.rs,1032,0,0,1,2,0.0,0.0,0.0,chars.next();
+512,src/stable.rs,1033,0,0,1,2,0.0,0.0,0.0,len += 1;
+513,src/stable.rs,1034,0,0,1,2,0.0,0.0,0.0,has_exp = true;
+514,src/stable.rs,1035,0,0,1,2,0.0,0.0,0.0,break;
+515,src/stable.rs,1037,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+516,src/stable.rs,1041,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(len);
+517,src/stable.rs,1042,0,0,1,2,0.0,0.0,0.0,"if !(has_dot || has_exp || rest.starts_with(""f32"") || rest.starts_with(""f64"")) {"
+518,src/stable.rs,1043,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+519,src/stable.rs,1044,0,0,1,2,0.0,0.0,0.0,}
+520,src/stable.rs,1046,0,0,1,2,0.0,0.0,0.0,if has_exp {
+521,src/stable.rs,1047,0,0,1,2,0.0,0.0,0.0,let mut has_exp_value = false;
+522,src/stable.rs,1048,0,0,1,2,0.0,0.0,0.0,while let Some(&ch) = chars.peek() {
+523,src/stable.rs,1049,0,0,1,2,0.0,0.0,0.0,match ch {
+524,src/stable.rs,1051,0,0,1,2,0.0,0.0,0.0,if has_exp_value {
+525,src/stable.rs,1052,0,0,1,2,0.0,0.0,0.0,break;
+526,src/stable.rs,1053,0,0,1,2,0.0,0.0,0.0,}
+527,src/stable.rs,1054,0,0,1,2,0.0,0.0,0.0,chars.next();
+528,src/stable.rs,1055,0,0,1,2,0.0,0.0,0.0,len += 1;
+529,src/stable.rs,1057,0,0,1,2,0.0,0.0,0.0,'0'...'9' => {
+530,src/stable.rs,1058,0,0,1,2,0.0,0.0,0.0,chars.next();
+531,src/stable.rs,1062,0,0,1,2,0.0,0.0,0.0,'_' => {
+532,src/stable.rs,1063,0,0,1,2,0.0,0.0,0.0,chars.next();
+533,src/stable.rs,1066,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+534,src/stable.rs,1069,0,0,1,2,0.0,0.0,0.0,if !has_exp_value {
+535,src/stable.rs,1070,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+536,src/stable.rs,1071,0,0,1,2,0.0,0.0,0.0,}
+537,src/stable.rs,1072,0,0,1,2,0.0,0.0,0.0,}
+538,src/stable.rs,1074,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(len), ()))"
+539,src/stable.rs,1075,0,0,1,2,0.0,0.0,0.0,}
+540,src/stable.rs,1077,0,0,1,2,0.0,0.0,0.0,fn int(input: Cursor) -> PResult<()> {
+541,src/stable.rs,1078,0,0,1,2,0.0,0.0,0.0,"let (rest, ()) = digits(input)?;"
+542,src/stable.rs,1079,0,0,1,2,0.0,0.0,0.0,for suffix in &[
+543,src/stable.rs,1093,0,0,1,2,0.0,0.0,0.0,if rest.starts_with(suffix) {
+544,src/stable.rs,1094,0,0,1,2,0.0,0.0,0.0,return word_break(rest.advance(suffix.len()));
+545,src/stable.rs,1095,0,0,1,2,0.0,0.0,0.0,}
+546,src/stable.rs,1097,0,0,1,2,0.0,0.0,0.0,word_break(rest)
+547,src/stable.rs,1098,0,0,1,2,0.0,0.0,0.0,}
+548,src/stable.rs,1100,0,0,1,2,0.0,0.0,0.0,fn digits(mut input: Cursor) -> PResult<()> {
+549,src/stable.rs,1101,0,0,1,2,0.0,0.0,0.0,"let base = if input.starts_with(""0x"") {"
+550,src/stable.rs,1102,0,0,1,2,0.0,0.0,0.0,input = input.advance(2);
+551,src/stable.rs,1103,0,0,1,2,0.0,0.0,0.0,16
+552,src/stable.rs,1104,0,0,1,2,0.0,0.0,0.0,"} else if input.starts_with(""0o"") {"
+553,src/stable.rs,1105,0,0,1,2,0.0,0.0,0.0,input = input.advance(2);
+554,src/stable.rs,1106,0,0,1,2,0.0,0.0,0.0,8
+555,src/stable.rs,1107,0,0,1,2,0.0,0.0,0.0,"} else if input.starts_with(""0b"") {"
+556,src/stable.rs,1108,0,0,1,2,0.0,0.0,0.0,input = input.advance(2);
+557,src/stable.rs,1109,0,0,1,2,0.0,0.0,0.0,2
+558,src/stable.rs,1111,0,0,1,2,0.0,0.0,0.0,10
+559,src/stable.rs,1114,0,0,1,2,0.0,0.0,0.0,let mut len = 0;
+560,src/stable.rs,1115,0,0,1,2,0.0,0.0,0.0,let mut empty = true;
+561,src/stable.rs,1116,0,0,1,2,0.0,0.0,0.0,for b in input.bytes() {
+562,src/stable.rs,1117,0,0,1,2,0.0,0.0,0.0,let digit = match b {
+563,src/stable.rs,1118,0,0,1,2,0.0,0.0,0.0,"b'0'...b'9' => (b - b'0') as u64,"
+564,src/stable.rs,1119,0,0,1,2,0.0,0.0,0.0,"b'a'...b'f' => 10 + (b - b'a') as u64,"
+565,src/stable.rs,1120,0,0,1,2,0.0,0.0,0.0,"b'A'...b'F' => 10 + (b - b'A') as u64,"
+566,src/stable.rs,1122,0,0,1,2,0.0,0.0,0.0,if empty && base == 10 {
+567,src/stable.rs,1123,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+568,src/stable.rs,1124,0,0,1,2,0.0,0.0,0.0,}
+569,src/stable.rs,1125,0,0,1,2,0.0,0.0,0.0,len += 1;
+570,src/stable.rs,1126,0,0,1,2,0.0,0.0,0.0,continue;
+571,src/stable.rs,1128,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+572,src/stable.rs,1130,0,0,1,2,0.0,0.0,0.0,if digit >= base {
+573,src/stable.rs,1131,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+574,src/stable.rs,1132,0,0,1,2,0.0,0.0,0.0,}
+575,src/stable.rs,1133,0,0,1,2,0.0,0.0,0.0,len += 1;
+576,src/stable.rs,1134,0,0,1,2,0.0,0.0,0.0,empty = false;
+577,src/stable.rs,1136,0,0,1,2,0.0,0.0,0.0,if empty {
+578,src/stable.rs,1137,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+579,src/stable.rs,1139,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(len), ()))"
+580,src/stable.rs,1141,0,0,1,2,0.0,0.0,0.0,}
+581,src/stable.rs,1143,0,0,1,2,0.0,0.0,0.0,"fn op(input: Cursor) -> PResult<(char, Spacing)> {"
+582,src/stable.rs,1144,0,0,1,2,0.0,0.0,0.0,let input = skip_whitespace(input);
+583,src/stable.rs,1145,0,0,1,2,0.0,0.0,0.0,match op_char(input) {
+584,src/stable.rs,1146,0,0,1,2,0.0,0.0,0.0,"Ok((rest, ch)) => {"
+585,src/stable.rs,1147,0,0,1,2,0.0,0.0,0.0,let kind = match op_char(rest) {
+586,src/stable.rs,1148,0,0,1,2,0.0,0.0,0.0,"Ok(_) => Spacing::Joint,"
+587,src/stable.rs,1149,0,0,1,2,0.0,0.0,0.0,"Err(LexError) => Spacing::Alone,"
+588,src/stable.rs,1151,0,0,1,2,0.0,0.0,0.0,"Ok((rest, (ch, kind)))"
+589,src/stable.rs,1153,0,0,1,2,0.0,0.0,0.0,"Err(LexError) => Err(LexError),"
+590,src/stable.rs,1155,0,0,1,2,0.0,0.0,0.0,}
+591,src/stable.rs,1157,0,0,1,2,0.0,0.0,0.0,fn op_char(input: Cursor) -> PResult<char> {
+592,src/stable.rs,1158,0,0,1,2,0.0,0.0,0.0,let mut chars = input.chars();
+593,src/stable.rs,1159,0,0,1,2,0.0,0.0,0.0,let first = match chars.next() {
+594,src/stable.rs,1160,0,0,1,2,0.0,0.0,0.0,"Some(ch) => ch,"
+595,src/stable.rs,1162,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+596,src/stable.rs,1165,0,0,1,2,0.0,0.0,0.0,"let recognized = ""~!@#$%^&*-=+|;:,<.>/?"";"
+597,src/stable.rs,1166,0,0,1,2,0.0,0.0,0.0,if recognized.contains(first) {
+598,src/stable.rs,1167,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(first.len_utf8()), first))"
+599,src/stable.rs,1169,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+600,src/stable.rs,1171,0,0,1,2,0.0,0.0,0.0,}
+601,src/strnom.rs,31,0,0,1,2,0.0,0.0,0.0,"pub fn find(&self, p: char) -> Option<usize> {"
+602,src/strnom.rs,32,0,0,1,2,0.0,0.0,0.0,self.rest.find(p)
+603,src/strnom.rs,33,0,0,1,2,0.0,0.0,0.0,}
+604,src/strnom.rs,43,0,2,1,0,0.0,0.0,0.0,pub fn len(&self) -> usize {
+605,src/strnom.rs,44,0,2,1,0,0.0,0.0,0.0,self.rest.len()
+606,src/strnom.rs,45,0,2,1,0,0.0,0.0,0.0,}
+607,src/strnom.rs,55,0,0,1,2,0.0,0.0,0.0,pub fn chars(&self) -> Chars<'a> {
+608,src/strnom.rs,56,0,0,1,2,0.0,0.0,0.0,self.rest.chars()
+609,src/strnom.rs,57,0,0,1,2,0.0,0.0,0.0,}
+610,src/strnom.rs,59,0,1,1,1,0.0,0.0,0.0,pub fn char_indices(&self) -> CharIndices<'a> {
+611,src/strnom.rs,60,0,1,1,1,0.0,0.0,0.0,self.rest.char_indices()
+612,src/strnom.rs,61,0,1,1,1,0.0,0.0,0.0,}
+613,src/strnom.rs,68,0,2,1,0,0.0,0.0,0.0,return Err(LexError);
+614,src/strnom.rs,76,0,0,1,2,0.0,0.0,0.0,"if s.starts_with(""//"") && (!s.starts_with(""///"") || s.starts_with(""////"")) &&"
+615,src/strnom.rs,77,0,0,1,2,0.0,0.0,0.0,"!s.starts_with(""//!"") {"
+616,src/strnom.rs,78,0,0,1,2,0.0,0.0,0.0,if let Some(len) = s.find('\n') {
+617,src/strnom.rs,79,0,0,1,2,0.0,0.0,0.0,i += len + 1;
+618,src/strnom.rs,80,0,0,1,2,0.0,0.0,0.0,continue;
+619,src/strnom.rs,81,0,0,1,2,0.0,0.0,0.0,}
+620,src/strnom.rs,82,0,0,1,2,0.0,0.0,0.0,break;
+621,src/strnom.rs,83,0,0,1,2,0.0,0.0,0.0,"} else if s.starts_with(""/*"") && (!s.starts_with(""/**"") || s.starts_with(""/***"")) &&"
+622,src/strnom.rs,84,0,0,1,2,0.0,0.0,0.0,"!s.starts_with(""/*!"") {"
+623,src/strnom.rs,85,0,0,1,2,0.0,0.0,0.0,"let (_, com) = block_comment(s)?;"
+624,src/strnom.rs,86,0,0,1,2,0.0,0.0,0.0,i += com.len();
+625,src/strnom.rs,87,0,0,1,2,0.0,0.0,0.0,continue;
+626,src/strnom.rs,88,0,0,1,2,0.0,0.0,0.0,}
+627,src/strnom.rs,92,0,0,1,2,0.0,0.0,0.0,i += 1;
+628,src/strnom.rs,93,0,0,1,2,0.0,0.0,0.0,continue;
+629,src/strnom.rs,97,0,0,1,2,0.0,0.0,0.0,let ch = s.chars().next().unwrap();
+630,src/strnom.rs,98,0,0,1,2,0.0,0.0,0.0,if is_whitespace(ch) {
+631,src/strnom.rs,99,0,0,1,2,0.0,0.0,0.0,i += ch.len_utf8();
+632,src/strnom.rs,100,0,0,1,2,0.0,0.0,0.0,continue;
+633,src/strnom.rs,101,0,0,1,2,0.0,0.0,0.0,}
+634,src/strnom.rs,105,0,0,1,2,0.0,0.0,0.0,"Ok((s, ()))"
+635,src/strnom.rs,110,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(input.len()), ()))"
+636,src/strnom.rs,113,0,0,1,2,0.0,0.0,0.0,pub fn block_comment(input: Cursor) -> PResult<&str> {
+637,src/strnom.rs,114,0,0,1,2,0.0,0.0,0.0,"if !input.starts_with(""/*"") {"
+638,src/strnom.rs,115,0,0,1,2,0.0,0.0,0.0,return Err(LexError);
+639,src/strnom.rs,116,0,0,1,2,0.0,0.0,0.0,}
+640,src/strnom.rs,118,0,0,1,2,0.0,0.0,0.0,let mut depth = 0;
+641,src/strnom.rs,119,0,0,1,2,0.0,0.0,0.0,let bytes = input.as_bytes();
+642,src/strnom.rs,120,0,0,1,2,0.0,0.0,0.0,let mut i = 0;
+643,src/strnom.rs,121,0,0,1,2,0.0,0.0,0.0,let upper = bytes.len() - 1;
+644,src/strnom.rs,122,0,0,1,2,0.0,0.0,0.0,while i < upper {
+645,src/strnom.rs,123,0,0,1,2,0.0,0.0,0.0,if bytes[i] == b'/' && bytes[i + 1] == b'*' {
+646,src/strnom.rs,126,0,0,1,2,0.0,0.0,0.0,} else if bytes[i] == b'*' && bytes[i + 1] == b'/' {
+647,src/strnom.rs,127,0,0,1,2,0.0,0.0,0.0,depth -= 1;
+648,src/strnom.rs,128,0,0,1,2,0.0,0.0,0.0,if depth == 0 {
+649,src/strnom.rs,129,0,0,1,2,0.0,0.0,0.0,"return Ok((input.advance(i + 2), &input.rest[..i + 2]));"
+650,src/strnom.rs,130,0,0,1,2,0.0,0.0,0.0,}
+651,src/strnom.rs,131,0,0,1,2,0.0,0.0,0.0,i += 1; // eat '/'
+652,src/strnom.rs,132,0,0,1,2,0.0,0.0,0.0,}
+653,src/strnom.rs,133,0,0,1,2,0.0,0.0,0.0,i += 1;
+654,src/strnom.rs,135,0,0,1,2,0.0,0.0,0.0,Err(LexError)
+655,src/strnom.rs,136,0,0,1,2,0.0,0.0,0.0,}
+656,src/strnom.rs,140,0,0,1,2,0.0,0.0,0.0,"Ok((rest, _)) => rest,"
+657,src/strnom.rs,145,0,0,1,2,0.0,0.0,0.0,fn is_whitespace(ch: char) -> bool {
+658,src/strnom.rs,147,0,0,1,2,0.0,0.0,0.0,ch.is_whitespace() || ch == '\u{200e}' || ch == '\u{200f}'
+659,src/strnom.rs,148,0,0,1,2,0.0,0.0,0.0,}
+660,src/strnom.rs,150,0,0,1,2,0.0,0.0,0.0,pub fn word_break(input: Cursor) -> PResult<()> {
+661,src/strnom.rs,151,0,0,1,2,0.0,0.0,0.0,match input.chars().next() {
+662,src/strnom.rs,152,0,0,1,2,0.0,0.0,0.0,"Some(ch) if UnicodeXID::is_xid_continue(ch) => Err(LexError),"
+663,src/strnom.rs,153,0,0,1,2,0.0,0.0,0.0,"Some(_) | None => Ok((input, ())),"
+664,src/strnom.rs,155,0,0,1,2,0.0,0.0,0.0,}
+665,src/strnom.rs,281,0,0,1,2,0.0,0.0,0.0,.map(|x| x.len_utf8())
+666,src/strnom.rs,282,0,0,1,2,0.0,0.0,0.0,".fold(0, |x, y| x + y);"

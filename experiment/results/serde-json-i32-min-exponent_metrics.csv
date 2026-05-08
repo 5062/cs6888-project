@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/de.rs:679,true,82,125,69.0,113,0.02801503245644004,0.04270584215920738,81,false,false,false,false,2927,src/de.rs,679,match POW10.get(exponent.abs() as usize) {
+dstar2,src/de.rs:679,true,82,125,69.0,113,0.02801503245644004,0.04270584215920738,81,false,false,false,false,2927,src/de.rs,679,match POW10.get(exponent.abs() as usize) {
+tarantula,src/de.rs:679,true,82,125,69.0,113,0.02801503245644004,0.04270584215920738,81,false,false,false,false,2927,src/de.rs,679,match POW10.get(exponent.abs() as usize) {

@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/ser/key.rs:99,true,8,22,11.5,22,0.0024353120243531205,0.006697108066971081,7,false,false,false,true,3285,src/ser/key.rs,99,Err(ErrorKind::KeyNotString.into())
+dstar2,src/ser/key.rs:99,true,8,22,11.5,22,0.0024353120243531205,0.006697108066971081,7,false,false,false,true,3285,src/ser/key.rs,99,Err(ErrorKind::KeyNotString.into())
+tarantula,src/ser/key.rs:99,true,8,22,11.5,22,0.0024353120243531205,0.006697108066971081,7,false,false,false,true,3285,src/ser/key.rs,99,Err(ErrorKind::KeyNotString.into())

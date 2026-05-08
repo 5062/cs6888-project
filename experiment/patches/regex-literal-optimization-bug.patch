@@ -1,0 +1,151 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index 82c1b77..d98618b 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -29,7 +29,7 @@ expression and then using it to search, split or replace text. For example,
+ to confirm that some text resembles a date:
+ 
+ ```rust
+-use regex::Regex;
++use Regex;
+ let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
+ assert!(re.is_match("2014-01-01"));
+ ```
+@@ -63,7 +63,7 @@ For example:
+ 
+ ```rust
+ use lazy_static::lazy_static;
+-use regex::Regex;
++use Regex;
+ 
+ fn some_helper_function(text: &str) -> bool {
+     lazy_static! {
+@@ -86,7 +86,7 @@ matches. For example, to find all dates in a string and be able to access
+ them by their component pieces:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"(\d{4})-(\d{2})-(\d{2})").unwrap();
+ let text = "2012-03-14, 2013-01-01 and 2014-07-05";
+@@ -111,7 +111,7 @@ clearer, we can *name*  our capture groups and use those names as variables
+ in our replacement text:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"(?P<y>\d{4})-(?P<m>\d{2})-(?P<d>\d{2})").unwrap();
+ let before = "2012-03-14, 2013-01-01 and 2014-07-05";
+@@ -128,7 +128,7 @@ Note that if your regex gets complicated, you can use the `x` flag to
+ enable insignificant whitespace mode, which also lets you write comments:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"(?x)
+   (?P<y>\d{4}) # the year
+@@ -154,7 +154,7 @@ This demonstrates how to use a `RegexSet` to match multiple (possibly
+ overlapping) regular expressions in a single scan of the search text:
+ 
+ ```rust
+-use regex::RegexSet;
++use RegexSet;
+ 
+ let set = RegexSet::new(&[
+     r"\w+",
+@@ -211,7 +211,7 @@ Unicode scalar values. This means you can use Unicode characters directly
+ in your expression:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"(?i)Δ+").unwrap();
+ let mat = re.find("ΔδΔ").unwrap();
+@@ -238,7 +238,7 @@ of boolean properties are available as character classes. For example, you can
+ match a sequence of numerals, Greek or Cherokee letters:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"[\pN\p{Greek}\p{Cherokee}]+").unwrap();
+ let mat = re.find("abcΔᎠβⅠᏴγδⅡxyz").unwrap();
+@@ -331,7 +331,7 @@ This example shows how an alternation works, and what it means to prefer a
+ branch in the alternation over subsequent branches.
+ 
+ ```
+-use regex::Regex;
++use Regex;
+ 
+ let haystack = "samwise";
+ // If 'samwise' comes first in our alternation, then it is
+@@ -418,7 +418,7 @@ Flags can be toggled within a pattern. Here's an example that matches
+ case-insensitively for the first part but case-sensitively for the second part:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"(?i)a+(?-i)b+").unwrap();
+ let cap = re.captures("AaAaAbbBBBb").unwrap();
+@@ -433,7 +433,7 @@ Multi-line mode means `^` and `$` no longer match just at the beginning/end of
+ the input, but at the beginning/end of lines:
+ 
+ ```
+-# use regex::Regex;
++# use Regex;
+ let re = Regex::new(r"(?m)^line \d+").unwrap();
+ let m = re.find("line one\nline 2\n").unwrap();
+ assert_eq!(m.as_str(), "line 2");
+@@ -442,7 +442,7 @@ assert_eq!(m.as_str(), "line 2");
+ Note that `^` matches after new lines, even at the end of input:
+ 
+ ```
+-# use regex::Regex;
++# use Regex;
+ let re = Regex::new(r"(?m)^").unwrap();
+ let m = re.find_iter("test\n").last().unwrap();
+ assert_eq!((m.start(), m.end()), (5, 5));
+@@ -452,7 +452,7 @@ Here is an example that uses an ASCII word boundary instead of a Unicode
+ word boundary:
+ 
+ ```rust
+-# use regex::Regex;
++# use Regex;
+ # fn main() {
+ let re = Regex::new(r"(?-u:\b).+(?-u:\b)").unwrap();
+ let cap = re.captures("$$abc$$").unwrap();
+@@ -799,3 +799,29 @@ pub mod internal {
+     pub use crate::literal::LiteralSearcher;
+     pub use crate::prog::{EmptyLook, Inst, InstRanges, Program};
+ }
++
++#[test]
++fn manual_regex_literal_optimization() {
++    let needles = vec![
++        "aA", "bA", "cA", "dA", "eA", "fA", "gA", "hA", "iA", "jA", "kA", "lA",
++        "mA", "nA", "oA", "pA", "qA", "rA", "sA", "tA", "uA", "vA", "wA", "xA",
++        "yA", "zA",
++    ];
++    let pattern = needles.join("|");
++    let re = Regex::new(&pattern).unwrap();
++    let hay = "FUBAR";
++    assert_eq!(0, re.find_iter(hay).count());
++}
++
++#[test]
++fn manual_regex_simple_alternation() {
++    let re = Regex::new("foo|bar").unwrap();
++    assert!(re.is_match("foo"));
++    assert!(re.is_match("bar"));
++}
++
++#[test]
++fn manual_regex_no_match() {
++    let re = Regex::new("xyz").unwrap();
++    assert_eq!(0, re.find_iter("abc").count());
++}

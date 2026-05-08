@@ -1,0 +1,168 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/lib.rs,117,1,0,0,2,1.0,1.0,inf,"Err(_) => unreachable!(),"
+2,src/lib.rs,405,1,0,0,2,1.0,1.0,inf,Err(PodCastError::SizeMismatch)
+3,src/lib.rs,445,1,0,0,2,1.0,1.0,inf,fn manual_bytes_of_zst() {
+4,src/lib.rs,446,1,0,0,2,1.0,1.0,inf,let zst: [u32; 0] = [];
+5,src/lib.rs,447,1,0,0,2,1.0,1.0,inf,let result = bytes_of(&zst);
+6,src/lib.rs,448,1,0,0,2,1.0,1.0,inf,"assert_eq!(result.len(), 0);"
+7,src/lib.rs,114,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn bytes_of<T: Pod>(t: &T) -> &[u8] {
+8,src/lib.rs,115,1,2,0,0,0.5,0.5773502691896258,0.5,"match try_cast_slice::<T, u8>(core::slice::from_ref(t)) {"
+9,src/lib.rs,395,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn try_cast_slice<A: Pod, B: Pod>(a: &[A]) -> Result<&[B], PodCastError> {"
+10,src/lib.rs,398,1,2,0,0,0.5,0.5773502691896258,0.5,if align_of::<B>() > align_of::<A>()
+11,src/lib.rs,402,1,2,0,0,0.5,0.5773502691896258,0.5,} else if size_of::<B>() == size_of::<A>() {
+12,src/lib.rs,404,1,2,0,0,0.5,0.5773502691896258,0.5,} else if size_of::<A>() == 0 || size_of::<B>() == 0 {
+13,src/lib.rs,412,1,2,0,0,0.5,0.5773502691896258,0.5,}
+14,src/contiguous.rs,120,0,0,1,2,0.0,0.0,0.0,fn from_integer(value: Self::Int) -> Option<Self> {
+15,src/contiguous.rs,124,0,0,1,2,0.0,0.0,0.0,assert!(size_of::<Self>() == size_of::<Self::Int>());
+16,src/contiguous.rs,125,0,0,1,2,0.0,0.0,0.0,if Self::MIN_VALUE <= value && value <= Self::MAX_VALUE {
+17,src/contiguous.rs,133,0,0,1,2,0.0,0.0,0.0,"Some(unsafe { transmute_copy::<Self::Int, Self>(&value) })"
+18,src/contiguous.rs,135,0,0,1,2,0.0,0.0,0.0,None
+19,src/contiguous.rs,137,0,0,1,2,0.0,0.0,0.0,}
+20,src/contiguous.rs,155,0,0,1,2,0.0,0.0,0.0,fn into_integer(self) -> Self::Int {
+21,src/contiguous.rs,160,0,0,1,2,0.0,0.0,0.0,assert!(size_of::<Self>() == size_of::<Self::Int>());
+22,src/contiguous.rs,166,0,0,1,2,0.0,0.0,0.0,"unsafe { transmute_copy::<Self, Self::Int>(&self) }"
+23,src/contiguous.rs,167,0,0,1,2,0.0,0.0,0.0,}
+24,src/lib.rs,102,0,0,1,2,0.0,0.0,0.0,"fn something_went_wrong(src: &str, err: PodCastError) -> ! {"
+25,src/lib.rs,106,0,0,1,2,0.0,0.0,0.0,"panic!(""{src}>{err:?}"", src = src, err = err)"
+26,src/lib.rs,116,0,2,1,0,0.0,0.0,0.0,"Ok(s) => s,"
+27,src/lib.rs,119,0,2,1,0,0.0,0.0,0.0,}
+28,src/lib.rs,126,0,0,1,2,0.0,0.0,0.0,pub fn bytes_of_mut<T: Pod>(t: &mut T) -> &mut [u8] {
+29,src/lib.rs,127,0,0,1,2,0.0,0.0,0.0,"match try_cast_slice_mut::<T, u8>(core::slice::from_mut(t)) {"
+30,src/lib.rs,128,0,0,1,2,0.0,0.0,0.0,"Ok(s) => s,"
+31,src/lib.rs,129,0,0,1,2,0.0,0.0,0.0,"Err(_) => unreachable!(),"
+32,src/lib.rs,131,0,0,1,2,0.0,0.0,0.0,}
+33,src/lib.rs,139,0,0,1,2,0.0,0.0,0.0,pub fn from_bytes<T: Pod>(s: &[u8]) -> &T {
+34,src/lib.rs,140,0,0,1,2,0.0,0.0,0.0,match try_from_bytes(s) {
+35,src/lib.rs,141,0,0,1,2,0.0,0.0,0.0,"Ok(t) => t,"
+36,src/lib.rs,142,0,0,1,2,0.0,0.0,0.0,"Err(e) => something_went_wrong(""from_bytes"", e),"
+37,src/lib.rs,144,0,0,1,2,0.0,0.0,0.0,}
+38,src/lib.rs,152,0,0,1,2,0.0,0.0,0.0,pub fn from_bytes_mut<T: Pod>(s: &mut [u8]) -> &mut T {
+39,src/lib.rs,153,0,0,1,2,0.0,0.0,0.0,match try_from_bytes_mut(s) {
+40,src/lib.rs,154,0,0,1,2,0.0,0.0,0.0,"Ok(t) => t,"
+41,src/lib.rs,155,0,0,1,2,0.0,0.0,0.0,"Err(e) => something_went_wrong(""from_bytes_mut"", e),"
+42,src/lib.rs,157,0,0,1,2,0.0,0.0,0.0,}
+43,src/lib.rs,166,0,0,1,2,0.0,0.0,0.0,"pub fn try_from_bytes<T: Pod>(s: &[u8]) -> Result<&T, PodCastError> {"
+44,src/lib.rs,167,0,0,1,2,0.0,0.0,0.0,if s.len() != size_of::<T>() {
+45,src/lib.rs,168,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::SizeMismatch)
+46,src/lib.rs,169,0,0,1,2,0.0,0.0,0.0,} else if (s.as_ptr() as usize) % align_of::<T>() != 0 {
+47,src/lib.rs,170,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
+48,src/lib.rs,172,0,0,1,2,0.0,0.0,0.0,Ok(unsafe { &*(s.as_ptr() as *const T) })
+49,src/lib.rs,174,0,0,1,2,0.0,0.0,0.0,}
+50,src/lib.rs,183,0,0,1,2,0.0,0.0,0.0,pub fn try_from_bytes_mut<T: Pod>(
+51,src/lib.rs,186,0,0,1,2,0.0,0.0,0.0,if s.len() != size_of::<T>() {
+52,src/lib.rs,187,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::SizeMismatch)
+53,src/lib.rs,188,0,0,1,2,0.0,0.0,0.0,} else if (s.as_ptr() as usize) % align_of::<T>() != 0 {
+54,src/lib.rs,189,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
+55,src/lib.rs,191,0,0,1,2,0.0,0.0,0.0,Ok(unsafe { &mut *(s.as_mut_ptr() as *mut T) })
+56,src/lib.rs,193,0,0,1,2,0.0,0.0,0.0,}
+57,src/lib.rs,218,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {"
+58,src/lib.rs,219,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{:?}"", self)"
+59,src/lib.rs,220,0,0,1,2,0.0,0.0,0.0,}
+60,src/lib.rs,231,0,0,1,2,0.0,0.0,0.0,"pub fn cast<A: Pod, B: Pod>(a: A) -> B {"
+61,src/lib.rs,232,0,0,1,2,0.0,0.0,0.0,if size_of::<A>() == size_of::<B>() {
+62,src/lib.rs,233,0,0,1,2,0.0,0.0,0.0,unsafe { core::mem::transmute_copy(&a) }
+63,src/lib.rs,235,0,0,1,2,0.0,0.0,0.0,"something_went_wrong(""cast"", PodCastError::SizeMismatch)"
+64,src/lib.rs,237,0,0,1,2,0.0,0.0,0.0,}
+65,src/lib.rs,245,0,0,1,2,0.0,0.0,0.0,"pub fn cast_mut<A: Pod, B: Pod>(a: &mut A) -> &mut B {"
+66,src/lib.rs,246,0,0,1,2,0.0,0.0,0.0,if size_of::<A>() == size_of::<B>() && align_of::<A>() >= align_of::<B>() {
+67,src/lib.rs,248,0,0,1,2,0.0,0.0,0.0,match try_cast_mut(a) {
+68,src/lib.rs,249,0,0,1,2,0.0,0.0,0.0,"Ok(b) => b,"
+69,src/lib.rs,250,0,0,1,2,0.0,0.0,0.0,"Err(_) => unreachable!(),"
+70,src/lib.rs,253,0,0,1,2,0.0,0.0,0.0,match try_cast_mut(a) {
+71,src/lib.rs,254,0,0,1,2,0.0,0.0,0.0,"Ok(b) => b,"
+72,src/lib.rs,255,0,0,1,2,0.0,0.0,0.0,"Err(e) => something_went_wrong(""cast_mut"", e),"
+73,src/lib.rs,258,0,0,1,2,0.0,0.0,0.0,}
+74,src/lib.rs,266,0,0,1,2,0.0,0.0,0.0,"pub fn cast_ref<A: Pod, B: Pod>(a: &A) -> &B {"
+75,src/lib.rs,267,0,0,1,2,0.0,0.0,0.0,if size_of::<A>() == size_of::<B>() && align_of::<A>() >= align_of::<B>() {
+76,src/lib.rs,269,0,0,1,2,0.0,0.0,0.0,match try_cast_ref(a) {
+77,src/lib.rs,270,0,0,1,2,0.0,0.0,0.0,"Ok(b) => b,"
+78,src/lib.rs,271,0,0,1,2,0.0,0.0,0.0,"Err(_) => unreachable!(),"
+79,src/lib.rs,274,0,0,1,2,0.0,0.0,0.0,match try_cast_ref(a) {
+80,src/lib.rs,275,0,0,1,2,0.0,0.0,0.0,"Ok(b) => b,"
+81,src/lib.rs,276,0,0,1,2,0.0,0.0,0.0,"Err(e) => something_went_wrong(""cast_ref"", e),"
+82,src/lib.rs,279,0,0,1,2,0.0,0.0,0.0,}
+83,src/lib.rs,287,0,0,1,2,0.0,0.0,0.0,"pub fn cast_slice<A: Pod, B: Pod>(a: &[A]) -> &[B] {"
+84,src/lib.rs,288,0,0,1,2,0.0,0.0,0.0,match try_cast_slice(a) {
+85,src/lib.rs,289,0,0,1,2,0.0,0.0,0.0,"Ok(b) => b,"
+86,src/lib.rs,290,0,0,1,2,0.0,0.0,0.0,"Err(e) => something_went_wrong(""cast_slice"", e),"
+87,src/lib.rs,292,0,0,1,2,0.0,0.0,0.0,}
+88,src/lib.rs,300,0,0,1,2,0.0,0.0,0.0,"pub fn cast_slice_mut<A: Pod, B: Pod>(a: &mut [A]) -> &mut [B] {"
+89,src/lib.rs,301,0,0,1,2,0.0,0.0,0.0,match try_cast_slice_mut(a) {
+90,src/lib.rs,302,0,0,1,2,0.0,0.0,0.0,"Ok(b) => b,"
+91,src/lib.rs,303,0,0,1,2,0.0,0.0,0.0,"Err(e) => something_went_wrong(""cast_slice_mut"", e),"
+92,src/lib.rs,305,0,0,1,2,0.0,0.0,0.0,}
+93,src/lib.rs,309,0,0,1,2,0.0,0.0,0.0,"pub fn pod_align_to<T: Pod, U: Pod>(vals: &[T]) -> (&[T], &[U], &[T]) {"
+94,src/lib.rs,310,0,0,1,2,0.0,0.0,0.0,unsafe { vals.align_to::<U>() }
+95,src/lib.rs,311,0,0,1,2,0.0,0.0,0.0,}
+96,src/lib.rs,315,0,0,1,2,0.0,0.0,0.0,"pub fn pod_align_to_mut<T: Pod, U: Pod>("
+97,src/lib.rs,318,0,0,1,2,0.0,0.0,0.0,unsafe { vals.align_to_mut::<U>() }
+98,src/lib.rs,319,0,0,1,2,0.0,0.0,0.0,}
+99,src/lib.rs,332,0,0,1,2,0.0,0.0,0.0,"pub fn try_cast<A: Pod, B: Pod>(a: A) -> Result<B, PodCastError> {"
+100,src/lib.rs,333,0,0,1,2,0.0,0.0,0.0,if size_of::<A>() == size_of::<B>() {
+101,src/lib.rs,334,0,0,1,2,0.0,0.0,0.0,Ok(unsafe { core::mem::transmute_copy(&a) })
+102,src/lib.rs,336,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::SizeMismatch)
+103,src/lib.rs,338,0,0,1,2,0.0,0.0,0.0,}
+104,src/lib.rs,347,0,0,1,2,0.0,0.0,0.0,"pub fn try_cast_ref<A: Pod, B: Pod>(a: &A) -> Result<&B, PodCastError> {"
+105,src/lib.rs,350,0,0,1,2,0.0,0.0,0.0,if align_of::<B>() > align_of::<A>()
+106,src/lib.rs,351,0,0,1,2,0.0,0.0,0.0,&& (a as *const A as usize) % align_of::<B>() != 0
+107,src/lib.rs,353,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
+108,src/lib.rs,354,0,0,1,2,0.0,0.0,0.0,} else if size_of::<B>() == size_of::<A>() {
+109,src/lib.rs,355,0,0,1,2,0.0,0.0,0.0,Ok(unsafe { &*(a as *const A as *const B) })
+110,src/lib.rs,357,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::SizeMismatch)
+111,src/lib.rs,359,0,0,1,2,0.0,0.0,0.0,}
+112,src/lib.rs,365,0,0,1,2,0.0,0.0,0.0,"pub fn try_cast_mut<A: Pod, B: Pod>(a: &mut A) -> Result<&mut B, PodCastError> {"
+113,src/lib.rs,368,0,0,1,2,0.0,0.0,0.0,if align_of::<B>() > align_of::<A>()
+114,src/lib.rs,369,0,0,1,2,0.0,0.0,0.0,&& (a as *mut A as usize) % align_of::<B>() != 0
+115,src/lib.rs,371,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
+116,src/lib.rs,372,0,0,1,2,0.0,0.0,0.0,} else if size_of::<B>() == size_of::<A>() {
+117,src/lib.rs,373,0,0,1,2,0.0,0.0,0.0,Ok(unsafe { &mut *(a as *mut A as *mut B) })
+118,src/lib.rs,375,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::SizeMismatch)
+119,src/lib.rs,377,0,0,1,2,0.0,0.0,0.0,}
+120,src/lib.rs,399,0,0,1,2,0.0,0.0,0.0,&& (a.as_ptr() as usize) % align_of::<B>() != 0
+121,src/lib.rs,401,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
+122,src/lib.rs,403,0,0,1,2,0.0,0.0,0.0,"Ok(unsafe { core::slice::from_raw_parts(a.as_ptr() as *const B, a.len()) })"
+123,src/lib.rs,406,0,2,1,0,0.0,0.0,0.0,} else if core::mem::size_of_val(a) % size_of::<B>() == 0 {
+124,src/lib.rs,407,0,2,1,0,0.0,0.0,0.0,let new_len = core::mem::size_of_val(a) / size_of::<B>();
+125,src/lib.rs,408,0,2,1,0,0.0,0.0,0.0,"Ok(unsafe { core::slice::from_raw_parts(a.as_ptr() as *const B, new_len) })"
+126,src/lib.rs,410,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::OutputSliceWouldHaveSlop)
+127,src/lib.rs,419,0,0,1,2,0.0,0.0,0.0,"pub fn try_cast_slice_mut<A: Pod, B: Pod>("
+128,src/lib.rs,424,0,0,1,2,0.0,0.0,0.0,if align_of::<B>() > align_of::<A>()
+129,src/lib.rs,425,0,0,1,2,0.0,0.0,0.0,&& (a.as_mut_ptr() as usize) % align_of::<B>() != 0
+130,src/lib.rs,427,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
+131,src/lib.rs,428,0,0,1,2,0.0,0.0,0.0,} else if size_of::<B>() == size_of::<A>() {
+132,src/lib.rs,429,0,0,1,2,0.0,0.0,0.0,Ok(unsafe {
+133,src/lib.rs,430,0,0,1,2,0.0,0.0,0.0,"core::slice::from_raw_parts_mut(a.as_mut_ptr() as *mut B, a.len())"
+134,src/lib.rs,432,0,0,1,2,0.0,0.0,0.0,} else if size_of::<A>() == 0 || size_of::<B>() == 0 {
+135,src/lib.rs,433,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::SizeMismatch)
+136,src/lib.rs,434,0,0,1,2,0.0,0.0,0.0,} else if core::mem::size_of_val(a) % size_of::<B>() == 0 {
+137,src/lib.rs,435,0,0,1,2,0.0,0.0,0.0,let new_len = core::mem::size_of_val(a) / size_of::<B>();
+138,src/lib.rs,436,0,0,1,2,0.0,0.0,0.0,Ok(unsafe {
+139,src/lib.rs,437,0,0,1,2,0.0,0.0,0.0,"core::slice::from_raw_parts_mut(a.as_mut_ptr() as *mut B, new_len)"
+140,src/lib.rs,440,0,0,1,2,0.0,0.0,0.0,Err(PodCastError::OutputSliceWouldHaveSlop)
+141,src/lib.rs,442,0,0,1,2,0.0,0.0,0.0,}
+142,src/lib.rs,449,0,0,1,2,0.0,0.0,0.0,}
+143,src/lib.rs,452,0,1,1,1,0.0,0.0,0.0,fn manual_bytes_of_nonempty_array() {
+144,src/lib.rs,453,0,1,1,1,0.0,0.0,0.0,"let arr: [u32; 3] = [1, 2, 3];"
+145,src/lib.rs,454,0,1,1,1,0.0,0.0,0.0,let result = bytes_of(&arr);
+146,src/lib.rs,455,0,1,1,1,0.0,0.0,0.0,"assert_eq!(result.len(), 12);"
+147,src/lib.rs,456,0,1,1,1,0.0,0.0,0.0,}
+148,src/lib.rs,459,0,1,1,1,0.0,0.0,0.0,fn manual_bytes_of_scalar() {
+149,src/lib.rs,460,0,1,1,1,0.0,0.0,0.0,let val: u32 = 42;
+150,src/lib.rs,461,0,1,1,1,0.0,0.0,0.0,let result = bytes_of(&val);
+151,src/lib.rs,462,0,1,1,1,0.0,0.0,0.0,"assert_eq!(result.len(), 4);"
+152,src/lib.rs,463,0,1,1,1,0.0,0.0,0.0,}
+153,src/transparent.rs,91,0,0,1,2,0.0,0.0,0.0,fn wrap_ref(s: &Wrapped) -> &Self {
+154,src/transparent.rs,93,0,0,1,2,0.0,0.0,0.0,assert!(size_of::<*const Wrapped>() == size_of::<*const Self>());
+155,src/transparent.rs,103,0,0,1,2,0.0,0.0,0.0,let wrapped_ptr = s as *const Wrapped;
+156,src/transparent.rs,104,0,0,1,2,0.0,0.0,0.0,let wrapper_ptr: *const Self = transmute_copy(&wrapped_ptr);
+157,src/transparent.rs,105,0,0,1,2,0.0,0.0,0.0,&*wrapper_ptr
+158,src/transparent.rs,107,0,0,1,2,0.0,0.0,0.0,}
+159,src/transparent.rs,116,0,0,1,2,0.0,0.0,0.0,fn wrap_mut(s: &mut Wrapped) -> &mut Self {
+160,src/transparent.rs,118,0,0,1,2,0.0,0.0,0.0,assert!(size_of::<*mut Wrapped>() == size_of::<*mut Self>());
+161,src/transparent.rs,128,0,0,1,2,0.0,0.0,0.0,let wrapped_ptr = s as *mut Wrapped;
+162,src/transparent.rs,129,0,0,1,2,0.0,0.0,0.0,let wrapper_ptr: *mut Self = transmute_copy(&wrapped_ptr);
+163,src/transparent.rs,130,0,0,1,2,0.0,0.0,0.0,&mut *wrapper_ptr
+164,src/transparent.rs,132,0,0,1,2,0.0,0.0,0.0,}
+165,src/zeroable.rs,22,0,0,1,2,0.0,0.0,0.0,fn zeroed() -> Self {
+166,src/zeroable.rs,23,0,0,1,2,0.0,0.0,0.0,unsafe { core::mem::zeroed() }
+167,src/zeroable.rs,24,0,0,1,2,0.0,0.0,0.0,}

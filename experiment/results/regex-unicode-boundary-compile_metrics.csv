@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/compile.rs:146,true,144,681,392.5,578,0.034334763948497854,0.16237482117310442,143,false,false,false,false,4194,src/compile.rs,146,expr.properties().look_set_prefix().contains(Look::Start);
+dstar2,src/compile.rs:146,true,144,681,392.5,578,0.034334763948497854,0.16237482117310442,143,false,false,false,false,4194,src/compile.rs,146,expr.properties().look_set_prefix().contains(Look::Start);
+tarantula,src/compile.rs:146,true,144,681,392.5,578,0.034334763948497854,0.16237482117310442,143,false,false,false,false,4194,src/compile.rs,146,expr.properties().look_set_prefix().contains(Look::Start);

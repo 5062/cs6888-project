@@ -1,0 +1,2051 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/parse.rs,113,1,0,0,2,1.0,1.0,inf,let ch = s.chars().next().unwrap();
+2,src/parse.rs,114,1,0,0,2,1.0,1.0,inf,if is_whitespace(ch) {
+3,src/parse.rs,117,1,0,0,2,1.0,1.0,inf,}
+4,src/parse.rs,152,1,0,0,2,1.0,1.0,inf,fn is_whitespace(ch: char) -> bool {
+5,src/parse.rs,154,1,0,0,2,1.0,1.0,inf,ch.is_whitespace() || ch == '\u{200e}' || ch == '\u{200f}'
+6,src/parse.rs,155,1,0,0,2,1.0,1.0,inf,}
+7,src/fallback.rs,370,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"Some((offset, _ch)) => &trunc_lo[..offset],"
+8,src/fallback.rs,371,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"None => trunc_lo,"
+9,src/parse.rs,108,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,s = s.advance(1);
+10,src/parse.rs,109,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,continue;
+11,src/parse.rs,327,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,end = i;
+12,src/parse.rs,328,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,break;
+13,src/parse.rs,839,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,let digit = 10 + (b - b'a') as u64;
+14,src/parse.rs,840,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,if digit >= base {
+15,src/parse.rs,841,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,break;
+16,src/parse.rs,844,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,b'A'..=b'F' => {
+17,src/parse.rs,857,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"_ => break,"
+18,src/detection.rs,7,1,2,0,0,0.5,0.5773502691896258,0.5,pub(crate) fn inside_proc_macro() -> bool {
+19,src/detection.rs,8,1,2,0,0,0.5,0.5773502691896258,0.5,match WORKS.load(Ordering::Relaxed) {
+20,src/detection.rs,9,1,2,0,0,0.5,0.5773502691896258,0.5,"1 => return false,"
+21,src/detection.rs,11,1,2,0,0,0.5,0.5773502691896258,0.5,_ => {}
+22,src/detection.rs,14,1,2,0,0,0.5,0.5773502691896258,0.5,INIT.call_once(initialize);
+23,src/detection.rs,15,1,2,0,0,0.5,0.5773502691896258,0.5,inside_proc_macro()
+24,src/detection.rs,16,1,2,0,0,0.5,0.5773502691896258,0.5,}
+25,src/detection.rs,27,1,2,0,0,0.5,0.5773502691896258,0.5,fn initialize() {
+26,src/detection.rs,28,1,2,0,0,0.5,0.5773502691896258,0.5,let available = proc_macro::is_available();
+27,src/detection.rs,29,1,2,0,0,0.5,0.5773502691896258,0.5,"WORKS.store(available as usize + 1, Ordering::Relaxed);"
+28,src/detection.rs,30,1,2,0,0,0.5,0.5773502691896258,0.5,}
+29,src/fallback.rs,64,1,2,0,0,0.5,0.5773502691896258,0.5,fn take_inner(self) -> RcVecBuilder<TokenTree> {
+30,src/fallback.rs,65,1,2,0,0,0.5,0.5773502691896258,0.5,let nodrop = ManuallyDrop::new(self);
+31,src/fallback.rs,66,1,2,0,0,0.5,0.5773502691896258,0.5,unsafe { ptr::read(&nodrop.inner) }.make_owned()
+32,src/fallback.rs,67,1,2,0,0,0.5,0.5773502691896258,0.5,}
+33,src/fallback.rs,122,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn new() -> Self {
+34,src/fallback.rs,123,1,2,0,0,0.5,0.5773502691896258,0.5,TokenStreamBuilder {
+35,src/fallback.rs,126,1,2,0,0,0.5,0.5773502691896258,0.5,}
+36,src/fallback.rs,134,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn push_token_from_parser(&mut self, tt: TokenTree) {"
+37,src/fallback.rs,135,1,2,0,0,0.5,0.5773502691896258,0.5,self.inner.push(tt);
+38,src/fallback.rs,136,1,2,0,0,0.5,0.5773502691896258,0.5,}
+39,src/fallback.rs,138,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn build(self) -> TokenStream {
+40,src/fallback.rs,139,1,2,0,0,0.5,0.5773502691896258,0.5,TokenStream {
+41,src/fallback.rs,142,1,2,0,0,0.5,0.5773502691896258,0.5,}
+42,src/fallback.rs,146,1,2,0,0,0.5,0.5773502691896258,0.5,fn get_cursor(src: &str) -> Cursor {
+43,src/fallback.rs,152,1,2,0,0,0.5,0.5773502691896258,0.5,SOURCE_MAP.with(|cm| {
+44,src/fallback.rs,153,1,2,0,0,0.5,0.5773502691896258,0.5,let mut cm = cm.borrow_mut();
+45,src/fallback.rs,154,1,2,0,0,0.5,0.5773502691896258,0.5,let span = cm.add_file(src);
+46,src/fallback.rs,155,1,2,0,0,0.5,0.5773502691896258,0.5,Cursor {
+47,src/fallback.rs,159,1,2,0,0,0.5,0.5773502691896258,0.5,})
+48,src/fallback.rs,160,1,2,0,0,0.5,0.5773502691896258,0.5,}
+49,src/fallback.rs,170,1,2,0,0,0.5,0.5773502691896258,0.5,"fn from_str(src: &str) -> Result<TokenStream, LexError> {"
+50,src/fallback.rs,172,1,2,0,0,0.5,0.5773502691896258,0.5,let mut cursor = get_cursor(src);
+51,src/fallback.rs,176,1,2,0,0,0.5,0.5773502691896258,0.5,if cursor.starts_with(BYTE_ORDER_MARK) {
+52,src/fallback.rs,178,1,2,0,0,0.5,0.5773502691896258,0.5,}
+53,src/fallback.rs,180,1,2,0,0,0.5,0.5773502691896258,0.5,parse::token_stream(cursor)
+54,src/fallback.rs,181,1,2,0,0,0.5,0.5773502691896258,0.5,}
+55,src/fallback.rs,291,1,2,0,0,0.5,0.5773502691896258,0.5,fn into_iter(self) -> TokenTreeIter {
+56,src/fallback.rs,292,1,2,0,0,0.5,0.5773502691896258,0.5,self.take_inner().into_iter()
+57,src/fallback.rs,293,1,2,0,0,0.5,0.5773502691896258,0.5,}
+58,src/fallback.rs,361,1,2,0,0,0.5,0.5773502691896258,0.5,"fn span_within(&self, span: Span) -> bool {"
+59,src/fallback.rs,362,1,2,0,0,0.5,0.5773502691896258,0.5,span.lo >= self.span.lo && span.hi <= self.span.hi
+60,src/fallback.rs,363,1,2,0,0,0.5,0.5773502691896258,0.5,}
+61,src/fallback.rs,365,1,2,0,0,0.5,0.5773502691896258,0.5,"fn source_text(&self, span: Span) -> String {"
+62,src/fallback.rs,366,1,2,0,0,0.5,0.5773502691896258,0.5,let lo = (span.lo - self.span.lo) as usize;
+63,src/fallback.rs,367,1,2,0,0,0.5,0.5773502691896258,0.5,let trunc_lo = &self.source_text[lo..];
+64,src/fallback.rs,368,1,2,0,0,0.5,0.5773502691896258,0.5,let char_len = (span.hi - span.lo) as usize;
+65,src/fallback.rs,369,1,2,0,0,0.5,0.5773502691896258,0.5,let source_text = match trunc_lo.char_indices().nth(char_len) {
+66,src/fallback.rs,373,1,2,0,0,0.5,0.5773502691896258,0.5,source_text.to_owned()
+67,src/fallback.rs,374,1,2,0,0,0.5,0.5773502691896258,0.5,}
+68,src/fallback.rs,380,1,2,0,0,0.5,0.5773502691896258,0.5,"fn lines_offsets(s: &str) -> (usize, Vec<usize>) {"
+69,src/fallback.rs,381,1,2,0,0,0.5,0.5773502691896258,0.5,let mut lines = vec![0];
+70,src/fallback.rs,382,1,2,0,0,0.5,0.5773502691896258,0.5,let mut total = 0;
+71,src/fallback.rs,384,1,2,0,0,0.5,0.5773502691896258,0.5,for ch in s.chars() {
+72,src/fallback.rs,385,1,2,0,0,0.5,0.5773502691896258,0.5,total += 1;
+73,src/fallback.rs,386,1,2,0,0,0.5,0.5773502691896258,0.5,if ch == '\n' {
+74,src/fallback.rs,388,1,2,0,0,0.5,0.5773502691896258,0.5,}
+75,src/fallback.rs,391,1,2,0,0,0.5,0.5773502691896258,0.5,"(total, lines)"
+76,src/fallback.rs,392,1,2,0,0,0.5,0.5773502691896258,0.5,}
+77,src/fallback.rs,401,1,2,0,0,0.5,0.5773502691896258,0.5,fn next_start_pos(&self) -> u32 {
+78,src/fallback.rs,406,1,2,0,0,0.5,0.5773502691896258,0.5,self.files.last().unwrap().span.hi + 1
+79,src/fallback.rs,407,1,2,0,0,0.5,0.5773502691896258,0.5,}
+80,src/fallback.rs,409,1,2,0,0,0.5,0.5773502691896258,0.5,"fn add_file(&mut self, src: &str) -> Span {"
+81,src/fallback.rs,410,1,2,0,0,0.5,0.5773502691896258,0.5,"let (len, lines) = lines_offsets(src);"
+82,src/fallback.rs,411,1,2,0,0,0.5,0.5773502691896258,0.5,let lo = self.next_start_pos();
+83,src/fallback.rs,412,1,2,0,0,0.5,0.5773502691896258,0.5,let span = Span {
+84,src/fallback.rs,413,1,2,0,0,0.5,0.5773502691896258,0.5,"lo,"
+85,src/fallback.rs,417,1,2,0,0,0.5,0.5773502691896258,0.5,self.files.push(FileInfo {
+86,src/fallback.rs,418,1,2,0,0,0.5,0.5773502691896258,0.5,"source_text: src.to_owned(),"
+87,src/fallback.rs,423,1,2,0,0,0.5,0.5773502691896258,0.5,span
+88,src/fallback.rs,424,1,2,0,0,0.5,0.5773502691896258,0.5,}
+89,src/fallback.rs,440,1,2,0,0,0.5,0.5773502691896258,0.5,"fn fileinfo(&self, span: Span) -> &FileInfo {"
+90,src/fallback.rs,441,1,2,0,0,0.5,0.5773502691896258,0.5,for file in &self.files {
+91,src/fallback.rs,442,1,2,0,0,0.5,0.5773502691896258,0.5,if file.span_within(span) {
+92,src/fallback.rs,443,1,2,0,0,0.5,0.5773502691896258,0.5,return file;
+93,src/fallback.rs,444,1,2,0,0,0.5,0.5773502691896258,0.5,}
+94,src/fallback.rs,447,1,2,0,0,0.5,0.5773502691896258,0.5,}
+95,src/fallback.rs,465,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn call_site() -> Self {
+96,src/fallback.rs,466,1,2,0,0,0.5,0.5773502691896258,0.5,"Span { lo: 0, hi: 0 }"
+97,src/fallback.rs,467,1,2,0,0,0.5,0.5773502691896258,0.5,}
+98,src/fallback.rs,563,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn source_text(&self) -> Option<String> {
+99,src/fallback.rs,569,1,2,0,0,0.5,0.5773502691896258,0.5,if self.is_call_site() {
+100,src/fallback.rs,572,1,2,0,0,0.5,0.5773502691896258,0.5,Some(SOURCE_MAP.with(|cm| cm.borrow().fileinfo(*self).source_text(*self)))
+101,src/fallback.rs,575,1,2,0,0,0.5,0.5773502691896258,0.5,}
+102,src/fallback.rs,604,1,2,0,0,0.5,0.5773502691896258,0.5,fn is_call_site(&self) -> bool {
+103,src/fallback.rs,605,1,2,0,0,0.5,0.5773502691896258,0.5,self.lo == 0 && self.hi == 0
+104,src/fallback.rs,606,1,2,0,0,0.5,0.5773502691896258,0.5,}
+105,src/fallback.rs,718,1,2,0,0,0.5,0.5773502691896258,0.5,"fn _new(string: &str, raw: bool, span: Span) -> Self {"
+106,src/fallback.rs,719,1,2,0,0,0.5,0.5773502691896258,0.5,"validate_ident(string, raw);"
+107,src/fallback.rs,721,1,2,0,0,0.5,0.5773502691896258,0.5,Ident {
+108,src/fallback.rs,722,1,2,0,0,0.5,0.5773502691896258,0.5,"sym: string.to_owned(),"
+109,src/fallback.rs,726,1,2,0,0,0.5,0.5773502691896258,0.5,}
+110,src/fallback.rs,728,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn new(string: &str, span: Span) -> Self {"
+111,src/fallback.rs,729,1,2,0,0,0.5,0.5773502691896258,0.5,"Ident::_new(string, false, span)"
+112,src/fallback.rs,730,1,2,0,0,0.5,0.5773502691896258,0.5,}
+113,src/fallback.rs,736,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn span(&self) -> Span {
+114,src/fallback.rs,737,1,2,0,0,0.5,0.5773502691896258,0.5,self.span
+115,src/fallback.rs,738,1,2,0,0,0.5,0.5773502691896258,0.5,}
+116,src/fallback.rs,740,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn set_span(&mut self, span: Span) {"
+117,src/fallback.rs,741,1,2,0,0,0.5,0.5773502691896258,0.5,self.span = span;
+118,src/fallback.rs,742,1,2,0,0,0.5,0.5773502691896258,0.5,}
+119,src/fallback.rs,745,1,2,0,0,0.5,0.5773502691896258,0.5,pub(crate) fn is_ident_start(c: char) -> bool {
+120,src/fallback.rs,746,1,2,0,0,0.5,0.5773502691896258,0.5,c == '_' || unicode_ident::is_xid_start(c)
+121,src/fallback.rs,747,1,2,0,0,0.5,0.5773502691896258,0.5,}
+122,src/fallback.rs,749,1,2,0,0,0.5,0.5773502691896258,0.5,pub(crate) fn is_ident_continue(c: char) -> bool {
+123,src/fallback.rs,750,1,2,0,0,0.5,0.5773502691896258,0.5,unicode_ident::is_xid_continue(c)
+124,src/fallback.rs,751,1,2,0,0,0.5,0.5773502691896258,0.5,}
+125,src/fallback.rs,753,1,2,0,0,0.5,0.5773502691896258,0.5,"fn validate_ident(string: &str, raw: bool) {"
+126,src/fallback.rs,754,1,2,0,0,0.5,0.5773502691896258,0.5,if string.is_empty() {
+127,src/fallback.rs,756,1,2,0,0,0.5,0.5773502691896258,0.5,}
+128,src/fallback.rs,758,1,2,0,0,0.5,0.5773502691896258,0.5,if string.bytes().all(|digit| b'0' <= digit && digit <= b'9') {
+129,src/fallback.rs,760,1,2,0,0,0.5,0.5773502691896258,0.5,}
+130,src/fallback.rs,762,1,2,0,0,0.5,0.5773502691896258,0.5,fn ident_ok(string: &str) -> bool {
+131,src/fallback.rs,763,1,2,0,0,0.5,0.5773502691896258,0.5,let mut chars = string.chars();
+132,src/fallback.rs,764,1,2,0,0,0.5,0.5773502691896258,0.5,let first = chars.next().unwrap();
+133,src/fallback.rs,765,1,2,0,0,0.5,0.5773502691896258,0.5,if !is_ident_start(first) {
+134,src/fallback.rs,767,1,2,0,0,0.5,0.5773502691896258,0.5,}
+135,src/fallback.rs,768,1,2,0,0,0.5,0.5773502691896258,0.5,for ch in chars {
+136,src/fallback.rs,773,1,2,0,0,0.5,0.5773502691896258,0.5,true
+137,src/fallback.rs,774,1,2,0,0,0.5,0.5773502691896258,0.5,}
+138,src/fallback.rs,776,1,2,0,0,0.5,0.5773502691896258,0.5,if !ident_ok(string) {
+139,src/fallback.rs,778,1,2,0,0,0.5,0.5773502691896258,0.5,}
+140,src/fallback.rs,780,1,2,0,0,0.5,0.5773502691896258,0.5,if raw {
+141,src/fallback.rs,787,1,2,0,0,0.5,0.5773502691896258,0.5,}
+142,src/fallback.rs,788,1,2,0,0,0.5,0.5773502691896258,0.5,}
+143,src/lib.rs,185,1,2,0,0,0.5,0.5773502691896258,0.5,fn _new(inner: imp::TokenStream) -> Self {
+144,src/lib.rs,186,1,2,0,0,0.5,0.5773502691896258,0.5,TokenStream {
+145,src/lib.rs,190,1,2,0,0,0.5,0.5773502691896258,0.5,}
+146,src/lib.rs,229,1,2,0,0,0.5,0.5773502691896258,0.5,"fn from_str(src: &str) -> Result<TokenStream, LexError> {"
+147,src/lib.rs,230,1,2,0,0,0.5,0.5773502691896258,0.5,let e = src.parse().map_err(|e| LexError {
+148,src/lib.rs,234,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(TokenStream::_new(e))
+149,src/lib.rs,235,1,2,0,0,0.5,0.5773502691896258,0.5,}
+150,src/lib.rs,381,1,2,0,0,0.5,0.5773502691896258,0.5,fn _new(inner: imp::Span) -> Self {
+151,src/lib.rs,382,1,2,0,0,0.5,0.5773502691896258,0.5,Span {
+152,src/lib.rs,386,1,2,0,0,0.5,0.5773502691896258,0.5,}
+153,src/lib.rs,388,1,2,0,0,0.5,0.5773502691896258,0.5,fn _new_fallback(inner: fallback::Span) -> Self {
+154,src/lib.rs,389,1,2,0,0,0.5,0.5773502691896258,0.5,Span {
+155,src/lib.rs,390,1,2,0,0,0.5,0.5773502691896258,0.5,"inner: inner.into(),"
+156,src/lib.rs,393,1,2,0,0,0.5,0.5773502691896258,0.5,}
+157,src/lib.rs,400,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn call_site() -> Self {
+158,src/lib.rs,401,1,2,0,0,0.5,0.5773502691896258,0.5,Span::_new(imp::Span::call_site())
+159,src/lib.rs,402,1,2,0,0,0.5,0.5773502691896258,0.5,}
+160,src/lib.rs,522,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn source_text(&self) -> Option<String> {
+161,src/lib.rs,523,1,2,0,0,0.5,0.5773502691896258,0.5,self.inner.source_text()
+162,src/lib.rs,524,1,2,0,0,0.5,0.5773502691896258,0.5,}
+163,src/lib.rs,550,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn span(&self) -> Span {
+164,src/lib.rs,551,1,2,0,0,0.5,0.5773502691896258,0.5,match self {
+165,src/lib.rs,553,1,2,0,0,0.5,0.5773502691896258,0.5,"TokenTree::Ident(t) => t.span(),"
+166,src/lib.rs,557,1,2,0,0,0.5,0.5773502691896258,0.5,}
+167,src/lib.rs,564,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn set_span(&mut self, span: Span) {"
+168,src/lib.rs,565,1,2,0,0,0.5,0.5773502691896258,0.5,match self {
+169,src/lib.rs,567,1,2,0,0,0.5,0.5773502691896258,0.5,"TokenTree::Ident(t) => t.set_span(span),"
+170,src/lib.rs,571,1,2,0,0,0.5,0.5773502691896258,0.5,}
+171,src/lib.rs,914,1,2,0,0,0.5,0.5773502691896258,0.5,fn _new(inner: imp::Ident) -> Self {
+172,src/lib.rs,915,1,2,0,0,0.5,0.5773502691896258,0.5,Ident {
+173,src/lib.rs,919,1,2,0,0,0.5,0.5773502691896258,0.5,}
+174,src/lib.rs,952,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn new(string: &str, span: Span) -> Self {"
+175,src/lib.rs,953,1,2,0,0,0.5,0.5773502691896258,0.5,"Ident::_new(imp::Ident::new(string, span.inner))"
+176,src/lib.rs,954,1,2,0,0,0.5,0.5773502691896258,0.5,}
+177,src/lib.rs,970,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn span(&self) -> Span {
+178,src/lib.rs,971,1,2,0,0,0.5,0.5773502691896258,0.5,Span::_new(self.inner.span())
+179,src/lib.rs,972,1,2,0,0,0.5,0.5773502691896258,0.5,}
+180,src/lib.rs,976,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn set_span(&mut self, span: Span) {"
+181,src/lib.rs,977,1,2,0,0,0.5,0.5773502691896258,0.5,self.inner.set_span(span.inner);
+182,src/lib.rs,978,1,2,0,0,0.5,0.5773502691896258,0.5,}
+183,src/lib.rs,1291,1,2,0,0,0.5,0.5773502691896258,0.5,fn next(&mut self) -> Option<TokenTree> {
+184,src/lib.rs,1292,1,2,0,0,0.5,0.5773502691896258,0.5,self.inner.next()
+185,src/lib.rs,1293,1,2,0,0,0.5,0.5773502691896258,0.5,}
+186,src/lib.rs,1311,1,2,0,0,0.5,0.5773502691896258,0.5,fn into_iter(self) -> IntoIter {
+187,src/lib.rs,1312,1,2,0,0,0.5,0.5773502691896258,0.5,IntoIter {
+188,src/lib.rs,1313,1,2,0,0,0.5,0.5773502691896258,0.5,"inner: self.inner.into_iter(),"
+189,src/lib.rs,1316,1,2,0,0,0.5,0.5773502691896258,0.5,}
+190,src/parse.rs,17,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn advance(&self, bytes: usize) -> Cursor<'a> {"
+191,src/parse.rs,18,1,2,0,0,0.5,0.5773502691896258,0.5,"let (_front, rest) = self.rest.split_at(bytes);"
+192,src/parse.rs,19,1,2,0,0,0.5,0.5773502691896258,0.5,Cursor {
+193,src/parse.rs,20,1,2,0,0,0.5,0.5773502691896258,0.5,"rest,"
+194,src/parse.rs,22,1,2,0,0,0.5,0.5773502691896258,0.5,"off: self.off + _front.chars().count() as u32,"
+195,src/parse.rs,24,1,2,0,0,0.5,0.5773502691896258,0.5,}
+196,src/parse.rs,26,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn starts_with(&self, s: &str) -> bool {"
+197,src/parse.rs,27,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.starts_with(s)
+198,src/parse.rs,28,1,2,0,0,0.5,0.5773502691896258,0.5,}
+199,src/parse.rs,41,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn is_empty(&self) -> bool {
+200,src/parse.rs,42,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.is_empty()
+201,src/parse.rs,43,1,2,0,0,0.5,0.5773502691896258,0.5,}
+202,src/parse.rs,45,1,2,0,0,0.5,0.5773502691896258,0.5,fn len(&self) -> usize {
+203,src/parse.rs,46,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.len()
+204,src/parse.rs,47,1,2,0,0,0.5,0.5773502691896258,0.5,}
+205,src/parse.rs,49,1,2,0,0,0.5,0.5773502691896258,0.5,fn as_bytes(&self) -> &'a [u8] {
+206,src/parse.rs,50,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.as_bytes()
+207,src/parse.rs,51,1,2,0,0,0.5,0.5773502691896258,0.5,}
+208,src/parse.rs,53,1,2,0,0,0.5,0.5773502691896258,0.5,fn bytes(&self) -> Bytes<'a> {
+209,src/parse.rs,54,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.bytes()
+210,src/parse.rs,55,1,2,0,0,0.5,0.5773502691896258,0.5,}
+211,src/parse.rs,57,1,2,0,0,0.5,0.5773502691896258,0.5,fn chars(&self) -> Chars<'a> {
+212,src/parse.rs,58,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.chars()
+213,src/parse.rs,59,1,2,0,0,0.5,0.5773502691896258,0.5,}
+214,src/parse.rs,61,1,2,0,0,0.5,0.5773502691896258,0.5,fn char_indices(&self) -> CharIndices<'a> {
+215,src/parse.rs,62,1,2,0,0,0.5,0.5773502691896258,0.5,self.rest.char_indices()
+216,src/parse.rs,63,1,2,0,0,0.5,0.5773502691896258,0.5,}
+217,src/parse.rs,65,1,2,0,0,0.5,0.5773502691896258,0.5,"fn parse(&self, tag: &str) -> Result<Cursor<'a>, Reject> {"
+218,src/parse.rs,66,1,2,0,0,0.5,0.5773502691896258,0.5,if self.starts_with(tag) {
+219,src/parse.rs,69,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+220,src/parse.rs,71,1,2,0,0,0.5,0.5773502691896258,0.5,}
+221,src/parse.rs,77,1,2,0,0,0.5,0.5773502691896258,0.5,fn skip_whitespace(input: Cursor) -> Cursor {
+222,src/parse.rs,78,1,2,0,0,0.5,0.5773502691896258,0.5,let mut s = input;
+223,src/parse.rs,80,1,2,0,0,0.5,0.5773502691896258,0.5,while !s.is_empty() {
+224,src/parse.rs,81,1,2,0,0,0.5,0.5773502691896258,0.5,let byte = s.as_bytes()[0];
+225,src/parse.rs,82,1,2,0,0,0.5,0.5773502691896258,0.5,if byte == b'/' {
+226,src/parse.rs,105,1,2,0,0,0.5,0.5773502691896258,0.5,}
+227,src/parse.rs,106,1,2,0,0,0.5,0.5773502691896258,0.5,match byte {
+228,src/parse.rs,107,1,2,0,0,0.5,0.5773502691896258,0.5,b' ' | 0x09..=0x0d => {
+229,src/parse.rs,111,1,2,0,0,0.5,0.5773502691896258,0.5,b if b.is_ascii() => {}
+230,src/parse.rs,120,1,2,0,0,0.5,0.5773502691896258,0.5,return s;
+231,src/parse.rs,122,1,2,0,0,0.5,0.5773502691896258,0.5,s
+232,src/parse.rs,123,1,2,0,0,0.5,0.5773502691896258,0.5,}
+233,src/parse.rs,168,1,2,0,0,0.5,0.5773502691896258,0.5,"pub(crate) fn token_stream(mut input: Cursor) -> Result<TokenStream, LexError> {"
+234,src/parse.rs,169,1,2,0,0,0.5,0.5773502691896258,0.5,let mut trees = TokenStreamBuilder::new();
+235,src/parse.rs,170,1,2,0,0,0.5,0.5773502691896258,0.5,let mut stack = Vec::new();
+236,src/parse.rs,173,1,2,0,0,0.5,0.5773502691896258,0.5,input = skip_whitespace(input);
+237,src/parse.rs,175,1,2,0,0,0.5,0.5773502691896258,0.5,"if let Ok((rest, ())) = doc_comment(input, &mut trees) {"
+238,src/parse.rs,178,1,2,0,0,0.5,0.5773502691896258,0.5,}
+239,src/parse.rs,181,1,2,0,0,0.5,0.5773502691896258,0.5,let lo = input.off;
+240,src/parse.rs,183,1,2,0,0,0.5,0.5773502691896258,0.5,let first = match input.bytes().next() {
+241,src/parse.rs,184,1,2,0,0,0.5,0.5773502691896258,0.5,"Some(first) => first,"
+242,src/parse.rs,185,1,2,0,0,0.5,0.5773502691896258,0.5,None => match stack.last() {
+243,src/parse.rs,186,1,2,0,0,0.5,0.5773502691896258,0.5,"None => return Ok(trees.build()),"
+244,src/parse.rs,202,1,2,0,0,0.5,0.5773502691896258,0.5,"_ => None,"
+245,src/parse.rs,210,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Some(close_delimiter) = match first {
+246,src/parse.rs,214,1,2,0,0,0.5,0.5773502691896258,0.5,"_ => None,"
+247,src/parse.rs,237,1,2,0,0,0.5,0.5773502691896258,0.5,"let (rest, mut tt) = match leaf_token(input) {"
+248,src/parse.rs,238,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((rest, tt)) => (rest, tt),"
+249,src/parse.rs,241,1,2,0,0,0.5,0.5773502691896258,0.5,tt.set_span(crate::Span::_new_fallback(Span {
+250,src/parse.rs,247,1,2,0,0,0.5,0.5773502691896258,0.5,trees.push_token_from_parser(tt);
+251,src/parse.rs,248,1,2,0,0,0.5,0.5773502691896258,0.5,input = rest;
+252,src/parse.rs,251,1,2,0,0,0.5,0.5773502691896258,0.5,}
+253,src/parse.rs,266,1,2,0,0,0.5,0.5773502691896258,0.5,fn leaf_token(input: Cursor) -> PResult<TokenTree> {
+254,src/parse.rs,267,1,2,0,0,0.5,0.5773502691896258,0.5,"if let Ok((input, l)) = literal(input) {"
+255,src/parse.rs,270,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if let Ok((input, p)) = punct(input) {"
+256,src/parse.rs,272,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if let Ok((input, i)) = ident(input) {"
+257,src/parse.rs,273,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((input, TokenTree::Ident(i)))"
+258,src/parse.rs,281,1,2,0,0,0.5,0.5773502691896258,0.5,}
+259,src/parse.rs,283,1,2,0,0,0.5,0.5773502691896258,0.5,fn ident(input: Cursor) -> PResult<crate::Ident> {
+260,src/parse.rs,284,1,2,0,0,0.5,0.5773502691896258,0.5,if [
+261,src/parse.rs,288,1,2,0,0,0.5,0.5773502691896258,0.5,.any(|prefix| input.starts_with(prefix))
+262,src/parse.rs,292,1,2,0,0,0.5,0.5773502691896258,0.5,ident_any(input)
+263,src/parse.rs,294,1,2,0,0,0.5,0.5773502691896258,0.5,}
+264,src/parse.rs,296,1,2,0,0,0.5,0.5773502691896258,0.5,fn ident_any(input: Cursor) -> PResult<crate::Ident> {
+265,src/parse.rs,297,1,2,0,0,0.5,0.5773502691896258,0.5,"let raw = input.starts_with(""r#"");"
+266,src/parse.rs,298,1,2,0,0,0.5,0.5773502691896258,0.5,let rest = input.advance((raw as usize) << 1);
+267,src/parse.rs,300,1,2,0,0,0.5,0.5773502691896258,0.5,"let (rest, sym) = ident_not_raw(rest)?;"
+268,src/parse.rs,302,1,2,0,0,0.5,0.5773502691896258,0.5,if !raw {
+269,src/parse.rs,303,1,2,0,0,0.5,0.5773502691896258,0.5,"let ident = crate::Ident::new(sym, crate::Span::call_site());"
+270,src/parse.rs,304,1,2,0,0,0.5,0.5773502691896258,0.5,"return Ok((rest, ident));"
+271,src/parse.rs,314,1,2,0,0,0.5,0.5773502691896258,0.5,}
+272,src/parse.rs,316,1,2,0,0,0.5,0.5773502691896258,0.5,fn ident_not_raw(input: Cursor) -> PResult<&str> {
+273,src/parse.rs,317,1,2,0,0,0.5,0.5773502691896258,0.5,let mut chars = input.char_indices();
+274,src/parse.rs,319,1,2,0,0,0.5,0.5773502691896258,0.5,match chars.next() {
+275,src/parse.rs,320,1,2,0,0,0.5,0.5773502691896258,0.5,"Some((_, ch)) if is_ident_start(ch) => {}"
+276,src/parse.rs,324,1,2,0,0,0.5,0.5773502691896258,0.5,let mut end = input.len();
+277,src/parse.rs,325,1,2,0,0,0.5,0.5773502691896258,0.5,"for (i, ch) in chars {"
+278,src/parse.rs,326,1,2,0,0,0.5,0.5773502691896258,0.5,if !is_ident_continue(ch) {
+279,src/parse.rs,332,1,2,0,0,0.5,0.5773502691896258,0.5,"Ok((input.advance(end), &input.rest[..end]))"
+280,src/parse.rs,333,1,2,0,0,0.5,0.5773502691896258,0.5,}
+281,src/parse.rs,335,1,2,0,0,0.5,0.5773502691896258,0.5,pub(crate) fn literal(input: Cursor) -> PResult<Literal> {
+282,src/parse.rs,336,1,2,0,0,0.5,0.5773502691896258,0.5,let rest = literal_nocapture(input)?;
+283,src/parse.rs,339,1,2,0,0,0.5,0.5773502691896258,0.5,}
+284,src/parse.rs,341,1,2,0,0,0.5,0.5773502691896258,0.5,"fn literal_nocapture(input: Cursor) -> Result<Cursor, Reject> {"
+285,src/parse.rs,342,1,2,0,0,0.5,0.5773502691896258,0.5,if let Ok(ok) = string(input) {
+286,src/parse.rs,344,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Ok(ok) = byte_string(input) {
+287,src/parse.rs,346,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Ok(ok) = c_string(input) {
+288,src/parse.rs,348,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Ok(ok) = byte(input) {
+289,src/parse.rs,350,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Ok(ok) = character(input) {
+290,src/parse.rs,352,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Ok(ok) = float(input) {
+291,src/parse.rs,354,1,2,0,0,0.5,0.5773502691896258,0.5,} else if let Ok(ok) = int(input) {
+292,src/parse.rs,357,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+293,src/parse.rs,359,1,2,0,0,0.5,0.5773502691896258,0.5,}
+294,src/parse.rs,368,1,2,0,0,0.5,0.5773502691896258,0.5,"fn string(input: Cursor) -> Result<Cursor, Reject> {"
+295,src/parse.rs,369,1,2,0,0,0.5,0.5773502691896258,0.5,"if let Ok(input) = input.parse(""\"""") {"
+296,src/parse.rs,371,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if let Ok(input) = input.parse(""r"") {"
+297,src/parse.rs,374,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+298,src/parse.rs,376,1,2,0,0,0.5,0.5773502691896258,0.5,}
+299,src/parse.rs,431,1,2,0,0,0.5,0.5773502691896258,0.5,"fn byte_string(input: Cursor) -> Result<Cursor, Reject> {"
+300,src/parse.rs,432,1,2,0,0,0.5,0.5773502691896258,0.5,"if let Ok(input) = input.parse(""b\"""") {"
+301,src/parse.rs,434,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if let Ok(input) = input.parse(""br"") {"
+302,src/parse.rs,437,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+303,src/parse.rs,439,1,2,0,0,0.5,0.5773502691896258,0.5,}
+304,src/parse.rs,512,1,2,0,0,0.5,0.5773502691896258,0.5,"fn c_string(input: Cursor) -> Result<Cursor, Reject> {"
+305,src/parse.rs,513,1,2,0,0,0.5,0.5773502691896258,0.5,"if let Ok(input) = input.parse(""c\"""") {"
+306,src/parse.rs,515,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if let Ok(input) = input.parse(""cr"") {"
+307,src/parse.rs,518,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+308,src/parse.rs,520,1,2,0,0,0.5,0.5773502691896258,0.5,}
+309,src/parse.rs,579,1,2,0,0,0.5,0.5773502691896258,0.5,"fn byte(input: Cursor) -> Result<Cursor, Reject> {"
+310,src/parse.rs,580,1,2,0,0,0.5,0.5773502691896258,0.5,"let input = input.parse(""b'"")?;"
+311,src/parse.rs,599,1,2,0,0,0.5,0.5773502691896258,0.5,}
+312,src/parse.rs,601,1,2,0,0,0.5,0.5773502691896258,0.5,"fn character(input: Cursor) -> Result<Cursor, Reject> {"
+313,src/parse.rs,602,1,2,0,0,0.5,0.5773502691896258,0.5,"let input = input.parse(""'"")?;"
+314,src/parse.rs,619,1,2,0,0,0.5,0.5773502691896258,0.5,}
+315,src/parse.rs,709,1,2,0,0,0.5,0.5773502691896258,0.5,"fn float(input: Cursor) -> Result<Cursor, Reject> {"
+316,src/parse.rs,710,1,2,0,0,0.5,0.5773502691896258,0.5,let mut rest = float_digits(input)?;
+317,src/parse.rs,717,1,2,0,0,0.5,0.5773502691896258,0.5,}
+318,src/parse.rs,719,1,2,0,0,0.5,0.5773502691896258,0.5,"fn float_digits(input: Cursor) -> Result<Cursor, Reject> {"
+319,src/parse.rs,720,1,2,0,0,0.5,0.5773502691896258,0.5,let mut chars = input.chars().peekable();
+320,src/parse.rs,721,1,2,0,0,0.5,0.5773502691896258,0.5,match chars.next() {
+321,src/parse.rs,722,1,2,0,0,0.5,0.5773502691896258,0.5,Some(ch) if '0' <= ch && ch <= '9' => {}
+322,src/parse.rs,723,1,2,0,0,0.5,0.5773502691896258,0.5,"_ => return Err(Reject),"
+323,src/parse.rs,802,1,2,0,0,0.5,0.5773502691896258,0.5,}
+324,src/parse.rs,804,1,2,0,0,0.5,0.5773502691896258,0.5,"fn int(input: Cursor) -> Result<Cursor, Reject> {"
+325,src/parse.rs,805,1,2,0,0,0.5,0.5773502691896258,0.5,let mut rest = digits(input)?;
+326,src/parse.rs,812,1,2,0,0,0.5,0.5773502691896258,0.5,}
+327,src/parse.rs,814,1,2,0,0,0.5,0.5773502691896258,0.5,"fn digits(mut input: Cursor) -> Result<Cursor, Reject> {"
+328,src/parse.rs,815,1,2,0,0,0.5,0.5773502691896258,0.5,"let base = if input.starts_with(""0x"") {"
+329,src/parse.rs,818,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if input.starts_with(""0o"") {"
+330,src/parse.rs,821,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if input.starts_with(""0b"") {"
+331,src/parse.rs,825,1,2,0,0,0.5,0.5773502691896258,0.5,10
+332,src/parse.rs,828,1,2,0,0,0.5,0.5773502691896258,0.5,let mut len = 0;
+333,src/parse.rs,829,1,2,0,0,0.5,0.5773502691896258,0.5,let mut empty = true;
+334,src/parse.rs,830,1,2,0,0,0.5,0.5773502691896258,0.5,for b in input.bytes() {
+335,src/parse.rs,831,1,2,0,0,0.5,0.5773502691896258,0.5,match b {
+336,src/parse.rs,832,1,2,0,0,0.5,0.5773502691896258,0.5,b'0'..=b'9' => {
+337,src/parse.rs,838,1,2,0,0,0.5,0.5773502691896258,0.5,b'a'..=b'f' => {
+338,src/parse.rs,862,1,2,0,0,0.5,0.5773502691896258,0.5,if empty {
+339,src/parse.rs,863,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+340,src/parse.rs,867,1,2,0,0,0.5,0.5773502691896258,0.5,}
+341,src/parse.rs,869,1,2,0,0,0.5,0.5773502691896258,0.5,fn punct(input: Cursor) -> PResult<Punct> {
+342,src/parse.rs,870,1,2,0,0,0.5,0.5773502691896258,0.5,"let (rest, ch) = punct_char(input)?;"
+343,src/parse.rs,884,1,2,0,0,0.5,0.5773502691896258,0.5,}
+344,src/parse.rs,886,1,2,0,0,0.5,0.5773502691896258,0.5,fn punct_char(input: Cursor) -> PResult<char> {
+345,src/parse.rs,887,1,2,0,0,0.5,0.5773502691896258,0.5,"if input.starts_with(""//"") || input.starts_with(""/*"") {"
+346,src/parse.rs,890,1,2,0,0,0.5,0.5773502691896258,0.5,}
+347,src/parse.rs,892,1,2,0,0,0.5,0.5773502691896258,0.5,let mut chars = input.chars();
+348,src/parse.rs,893,1,2,0,0,0.5,0.5773502691896258,0.5,let first = match chars.next() {
+349,src/parse.rs,894,1,2,0,0,0.5,0.5773502691896258,0.5,"Some(ch) => ch,"
+350,src/parse.rs,899,1,2,0,0,0.5,0.5773502691896258,0.5,"let recognized = ""~!@#$%^&*-=+|;:,<.>/?'"";"
+351,src/parse.rs,900,1,2,0,0,0.5,0.5773502691896258,0.5,if recognized.contains(first) {
+352,src/parse.rs,903,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+353,src/parse.rs,905,1,2,0,0,0.5,0.5773502691896258,0.5,}
+354,src/parse.rs,907,1,2,0,0,0.5,0.5773502691896258,0.5,"fn doc_comment<'a>(input: Cursor<'a>, trees: &mut TokenStreamBuilder) -> PResult<'a, ()> {"
+355,src/parse.rs,909,1,2,0,0,0.5,0.5773502691896258,0.5,let lo = input.off;
+356,src/parse.rs,910,1,2,0,0,0.5,0.5773502691896258,0.5,"let (rest, (comment, inner)) = doc_comment_contents(input)?;"
+357,src/parse.rs,952,1,2,0,0,0.5,0.5773502691896258,0.5,}
+358,src/parse.rs,954,1,2,0,0,0.5,0.5773502691896258,0.5,"fn doc_comment_contents(input: Cursor) -> PResult<(&str, bool)> {"
+359,src/parse.rs,955,1,2,0,0,0.5,0.5773502691896258,0.5,"if input.starts_with(""//!"") {"
+360,src/parse.rs,959,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if input.starts_with(""/*!"") {"
+361,src/parse.rs,962,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if input.starts_with(""///"") {"
+362,src/parse.rs,969,1,2,0,0,0.5,0.5773502691896258,0.5,"} else if input.starts_with(""/**"") && !input.rest[3..].starts_with('*') {"
+363,src/parse.rs,973,1,2,0,0,0.5,0.5773502691896258,0.5,Err(Reject)
+364,src/parse.rs,975,1,2,0,0,0.5,0.5773502691896258,0.5,}
+365,src/rcvec.rs,51,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn make_owned(mut self) -> RcVecBuilder<T>
+366,src/rcvec.rs,55,1,2,0,0,0.5,0.5773502691896258,0.5,let vec = if let Some(owned) = Rc::get_mut(&mut self.inner) {
+367,src/rcvec.rs,56,1,2,0,0,0.5,0.5773502691896258,0.5,mem::take(owned)
+368,src/rcvec.rs,60,1,2,0,0,0.5,0.5773502691896258,0.5,RcVecBuilder { inner: vec }
+369,src/rcvec.rs,61,1,2,0,0,0.5,0.5773502691896258,0.5,}
+370,src/rcvec.rs,65,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn new() -> Self {
+371,src/rcvec.rs,66,1,2,0,0,0.5,0.5773502691896258,0.5,RcVecBuilder { inner: Vec::new() }
+372,src/rcvec.rs,67,1,2,0,0,0.5,0.5773502691896258,0.5,}
+373,src/rcvec.rs,75,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn push(&mut self, element: T) {"
+374,src/rcvec.rs,76,1,2,0,0,0.5,0.5773502691896258,0.5,self.inner.push(element);
+375,src/rcvec.rs,77,1,2,0,0,0.5,0.5773502691896258,0.5,}
+376,src/rcvec.rs,89,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn build(self) -> RcVec<T> {
+377,src/rcvec.rs,90,1,2,0,0,0.5,0.5773502691896258,0.5,RcVec {
+378,src/rcvec.rs,93,1,2,0,0,0.5,0.5773502691896258,0.5,}
+379,src/rcvec.rs,126,1,2,0,0,0.5,0.5773502691896258,0.5,fn into_iter(self) -> Self::IntoIter {
+380,src/rcvec.rs,127,1,2,0,0,0.5,0.5773502691896258,0.5,RcVecIntoIter {
+381,src/rcvec.rs,130,1,2,0,0,0.5,0.5773502691896258,0.5,}
+382,src/rcvec.rs,136,1,2,0,0,0.5,0.5773502691896258,0.5,fn next(&mut self) -> Option<Self::Item> {
+383,src/rcvec.rs,137,1,2,0,0,0.5,0.5773502691896258,0.5,self.inner.next()
+384,src/rcvec.rs,138,1,2,0,0,0.5,0.5773502691896258,0.5,}
+385,src/wrapper.rs,106,1,2,0,0,0.5,0.5773502691896258,0.5,"fn from_str(src: &str) -> Result<TokenStream, LexError> {"
+386,src/wrapper.rs,107,1,2,0,0,0.5,0.5773502691896258,0.5,if inside_proc_macro() {
+387,src/wrapper.rs,112,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(TokenStream::Fallback(src.parse()?))
+388,src/wrapper.rs,114,1,2,0,0,0.5,0.5773502691896258,0.5,}
+389,src/wrapper.rs,304,1,2,0,0,0.5,0.5773502691896258,0.5,fn into_iter(self) -> TokenTreeIter {
+390,src/wrapper.rs,305,1,2,0,0,0.5,0.5773502691896258,0.5,match self {
+391,src/wrapper.rs,309,1,2,0,0,0.5,0.5773502691896258,0.5,"TokenStream::Fallback(tts) => TokenTreeIter::Fallback(tts.into_iter()),"
+392,src/wrapper.rs,311,1,2,0,0,0.5,0.5773502691896258,0.5,}
+393,src/wrapper.rs,317,1,2,0,0,0.5,0.5773502691896258,0.5,fn next(&mut self) -> Option<TokenTree> {
+394,src/wrapper.rs,318,1,2,0,0,0.5,0.5773502691896258,0.5,let token = match self {
+395,src/wrapper.rs,320,1,2,0,0,0.5,0.5773502691896258,0.5,"TokenTreeIter::Fallback(iter) => return iter.next(),"
+396,src/wrapper.rs,336,1,2,0,0,0.5,0.5773502691896258,0.5,}
+397,src/wrapper.rs,392,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn call_site() -> Self {
+398,src/wrapper.rs,393,1,2,0,0,0.5,0.5773502691896258,0.5,if inside_proc_macro() {
+399,src/wrapper.rs,396,1,2,0,0,0.5,0.5773502691896258,0.5,Span::Fallback(fallback::Span::call_site())
+400,src/wrapper.rs,398,1,2,0,0,0.5,0.5773502691896258,0.5,}
+401,src/wrapper.rs,483,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn source_text(&self) -> Option<String> {
+402,src/wrapper.rs,484,1,2,0,0,0.5,0.5773502691896258,0.5,match self {
+403,src/wrapper.rs,489,1,2,0,0,0.5,0.5773502691896258,0.5,"Span::Fallback(s) => s.source_text(),"
+404,src/wrapper.rs,491,1,2,0,0,0.5,0.5773502691896258,0.5,}
+405,src/wrapper.rs,508,1,2,0,0,0.5,0.5773502691896258,0.5,fn from(inner: fallback::Span) -> Self {
+406,src/wrapper.rs,509,1,2,0,0,0.5,0.5773502691896258,0.5,Span::Fallback(inner)
+407,src/wrapper.rs,510,1,2,0,0,0.5,0.5773502691896258,0.5,}
+408,src/wrapper.rs,642,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn new(string: &str, span: Span) -> Self {"
+409,src/wrapper.rs,643,1,2,0,0,0.5,0.5773502691896258,0.5,match span {
+410,src/wrapper.rs,645,1,2,0,0,0.5,0.5773502691896258,0.5,"Span::Fallback(s) => Ident::Fallback(fallback::Ident::new(string, s)),"
+411,src/wrapper.rs,647,1,2,0,0,0.5,0.5773502691896258,0.5,}
+412,src/wrapper.rs,656,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn span(&self) -> Span {
+413,src/wrapper.rs,657,1,2,0,0,0.5,0.5773502691896258,0.5,match self {
+414,src/wrapper.rs,659,1,2,0,0,0.5,0.5773502691896258,0.5,"Ident::Fallback(t) => Span::Fallback(t.span()),"
+415,src/wrapper.rs,661,1,2,0,0,0.5,0.5773502691896258,0.5,}
+416,src/wrapper.rs,663,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn set_span(&mut self, span: Span) {"
+417,src/wrapper.rs,664,1,2,0,0,0.5,0.5773502691896258,0.5,"match (self, span) {"
+418,src/wrapper.rs,666,1,2,0,0,0.5,0.5773502691896258,0.5,"(Ident::Fallback(t), Span::Fallback(s)) => t.set_span(s),"
+419,src/wrapper.rs,669,1,2,0,0,0.5,0.5773502691896258,0.5,}
+420,src/detection.rs,10,0,0,1,2,0.0,0.0,0.0,"2 => return true,"
+421,src/detection.rs,18,0,0,1,2,0.0,0.0,0.0,pub(crate) fn force_fallback() {
+422,src/detection.rs,19,0,0,1,2,0.0,0.0,0.0,"WORKS.store(1, Ordering::Relaxed);"
+423,src/detection.rs,20,0,0,1,2,0.0,0.0,0.0,}
+424,src/detection.rs,22,0,0,1,2,0.0,0.0,0.0,pub(crate) fn unforce_fallback() {
+425,src/detection.rs,23,0,0,1,2,0.0,0.0,0.0,initialize();
+426,src/detection.rs,24,0,0,1,2,0.0,0.0,0.0,}
+427,src/extra.rs,32,0,0,1,2,0.0,0.0,0.0,pub(crate) fn new(group: &imp::Group) -> Self {
+428,src/extra.rs,34,0,0,1,2,0.0,0.0,0.0,let inner = match group {
+429,src/extra.rs,35,0,0,1,2,0.0,0.0,0.0,imp::Group::Compiler(group) => DelimSpanEnum::Compiler {
+430,src/extra.rs,36,0,0,1,2,0.0,0.0,0.0,"join: group.span(),"
+431,src/extra.rs,37,0,0,1,2,0.0,0.0,0.0,"open: group.span_open(),"
+432,src/extra.rs,40,0,0,1,2,0.0,0.0,0.0,"imp::Group::Fallback(group) => DelimSpanEnum::Fallback(group.span()),"
+433,src/extra.rs,46,0,0,1,2,0.0,0.0,0.0,DelimSpan {
+434,src/extra.rs,50,0,0,1,2,0.0,0.0,0.0,}
+435,src/extra.rs,53,0,0,1,2,0.0,0.0,0.0,pub fn join(&self) -> Span {
+436,src/extra.rs,54,0,0,1,2,0.0,0.0,0.0,match &self.inner {
+437,src/extra.rs,56,0,0,1,2,0.0,0.0,0.0,"DelimSpanEnum::Compiler { join, .. } => Span::_new(imp::Span::Compiler(*join)),"
+438,src/extra.rs,57,0,0,1,2,0.0,0.0,0.0,"DelimSpanEnum::Fallback(span) => Span::_new_fallback(*span),"
+439,src/extra.rs,59,0,0,1,2,0.0,0.0,0.0,}
+440,src/extra.rs,62,0,0,1,2,0.0,0.0,0.0,pub fn open(&self) -> Span {
+441,src/extra.rs,63,0,0,1,2,0.0,0.0,0.0,match &self.inner {
+442,src/extra.rs,65,0,0,1,2,0.0,0.0,0.0,"DelimSpanEnum::Compiler { open, .. } => Span::_new(imp::Span::Compiler(*open)),"
+443,src/extra.rs,66,0,0,1,2,0.0,0.0,0.0,"DelimSpanEnum::Fallback(span) => Span::_new_fallback(span.first_byte()),"
+444,src/extra.rs,68,0,0,1,2,0.0,0.0,0.0,}
+445,src/extra.rs,71,0,0,1,2,0.0,0.0,0.0,pub fn close(&self) -> Span {
+446,src/extra.rs,72,0,0,1,2,0.0,0.0,0.0,match &self.inner {
+447,src/extra.rs,74,0,0,1,2,0.0,0.0,0.0,"DelimSpanEnum::Compiler { close, .. } => Span::_new(imp::Span::Compiler(*close)),"
+448,src/extra.rs,75,0,0,1,2,0.0,0.0,0.0,"DelimSpanEnum::Fallback(span) => Span::_new_fallback(span.last_byte()),"
+449,src/extra.rs,77,0,0,1,2,0.0,0.0,0.0,}
+450,src/extra.rs,81,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+451,src/extra.rs,82,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.join(), f)"
+452,src/extra.rs,83,0,0,1,2,0.0,0.0,0.0,}
+453,src/fallback.rs,19,0,0,1,2,0.0,0.0,0.0,pub fn force() {
+454,src/fallback.rs,21,0,0,1,2,0.0,0.0,0.0,crate::detection::force_fallback();
+455,src/fallback.rs,22,0,0,1,2,0.0,0.0,0.0,}
+456,src/fallback.rs,26,0,0,1,2,0.0,0.0,0.0,pub fn unforce() {
+457,src/fallback.rs,28,0,0,1,2,0.0,0.0,0.0,crate::detection::unforce_fallback();
+458,src/fallback.rs,29,0,0,1,2,0.0,0.0,0.0,}
+459,src/fallback.rs,42,0,0,1,2,0.0,0.0,0.0,pub(crate) fn span(&self) -> Span {
+460,src/fallback.rs,43,0,0,1,2,0.0,0.0,0.0,self.span
+461,src/fallback.rs,44,0,0,1,2,0.0,0.0,0.0,}
+462,src/fallback.rs,46,0,0,1,2,0.0,0.0,0.0,fn call_site() -> Self {
+463,src/fallback.rs,47,0,0,1,2,0.0,0.0,0.0,LexError {
+464,src/fallback.rs,50,0,0,1,2,0.0,0.0,0.0,}
+465,src/fallback.rs,54,0,0,1,2,0.0,0.0,0.0,pub fn new() -> Self {
+466,src/fallback.rs,55,0,0,1,2,0.0,0.0,0.0,TokenStream {
+467,src/fallback.rs,58,0,0,1,2,0.0,0.0,0.0,}
+468,src/fallback.rs,60,0,0,1,2,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+469,src/fallback.rs,61,0,0,1,2,0.0,0.0,0.0,self.inner.len() == 0
+470,src/fallback.rs,62,0,0,1,2,0.0,0.0,0.0,}
+471,src/fallback.rs,70,0,0,1,2,0.0,0.0,0.0,"fn push_token_from_proc_macro(mut vec: RcVecMut<TokenTree>, token: TokenTree) {"
+472,src/fallback.rs,72,0,0,1,2,0.0,0.0,0.0,match token {
+473,src/fallback.rs,75,0,0,1,2,0.0,0.0,0.0,"inner: crate::imp::Literal::Fallback(literal),"
+474,src/fallback.rs,79,0,0,1,2,0.0,0.0,0.0,}) if literal.repr.starts_with('-') => {
+475,src/fallback.rs,80,0,0,1,2,0.0,0.0,0.0,"push_negative_literal(vec, literal);"
+476,src/fallback.rs,82,0,0,1,2,0.0,0.0,0.0,"_ => vec.push(token),"
+477,src/fallback.rs,86,0,0,1,2,0.0,0.0,0.0,"fn push_negative_literal(mut vec: RcVecMut<TokenTree>, mut literal: Literal) {"
+478,src/fallback.rs,87,0,0,1,2,0.0,0.0,0.0,literal.repr.remove(0);
+479,src/fallback.rs,88,0,0,1,2,0.0,0.0,0.0,"let mut punct = crate::Punct::new('-', Spacing::Alone);"
+480,src/fallback.rs,89,0,0,1,2,0.0,0.0,0.0,punct.set_span(crate::Span::_new_fallback(literal.span));
+481,src/fallback.rs,90,0,0,1,2,0.0,0.0,0.0,vec.push(TokenTree::Punct(punct));
+482,src/fallback.rs,91,0,0,1,2,0.0,0.0,0.0,vec.push(TokenTree::Literal(crate::Literal::_new_fallback(literal)));
+483,src/fallback.rs,92,0,0,1,2,0.0,0.0,0.0,}
+484,src/fallback.rs,93,0,0,1,2,0.0,0.0,0.0,}
+485,src/fallback.rs,97,0,0,1,2,0.0,0.0,0.0,fn drop(&mut self) {
+486,src/fallback.rs,98,0,0,1,2,0.0,0.0,0.0,let mut inner = match self.inner.get_mut() {
+487,src/fallback.rs,99,0,0,1,2,0.0,0.0,0.0,"Some(inner) => inner,"
+488,src/fallback.rs,100,0,0,1,2,0.0,0.0,0.0,"None => return,"
+489,src/fallback.rs,102,0,0,1,2,0.0,0.0,0.0,while let Some(token) = inner.pop() {
+490,src/fallback.rs,103,0,0,1,2,0.0,0.0,0.0,let group = match token {
+491,src/fallback.rs,104,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(group) => group.inner,"
+492,src/fallback.rs,105,0,0,1,2,0.0,0.0,0.0,"_ => continue,"
+493,src/fallback.rs,108,0,0,1,2,0.0,0.0,0.0,let group = match group {
+494,src/fallback.rs,109,0,0,1,2,0.0,0.0,0.0,"crate::imp::Group::Fallback(group) => group,"
+495,src/fallback.rs,110,0,0,1,2,0.0,0.0,0.0,"crate::imp::Group::Compiler(_) => continue,"
+496,src/fallback.rs,112,0,0,1,2,0.0,0.0,0.0,inner.extend(group.stream.take_inner());
+497,src/fallback.rs,114,0,0,1,2,0.0,0.0,0.0,}
+498,src/fallback.rs,128,0,0,1,2,0.0,0.0,0.0,pub fn with_capacity(cap: usize) -> Self {
+499,src/fallback.rs,129,0,0,1,2,0.0,0.0,0.0,TokenStreamBuilder {
+500,src/fallback.rs,132,0,0,1,2,0.0,0.0,0.0,}
+501,src/fallback.rs,177,0,0,1,2,0.0,0.0,0.0,cursor = cursor.advance(BYTE_ORDER_MARK.len());
+502,src/fallback.rs,185,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+503,src/fallback.rs,186,0,0,1,2,0.0,0.0,0.0,"f.write_str(""cannot parse string into token stream"")"
+504,src/fallback.rs,187,0,0,1,2,0.0,0.0,0.0,}
+505,src/fallback.rs,191,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+506,src/fallback.rs,192,0,0,1,2,0.0,0.0,0.0,let mut joint = false;
+507,src/fallback.rs,193,0,0,1,2,0.0,0.0,0.0,"for (i, tt) in self.inner.iter().enumerate() {"
+508,src/fallback.rs,194,0,0,1,2,0.0,0.0,0.0,if i != 0 && !joint {
+509,src/fallback.rs,195,0,0,1,2,0.0,0.0,0.0,"write!(f, "" "")?;"
+510,src/fallback.rs,196,0,0,1,2,0.0,0.0,0.0,}
+511,src/fallback.rs,197,0,0,1,2,0.0,0.0,0.0,joint = false;
+512,src/fallback.rs,198,0,0,1,2,0.0,0.0,0.0,match tt {
+513,src/fallback.rs,199,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(tt) => Display::fmt(tt, f),"
+514,src/fallback.rs,200,0,0,1,2,0.0,0.0,0.0,"TokenTree::Ident(tt) => Display::fmt(tt, f),"
+515,src/fallback.rs,201,0,0,1,2,0.0,0.0,0.0,TokenTree::Punct(tt) => {
+516,src/fallback.rs,202,0,0,1,2,0.0,0.0,0.0,joint = tt.spacing() == Spacing::Joint;
+517,src/fallback.rs,203,0,0,1,2,0.0,0.0,0.0,"Display::fmt(tt, f)"
+518,src/fallback.rs,205,0,0,1,2,0.0,0.0,0.0,"TokenTree::Literal(tt) => Display::fmt(tt, f),"
+519,src/fallback.rs,206,0,0,1,2,0.0,0.0,0.0,}?;
+520,src/fallback.rs,209,0,0,1,2,0.0,0.0,0.0,Ok(())
+521,src/fallback.rs,210,0,0,1,2,0.0,0.0,0.0,}
+522,src/fallback.rs,214,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+523,src/fallback.rs,215,0,0,1,2,0.0,0.0,0.0,"f.write_str(""TokenStream "")?;"
+524,src/fallback.rs,216,0,0,1,2,0.0,0.0,0.0,f.debug_list().entries(self.clone()).finish()
+525,src/fallback.rs,217,0,0,1,2,0.0,0.0,0.0,}
+526,src/fallback.rs,222,0,0,1,2,0.0,0.0,0.0,fn from(inner: proc_macro::TokenStream) -> Self {
+527,src/fallback.rs,223,0,0,1,2,0.0,0.0,0.0,inner
+528,src/fallback.rs,226,0,0,1,2,0.0,0.0,0.0,".expect(""compiler token stream parse failed"")"
+529,src/fallback.rs,227,0,0,1,2,0.0,0.0,0.0,}
+530,src/fallback.rs,232,0,0,1,2,0.0,0.0,0.0,fn from(inner: TokenStream) -> Self {
+531,src/fallback.rs,233,0,0,1,2,0.0,0.0,0.0,inner
+532,src/fallback.rs,236,0,0,1,2,0.0,0.0,0.0,".expect(""failed to parse to compiler tokens"")"
+533,src/fallback.rs,237,0,0,1,2,0.0,0.0,0.0,}
+534,src/fallback.rs,241,0,0,1,2,0.0,0.0,0.0,fn from(tree: TokenTree) -> Self {
+535,src/fallback.rs,242,0,0,1,2,0.0,0.0,0.0,let mut stream = RcVecBuilder::new();
+536,src/fallback.rs,243,0,0,1,2,0.0,0.0,0.0,"push_token_from_proc_macro(stream.as_mut(), tree);"
+537,src/fallback.rs,244,0,0,1,2,0.0,0.0,0.0,TokenStream {
+538,src/fallback.rs,247,0,0,1,2,0.0,0.0,0.0,}
+539,src/fallback.rs,251,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = TokenTree>>(tokens: I) -> Self {
+540,src/fallback.rs,252,0,0,1,2,0.0,0.0,0.0,let mut stream = TokenStream::new();
+541,src/fallback.rs,253,0,0,1,2,0.0,0.0,0.0,stream.extend(tokens);
+542,src/fallback.rs,254,0,0,1,2,0.0,0.0,0.0,stream
+543,src/fallback.rs,255,0,0,1,2,0.0,0.0,0.0,}
+544,src/fallback.rs,259,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = TokenStream>>(streams: I) -> Self {
+545,src/fallback.rs,260,0,0,1,2,0.0,0.0,0.0,let mut v = RcVecBuilder::new();
+546,src/fallback.rs,262,0,0,1,2,0.0,0.0,0.0,for stream in streams {
+547,src/fallback.rs,263,0,0,1,2,0.0,0.0,0.0,v.extend(stream.take_inner());
+548,src/fallback.rs,266,0,0,1,2,0.0,0.0,0.0,TokenStream { inner: v.build() }
+549,src/fallback.rs,267,0,0,1,2,0.0,0.0,0.0,}
+550,src/fallback.rs,271,0,0,1,2,0.0,0.0,0.0,"fn extend<I: IntoIterator<Item = TokenTree>>(&mut self, tokens: I) {"
+551,src/fallback.rs,272,0,0,1,2,0.0,0.0,0.0,let mut vec = self.inner.make_mut();
+552,src/fallback.rs,273,0,0,1,2,0.0,0.0,0.0,tokens
+553,src/fallback.rs,274,0,0,1,2,0.0,0.0,0.0,.into_iter()
+554,src/fallback.rs,275,0,0,1,2,0.0,0.0,0.0,".for_each(|token| push_token_from_proc_macro(vec.as_mut(), token));"
+555,src/fallback.rs,276,0,0,1,2,0.0,0.0,0.0,}
+556,src/fallback.rs,280,0,0,1,2,0.0,0.0,0.0,"fn extend<I: IntoIterator<Item = TokenStream>>(&mut self, streams: I) {"
+557,src/fallback.rs,281,0,0,1,2,0.0,0.0,0.0,self.inner.make_mut().extend(streams.into_iter().flatten());
+558,src/fallback.rs,282,0,0,1,2,0.0,0.0,0.0,}
+559,src/fallback.rs,303,0,0,1,2,0.0,0.0,0.0,pub fn path(&self) -> PathBuf {
+560,src/fallback.rs,304,0,0,1,2,0.0,0.0,0.0,self.path.clone()
+561,src/fallback.rs,305,0,0,1,2,0.0,0.0,0.0,}
+562,src/fallback.rs,307,0,0,1,2,0.0,0.0,0.0,pub fn is_real(&self) -> bool {
+563,src/fallback.rs,308,0,0,1,2,0.0,0.0,0.0,false
+564,src/fallback.rs,309,0,0,1,2,0.0,0.0,0.0,}
+565,src/fallback.rs,313,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+566,src/fallback.rs,314,0,0,1,2,0.0,0.0,0.0,"f.debug_struct(""SourceFile"")"
+567,src/fallback.rs,315,0,0,1,2,0.0,0.0,0.0,".field(""path"", &self.path())"
+568,src/fallback.rs,316,0,0,1,2,0.0,0.0,0.0,".field(""is_real"", &self.is_real())"
+569,src/fallback.rs,317,0,0,1,2,0.0,0.0,0.0,.finish()
+570,src/fallback.rs,318,0,0,1,2,0.0,0.0,0.0,}
+571,src/fallback.rs,343,0,0,1,2,0.0,0.0,0.0,"fn offset_line_column(&self, offset: usize) -> LineColumn {"
+572,src/fallback.rs,344,0,0,1,2,0.0,0.0,0.0,assert!(self.span_within(Span {
+573,src/fallback.rs,348,0,0,1,2,0.0,0.0,0.0,let offset = offset - self.span.lo as usize;
+574,src/fallback.rs,349,0,0,1,2,0.0,0.0,0.0,match self.lines.binary_search(&offset) {
+575,src/fallback.rs,350,0,0,1,2,0.0,0.0,0.0,Ok(found) => LineColumn {
+576,src/fallback.rs,354,0,0,1,2,0.0,0.0,0.0,Err(idx) => LineColumn {
+577,src/fallback.rs,355,0,0,1,2,0.0,0.0,0.0,"line: idx,"
+578,src/fallback.rs,356,0,0,1,2,0.0,0.0,0.0,"column: offset - self.lines[idx - 1],"
+579,src/fallback.rs,359,0,0,1,2,0.0,0.0,0.0,}
+580,src/fallback.rs,387,0,0,1,2,0.0,0.0,0.0,lines.push(total);
+581,src/fallback.rs,446,0,0,1,2,0.0,0.0,0.0,"unreachable!(""Invalid span with no related FileInfo!"");"
+582,src/fallback.rs,469,0,0,1,2,0.0,0.0,0.0,pub fn mixed_site() -> Self {
+583,src/fallback.rs,470,0,0,1,2,0.0,0.0,0.0,Span::call_site()
+584,src/fallback.rs,471,0,0,1,2,0.0,0.0,0.0,}
+585,src/fallback.rs,478,0,0,1,2,0.0,0.0,0.0,"pub fn resolved_at(&self, _other: Span) -> Span {"
+586,src/fallback.rs,482,0,0,1,2,0.0,0.0,0.0,*self
+587,src/fallback.rs,483,0,0,1,2,0.0,0.0,0.0,}
+588,src/fallback.rs,485,0,0,1,2,0.0,0.0,0.0,"pub fn located_at(&self, other: Span) -> Span {"
+589,src/fallback.rs,486,0,0,1,2,0.0,0.0,0.0,other
+590,src/fallback.rs,487,0,0,1,2,0.0,0.0,0.0,}
+591,src/fallback.rs,505,0,0,1,2,0.0,0.0,0.0,pub fn start(&self) -> LineColumn {
+592,src/fallback.rs,510,0,0,1,2,0.0,0.0,0.0,SOURCE_MAP.with(|cm| {
+593,src/fallback.rs,511,0,0,1,2,0.0,0.0,0.0,let cm = cm.borrow();
+594,src/fallback.rs,512,0,0,1,2,0.0,0.0,0.0,let fi = cm.fileinfo(*self);
+595,src/fallback.rs,513,0,0,1,2,0.0,0.0,0.0,fi.offset_line_column(self.lo as usize)
+596,src/fallback.rs,514,0,0,1,2,0.0,0.0,0.0,})
+597,src/fallback.rs,515,0,0,1,2,0.0,0.0,0.0,}
+598,src/fallback.rs,518,0,0,1,2,0.0,0.0,0.0,pub fn end(&self) -> LineColumn {
+599,src/fallback.rs,523,0,0,1,2,0.0,0.0,0.0,SOURCE_MAP.with(|cm| {
+600,src/fallback.rs,524,0,0,1,2,0.0,0.0,0.0,let cm = cm.borrow();
+601,src/fallback.rs,525,0,0,1,2,0.0,0.0,0.0,let fi = cm.fileinfo(*self);
+602,src/fallback.rs,526,0,0,1,2,0.0,0.0,0.0,fi.offset_line_column(self.hi as usize)
+603,src/fallback.rs,527,0,0,1,2,0.0,0.0,0.0,})
+604,src/fallback.rs,528,0,0,1,2,0.0,0.0,0.0,}
+605,src/fallback.rs,536,0,0,1,2,0.0,0.0,0.0,"pub fn join(&self, other: Span) -> Option<Span> {"
+606,src/fallback.rs,544,0,0,1,2,0.0,0.0,0.0,SOURCE_MAP.with(|cm| {
+607,src/fallback.rs,545,0,0,1,2,0.0,0.0,0.0,let cm = cm.borrow();
+608,src/fallback.rs,547,0,0,1,2,0.0,0.0,0.0,if !cm.fileinfo(*self).span_within(other) {
+609,src/fallback.rs,548,0,0,1,2,0.0,0.0,0.0,return None;
+610,src/fallback.rs,549,0,0,1,2,0.0,0.0,0.0,}
+611,src/fallback.rs,550,0,0,1,2,0.0,0.0,0.0,Some(Span {
+612,src/fallback.rs,551,0,0,1,2,0.0,0.0,0.0,"lo: cmp::min(self.lo, other.lo),"
+613,src/fallback.rs,552,0,0,1,2,0.0,0.0,0.0,"hi: cmp::max(self.hi, other.hi),"
+614,src/fallback.rs,554,0,0,1,2,0.0,0.0,0.0,})
+615,src/fallback.rs,555,0,0,1,2,0.0,0.0,0.0,}
+616,src/fallback.rs,570,0,0,1,2,0.0,0.0,0.0,None
+617,src/fallback.rs,583,0,0,1,2,0.0,0.0,0.0,pub(crate) fn first_byte(self) -> Self {
+618,src/fallback.rs,584,0,0,1,2,0.0,0.0,0.0,Span {
+619,src/fallback.rs,585,0,0,1,2,0.0,0.0,0.0,"lo: self.lo,"
+620,src/fallback.rs,586,0,0,1,2,0.0,0.0,0.0,"hi: cmp::min(self.lo.saturating_add(1), self.hi),"
+621,src/fallback.rs,588,0,0,1,2,0.0,0.0,0.0,}
+622,src/fallback.rs,596,0,0,1,2,0.0,0.0,0.0,pub(crate) fn last_byte(self) -> Self {
+623,src/fallback.rs,597,0,0,1,2,0.0,0.0,0.0,Span {
+624,src/fallback.rs,598,0,0,1,2,0.0,0.0,0.0,"lo: cmp::max(self.hi.saturating_sub(1), self.lo),"
+625,src/fallback.rs,601,0,0,1,2,0.0,0.0,0.0,}
+626,src/fallback.rs,610,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+627,src/fallback.rs,612,0,0,1,2,0.0,0.0,0.0,"return write!(f, ""bytes({}..{})"", self.lo, self.hi);"
+628,src/fallback.rs,616,0,0,1,2,0.0,0.0,0.0,}
+629,src/fallback.rs,619,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn debug_span_field_if_nontrivial(debug: &mut fmt::DebugStruct, span: Span) {"
+630,src/fallback.rs,622,0,0,1,2,0.0,0.0,0.0,if span.is_call_site() {
+631,src/fallback.rs,623,0,0,1,2,0.0,0.0,0.0,return;
+632,src/fallback.rs,624,0,0,1,2,0.0,0.0,0.0,}
+633,src/fallback.rs,627,0,0,1,2,0.0,0.0,0.0,if cfg!(span_locations) {
+634,src/fallback.rs,628,0,0,1,2,0.0,0.0,0.0,"debug.field(""span"", &span);"
+635,src/fallback.rs,629,0,0,1,2,0.0,0.0,0.0,}
+636,src/fallback.rs,630,0,0,1,2,0.0,0.0,0.0,}
+637,src/fallback.rs,640,0,0,1,2,0.0,0.0,0.0,"pub fn new(delimiter: Delimiter, stream: TokenStream) -> Self {"
+638,src/fallback.rs,641,0,0,1,2,0.0,0.0,0.0,Group {
+639,src/fallback.rs,642,0,0,1,2,0.0,0.0,0.0,"delimiter,"
+640,src/fallback.rs,646,0,0,1,2,0.0,0.0,0.0,}
+641,src/fallback.rs,648,0,0,1,2,0.0,0.0,0.0,pub fn delimiter(&self) -> Delimiter {
+642,src/fallback.rs,649,0,0,1,2,0.0,0.0,0.0,self.delimiter
+643,src/fallback.rs,650,0,0,1,2,0.0,0.0,0.0,}
+644,src/fallback.rs,652,0,0,1,2,0.0,0.0,0.0,pub fn stream(&self) -> TokenStream {
+645,src/fallback.rs,653,0,0,1,2,0.0,0.0,0.0,self.stream.clone()
+646,src/fallback.rs,654,0,0,1,2,0.0,0.0,0.0,}
+647,src/fallback.rs,656,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+648,src/fallback.rs,657,0,0,1,2,0.0,0.0,0.0,self.span
+649,src/fallback.rs,658,0,0,1,2,0.0,0.0,0.0,}
+650,src/fallback.rs,660,0,0,1,2,0.0,0.0,0.0,pub fn span_open(&self) -> Span {
+651,src/fallback.rs,661,0,0,1,2,0.0,0.0,0.0,self.span.first_byte()
+652,src/fallback.rs,662,0,0,1,2,0.0,0.0,0.0,}
+653,src/fallback.rs,664,0,0,1,2,0.0,0.0,0.0,pub fn span_close(&self) -> Span {
+654,src/fallback.rs,665,0,0,1,2,0.0,0.0,0.0,self.span.last_byte()
+655,src/fallback.rs,666,0,0,1,2,0.0,0.0,0.0,}
+656,src/fallback.rs,668,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+657,src/fallback.rs,669,0,0,1,2,0.0,0.0,0.0,self.span = span;
+658,src/fallback.rs,670,0,0,1,2,0.0,0.0,0.0,}
+659,src/fallback.rs,681,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+660,src/fallback.rs,682,0,0,1,2,0.0,0.0,0.0,"let (open, close) = match self.delimiter {"
+661,src/fallback.rs,683,0,0,1,2,0.0,0.0,0.0,"Delimiter::Parenthesis => (""("", "")""),"
+662,src/fallback.rs,684,0,0,1,2,0.0,0.0,0.0,"Delimiter::Brace => (""{ "", ""}""),"
+663,src/fallback.rs,685,0,0,1,2,0.0,0.0,0.0,"Delimiter::Bracket => (""["", ""]""),"
+664,src/fallback.rs,686,0,0,1,2,0.0,0.0,0.0,"Delimiter::None => ("""", """"),"
+665,src/fallback.rs,689,0,0,1,2,0.0,0.0,0.0,f.write_str(open)?;
+666,src/fallback.rs,690,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.stream, f)?;"
+667,src/fallback.rs,691,0,0,1,2,0.0,0.0,0.0,if self.delimiter == Delimiter::Brace && !self.stream.inner.is_empty() {
+668,src/fallback.rs,692,0,0,1,2,0.0,0.0,0.0,"f.write_str("" "")?;"
+669,src/fallback.rs,693,0,0,1,2,0.0,0.0,0.0,}
+670,src/fallback.rs,694,0,0,1,2,0.0,0.0,0.0,f.write_str(close)?;
+671,src/fallback.rs,696,0,0,1,2,0.0,0.0,0.0,Ok(())
+672,src/fallback.rs,697,0,0,1,2,0.0,0.0,0.0,}
+673,src/fallback.rs,701,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {"
+674,src/fallback.rs,702,0,0,1,2,0.0,0.0,0.0,"let mut debug = fmt.debug_struct(""Group"");"
+675,src/fallback.rs,703,0,0,1,2,0.0,0.0,0.0,"debug.field(""delimiter"", &self.delimiter);"
+676,src/fallback.rs,704,0,0,1,2,0.0,0.0,0.0,"debug.field(""stream"", &self.stream);"
+677,src/fallback.rs,705,0,0,1,2,0.0,0.0,0.0,"debug_span_field_if_nontrivial(&mut debug, self.span);"
+678,src/fallback.rs,706,0,0,1,2,0.0,0.0,0.0,debug.finish()
+679,src/fallback.rs,707,0,0,1,2,0.0,0.0,0.0,}
+680,src/fallback.rs,732,0,0,1,2,0.0,0.0,0.0,"pub fn new_raw(string: &str, span: Span) -> Self {"
+681,src/fallback.rs,733,0,0,1,2,0.0,0.0,0.0,"Ident::_new(string, true, span)"
+682,src/fallback.rs,734,0,0,1,2,0.0,0.0,0.0,}
+683,src/fallback.rs,755,0,0,1,2,0.0,0.0,0.0,"panic!(""Ident is not allowed to be empty; use Option<Ident>"");"
+684,src/fallback.rs,759,0,0,1,2,0.0,0.0,0.0,"panic!(""Ident cannot be a number; use Literal instead"");"
+685,src/fallback.rs,766,0,0,1,2,0.0,0.0,0.0,return false;
+686,src/fallback.rs,769,0,2,1,0,0.0,0.0,0.0,if !is_ident_continue(ch) {
+687,src/fallback.rs,770,0,0,1,2,0.0,0.0,0.0,return false;
+688,src/fallback.rs,771,0,2,1,0,0.0,0.0,0.0,}
+689,src/fallback.rs,777,0,0,1,2,0.0,0.0,0.0,"panic!(""{:?} is not a valid Ident"", string);"
+690,src/fallback.rs,781,0,0,1,2,0.0,0.0,0.0,match string {
+691,src/fallback.rs,782,0,0,1,2,0.0,0.0,0.0,"""_"" | ""super"" | ""self"" | ""Self"" | ""crate"" => {"
+692,src/fallback.rs,783,0,0,1,2,0.0,0.0,0.0,"panic!(""`r#{}` cannot be a raw identifier"", string);"
+693,src/fallback.rs,785,0,0,1,2,0.0,0.0,0.0,_ => {}
+694,src/fallback.rs,791,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &Ident) -> bool {"
+695,src/fallback.rs,792,0,0,1,2,0.0,0.0,0.0,self.sym == other.sym && self.raw == other.raw
+696,src/fallback.rs,793,0,0,1,2,0.0,0.0,0.0,}
+697,src/fallback.rs,800,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &T) -> bool {"
+698,src/fallback.rs,801,0,0,1,2,0.0,0.0,0.0,let other = other.as_ref();
+699,src/fallback.rs,802,0,0,1,2,0.0,0.0,0.0,if self.raw {
+700,src/fallback.rs,803,0,0,1,2,0.0,0.0,0.0,"other.starts_with(""r#"") && self.sym == other[2..]"
+701,src/fallback.rs,805,0,0,1,2,0.0,0.0,0.0,self.sym == other
+702,src/fallback.rs,807,0,0,1,2,0.0,0.0,0.0,}
+703,src/fallback.rs,811,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+704,src/fallback.rs,812,0,0,1,2,0.0,0.0,0.0,if self.raw {
+705,src/fallback.rs,813,0,0,1,2,0.0,0.0,0.0,"f.write_str(""r#"")?;"
+706,src/fallback.rs,814,0,0,1,2,0.0,0.0,0.0,}
+707,src/fallback.rs,815,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.sym, f)"
+708,src/fallback.rs,816,0,0,1,2,0.0,0.0,0.0,}
+709,src/fallback.rs,834,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+710,src/fallback.rs,835,0,0,1,2,0.0,0.0,0.0,"let mut debug = f.debug_struct(""Ident"");"
+711,src/fallback.rs,836,0,0,1,2,0.0,0.0,0.0,"debug.field(""sym"", &format_args!(""{}"", self));"
+712,src/fallback.rs,837,0,0,1,2,0.0,0.0,0.0,"debug_span_field_if_nontrivial(&mut debug, self.span);"
+713,src/fallback.rs,838,0,0,1,2,0.0,0.0,0.0,debug.finish()
+714,src/fallback.rs,839,0,0,1,2,0.0,0.0,0.0,}
+715,src/fallback.rs,850,0,0,1,2,0.0,0.0,0.0,pub fn $name(n: $kind) -> Literal {
+716,src/fallback.rs,851,0,0,1,2,0.0,0.0,0.0,"Literal::_new(format!(concat!(""{}"", stringify!($kind)), n))"
+717,src/fallback.rs,852,0,0,1,2,0.0,0.0,0.0,}
+718,src/fallback.rs,858,0,0,1,2,0.0,0.0,0.0,pub fn $name(n: $kind) -> Literal {
+719,src/fallback.rs,859,0,0,1,2,0.0,0.0,0.0,Literal::_new(n.to_string())
+720,src/fallback.rs,860,0,0,1,2,0.0,0.0,0.0,}
+721,src/fallback.rs,865,0,0,1,2,0.0,0.0,0.0,pub(crate) fn _new(repr: String) -> Self {
+722,src/fallback.rs,866,0,0,1,2,0.0,0.0,0.0,Literal {
+723,src/fallback.rs,870,0,0,1,2,0.0,0.0,0.0,}
+724,src/fallback.rs,872,0,0,1,2,0.0,0.0,0.0,pub(crate) unsafe fn from_str_unchecked(repr: &str) -> Self {
+725,src/fallback.rs,873,0,0,1,2,0.0,0.0,0.0,Literal::_new(repr.to_owned())
+726,src/fallback.rs,874,0,0,1,2,0.0,0.0,0.0,}
+727,src/fallback.rs,909,0,0,1,2,0.0,0.0,0.0,pub fn f32_unsuffixed(f: f32) -> Literal {
+728,src/fallback.rs,910,0,0,1,2,0.0,0.0,0.0,let mut s = f.to_string();
+729,src/fallback.rs,911,0,0,1,2,0.0,0.0,0.0,if !s.contains('.') {
+730,src/fallback.rs,912,0,0,1,2,0.0,0.0,0.0,"s.push_str("".0"");"
+731,src/fallback.rs,913,0,0,1,2,0.0,0.0,0.0,}
+732,src/fallback.rs,914,0,0,1,2,0.0,0.0,0.0,Literal::_new(s)
+733,src/fallback.rs,915,0,0,1,2,0.0,0.0,0.0,}
+734,src/fallback.rs,917,0,0,1,2,0.0,0.0,0.0,pub fn f64_unsuffixed(f: f64) -> Literal {
+735,src/fallback.rs,918,0,0,1,2,0.0,0.0,0.0,let mut s = f.to_string();
+736,src/fallback.rs,919,0,0,1,2,0.0,0.0,0.0,if !s.contains('.') {
+737,src/fallback.rs,920,0,0,1,2,0.0,0.0,0.0,"s.push_str("".0"");"
+738,src/fallback.rs,921,0,0,1,2,0.0,0.0,0.0,}
+739,src/fallback.rs,922,0,0,1,2,0.0,0.0,0.0,Literal::_new(s)
+740,src/fallback.rs,923,0,0,1,2,0.0,0.0,0.0,}
+741,src/fallback.rs,925,0,0,1,2,0.0,0.0,0.0,pub fn string(t: &str) -> Literal {
+742,src/fallback.rs,926,0,0,1,2,0.0,0.0,0.0,let mut repr = String::with_capacity(t.len() + 2);
+743,src/fallback.rs,927,0,0,1,2,0.0,0.0,0.0,"repr.push('""');"
+744,src/fallback.rs,928,0,0,1,2,0.0,0.0,0.0,let mut chars = t.chars();
+745,src/fallback.rs,929,0,0,1,2,0.0,0.0,0.0,while let Some(ch) = chars.next() {
+746,src/fallback.rs,930,0,0,1,2,0.0,0.0,0.0,if ch == '\0' {
+747,src/fallback.rs,931,0,0,1,2,0.0,0.0,0.0,repr.push_str(
+748,src/fallback.rs,932,0,0,1,2,0.0,0.0,0.0,if chars
+749,src/fallback.rs,934,0,0,1,2,0.0,0.0,0.0,.starts_with(|next| '0' <= next && next <= '7')
+750,src/fallback.rs,937,0,0,1,2,0.0,0.0,0.0,"""\\x00"""
+751,src/fallback.rs,939,0,0,1,2,0.0,0.0,0.0,"""\\0"""
+752,src/fallback.rs,942,0,0,1,2,0.0,0.0,0.0,} else if ch == '\'' {
+753,src/fallback.rs,944,0,0,1,2,0.0,0.0,0.0,repr.push(ch);
+754,src/fallback.rs,945,0,0,1,2,0.0,0.0,0.0,} else {
+755,src/fallback.rs,946,0,0,1,2,0.0,0.0,0.0,repr.extend(ch.escape_debug());
+756,src/fallback.rs,949,0,0,1,2,0.0,0.0,0.0,"repr.push('""');"
+757,src/fallback.rs,950,0,0,1,2,0.0,0.0,0.0,Literal::_new(repr)
+758,src/fallback.rs,951,0,0,1,2,0.0,0.0,0.0,}
+759,src/fallback.rs,953,0,0,1,2,0.0,0.0,0.0,pub fn character(t: char) -> Literal {
+760,src/fallback.rs,954,0,0,1,2,0.0,0.0,0.0,let mut repr = String::new();
+761,src/fallback.rs,955,0,0,1,2,0.0,0.0,0.0,repr.push('\'');
+762,src/fallback.rs,956,0,0,1,2,0.0,0.0,0.0,"if t == '""' {"
+763,src/fallback.rs,958,0,0,1,2,0.0,0.0,0.0,repr.push(t);
+764,src/fallback.rs,959,0,0,1,2,0.0,0.0,0.0,} else {
+765,src/fallback.rs,960,0,0,1,2,0.0,0.0,0.0,repr.extend(t.escape_debug());
+766,src/fallback.rs,962,0,0,1,2,0.0,0.0,0.0,repr.push('\'');
+767,src/fallback.rs,963,0,0,1,2,0.0,0.0,0.0,Literal::_new(repr)
+768,src/fallback.rs,964,0,0,1,2,0.0,0.0,0.0,}
+769,src/fallback.rs,966,0,0,1,2,0.0,0.0,0.0,pub fn byte_string(bytes: &[u8]) -> Literal {
+770,src/fallback.rs,967,0,0,1,2,0.0,0.0,0.0,"let mut escaped = ""b\"""".to_string();"
+771,src/fallback.rs,968,0,0,1,2,0.0,0.0,0.0,let mut bytes = bytes.iter();
+772,src/fallback.rs,969,0,0,1,2,0.0,0.0,0.0,while let Some(&b) = bytes.next() {
+773,src/fallback.rs,971,0,0,1,2,0.0,0.0,0.0,match b {
+774,src/fallback.rs,972,0,0,1,2,0.0,0.0,0.0,b'\0' => escaped.push_str(match bytes.as_slice().first() {
+775,src/fallback.rs,974,0,0,1,2,0.0,0.0,0.0,"Some(b'0'..=b'7') => r""\x00"","
+776,src/fallback.rs,975,0,0,1,2,0.0,0.0,0.0,"_ => r""\0"","
+777,src/fallback.rs,977,0,0,1,2,0.0,0.0,0.0,"b'\t' => escaped.push_str(r""\t""),"
+778,src/fallback.rs,978,0,0,1,2,0.0,0.0,0.0,"b'\n' => escaped.push_str(r""\n""),"
+779,src/fallback.rs,979,0,0,1,2,0.0,0.0,0.0,"b'\r' => escaped.push_str(r""\r""),"
+780,src/fallback.rs,980,0,0,1,2,0.0,0.0,0.0,"b'""' => escaped.push_str(""\\\""""),"
+781,src/fallback.rs,981,0,0,1,2,0.0,0.0,0.0,"b'\\' => escaped.push_str(""\\\\""),"
+782,src/fallback.rs,982,0,0,1,2,0.0,0.0,0.0,"b'\x20'..=b'\x7E' => escaped.push(b as char),"
+783,src/fallback.rs,983,0,0,1,2,0.0,0.0,0.0,_ => {
+784,src/fallback.rs,988,0,0,1,2,0.0,0.0,0.0,"escaped.push('""');"
+785,src/fallback.rs,989,0,0,1,2,0.0,0.0,0.0,Literal::_new(escaped)
+786,src/fallback.rs,990,0,0,1,2,0.0,0.0,0.0,}
+787,src/fallback.rs,992,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+788,src/fallback.rs,993,0,0,1,2,0.0,0.0,0.0,self.span
+789,src/fallback.rs,994,0,0,1,2,0.0,0.0,0.0,}
+790,src/fallback.rs,996,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+791,src/fallback.rs,997,0,0,1,2,0.0,0.0,0.0,self.span = span;
+792,src/fallback.rs,998,0,0,1,2,0.0,0.0,0.0,}
+793,src/fallback.rs,1000,0,0,1,2,0.0,0.0,0.0,"pub fn subspan<R: RangeBounds<usize>>(&self, range: R) -> Option<Span> {"
+794,src/fallback.rs,1011,0,0,1,2,0.0,0.0,0.0,let lo = match range.start_bound() {
+795,src/fallback.rs,1012,0,0,1,2,0.0,0.0,0.0,Bound::Included(start) => {
+796,src/fallback.rs,1013,0,0,1,2,0.0,0.0,0.0,let start = u32::try_from(*start).ok()?;
+797,src/fallback.rs,1014,0,0,1,2,0.0,0.0,0.0,self.span.lo.checked_add(start)?
+798,src/fallback.rs,1016,0,0,1,2,0.0,0.0,0.0,Bound::Excluded(start) => {
+799,src/fallback.rs,1017,0,0,1,2,0.0,0.0,0.0,let start = u32::try_from(*start).ok()?;
+800,src/fallback.rs,1018,0,0,1,2,0.0,0.0,0.0,self.span.lo.checked_add(start)?.checked_add(1)?
+801,src/fallback.rs,1020,0,0,1,2,0.0,0.0,0.0,"Bound::Unbounded => self.span.lo,"
+802,src/fallback.rs,1022,0,0,1,2,0.0,0.0,0.0,let hi = match range.end_bound() {
+803,src/fallback.rs,1023,0,0,1,2,0.0,0.0,0.0,Bound::Included(end) => {
+804,src/fallback.rs,1024,0,0,1,2,0.0,0.0,0.0,let end = u32::try_from(*end).ok()?;
+805,src/fallback.rs,1025,0,0,1,2,0.0,0.0,0.0,self.span.lo.checked_add(end)?.checked_add(1)?
+806,src/fallback.rs,1027,0,0,1,2,0.0,0.0,0.0,Bound::Excluded(end) => {
+807,src/fallback.rs,1028,0,0,1,2,0.0,0.0,0.0,let end = u32::try_from(*end).ok()?;
+808,src/fallback.rs,1029,0,0,1,2,0.0,0.0,0.0,self.span.lo.checked_add(end)?
+809,src/fallback.rs,1031,0,0,1,2,0.0,0.0,0.0,"Bound::Unbounded => self.span.hi,"
+810,src/fallback.rs,1033,0,0,1,2,0.0,0.0,0.0,if lo <= hi && hi <= self.span.hi {
+811,src/fallback.rs,1034,0,0,1,2,0.0,0.0,0.0,"Some(Span { lo, hi })"
+812,src/fallback.rs,1036,0,0,1,2,0.0,0.0,0.0,None
+813,src/fallback.rs,1039,0,0,1,2,0.0,0.0,0.0,}
+814,src/fallback.rs,1045,0,0,1,2,0.0,0.0,0.0,"fn from_str(repr: &str) -> Result<Self, Self::Err> {"
+815,src/fallback.rs,1046,0,0,1,2,0.0,0.0,0.0,let mut cursor = get_cursor(repr);
+816,src/fallback.rs,1048,0,0,1,2,0.0,0.0,0.0,let lo = cursor.off;
+817,src/fallback.rs,1050,0,0,1,2,0.0,0.0,0.0,let negative = cursor.starts_with_char('-');
+818,src/fallback.rs,1051,0,0,1,2,0.0,0.0,0.0,if negative {
+819,src/fallback.rs,1052,0,0,1,2,0.0,0.0,0.0,cursor = cursor.advance(1);
+820,src/fallback.rs,1053,0,0,1,2,0.0,0.0,0.0,if !cursor.starts_with_fn(|ch| ch.is_ascii_digit()) {
+821,src/fallback.rs,1054,0,0,1,2,0.0,0.0,0.0,return Err(LexError::call_site());
+822,src/fallback.rs,1055,0,0,1,2,0.0,0.0,0.0,}
+823,src/fallback.rs,1056,0,0,1,2,0.0,0.0,0.0,}
+824,src/fallback.rs,1058,0,0,1,2,0.0,0.0,0.0,"if let Ok((rest, mut literal)) = parse::literal(cursor) {"
+825,src/fallback.rs,1059,0,0,1,2,0.0,0.0,0.0,if rest.is_empty() {
+826,src/fallback.rs,1060,0,0,1,2,0.0,0.0,0.0,if negative {
+827,src/fallback.rs,1062,0,0,1,2,0.0,0.0,0.0,}
+828,src/fallback.rs,1063,0,0,1,2,0.0,0.0,0.0,literal.span = Span {
+829,src/fallback.rs,1069,0,0,1,2,0.0,0.0,0.0,return Ok(literal);
+830,src/fallback.rs,1070,0,0,1,2,0.0,0.0,0.0,}
+831,src/fallback.rs,1071,0,0,1,2,0.0,0.0,0.0,}
+832,src/fallback.rs,1072,0,0,1,2,0.0,0.0,0.0,Err(LexError::call_site())
+833,src/fallback.rs,1073,0,0,1,2,0.0,0.0,0.0,}
+834,src/fallback.rs,1077,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+835,src/fallback.rs,1078,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.repr, f)"
+836,src/fallback.rs,1079,0,0,1,2,0.0,0.0,0.0,}
+837,src/fallback.rs,1083,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {"
+838,src/fallback.rs,1084,0,0,1,2,0.0,0.0,0.0,"let mut debug = fmt.debug_struct(""Literal"");"
+839,src/fallback.rs,1085,0,0,1,2,0.0,0.0,0.0,"debug.field(""lit"", &format_args!(""{}"", self.repr));"
+840,src/fallback.rs,1086,0,0,1,2,0.0,0.0,0.0,"debug_span_field_if_nontrivial(&mut debug, self.span);"
+841,src/fallback.rs,1087,0,0,1,2,0.0,0.0,0.0,debug.finish()
+842,src/fallback.rs,1088,0,0,1,2,0.0,0.0,0.0,}
+843,src/lib.rs,192,0,0,1,2,0.0,0.0,0.0,fn _new_fallback(inner: fallback::TokenStream) -> Self {
+844,src/lib.rs,193,0,0,1,2,0.0,0.0,0.0,TokenStream {
+845,src/lib.rs,194,0,0,1,2,0.0,0.0,0.0,"inner: inner.into(),"
+846,src/lib.rs,197,0,0,1,2,0.0,0.0,0.0,}
+847,src/lib.rs,200,0,0,1,2,0.0,0.0,0.0,pub fn new() -> Self {
+848,src/lib.rs,201,0,0,1,2,0.0,0.0,0.0,TokenStream::_new(imp::TokenStream::new())
+849,src/lib.rs,202,0,0,1,2,0.0,0.0,0.0,}
+850,src/lib.rs,205,0,0,1,2,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+851,src/lib.rs,206,0,0,1,2,0.0,0.0,0.0,self.inner.is_empty()
+852,src/lib.rs,207,0,0,1,2,0.0,0.0,0.0,}
+853,src/lib.rs,213,0,0,1,2,0.0,0.0,0.0,fn default() -> Self {
+854,src/lib.rs,214,0,0,1,2,0.0,0.0,0.0,TokenStream::new()
+855,src/lib.rs,215,0,0,1,2,0.0,0.0,0.0,}
+856,src/lib.rs,231,0,0,1,2,0.0,0.0,0.0,"inner: e,"
+857,src/lib.rs,232,0,0,1,2,0.0,0.0,0.0,"_marker: Marker,"
+858,src/lib.rs,233,0,0,1,2,0.0,0.0,0.0,})?;
+859,src/lib.rs,241,0,0,1,2,0.0,0.0,0.0,fn from(inner: proc_macro::TokenStream) -> Self {
+860,src/lib.rs,242,0,0,1,2,0.0,0.0,0.0,TokenStream::_new(inner.into())
+861,src/lib.rs,243,0,0,1,2,0.0,0.0,0.0,}
+862,src/lib.rs,249,0,0,1,2,0.0,0.0,0.0,fn from(inner: TokenStream) -> Self {
+863,src/lib.rs,250,0,0,1,2,0.0,0.0,0.0,inner.inner.into()
+864,src/lib.rs,251,0,0,1,2,0.0,0.0,0.0,}
+865,src/lib.rs,255,0,0,1,2,0.0,0.0,0.0,fn from(token: TokenTree) -> Self {
+866,src/lib.rs,256,0,0,1,2,0.0,0.0,0.0,TokenStream::_new(imp::TokenStream::from(token))
+867,src/lib.rs,257,0,0,1,2,0.0,0.0,0.0,}
+868,src/lib.rs,261,0,0,1,2,0.0,0.0,0.0,"fn extend<I: IntoIterator<Item = TokenTree>>(&mut self, streams: I) {"
+869,src/lib.rs,262,0,0,1,2,0.0,0.0,0.0,self.inner.extend(streams);
+870,src/lib.rs,263,0,0,1,2,0.0,0.0,0.0,}
+871,src/lib.rs,267,0,0,1,2,0.0,0.0,0.0,"fn extend<I: IntoIterator<Item = TokenStream>>(&mut self, streams: I) {"
+872,src/lib.rs,268,0,0,1,2,0.0,0.0,0.0,self.inner
+873,src/lib.rs,269,0,0,1,2,0.0,0.0,0.0,.extend(streams.into_iter().map(|stream| stream.inner));
+874,src/lib.rs,270,0,0,1,2,0.0,0.0,0.0,}
+875,src/lib.rs,275,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = TokenTree>>(streams: I) -> Self {
+876,src/lib.rs,276,0,0,1,2,0.0,0.0,0.0,TokenStream::_new(streams.into_iter().collect())
+877,src/lib.rs,277,0,0,1,2,0.0,0.0,0.0,}
+878,src/lib.rs,280,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = TokenStream>>(streams: I) -> Self {
+879,src/lib.rs,281,0,0,1,2,0.0,0.0,0.0,TokenStream::_new(streams.into_iter().map(|i| i.inner).collect())
+880,src/lib.rs,282,0,0,1,2,0.0,0.0,0.0,}
+881,src/lib.rs,290,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+882,src/lib.rs,291,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.inner, f)"
+883,src/lib.rs,292,0,0,1,2,0.0,0.0,0.0,}
+884,src/lib.rs,297,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+885,src/lib.rs,298,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.inner, f)"
+886,src/lib.rs,299,0,0,1,2,0.0,0.0,0.0,}
+887,src/lib.rs,303,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+888,src/lib.rs,304,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.span())
+889,src/lib.rs,305,0,0,1,2,0.0,0.0,0.0,}
+890,src/lib.rs,309,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+891,src/lib.rs,310,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.inner, f)"
+892,src/lib.rs,311,0,0,1,2,0.0,0.0,0.0,}
+893,src/lib.rs,315,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+894,src/lib.rs,316,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.inner, f)"
+895,src/lib.rs,317,0,0,1,2,0.0,0.0,0.0,}
+896,src/lib.rs,407,0,0,1,2,0.0,0.0,0.0,pub fn mixed_site() -> Self {
+897,src/lib.rs,408,0,0,1,2,0.0,0.0,0.0,Span::_new(imp::Span::mixed_site())
+898,src/lib.rs,409,0,0,1,2,0.0,0.0,0.0,}
+899,src/lib.rs,422,0,0,1,2,0.0,0.0,0.0,"pub fn resolved_at(&self, other: Span) -> Span {"
+900,src/lib.rs,423,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.resolved_at(other.inner))
+901,src/lib.rs,424,0,0,1,2,0.0,0.0,0.0,}
+902,src/lib.rs,428,0,0,1,2,0.0,0.0,0.0,"pub fn located_at(&self, other: Span) -> Span {"
+903,src/lib.rs,429,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.located_at(other.inner))
+904,src/lib.rs,430,0,0,1,2,0.0,0.0,0.0,}
+905,src/lib.rs,443,0,0,1,2,0.0,0.0,0.0,pub fn unwrap(self) -> proc_macro::Span {
+906,src/lib.rs,444,0,0,1,2,0.0,0.0,0.0,self.inner.unwrap()
+907,src/lib.rs,445,0,0,1,2,0.0,0.0,0.0,}
+908,src/lib.rs,450,0,0,1,2,0.0,0.0,0.0,pub fn unstable(self) -> proc_macro::Span {
+909,src/lib.rs,451,0,0,1,2,0.0,0.0,0.0,self.unwrap()
+910,src/lib.rs,452,0,0,1,2,0.0,0.0,0.0,}
+911,src/lib.rs,474,0,0,1,2,0.0,0.0,0.0,pub fn start(&self) -> LineColumn {
+912,src/lib.rs,475,0,0,1,2,0.0,0.0,0.0,self.inner.start()
+913,src/lib.rs,476,0,0,1,2,0.0,0.0,0.0,}
+914,src/lib.rs,489,0,0,1,2,0.0,0.0,0.0,pub fn end(&self) -> LineColumn {
+915,src/lib.rs,490,0,0,1,2,0.0,0.0,0.0,self.inner.end()
+916,src/lib.rs,491,0,0,1,2,0.0,0.0,0.0,}
+917,src/lib.rs,502,0,0,1,2,0.0,0.0,0.0,"pub fn join(&self, other: Span) -> Option<Span> {"
+918,src/lib.rs,503,0,0,1,2,0.0,0.0,0.0,self.inner.join(other.inner).map(Span::_new)
+919,src/lib.rs,504,0,0,1,2,0.0,0.0,0.0,}
+920,src/lib.rs,529,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+921,src/lib.rs,530,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.inner, f)"
+922,src/lib.rs,531,0,0,1,2,0.0,0.0,0.0,}
+923,src/lib.rs,552,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(t) => t.span(),"
+924,src/lib.rs,554,0,0,1,2,0.0,0.0,0.0,"TokenTree::Punct(t) => t.span(),"
+925,src/lib.rs,555,0,0,1,2,0.0,0.0,0.0,"TokenTree::Literal(t) => t.span(),"
+926,src/lib.rs,566,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(t) => t.set_span(span),"
+927,src/lib.rs,568,0,0,1,2,0.0,0.0,0.0,"TokenTree::Punct(t) => t.set_span(span),"
+928,src/lib.rs,569,0,0,1,2,0.0,0.0,0.0,"TokenTree::Literal(t) => t.set_span(span),"
+929,src/lib.rs,575,0,0,1,2,0.0,0.0,0.0,fn from(g: Group) -> Self {
+930,src/lib.rs,576,0,0,1,2,0.0,0.0,0.0,TokenTree::Group(g)
+931,src/lib.rs,577,0,0,1,2,0.0,0.0,0.0,}
+932,src/lib.rs,581,0,0,1,2,0.0,0.0,0.0,fn from(g: Ident) -> Self {
+933,src/lib.rs,582,0,0,1,2,0.0,0.0,0.0,TokenTree::Ident(g)
+934,src/lib.rs,583,0,0,1,2,0.0,0.0,0.0,}
+935,src/lib.rs,587,0,0,1,2,0.0,0.0,0.0,fn from(g: Punct) -> Self {
+936,src/lib.rs,588,0,0,1,2,0.0,0.0,0.0,TokenTree::Punct(g)
+937,src/lib.rs,589,0,0,1,2,0.0,0.0,0.0,}
+938,src/lib.rs,593,0,0,1,2,0.0,0.0,0.0,fn from(g: Literal) -> Self {
+939,src/lib.rs,594,0,0,1,2,0.0,0.0,0.0,TokenTree::Literal(g)
+940,src/lib.rs,595,0,0,1,2,0.0,0.0,0.0,}
+941,src/lib.rs,603,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+942,src/lib.rs,604,0,0,1,2,0.0,0.0,0.0,match self {
+943,src/lib.rs,605,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(t) => Display::fmt(t, f),"
+944,src/lib.rs,606,0,0,1,2,0.0,0.0,0.0,"TokenTree::Ident(t) => Display::fmt(t, f),"
+945,src/lib.rs,607,0,0,1,2,0.0,0.0,0.0,"TokenTree::Punct(t) => Display::fmt(t, f),"
+946,src/lib.rs,608,0,0,1,2,0.0,0.0,0.0,"TokenTree::Literal(t) => Display::fmt(t, f),"
+947,src/lib.rs,610,0,0,1,2,0.0,0.0,0.0,}
+948,src/lib.rs,615,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+949,src/lib.rs,618,0,0,1,2,0.0,0.0,0.0,match self {
+950,src/lib.rs,619,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(t) => Debug::fmt(t, f),"
+951,src/lib.rs,620,0,0,1,2,0.0,0.0,0.0,TokenTree::Ident(t) => {
+952,src/lib.rs,621,0,0,1,2,0.0,0.0,0.0,"let mut debug = f.debug_struct(""Ident"");"
+953,src/lib.rs,622,0,0,1,2,0.0,0.0,0.0,"debug.field(""sym"", &format_args!(""{}"", t));"
+954,src/lib.rs,623,0,0,1,2,0.0,0.0,0.0,"imp::debug_span_field_if_nontrivial(&mut debug, t.span().inner);"
+955,src/lib.rs,624,0,0,1,2,0.0,0.0,0.0,debug.finish()
+956,src/lib.rs,626,0,0,1,2,0.0,0.0,0.0,"TokenTree::Punct(t) => Debug::fmt(t, f),"
+957,src/lib.rs,627,0,0,1,2,0.0,0.0,0.0,"TokenTree::Literal(t) => Debug::fmt(t, f),"
+958,src/lib.rs,629,0,0,1,2,0.0,0.0,0.0,}
+959,src/lib.rs,661,0,0,1,2,0.0,0.0,0.0,fn _new(inner: imp::Group) -> Self {
+960,src/lib.rs,662,0,0,1,2,0.0,0.0,0.0,Group { inner }
+961,src/lib.rs,663,0,0,1,2,0.0,0.0,0.0,}
+962,src/lib.rs,665,0,0,1,2,0.0,0.0,0.0,fn _new_fallback(inner: fallback::Group) -> Self {
+963,src/lib.rs,666,0,0,1,2,0.0,0.0,0.0,Group {
+964,src/lib.rs,669,0,0,1,2,0.0,0.0,0.0,}
+965,src/lib.rs,676,0,0,1,2,0.0,0.0,0.0,"pub fn new(delimiter: Delimiter, stream: TokenStream) -> Self {"
+966,src/lib.rs,677,0,0,1,2,0.0,0.0,0.0,Group {
+967,src/lib.rs,678,0,0,1,2,0.0,0.0,0.0,"inner: imp::Group::new(delimiter, stream.inner),"
+968,src/lib.rs,680,0,0,1,2,0.0,0.0,0.0,}
+969,src/lib.rs,684,0,0,1,2,0.0,0.0,0.0,pub fn delimiter(&self) -> Delimiter {
+970,src/lib.rs,685,0,0,1,2,0.0,0.0,0.0,self.inner.delimiter()
+971,src/lib.rs,686,0,0,1,2,0.0,0.0,0.0,}
+972,src/lib.rs,692,0,0,1,2,0.0,0.0,0.0,pub fn stream(&self) -> TokenStream {
+973,src/lib.rs,693,0,0,1,2,0.0,0.0,0.0,TokenStream::_new(self.inner.stream())
+974,src/lib.rs,694,0,0,1,2,0.0,0.0,0.0,}
+975,src/lib.rs,703,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+976,src/lib.rs,704,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.span())
+977,src/lib.rs,705,0,0,1,2,0.0,0.0,0.0,}
+978,src/lib.rs,713,0,0,1,2,0.0,0.0,0.0,pub fn span_open(&self) -> Span {
+979,src/lib.rs,714,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.span_open())
+980,src/lib.rs,715,0,0,1,2,0.0,0.0,0.0,}
+981,src/lib.rs,723,0,0,1,2,0.0,0.0,0.0,pub fn span_close(&self) -> Span {
+982,src/lib.rs,724,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.span_close())
+983,src/lib.rs,725,0,0,1,2,0.0,0.0,0.0,}
+984,src/lib.rs,730,0,0,1,2,0.0,0.0,0.0,pub fn delim_span(&self) -> DelimSpan {
+985,src/lib.rs,731,0,0,1,2,0.0,0.0,0.0,DelimSpan::new(&self.inner)
+986,src/lib.rs,732,0,0,1,2,0.0,0.0,0.0,}
+987,src/lib.rs,740,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+988,src/lib.rs,741,0,0,1,2,0.0,0.0,0.0,self.inner.set_span(span.inner);
+989,src/lib.rs,742,0,0,1,2,0.0,0.0,0.0,}
+990,src/lib.rs,749,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {"
+991,src/lib.rs,750,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.inner, formatter)"
+992,src/lib.rs,751,0,0,1,2,0.0,0.0,0.0,}
+993,src/lib.rs,755,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {"
+994,src/lib.rs,756,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.inner, formatter)"
+995,src/lib.rs,757,0,0,1,2,0.0,0.0,0.0,}
+996,src/lib.rs,792,0,0,1,2,0.0,0.0,0.0,"pub fn new(ch: char, spacing: Spacing) -> Self {"
+997,src/lib.rs,793,0,0,1,2,0.0,0.0,0.0,Punct {
+998,src/lib.rs,794,0,0,1,2,0.0,0.0,0.0,"ch,"
+999,src/lib.rs,798,0,0,1,2,0.0,0.0,0.0,}
+1000,src/lib.rs,801,0,0,1,2,0.0,0.0,0.0,pub fn as_char(&self) -> char {
+1001,src/lib.rs,802,0,0,1,2,0.0,0.0,0.0,self.ch
+1002,src/lib.rs,803,0,0,1,2,0.0,0.0,0.0,}
+1003,src/lib.rs,810,0,0,1,2,0.0,0.0,0.0,pub fn spacing(&self) -> Spacing {
+1004,src/lib.rs,811,0,0,1,2,0.0,0.0,0.0,self.spacing
+1005,src/lib.rs,812,0,0,1,2,0.0,0.0,0.0,}
+1006,src/lib.rs,815,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+1007,src/lib.rs,816,0,0,1,2,0.0,0.0,0.0,self.span
+1008,src/lib.rs,817,0,0,1,2,0.0,0.0,0.0,}
+1009,src/lib.rs,820,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+1010,src/lib.rs,821,0,0,1,2,0.0,0.0,0.0,self.span = span;
+1011,src/lib.rs,822,0,0,1,2,0.0,0.0,0.0,}
+1012,src/lib.rs,828,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1013,src/lib.rs,829,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.ch, f)"
+1014,src/lib.rs,830,0,0,1,2,0.0,0.0,0.0,}
+1015,src/lib.rs,834,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {"
+1016,src/lib.rs,835,0,0,1,2,0.0,0.0,0.0,"let mut debug = fmt.debug_struct(""Punct"");"
+1017,src/lib.rs,836,0,0,1,2,0.0,0.0,0.0,"debug.field(""char"", &self.ch);"
+1018,src/lib.rs,837,0,0,1,2,0.0,0.0,0.0,"debug.field(""spacing"", &self.spacing);"
+1019,src/lib.rs,838,0,0,1,2,0.0,0.0,0.0,"imp::debug_span_field_if_nontrivial(&mut debug, self.span.inner);"
+1020,src/lib.rs,839,0,0,1,2,0.0,0.0,0.0,debug.finish()
+1021,src/lib.rs,840,0,0,1,2,0.0,0.0,0.0,}
+1022,src/lib.rs,961,0,0,1,2,0.0,0.0,0.0,"pub fn new_raw(string: &str, span: Span) -> Self {"
+1023,src/lib.rs,962,0,0,1,2,0.0,0.0,0.0,"Ident::_new_raw(string, span)"
+1024,src/lib.rs,963,0,0,1,2,0.0,0.0,0.0,}
+1025,src/lib.rs,965,0,0,1,2,0.0,0.0,0.0,"fn _new_raw(string: &str, span: Span) -> Self {"
+1026,src/lib.rs,966,0,0,1,2,0.0,0.0,0.0,"Ident::_new(imp::Ident::new_raw(string, span.inner))"
+1027,src/lib.rs,967,0,0,1,2,0.0,0.0,0.0,}
+1028,src/lib.rs,982,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &Ident) -> bool {"
+1029,src/lib.rs,983,0,0,1,2,0.0,0.0,0.0,self.inner == other.inner
+1030,src/lib.rs,984,0,0,1,2,0.0,0.0,0.0,}
+1031,src/lib.rs,991,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &T) -> bool {"
+1032,src/lib.rs,992,0,0,1,2,0.0,0.0,0.0,self.inner == other
+1033,src/lib.rs,993,0,0,1,2,0.0,0.0,0.0,}
+1034,src/lib.rs,999,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &Ident) -> Option<Ordering> {"
+1035,src/lib.rs,1000,0,0,1,2,0.0,0.0,0.0,Some(self.cmp(other))
+1036,src/lib.rs,1001,0,0,1,2,0.0,0.0,0.0,}
+1037,src/lib.rs,1005,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, other: &Ident) -> Ordering {"
+1038,src/lib.rs,1006,0,0,1,2,0.0,0.0,0.0,self.to_string().cmp(&other.to_string())
+1039,src/lib.rs,1007,0,0,1,2,0.0,0.0,0.0,}
+1040,src/lib.rs,1011,0,0,1,2,0.0,0.0,0.0,"fn hash<H: Hasher>(&self, hasher: &mut H) {"
+1041,src/lib.rs,1012,0,0,1,2,0.0,0.0,0.0,self.to_string().hash(hasher);
+1042,src/lib.rs,1013,0,0,1,2,0.0,0.0,0.0,}
+1043,src/lib.rs,1019,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1044,src/lib.rs,1020,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.inner, f)"
+1045,src/lib.rs,1021,0,0,1,2,0.0,0.0,0.0,}
+1046,src/lib.rs,1025,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1047,src/lib.rs,1026,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.inner, f)"
+1048,src/lib.rs,1027,0,0,1,2,0.0,0.0,0.0,}
+1049,src/lib.rs,1055,0,0,1,2,0.0,0.0,0.0,pub fn $name(n: $kind) -> Literal {
+1050,src/lib.rs,1056,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::$name(n))
+1051,src/lib.rs,1057,0,0,1,2,0.0,0.0,0.0,}
+1052,src/lib.rs,1076,0,0,1,2,0.0,0.0,0.0,pub fn $name(n: $kind) -> Literal {
+1053,src/lib.rs,1077,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::$name(n))
+1054,src/lib.rs,1078,0,0,1,2,0.0,0.0,0.0,}
+1055,src/lib.rs,1083,0,0,1,2,0.0,0.0,0.0,fn _new(inner: imp::Literal) -> Self {
+1056,src/lib.rs,1084,0,0,1,2,0.0,0.0,0.0,Literal {
+1057,src/lib.rs,1088,0,0,1,2,0.0,0.0,0.0,}
+1058,src/lib.rs,1090,0,0,1,2,0.0,0.0,0.0,fn _new_fallback(inner: fallback::Literal) -> Self {
+1059,src/lib.rs,1091,0,0,1,2,0.0,0.0,0.0,Literal {
+1060,src/lib.rs,1092,0,0,1,2,0.0,0.0,0.0,"inner: inner.into(),"
+1061,src/lib.rs,1095,0,0,1,2,0.0,0.0,0.0,}
+1062,src/lib.rs,1140,0,0,1,2,0.0,0.0,0.0,pub fn f64_unsuffixed(f: f64) -> Literal {
+1063,src/lib.rs,1141,0,0,1,2,0.0,0.0,0.0,assert!(f.is_finite());
+1064,src/lib.rs,1142,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::f64_unsuffixed(f))
+1065,src/lib.rs,1143,0,0,1,2,0.0,0.0,0.0,}
+1066,src/lib.rs,1158,0,0,1,2,0.0,0.0,0.0,pub fn f64_suffixed(f: f64) -> Literal {
+1067,src/lib.rs,1159,0,0,1,2,0.0,0.0,0.0,assert!(f.is_finite());
+1068,src/lib.rs,1160,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::f64_suffixed(f))
+1069,src/lib.rs,1161,0,0,1,2,0.0,0.0,0.0,}
+1070,src/lib.rs,1176,0,0,1,2,0.0,0.0,0.0,pub fn f32_unsuffixed(f: f32) -> Literal {
+1071,src/lib.rs,1177,0,0,1,2,0.0,0.0,0.0,assert!(f.is_finite());
+1072,src/lib.rs,1178,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::f32_unsuffixed(f))
+1073,src/lib.rs,1179,0,0,1,2,0.0,0.0,0.0,}
+1074,src/lib.rs,1194,0,0,1,2,0.0,0.0,0.0,pub fn f32_suffixed(f: f32) -> Literal {
+1075,src/lib.rs,1195,0,0,1,2,0.0,0.0,0.0,assert!(f.is_finite());
+1076,src/lib.rs,1196,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::f32_suffixed(f))
+1077,src/lib.rs,1197,0,0,1,2,0.0,0.0,0.0,}
+1078,src/lib.rs,1200,0,0,1,2,0.0,0.0,0.0,pub fn string(string: &str) -> Literal {
+1079,src/lib.rs,1201,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::string(string))
+1080,src/lib.rs,1202,0,0,1,2,0.0,0.0,0.0,}
+1081,src/lib.rs,1205,0,0,1,2,0.0,0.0,0.0,pub fn character(ch: char) -> Literal {
+1082,src/lib.rs,1206,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::character(ch))
+1083,src/lib.rs,1207,0,0,1,2,0.0,0.0,0.0,}
+1084,src/lib.rs,1210,0,0,1,2,0.0,0.0,0.0,pub fn byte_string(s: &[u8]) -> Literal {
+1085,src/lib.rs,1211,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::byte_string(s))
+1086,src/lib.rs,1212,0,0,1,2,0.0,0.0,0.0,}
+1087,src/lib.rs,1215,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+1088,src/lib.rs,1216,0,0,1,2,0.0,0.0,0.0,Span::_new(self.inner.span())
+1089,src/lib.rs,1217,0,0,1,2,0.0,0.0,0.0,}
+1090,src/lib.rs,1220,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+1091,src/lib.rs,1221,0,0,1,2,0.0,0.0,0.0,self.inner.set_span(span.inner);
+1092,src/lib.rs,1222,0,0,1,2,0.0,0.0,0.0,}
+1093,src/lib.rs,1233,0,0,1,2,0.0,0.0,0.0,"pub fn subspan<R: RangeBounds<usize>>(&self, range: R) -> Option<Span> {"
+1094,src/lib.rs,1234,0,0,1,2,0.0,0.0,0.0,self.inner.subspan(range).map(Span::_new)
+1095,src/lib.rs,1235,0,0,1,2,0.0,0.0,0.0,}
+1096,src/lib.rs,1242,0,0,1,2,0.0,0.0,0.0,pub unsafe fn from_str_unchecked(repr: &str) -> Self {
+1097,src/lib.rs,1243,0,0,1,2,0.0,0.0,0.0,Literal::_new(imp::Literal::from_str_unchecked(repr))
+1098,src/lib.rs,1244,0,0,1,2,0.0,0.0,0.0,}
+1099,src/lib.rs,1250,0,0,1,2,0.0,0.0,0.0,"fn from_str(repr: &str) -> Result<Self, LexError> {"
+1100,src/lib.rs,1251,0,0,1,2,0.0,0.0,0.0,repr.parse().map(Literal::_new).map_err(|inner| LexError {
+1101,src/lib.rs,1252,0,0,1,2,0.0,0.0,0.0,"inner,"
+1102,src/lib.rs,1253,0,0,1,2,0.0,0.0,0.0,"_marker: Marker,"
+1103,src/lib.rs,1254,0,0,1,2,0.0,0.0,0.0,})
+1104,src/lib.rs,1255,0,0,1,2,0.0,0.0,0.0,}
+1105,src/lib.rs,1259,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1106,src/lib.rs,1260,0,0,1,2,0.0,0.0,0.0,"Debug::fmt(&self.inner, f)"
+1107,src/lib.rs,1261,0,0,1,2,0.0,0.0,0.0,}
+1108,src/lib.rs,1265,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1109,src/lib.rs,1266,0,0,1,2,0.0,0.0,0.0,"Display::fmt(&self.inner, f)"
+1110,src/lib.rs,1267,0,0,1,2,0.0,0.0,0.0,}
+1111,src/lib.rs,1295,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+1112,src/lib.rs,1296,0,0,1,2,0.0,0.0,0.0,self.inner.size_hint()
+1113,src/lib.rs,1297,0,0,1,2,0.0,0.0,0.0,}
+1114,src/lib.rs,1301,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1115,src/lib.rs,1302,0,0,1,2,0.0,0.0,0.0,"f.write_str(""TokenStream "")?;"
+1116,src/lib.rs,1303,0,0,1,2,0.0,0.0,0.0,f.debug_list().entries(self.clone()).finish()
+1117,src/lib.rs,1304,0,0,1,2,0.0,0.0,0.0,}
+1118,src/location.rs,18,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, other: &Self) -> Ordering {"
+1119,src/location.rs,19,0,0,1,2,0.0,0.0,0.0,self.line
+1120,src/location.rs,20,0,0,1,2,0.0,0.0,0.0,.cmp(&other.line)
+1121,src/location.rs,21,0,0,1,2,0.0,0.0,0.0,.then(self.column.cmp(&other.column))
+1122,src/location.rs,22,0,0,1,2,0.0,0.0,0.0,}
+1123,src/location.rs,26,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &Self) -> Option<Ordering> {"
+1124,src/location.rs,27,0,0,1,2,0.0,0.0,0.0,Some(self.cmp(other))
+1125,src/location.rs,28,0,0,1,2,0.0,0.0,0.0,}
+1126,src/parse.rs,30,0,0,1,2,0.0,0.0,0.0,"pub fn starts_with_char(&self, ch: char) -> bool {"
+1127,src/parse.rs,31,0,0,1,2,0.0,0.0,0.0,self.rest.starts_with(ch)
+1128,src/parse.rs,32,0,0,1,2,0.0,0.0,0.0,}
+1129,src/parse.rs,34,0,0,1,2,0.0,0.0,0.0,"pub fn starts_with_fn<Pattern>(&self, f: Pattern) -> bool"
+1130,src/parse.rs,38,0,0,1,2,0.0,0.0,0.0,self.rest.starts_with(f)
+1131,src/parse.rs,39,0,0,1,2,0.0,0.0,0.0,}
+1132,src/parse.rs,67,0,0,1,2,0.0,0.0,0.0,Ok(self.advance(tag.len()))
+1133,src/parse.rs,83,0,0,1,2,0.0,0.0,0.0,"if s.starts_with(""//"")"
+1134,src/parse.rs,84,0,0,1,2,0.0,0.0,0.0,"&& (!s.starts_with(""///"") || s.starts_with(""////""))"
+1135,src/parse.rs,85,0,0,1,2,0.0,0.0,0.0,"&& !s.starts_with(""//!"")"
+1136,src/parse.rs,87,0,0,1,2,0.0,0.0,0.0,"let (cursor, _) = take_until_newline_or_eof(s);"
+1137,src/parse.rs,88,0,0,1,2,0.0,0.0,0.0,s = cursor;
+1138,src/parse.rs,89,0,0,1,2,0.0,0.0,0.0,continue;
+1139,src/parse.rs,90,0,0,1,2,0.0,0.0,0.0,"} else if s.starts_with(""/**/"") {"
+1140,src/parse.rs,91,0,0,1,2,0.0,0.0,0.0,s = s.advance(4);
+1141,src/parse.rs,92,0,0,1,2,0.0,0.0,0.0,continue;
+1142,src/parse.rs,93,0,0,1,2,0.0,0.0,0.0,"} else if s.starts_with(""/*"")"
+1143,src/parse.rs,94,0,0,1,2,0.0,0.0,0.0,"&& (!s.starts_with(""/**"") || s.starts_with(""/***""))"
+1144,src/parse.rs,95,0,0,1,2,0.0,0.0,0.0,"&& !s.starts_with(""/*!"")"
+1145,src/parse.rs,97,0,0,1,2,0.0,0.0,0.0,match block_comment(s) {
+1146,src/parse.rs,98,0,0,1,2,0.0,0.0,0.0,"Ok((rest, _)) => {"
+1147,src/parse.rs,99,0,0,1,2,0.0,0.0,0.0,s = rest;
+1148,src/parse.rs,100,0,0,1,2,0.0,0.0,0.0,continue;
+1149,src/parse.rs,102,0,0,1,2,0.0,0.0,0.0,"Err(Reject) => return s,"
+1150,src/parse.rs,104,0,0,1,2,0.0,0.0,0.0,}
+1151,src/parse.rs,115,0,0,1,2,0.0,0.0,0.0,s = s.advance(ch.len_utf8());
+1152,src/parse.rs,116,0,0,1,2,0.0,0.0,0.0,continue;
+1153,src/parse.rs,125,0,0,1,2,0.0,0.0,0.0,fn block_comment(input: Cursor) -> PResult<&str> {
+1154,src/parse.rs,126,0,0,1,2,0.0,0.0,0.0,"if !input.starts_with(""/*"") {"
+1155,src/parse.rs,127,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1156,src/parse.rs,128,0,0,1,2,0.0,0.0,0.0,}
+1157,src/parse.rs,130,0,0,1,2,0.0,0.0,0.0,let mut depth = 0usize;
+1158,src/parse.rs,131,0,0,1,2,0.0,0.0,0.0,let bytes = input.as_bytes();
+1159,src/parse.rs,132,0,0,1,2,0.0,0.0,0.0,let mut i = 0usize;
+1160,src/parse.rs,133,0,0,1,2,0.0,0.0,0.0,let upper = bytes.len() - 1;
+1161,src/parse.rs,135,0,0,1,2,0.0,0.0,0.0,while i < upper {
+1162,src/parse.rs,136,0,0,1,2,0.0,0.0,0.0,if bytes[i] == b'/' && bytes[i + 1] == b'*' {
+1163,src/parse.rs,139,0,0,1,2,0.0,0.0,0.0,} else if bytes[i] == b'*' && bytes[i + 1] == b'/' {
+1164,src/parse.rs,140,0,0,1,2,0.0,0.0,0.0,depth -= 1;
+1165,src/parse.rs,141,0,0,1,2,0.0,0.0,0.0,if depth == 0 {
+1166,src/parse.rs,142,0,0,1,2,0.0,0.0,0.0,"return Ok((input.advance(i + 2), &input.rest[..i + 2]));"
+1167,src/parse.rs,143,0,0,1,2,0.0,0.0,0.0,}
+1168,src/parse.rs,144,0,0,1,2,0.0,0.0,0.0,i += 1; // eat '/'
+1169,src/parse.rs,145,0,0,1,2,0.0,0.0,0.0,}
+1170,src/parse.rs,146,0,0,1,2,0.0,0.0,0.0,i += 1;
+1171,src/parse.rs,149,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1172,src/parse.rs,150,0,0,1,2,0.0,0.0,0.0,}
+1173,src/parse.rs,157,0,0,1,2,0.0,0.0,0.0,"fn word_break(input: Cursor) -> Result<Cursor, Reject> {"
+1174,src/parse.rs,158,0,0,1,2,0.0,0.0,0.0,match input.chars().next() {
+1175,src/parse.rs,159,0,0,1,2,0.0,0.0,0.0,"Some(ch) if is_ident_continue(ch) => Err(Reject),"
+1176,src/parse.rs,160,0,0,1,2,0.0,0.0,0.0,"Some(_) | None => Ok(input),"
+1177,src/parse.rs,162,0,0,1,2,0.0,0.0,0.0,}
+1178,src/parse.rs,176,0,0,1,2,0.0,0.0,0.0,input = rest;
+1179,src/parse.rs,177,0,0,1,2,0.0,0.0,0.0,continue;
+1180,src/parse.rs,188,0,0,1,2,0.0,0.0,0.0,"Some((lo, _frame)) => {"
+1181,src/parse.rs,189,0,0,1,2,0.0,0.0,0.0,return Err(LexError {
+1182,src/parse.rs,198,0,0,1,2,0.0,0.0,0.0,if let Some(open_delimiter) = match first {
+1183,src/parse.rs,199,0,0,1,2,0.0,0.0,0.0,"b'(' if !input.starts_with(ERROR) => Some(Delimiter::Parenthesis),"
+1184,src/parse.rs,200,0,0,1,2,0.0,0.0,0.0,"b'[' => Some(Delimiter::Bracket),"
+1185,src/parse.rs,201,0,0,1,2,0.0,0.0,0.0,"b'{' => Some(Delimiter::Brace),"
+1186,src/parse.rs,203,0,0,1,2,0.0,0.0,0.0,} {
+1187,src/parse.rs,204,0,0,1,2,0.0,0.0,0.0,input = input.advance(1);
+1188,src/parse.rs,205,0,0,1,2,0.0,0.0,0.0,"let frame = (open_delimiter, trees);"
+1189,src/parse.rs,207,0,0,1,2,0.0,0.0,0.0,"let frame = (lo, frame);"
+1190,src/parse.rs,208,0,0,1,2,0.0,0.0,0.0,stack.push(frame);
+1191,src/parse.rs,211,0,0,1,2,0.0,0.0,0.0,"b')' => Some(Delimiter::Parenthesis),"
+1192,src/parse.rs,212,0,0,1,2,0.0,0.0,0.0,"b']' => Some(Delimiter::Bracket),"
+1193,src/parse.rs,213,0,0,1,2,0.0,0.0,0.0,"b'}' => Some(Delimiter::Brace),"
+1194,src/parse.rs,216,0,0,1,2,0.0,0.0,0.0,let frame = match stack.pop() {
+1195,src/parse.rs,217,0,0,1,2,0.0,0.0,0.0,"Some(frame) => frame,"
+1196,src/parse.rs,218,0,0,1,2,0.0,0.0,0.0,"None => return Err(lex_error(input)),"
+1197,src/parse.rs,221,0,0,1,2,0.0,0.0,0.0,"let (lo, frame) = frame;"
+1198,src/parse.rs,222,0,0,1,2,0.0,0.0,0.0,"let (open_delimiter, outer) = frame;"
+1199,src/parse.rs,223,0,0,1,2,0.0,0.0,0.0,if open_delimiter != close_delimiter {
+1200,src/parse.rs,224,0,0,1,2,0.0,0.0,0.0,return Err(lex_error(input));
+1201,src/parse.rs,225,0,0,1,2,0.0,0.0,0.0,}
+1202,src/parse.rs,226,0,0,1,2,0.0,0.0,0.0,input = input.advance(1);
+1203,src/parse.rs,227,0,0,1,2,0.0,0.0,0.0,"let mut g = Group::new(open_delimiter, trees.build());"
+1204,src/parse.rs,228,0,0,1,2,0.0,0.0,0.0,g.set_span(Span {
+1205,src/parse.rs,234,0,0,1,2,0.0,0.0,0.0,trees = outer;
+1206,src/parse.rs,235,0,0,1,2,0.0,0.0,0.0,trees.push_token_from_parser(TokenTree::Group(crate::Group::_new_fallback(g)));
+1207,src/parse.rs,239,0,0,1,2,0.0,0.0,0.0,"Err(Reject) => return Err(lex_error(input)),"
+1208,src/parse.rs,253,0,0,1,2,0.0,0.0,0.0,fn lex_error(cursor: Cursor) -> LexError {
+1209,src/parse.rs,256,0,0,1,2,0.0,0.0,0.0,LexError {
+1210,src/parse.rs,264,0,0,1,2,0.0,0.0,0.0,}
+1211,src/parse.rs,269,0,0,1,2,0.0,0.0,0.0,"Ok((input, TokenTree::Literal(crate::Literal::_new_fallback(l))))"
+1212,src/parse.rs,271,0,0,1,2,0.0,0.0,0.0,"Ok((input, TokenTree::Punct(p)))"
+1213,src/parse.rs,274,0,0,1,2,0.0,0.0,0.0,} else if input.starts_with(ERROR) {
+1214,src/parse.rs,275,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(ERROR.len());
+1215,src/parse.rs,276,0,0,1,2,0.0,0.0,0.0,let repr = crate::Literal::_new_fallback(Literal::_new(ERROR.to_owned()));
+1216,src/parse.rs,277,0,0,1,2,0.0,0.0,0.0,"Ok((rest, TokenTree::Literal(repr)))"
+1217,src/parse.rs,279,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1218,src/parse.rs,290,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1219,src/parse.rs,305,0,0,1,2,0.0,0.0,0.0,}
+1220,src/parse.rs,307,0,0,1,2,0.0,0.0,0.0,match sym {
+1221,src/parse.rs,308,0,0,1,2,0.0,0.0,0.0,"""_"" | ""super"" | ""self"" | ""Self"" | ""crate"" => return Err(Reject),"
+1222,src/parse.rs,309,0,0,1,2,0.0,0.0,0.0,_ => {}
+1223,src/parse.rs,312,0,0,1,2,0.0,0.0,0.0,"let ident = crate::Ident::_new_raw(sym, crate::Span::call_site());"
+1224,src/parse.rs,313,0,0,1,2,0.0,0.0,0.0,"Ok((rest, ident))"
+1225,src/parse.rs,321,0,0,1,2,0.0,0.0,0.0,"_ => return Err(Reject),"
+1226,src/parse.rs,329,0,2,1,0,0.0,0.0,0.0,}
+1227,src/parse.rs,337,0,0,1,2,0.0,0.0,0.0,let end = input.len() - rest.len();
+1228,src/parse.rs,338,0,0,1,2,0.0,0.0,0.0,"Ok((rest, Literal::_new(input.rest[..end].to_string())))"
+1229,src/parse.rs,343,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1230,src/parse.rs,345,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1231,src/parse.rs,347,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1232,src/parse.rs,349,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1233,src/parse.rs,351,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1234,src/parse.rs,353,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1235,src/parse.rs,355,0,0,1,2,0.0,0.0,0.0,Ok(ok)
+1236,src/parse.rs,361,0,0,1,2,0.0,0.0,0.0,fn literal_suffix(input: Cursor) -> Cursor {
+1237,src/parse.rs,362,0,0,1,2,0.0,0.0,0.0,match ident_not_raw(input) {
+1238,src/parse.rs,363,0,0,1,2,0.0,0.0,0.0,"Ok((input, _)) => input,"
+1239,src/parse.rs,364,0,0,1,2,0.0,0.0,0.0,"Err(Reject) => input,"
+1240,src/parse.rs,366,0,0,1,2,0.0,0.0,0.0,}
+1241,src/parse.rs,370,0,0,1,2,0.0,0.0,0.0,cooked_string(input)
+1242,src/parse.rs,372,0,0,1,2,0.0,0.0,0.0,raw_string(input)
+1243,src/parse.rs,378,0,0,1,2,0.0,0.0,0.0,"fn cooked_string(mut input: Cursor) -> Result<Cursor, Reject> {"
+1244,src/parse.rs,379,0,0,1,2,0.0,0.0,0.0,let mut chars = input.char_indices();
+1245,src/parse.rs,381,0,0,1,2,0.0,0.0,0.0,"while let Some((i, ch)) = chars.next() {"
+1246,src/parse.rs,382,0,0,1,2,0.0,0.0,0.0,match ch {
+1247,src/parse.rs,384,0,0,1,2,0.0,0.0,0.0,let input = input.advance(i + 1);
+1248,src/parse.rs,385,0,0,1,2,0.0,0.0,0.0,return Ok(literal_suffix(input));
+1249,src/parse.rs,387,0,0,1,2,0.0,0.0,0.0,'\r' => match chars.next() {
+1250,src/parse.rs,388,0,0,1,2,0.0,0.0,0.0,"Some((_, '\n')) => {}"
+1251,src/parse.rs,389,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1252,src/parse.rs,391,0,0,1,2,0.0,0.0,0.0,'\\' => match chars.next() {
+1253,src/parse.rs,393,0,0,1,2,0.0,0.0,0.0,backslash_x_char(&mut chars)?;
+1254,src/parse.rs,395,0,0,1,2,0.0,0.0,0.0,"Some((_, 'n' | 'r' | 't' | '\\' | '\'' | '""' | '0')) => {}"
+1255,src/parse.rs,397,0,0,1,2,0.0,0.0,0.0,backslash_u(&mut chars)?;
+1256,src/parse.rs,399,0,0,1,2,0.0,0.0,0.0,"Some((newline, ch @ ('\n' | '\r'))) => {"
+1257,src/parse.rs,400,0,0,1,2,0.0,0.0,0.0,input = input.advance(newline + 1);
+1258,src/parse.rs,401,0,0,1,2,0.0,0.0,0.0,"trailing_backslash(&mut input, ch as u8)?;"
+1259,src/parse.rs,402,0,0,1,2,0.0,0.0,0.0,chars = input.char_indices();
+1260,src/parse.rs,404,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1261,src/parse.rs,406,0,0,1,2,0.0,0.0,0.0,_ch => {}
+1262,src/parse.rs,409,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1263,src/parse.rs,410,0,0,1,2,0.0,0.0,0.0,}
+1264,src/parse.rs,412,0,0,1,2,0.0,0.0,0.0,"fn raw_string(input: Cursor) -> Result<Cursor, Reject> {"
+1265,src/parse.rs,413,0,0,1,2,0.0,0.0,0.0,"let (input, delimiter) = delimiter_of_raw_string(input)?;"
+1266,src/parse.rs,414,0,0,1,2,0.0,0.0,0.0,let mut bytes = input.bytes().enumerate();
+1267,src/parse.rs,415,0,0,1,2,0.0,0.0,0.0,"while let Some((i, byte)) = bytes.next() {"
+1268,src/parse.rs,416,0,0,1,2,0.0,0.0,0.0,match byte {
+1269,src/parse.rs,417,0,0,1,2,0.0,0.0,0.0,"b'""' if input.rest[i + 1..].starts_with(delimiter) => {"
+1270,src/parse.rs,418,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(i + 1 + delimiter.len());
+1271,src/parse.rs,419,0,0,1,2,0.0,0.0,0.0,return Ok(literal_suffix(rest));
+1272,src/parse.rs,421,0,0,1,2,0.0,0.0,0.0,b'\r' => match bytes.next() {
+1273,src/parse.rs,422,0,0,1,2,0.0,0.0,0.0,"Some((_, b'\n')) => {}"
+1274,src/parse.rs,423,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1275,src/parse.rs,425,0,0,1,2,0.0,0.0,0.0,_ => {}
+1276,src/parse.rs,428,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1277,src/parse.rs,429,0,0,1,2,0.0,0.0,0.0,}
+1278,src/parse.rs,433,0,0,1,2,0.0,0.0,0.0,cooked_byte_string(input)
+1279,src/parse.rs,435,0,0,1,2,0.0,0.0,0.0,raw_byte_string(input)
+1280,src/parse.rs,441,0,0,1,2,0.0,0.0,0.0,"fn cooked_byte_string(mut input: Cursor) -> Result<Cursor, Reject> {"
+1281,src/parse.rs,442,0,0,1,2,0.0,0.0,0.0,let mut bytes = input.bytes().enumerate();
+1282,src/parse.rs,443,0,0,1,2,0.0,0.0,0.0,"while let Some((offset, b)) = bytes.next() {"
+1283,src/parse.rs,444,0,0,1,2,0.0,0.0,0.0,match b {
+1284,src/parse.rs,446,0,0,1,2,0.0,0.0,0.0,let input = input.advance(offset + 1);
+1285,src/parse.rs,447,0,0,1,2,0.0,0.0,0.0,return Ok(literal_suffix(input));
+1286,src/parse.rs,449,0,0,1,2,0.0,0.0,0.0,b'\r' => match bytes.next() {
+1287,src/parse.rs,450,0,0,1,2,0.0,0.0,0.0,"Some((_, b'\n')) => {}"
+1288,src/parse.rs,451,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1289,src/parse.rs,453,0,0,1,2,0.0,0.0,0.0,b'\\' => match bytes.next() {
+1290,src/parse.rs,455,0,0,1,2,0.0,0.0,0.0,backslash_x_byte(&mut bytes)?;
+1291,src/parse.rs,457,0,0,1,2,0.0,0.0,0.0,"Some((_, b'n' | b'r' | b't' | b'\\' | b'0' | b'\'' | b'""')) => {}"
+1292,src/parse.rs,458,0,0,1,2,0.0,0.0,0.0,"Some((newline, b @ (b'\n' | b'\r'))) => {"
+1293,src/parse.rs,459,0,0,1,2,0.0,0.0,0.0,input = input.advance(newline + 1);
+1294,src/parse.rs,460,0,0,1,2,0.0,0.0,0.0,"trailing_backslash(&mut input, b)?;"
+1295,src/parse.rs,461,0,0,1,2,0.0,0.0,0.0,bytes = input.bytes().enumerate();
+1296,src/parse.rs,463,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1297,src/parse.rs,465,0,0,1,2,0.0,0.0,0.0,b if b.is_ascii() => {}
+1298,src/parse.rs,466,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1299,src/parse.rs,469,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1300,src/parse.rs,470,0,0,1,2,0.0,0.0,0.0,}
+1301,src/parse.rs,472,0,0,1,2,0.0,0.0,0.0,fn delimiter_of_raw_string(input: Cursor) -> PResult<&str> {
+1302,src/parse.rs,473,0,0,1,2,0.0,0.0,0.0,"for (i, byte) in input.bytes().enumerate() {"
+1303,src/parse.rs,474,0,0,1,2,0.0,0.0,0.0,match byte {
+1304,src/parse.rs,476,0,0,1,2,0.0,0.0,0.0,if i > 255 {
+1305,src/parse.rs,478,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1306,src/parse.rs,479,0,0,1,2,0.0,0.0,0.0,}
+1307,src/parse.rs,480,0,0,1,2,0.0,0.0,0.0,"return Ok((input.advance(i + 1), &input.rest[..i]));"
+1308,src/parse.rs,482,0,0,1,2,0.0,0.0,0.0,b'#' => {}
+1309,src/parse.rs,483,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1310,src/parse.rs,486,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1311,src/parse.rs,487,0,0,1,2,0.0,0.0,0.0,}
+1312,src/parse.rs,489,0,0,1,2,0.0,0.0,0.0,"fn raw_byte_string(input: Cursor) -> Result<Cursor, Reject> {"
+1313,src/parse.rs,490,0,0,1,2,0.0,0.0,0.0,"let (input, delimiter) = delimiter_of_raw_string(input)?;"
+1314,src/parse.rs,491,0,0,1,2,0.0,0.0,0.0,let mut bytes = input.bytes().enumerate();
+1315,src/parse.rs,492,0,0,1,2,0.0,0.0,0.0,"while let Some((i, byte)) = bytes.next() {"
+1316,src/parse.rs,493,0,0,1,2,0.0,0.0,0.0,match byte {
+1317,src/parse.rs,494,0,0,1,2,0.0,0.0,0.0,"b'""' if input.rest[i + 1..].starts_with(delimiter) => {"
+1318,src/parse.rs,495,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(i + 1 + delimiter.len());
+1319,src/parse.rs,496,0,0,1,2,0.0,0.0,0.0,return Ok(literal_suffix(rest));
+1320,src/parse.rs,498,0,0,1,2,0.0,0.0,0.0,b'\r' => match bytes.next() {
+1321,src/parse.rs,499,0,0,1,2,0.0,0.0,0.0,"Some((_, b'\n')) => {}"
+1322,src/parse.rs,500,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1323,src/parse.rs,502,0,0,1,2,0.0,0.0,0.0,other => {
+1324,src/parse.rs,503,0,0,1,2,0.0,0.0,0.0,if !other.is_ascii() {
+1325,src/parse.rs,504,0,0,1,2,0.0,0.0,0.0,break;
+1326,src/parse.rs,505,0,0,1,2,0.0,0.0,0.0,}
+1327,src/parse.rs,509,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1328,src/parse.rs,510,0,0,1,2,0.0,0.0,0.0,}
+1329,src/parse.rs,514,0,0,1,2,0.0,0.0,0.0,cooked_c_string(input)
+1330,src/parse.rs,516,0,0,1,2,0.0,0.0,0.0,raw_c_string(input)
+1331,src/parse.rs,522,0,0,1,2,0.0,0.0,0.0,"fn raw_c_string(input: Cursor) -> Result<Cursor, Reject> {"
+1332,src/parse.rs,523,0,0,1,2,0.0,0.0,0.0,"let (input, delimiter) = delimiter_of_raw_string(input)?;"
+1333,src/parse.rs,524,0,0,1,2,0.0,0.0,0.0,let mut bytes = input.bytes().enumerate();
+1334,src/parse.rs,525,0,0,1,2,0.0,0.0,0.0,"while let Some((i, byte)) = bytes.next() {"
+1335,src/parse.rs,526,0,0,1,2,0.0,0.0,0.0,match byte {
+1336,src/parse.rs,527,0,0,1,2,0.0,0.0,0.0,"b'""' if input.rest[i + 1..].starts_with(delimiter) => {"
+1337,src/parse.rs,528,0,0,1,2,0.0,0.0,0.0,let rest = input.advance(i + 1 + delimiter.len());
+1338,src/parse.rs,529,0,0,1,2,0.0,0.0,0.0,return Ok(literal_suffix(rest));
+1339,src/parse.rs,531,0,0,1,2,0.0,0.0,0.0,b'\r' => match bytes.next() {
+1340,src/parse.rs,532,0,0,1,2,0.0,0.0,0.0,"Some((_, b'\n')) => {}"
+1341,src/parse.rs,533,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1342,src/parse.rs,535,0,0,1,2,0.0,0.0,0.0,"b'\0' => break,"
+1343,src/parse.rs,536,0,0,1,2,0.0,0.0,0.0,_ => {}
+1344,src/parse.rs,539,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1345,src/parse.rs,540,0,0,1,2,0.0,0.0,0.0,}
+1346,src/parse.rs,542,0,0,1,2,0.0,0.0,0.0,"fn cooked_c_string(mut input: Cursor) -> Result<Cursor, Reject> {"
+1347,src/parse.rs,543,0,0,1,2,0.0,0.0,0.0,let mut chars = input.char_indices();
+1348,src/parse.rs,545,0,0,1,2,0.0,0.0,0.0,"while let Some((i, ch)) = chars.next() {"
+1349,src/parse.rs,546,0,0,1,2,0.0,0.0,0.0,match ch {
+1350,src/parse.rs,548,0,0,1,2,0.0,0.0,0.0,let input = input.advance(i + 1);
+1351,src/parse.rs,549,0,0,1,2,0.0,0.0,0.0,return Ok(literal_suffix(input));
+1352,src/parse.rs,551,0,0,1,2,0.0,0.0,0.0,'\r' => match chars.next() {
+1353,src/parse.rs,552,0,0,1,2,0.0,0.0,0.0,"Some((_, '\n')) => {}"
+1354,src/parse.rs,553,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1355,src/parse.rs,555,0,0,1,2,0.0,0.0,0.0,'\\' => match chars.next() {
+1356,src/parse.rs,557,0,0,1,2,0.0,0.0,0.0,backslash_x_nonzero(&mut chars)?;
+1357,src/parse.rs,559,0,0,1,2,0.0,0.0,0.0,"Some((_, 'n' | 'r' | 't' | '\\' | '\'' | '""')) => {}"
+1358,src/parse.rs,561,0,0,1,2,0.0,0.0,0.0,if backslash_u(&mut chars)? == '\0' {
+1359,src/parse.rs,562,0,0,1,2,0.0,0.0,0.0,break;
+1360,src/parse.rs,563,0,0,1,2,0.0,0.0,0.0,}
+1361,src/parse.rs,565,0,0,1,2,0.0,0.0,0.0,"Some((newline, ch @ ('\n' | '\r'))) => {"
+1362,src/parse.rs,566,0,0,1,2,0.0,0.0,0.0,input = input.advance(newline + 1);
+1363,src/parse.rs,567,0,0,1,2,0.0,0.0,0.0,"trailing_backslash(&mut input, ch as u8)?;"
+1364,src/parse.rs,568,0,0,1,2,0.0,0.0,0.0,chars = input.char_indices();
+1365,src/parse.rs,570,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1366,src/parse.rs,572,0,0,1,2,0.0,0.0,0.0,"'\0' => break,"
+1367,src/parse.rs,573,0,0,1,2,0.0,0.0,0.0,_ch => {}
+1368,src/parse.rs,576,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1369,src/parse.rs,577,0,0,1,2,0.0,0.0,0.0,}
+1370,src/parse.rs,581,0,0,1,2,0.0,0.0,0.0,let mut bytes = input.bytes().enumerate();
+1371,src/parse.rs,582,0,0,1,2,0.0,0.0,0.0,"let ok = match bytes.next().map(|(_, b)| b) {"
+1372,src/parse.rs,583,0,0,1,2,0.0,0.0,0.0,"Some(b'\\') => match bytes.next().map(|(_, b)| b) {"
+1373,src/parse.rs,584,0,0,1,2,0.0,0.0,0.0,"Some(b'x') => backslash_x_byte(&mut bytes).is_ok(),"
+1374,src/parse.rs,585,0,0,1,2,0.0,0.0,0.0,"Some(b'n' | b'r' | b't' | b'\\' | b'0' | b'\'' | b'""') => true,"
+1375,src/parse.rs,586,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+1376,src/parse.rs,588,0,0,1,2,0.0,0.0,0.0,"b => b.is_some(),"
+1377,src/parse.rs,590,0,0,1,2,0.0,0.0,0.0,if !ok {
+1378,src/parse.rs,591,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1379,src/parse.rs,592,0,0,1,2,0.0,0.0,0.0,}
+1380,src/parse.rs,593,0,0,1,2,0.0,0.0,0.0,"let (offset, _) = bytes.next().ok_or(Reject)?;"
+1381,src/parse.rs,594,0,0,1,2,0.0,0.0,0.0,if !input.chars().as_str().is_char_boundary(offset) {
+1382,src/parse.rs,595,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1383,src/parse.rs,596,0,0,1,2,0.0,0.0,0.0,}
+1384,src/parse.rs,597,0,0,1,2,0.0,0.0,0.0,"let input = input.advance(offset).parse(""'"")?;"
+1385,src/parse.rs,598,0,0,1,2,0.0,0.0,0.0,Ok(literal_suffix(input))
+1386,src/parse.rs,603,0,0,1,2,0.0,0.0,0.0,let mut chars = input.char_indices();
+1387,src/parse.rs,604,0,0,1,2,0.0,0.0,0.0,"let ok = match chars.next().map(|(_, ch)| ch) {"
+1388,src/parse.rs,605,0,0,1,2,0.0,0.0,0.0,"Some('\\') => match chars.next().map(|(_, ch)| ch) {"
+1389,src/parse.rs,606,0,0,1,2,0.0,0.0,0.0,"Some('x') => backslash_x_char(&mut chars).is_ok(),"
+1390,src/parse.rs,607,0,0,1,2,0.0,0.0,0.0,"Some('u') => backslash_u(&mut chars).is_ok(),"
+1391,src/parse.rs,608,0,0,1,2,0.0,0.0,0.0,"Some('n' | 'r' | 't' | '\\' | '0' | '\'' | '""') => true,"
+1392,src/parse.rs,609,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+1393,src/parse.rs,611,0,0,1,2,0.0,0.0,0.0,"ch => ch.is_some(),"
+1394,src/parse.rs,613,0,0,1,2,0.0,0.0,0.0,if !ok {
+1395,src/parse.rs,614,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1396,src/parse.rs,615,0,0,1,2,0.0,0.0,0.0,}
+1397,src/parse.rs,616,0,0,1,2,0.0,0.0,0.0,"let (idx, _) = chars.next().ok_or(Reject)?;"
+1398,src/parse.rs,617,0,0,1,2,0.0,0.0,0.0,"let input = input.advance(idx).parse(""'"")?;"
+1399,src/parse.rs,618,0,0,1,2,0.0,0.0,0.0,Ok(literal_suffix(input))
+1400,src/parse.rs,633,0,0,1,2,0.0,0.0,0.0,"fn backslash_x_char<I>(chars: &mut I) -> Result<(), Reject>"
+1401,src/parse.rs,637,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '0'..='7');
+1402,src/parse.rs,638,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '0'..='9' | 'a'..='f' | 'A'..='F');
+1403,src/parse.rs,639,0,0,1,2,0.0,0.0,0.0,Ok(())
+1404,src/parse.rs,640,0,0,1,2,0.0,0.0,0.0,}
+1405,src/parse.rs,642,0,0,1,2,0.0,0.0,0.0,"fn backslash_x_byte<I>(chars: &mut I) -> Result<(), Reject>"
+1406,src/parse.rs,646,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ b'0'..=b'9' | b'a'..=b'f' | b'A'..=b'F');
+1407,src/parse.rs,647,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ b'0'..=b'9' | b'a'..=b'f' | b'A'..=b'F');
+1408,src/parse.rs,648,0,0,1,2,0.0,0.0,0.0,Ok(())
+1409,src/parse.rs,649,0,0,1,2,0.0,0.0,0.0,}
+1410,src/parse.rs,651,0,0,1,2,0.0,0.0,0.0,"fn backslash_x_nonzero<I>(chars: &mut I) -> Result<(), Reject>"
+1411,src/parse.rs,655,0,0,1,2,0.0,0.0,0.0,let first = next_ch!(chars @ '0'..='9' | 'a'..='f' | 'A'..='F');
+1412,src/parse.rs,656,0,0,1,2,0.0,0.0,0.0,let second = next_ch!(chars @ '0'..='9' | 'a'..='f' | 'A'..='F');
+1413,src/parse.rs,657,0,0,1,2,0.0,0.0,0.0,if first == '0' && second == '0' {
+1414,src/parse.rs,658,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1415,src/parse.rs,660,0,0,1,2,0.0,0.0,0.0,Ok(())
+1416,src/parse.rs,662,0,0,1,2,0.0,0.0,0.0,}
+1417,src/parse.rs,664,0,0,1,2,0.0,0.0,0.0,"fn backslash_u<I>(chars: &mut I) -> Result<char, Reject>"
+1418,src/parse.rs,668,0,0,1,2,0.0,0.0,0.0,next_ch!(chars @ '{');
+1419,src/parse.rs,669,0,0,1,2,0.0,0.0,0.0,let mut value = 0;
+1420,src/parse.rs,670,0,0,1,2,0.0,0.0,0.0,let mut len = 0;
+1421,src/parse.rs,671,0,0,1,2,0.0,0.0,0.0,"for (_, ch) in chars {"
+1422,src/parse.rs,672,0,0,1,2,0.0,0.0,0.0,let digit = match ch {
+1423,src/parse.rs,673,0,0,1,2,0.0,0.0,0.0,"'0'..='9' => ch as u8 - b'0',"
+1424,src/parse.rs,674,0,0,1,2,0.0,0.0,0.0,"'a'..='f' => 10 + ch as u8 - b'a',"
+1425,src/parse.rs,675,0,0,1,2,0.0,0.0,0.0,"'A'..='F' => 10 + ch as u8 - b'A',"
+1426,src/parse.rs,676,0,0,1,2,0.0,0.0,0.0,"'_' if len > 0 => continue,"
+1427,src/parse.rs,677,0,0,1,2,0.0,0.0,0.0,"'}' if len > 0 => return char::from_u32(value).ok_or(Reject),"
+1428,src/parse.rs,678,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1429,src/parse.rs,680,0,0,1,2,0.0,0.0,0.0,if len == 6 {
+1430,src/parse.rs,681,0,0,1,2,0.0,0.0,0.0,break;
+1431,src/parse.rs,682,0,0,1,2,0.0,0.0,0.0,}
+1432,src/parse.rs,683,0,0,1,2,0.0,0.0,0.0,value *= 0x10;
+1433,src/parse.rs,684,0,0,1,2,0.0,0.0,0.0,value += u32::from(digit);
+1434,src/parse.rs,685,0,0,1,2,0.0,0.0,0.0,len += 1;
+1435,src/parse.rs,687,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1436,src/parse.rs,688,0,0,1,2,0.0,0.0,0.0,}
+1437,src/parse.rs,690,0,0,1,2,0.0,0.0,0.0,"fn trailing_backslash(input: &mut Cursor, mut last: u8) -> Result<(), Reject> {"
+1438,src/parse.rs,691,0,0,1,2,0.0,0.0,0.0,let mut whitespace = input.bytes().enumerate();
+1439,src/parse.rs,693,0,0,1,2,0.0,0.0,0.0,"if last == b'\r' && whitespace.next().map_or(true, |(_, b)| b != b'\n') {"
+1440,src/parse.rs,694,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1441,src/parse.rs,695,0,0,1,2,0.0,0.0,0.0,}
+1442,src/parse.rs,696,0,0,1,2,0.0,0.0,0.0,match whitespace.next() {
+1443,src/parse.rs,697,0,0,1,2,0.0,0.0,0.0,"Some((_, b @ (b' ' | b'\t' | b'\n' | b'\r'))) => {"
+1444,src/parse.rs,700,0,0,1,2,0.0,0.0,0.0,"Some((offset, _)) => {"
+1445,src/parse.rs,701,0,0,1,2,0.0,0.0,0.0,*input = input.advance(offset);
+1446,src/parse.rs,702,0,0,1,2,0.0,0.0,0.0,return Ok(());
+1447,src/parse.rs,704,0,0,1,2,0.0,0.0,0.0,"None => return Err(Reject),"
+1448,src/parse.rs,707,0,0,1,2,0.0,0.0,0.0,}
+1449,src/parse.rs,711,0,0,1,2,0.0,0.0,0.0,if let Some(ch) = rest.chars().next() {
+1450,src/parse.rs,712,0,0,1,2,0.0,0.0,0.0,if is_ident_start(ch) {
+1451,src/parse.rs,713,0,0,1,2,0.0,0.0,0.0,rest = ident_not_raw(rest)?.0;
+1452,src/parse.rs,714,0,0,1,2,0.0,0.0,0.0,}
+1453,src/parse.rs,715,0,0,1,2,0.0,0.0,0.0,}
+1454,src/parse.rs,716,0,0,1,2,0.0,0.0,0.0,word_break(rest)
+1455,src/parse.rs,726,0,0,1,2,0.0,0.0,0.0,let mut len = 1;
+1456,src/parse.rs,727,0,0,1,2,0.0,0.0,0.0,let mut has_dot = false;
+1457,src/parse.rs,728,0,0,1,2,0.0,0.0,0.0,let mut has_exp = false;
+1458,src/parse.rs,729,0,0,1,2,0.0,0.0,0.0,while let Some(&ch) = chars.peek() {
+1459,src/parse.rs,730,0,0,1,2,0.0,0.0,0.0,match ch {
+1460,src/parse.rs,731,0,0,1,2,0.0,0.0,0.0,'0'..='9' | '_' => {
+1461,src/parse.rs,732,0,0,1,2,0.0,0.0,0.0,chars.next();
+1462,src/parse.rs,736,0,0,1,2,0.0,0.0,0.0,if has_dot {
+1463,src/parse.rs,737,0,0,1,2,0.0,0.0,0.0,break;
+1464,src/parse.rs,738,0,0,1,2,0.0,0.0,0.0,}
+1465,src/parse.rs,739,0,0,1,2,0.0,0.0,0.0,chars.next();
+1466,src/parse.rs,740,0,0,1,2,0.0,0.0,0.0,if chars
+1467,src/parse.rs,741,0,0,1,2,0.0,0.0,0.0,.peek()
+1468,src/parse.rs,742,0,0,1,2,0.0,0.0,0.0,".map_or(false, |&ch| ch == '.' || is_ident_start(ch))"
+1469,src/parse.rs,744,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1470,src/parse.rs,745,0,0,1,2,0.0,0.0,0.0,}
+1471,src/parse.rs,746,0,0,1,2,0.0,0.0,0.0,len += 1;
+1472,src/parse.rs,747,0,0,1,2,0.0,0.0,0.0,has_dot = true;
+1473,src/parse.rs,750,0,0,1,2,0.0,0.0,0.0,chars.next();
+1474,src/parse.rs,751,0,0,1,2,0.0,0.0,0.0,len += 1;
+1475,src/parse.rs,752,0,0,1,2,0.0,0.0,0.0,has_exp = true;
+1476,src/parse.rs,753,0,0,1,2,0.0,0.0,0.0,break;
+1477,src/parse.rs,755,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1478,src/parse.rs,759,0,0,1,2,0.0,0.0,0.0,if !(has_dot || has_exp) {
+1479,src/parse.rs,760,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1480,src/parse.rs,761,0,0,1,2,0.0,0.0,0.0,}
+1481,src/parse.rs,763,0,0,1,2,0.0,0.0,0.0,if has_exp {
+1482,src/parse.rs,764,0,0,1,2,0.0,0.0,0.0,let token_before_exp = if has_dot {
+1483,src/parse.rs,765,0,0,1,2,0.0,0.0,0.0,Ok(input.advance(len - 1))
+1484,src/parse.rs,767,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1485,src/parse.rs,769,0,0,1,2,0.0,0.0,0.0,let mut has_sign = false;
+1486,src/parse.rs,770,0,0,1,2,0.0,0.0,0.0,let mut has_exp_value = false;
+1487,src/parse.rs,771,0,0,1,2,0.0,0.0,0.0,while let Some(&ch) = chars.peek() {
+1488,src/parse.rs,772,0,0,1,2,0.0,0.0,0.0,match ch {
+1489,src/parse.rs,774,0,0,1,2,0.0,0.0,0.0,if has_exp_value {
+1490,src/parse.rs,775,0,0,1,2,0.0,0.0,0.0,break;
+1491,src/parse.rs,776,0,0,1,2,0.0,0.0,0.0,}
+1492,src/parse.rs,777,0,0,1,2,0.0,0.0,0.0,if has_sign {
+1493,src/parse.rs,778,0,0,1,2,0.0,0.0,0.0,return token_before_exp;
+1494,src/parse.rs,779,0,0,1,2,0.0,0.0,0.0,}
+1495,src/parse.rs,780,0,0,1,2,0.0,0.0,0.0,chars.next();
+1496,src/parse.rs,781,0,0,1,2,0.0,0.0,0.0,len += 1;
+1497,src/parse.rs,782,0,0,1,2,0.0,0.0,0.0,has_sign = true;
+1498,src/parse.rs,784,0,0,1,2,0.0,0.0,0.0,'0'..='9' => {
+1499,src/parse.rs,785,0,0,1,2,0.0,0.0,0.0,chars.next();
+1500,src/parse.rs,789,0,0,1,2,0.0,0.0,0.0,'_' => {
+1501,src/parse.rs,790,0,0,1,2,0.0,0.0,0.0,chars.next();
+1502,src/parse.rs,793,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+1503,src/parse.rs,796,0,0,1,2,0.0,0.0,0.0,if !has_exp_value {
+1504,src/parse.rs,797,0,0,1,2,0.0,0.0,0.0,return token_before_exp;
+1505,src/parse.rs,798,0,0,1,2,0.0,0.0,0.0,}
+1506,src/parse.rs,799,0,0,1,2,0.0,0.0,0.0,}
+1507,src/parse.rs,801,0,0,1,2,0.0,0.0,0.0,Ok(input.advance(len))
+1508,src/parse.rs,806,0,0,1,2,0.0,0.0,0.0,if let Some(ch) = rest.chars().next() {
+1509,src/parse.rs,807,0,0,1,2,0.0,0.0,0.0,if is_ident_start(ch) {
+1510,src/parse.rs,808,0,0,1,2,0.0,0.0,0.0,rest = ident_not_raw(rest)?.0;
+1511,src/parse.rs,809,0,0,1,2,0.0,0.0,0.0,}
+1512,src/parse.rs,810,0,0,1,2,0.0,0.0,0.0,}
+1513,src/parse.rs,811,0,0,1,2,0.0,0.0,0.0,word_break(rest)
+1514,src/parse.rs,816,0,0,1,2,0.0,0.0,0.0,input = input.advance(2);
+1515,src/parse.rs,817,0,0,1,2,0.0,0.0,0.0,16
+1516,src/parse.rs,819,0,0,1,2,0.0,0.0,0.0,input = input.advance(2);
+1517,src/parse.rs,820,0,0,1,2,0.0,0.0,0.0,8
+1518,src/parse.rs,822,0,0,1,2,0.0,0.0,0.0,input = input.advance(2);
+1519,src/parse.rs,823,0,0,1,2,0.0,0.0,0.0,2
+1520,src/parse.rs,833,0,0,1,2,0.0,0.0,0.0,let digit = (b - b'0') as u64;
+1521,src/parse.rs,834,0,0,1,2,0.0,0.0,0.0,if digit >= base {
+1522,src/parse.rs,835,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1523,src/parse.rs,836,0,0,1,2,0.0,0.0,0.0,}
+1524,src/parse.rs,842,0,0,1,2,0.0,0.0,0.0,}
+1525,src/parse.rs,845,0,0,1,2,0.0,0.0,0.0,let digit = 10 + (b - b'A') as u64;
+1526,src/parse.rs,846,0,0,1,2,0.0,0.0,0.0,if digit >= base {
+1527,src/parse.rs,847,0,0,1,2,0.0,0.0,0.0,break;
+1528,src/parse.rs,848,0,0,1,2,0.0,0.0,0.0,}
+1529,src/parse.rs,851,0,0,1,2,0.0,0.0,0.0,if empty && base == 10 {
+1530,src/parse.rs,852,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1531,src/parse.rs,853,0,0,1,2,0.0,0.0,0.0,}
+1532,src/parse.rs,854,0,0,1,2,0.0,0.0,0.0,len += 1;
+1533,src/parse.rs,855,0,0,1,2,0.0,0.0,0.0,continue;
+1534,src/parse.rs,859,0,0,1,2,0.0,0.0,0.0,len += 1;
+1535,src/parse.rs,860,0,0,1,2,0.0,0.0,0.0,empty = false;
+1536,src/parse.rs,865,0,0,1,2,0.0,0.0,0.0,Ok(input.advance(len))
+1537,src/parse.rs,871,0,0,1,2,0.0,0.0,0.0,if ch == '\'' {
+1538,src/parse.rs,872,0,0,1,2,0.0,0.0,0.0,if ident_any(rest)?.0.starts_with_char('\'') {
+1539,src/parse.rs,873,0,0,1,2,0.0,0.0,0.0,Err(Reject)
+1540,src/parse.rs,875,0,0,1,2,0.0,0.0,0.0,"Ok((rest, Punct::new('\'', Spacing::Joint)))"
+1541,src/parse.rs,878,0,0,1,2,0.0,0.0,0.0,let kind = match punct_char(rest) {
+1542,src/parse.rs,879,0,0,1,2,0.0,0.0,0.0,"Ok(_) => Spacing::Joint,"
+1543,src/parse.rs,880,0,0,1,2,0.0,0.0,0.0,"Err(Reject) => Spacing::Alone,"
+1544,src/parse.rs,882,0,0,1,2,0.0,0.0,0.0,"Ok((rest, Punct::new(ch, kind)))"
+1545,src/parse.rs,889,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1546,src/parse.rs,896,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1547,src/parse.rs,901,0,0,1,2,0.0,0.0,0.0,"Ok((input.advance(first.len_utf8()), first))"
+1548,src/parse.rs,911,0,0,1,2,0.0,0.0,0.0,let span = crate::Span::_new_fallback(Span {
+1549,src/parse.rs,918,0,0,1,2,0.0,0.0,0.0,let mut scan_for_bare_cr = comment;
+1550,src/parse.rs,919,0,0,1,2,0.0,0.0,0.0,while let Some(cr) = scan_for_bare_cr.find('\r') {
+1551,src/parse.rs,920,0,0,1,2,0.0,0.0,0.0,let rest = &scan_for_bare_cr[cr + 1..];
+1552,src/parse.rs,921,0,0,1,2,0.0,0.0,0.0,if !rest.starts_with('\n') {
+1553,src/parse.rs,922,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1554,src/parse.rs,923,0,0,1,2,0.0,0.0,0.0,}
+1555,src/parse.rs,924,0,0,1,2,0.0,0.0,0.0,scan_for_bare_cr = rest;
+1556,src/parse.rs,927,0,0,1,2,0.0,0.0,0.0,"let mut pound = Punct::new('#', Spacing::Alone);"
+1557,src/parse.rs,928,0,0,1,2,0.0,0.0,0.0,pound.set_span(span);
+1558,src/parse.rs,929,0,0,1,2,0.0,0.0,0.0,trees.push_token_from_parser(TokenTree::Punct(pound));
+1559,src/parse.rs,931,0,0,1,2,0.0,0.0,0.0,if inner {
+1560,src/parse.rs,932,0,0,1,2,0.0,0.0,0.0,"let mut bang = Punct::new('!', Spacing::Alone);"
+1561,src/parse.rs,933,0,0,1,2,0.0,0.0,0.0,bang.set_span(span);
+1562,src/parse.rs,934,0,0,1,2,0.0,0.0,0.0,trees.push_token_from_parser(TokenTree::Punct(bang));
+1563,src/parse.rs,935,0,0,1,2,0.0,0.0,0.0,}
+1564,src/parse.rs,937,0,0,1,2,0.0,0.0,0.0,"let doc_ident = crate::Ident::new(""doc"", span);"
+1565,src/parse.rs,938,0,0,1,2,0.0,0.0,0.0,"let mut equal = Punct::new('=', Spacing::Alone);"
+1566,src/parse.rs,939,0,0,1,2,0.0,0.0,0.0,equal.set_span(span);
+1567,src/parse.rs,940,0,0,1,2,0.0,0.0,0.0,let mut literal = crate::Literal::string(comment);
+1568,src/parse.rs,941,0,0,1,2,0.0,0.0,0.0,literal.set_span(span);
+1569,src/parse.rs,942,0,0,1,2,0.0,0.0,0.0,let mut bracketed = TokenStreamBuilder::with_capacity(3);
+1570,src/parse.rs,943,0,0,1,2,0.0,0.0,0.0,bracketed.push_token_from_parser(TokenTree::Ident(doc_ident));
+1571,src/parse.rs,944,0,0,1,2,0.0,0.0,0.0,bracketed.push_token_from_parser(TokenTree::Punct(equal));
+1572,src/parse.rs,945,0,0,1,2,0.0,0.0,0.0,bracketed.push_token_from_parser(TokenTree::Literal(literal));
+1573,src/parse.rs,946,0,0,1,2,0.0,0.0,0.0,"let group = Group::new(Delimiter::Bracket, bracketed.build());"
+1574,src/parse.rs,947,0,0,1,2,0.0,0.0,0.0,let mut group = crate::Group::_new_fallback(group);
+1575,src/parse.rs,948,0,0,1,2,0.0,0.0,0.0,group.set_span(span);
+1576,src/parse.rs,949,0,0,1,2,0.0,0.0,0.0,trees.push_token_from_parser(TokenTree::Group(group));
+1577,src/parse.rs,951,0,0,1,2,0.0,0.0,0.0,"Ok((rest, ()))"
+1578,src/parse.rs,956,0,0,1,2,0.0,0.0,0.0,let input = input.advance(3);
+1579,src/parse.rs,957,0,0,1,2,0.0,0.0,0.0,"let (input, s) = take_until_newline_or_eof(input);"
+1580,src/parse.rs,958,0,0,1,2,0.0,0.0,0.0,"Ok((input, (s, true)))"
+1581,src/parse.rs,960,0,0,1,2,0.0,0.0,0.0,"let (input, s) = block_comment(input)?;"
+1582,src/parse.rs,961,0,0,1,2,0.0,0.0,0.0,"Ok((input, (&s[3..s.len() - 2], true)))"
+1583,src/parse.rs,963,0,0,1,2,0.0,0.0,0.0,let input = input.advance(3);
+1584,src/parse.rs,964,0,0,1,2,0.0,0.0,0.0,if input.starts_with_char('/') {
+1585,src/parse.rs,965,0,0,1,2,0.0,0.0,0.0,return Err(Reject);
+1586,src/parse.rs,966,0,0,1,2,0.0,0.0,0.0,}
+1587,src/parse.rs,967,0,0,1,2,0.0,0.0,0.0,"let (input, s) = take_until_newline_or_eof(input);"
+1588,src/parse.rs,968,0,0,1,2,0.0,0.0,0.0,"Ok((input, (s, false)))"
+1589,src/parse.rs,970,0,0,1,2,0.0,0.0,0.0,"let (input, s) = block_comment(input)?;"
+1590,src/parse.rs,971,0,0,1,2,0.0,0.0,0.0,"Ok((input, (&s[3..s.len() - 2], false)))"
+1591,src/parse.rs,977,0,0,1,2,0.0,0.0,0.0,"fn take_until_newline_or_eof(input: Cursor) -> (Cursor, &str) {"
+1592,src/parse.rs,978,0,0,1,2,0.0,0.0,0.0,let chars = input.char_indices();
+1593,src/parse.rs,980,0,0,1,2,0.0,0.0,0.0,"for (i, ch) in chars {"
+1594,src/parse.rs,981,0,0,1,2,0.0,0.0,0.0,if ch == '\n' {
+1595,src/parse.rs,982,0,0,1,2,0.0,0.0,0.0,"return (input.advance(i), &input.rest[..i]);"
+1596,src/parse.rs,983,0,0,1,2,0.0,0.0,0.0,} else if ch == '\r' && input.rest[i + 1..].starts_with('\n') {
+1597,src/parse.rs,984,0,0,1,2,0.0,0.0,0.0,"return (input.advance(i + 1), &input.rest[..i]);"
+1598,src/parse.rs,985,0,0,1,2,0.0,0.0,0.0,}
+1599,src/parse.rs,988,0,0,1,2,0.0,0.0,0.0,"(input.advance(input.len()), input.rest)"
+1600,src/parse.rs,989,0,0,1,2,0.0,0.0,0.0,}
+1601,src/rcvec.rs,25,0,0,1,2,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+1602,src/rcvec.rs,26,0,0,1,2,0.0,0.0,0.0,self.inner.is_empty()
+1603,src/rcvec.rs,27,0,0,1,2,0.0,0.0,0.0,}
+1604,src/rcvec.rs,29,0,0,1,2,0.0,0.0,0.0,pub fn len(&self) -> usize {
+1605,src/rcvec.rs,30,0,0,1,2,0.0,0.0,0.0,self.inner.len()
+1606,src/rcvec.rs,31,0,0,1,2,0.0,0.0,0.0,}
+1607,src/rcvec.rs,33,0,0,1,2,0.0,0.0,0.0,pub fn iter(&self) -> slice::Iter<T> {
+1608,src/rcvec.rs,34,0,0,1,2,0.0,0.0,0.0,self.inner.iter()
+1609,src/rcvec.rs,35,0,0,1,2,0.0,0.0,0.0,}
+1610,src/rcvec.rs,37,0,0,1,2,0.0,0.0,0.0,pub fn make_mut(&mut self) -> RcVecMut<T>
+1611,src/rcvec.rs,41,0,0,1,2,0.0,0.0,0.0,RcVecMut {
+1612,src/rcvec.rs,44,0,0,1,2,0.0,0.0,0.0,}
+1613,src/rcvec.rs,46,0,0,1,2,0.0,0.0,0.0,pub fn get_mut(&mut self) -> Option<RcVecMut<T>> {
+1614,src/rcvec.rs,47,0,0,1,2,0.0,0.0,0.0,let inner = Rc::get_mut(&mut self.inner)?;
+1615,src/rcvec.rs,48,0,0,1,2,0.0,0.0,0.0,Some(RcVecMut { inner })
+1616,src/rcvec.rs,49,0,0,1,2,0.0,0.0,0.0,}
+1617,src/rcvec.rs,58,0,0,1,2,0.0,0.0,0.0,Vec::clone(&self.inner)
+1618,src/rcvec.rs,69,0,0,1,2,0.0,0.0,0.0,pub fn with_capacity(cap: usize) -> Self {
+1619,src/rcvec.rs,70,0,0,1,2,0.0,0.0,0.0,RcVecBuilder {
+1620,src/rcvec.rs,73,0,0,1,2,0.0,0.0,0.0,}
+1621,src/rcvec.rs,79,0,0,1,2,0.0,0.0,0.0,"pub fn extend(&mut self, iter: impl IntoIterator<Item = T>) {"
+1622,src/rcvec.rs,80,0,0,1,2,0.0,0.0,0.0,self.inner.extend(iter);
+1623,src/rcvec.rs,81,0,0,1,2,0.0,0.0,0.0,}
+1624,src/rcvec.rs,83,0,0,1,2,0.0,0.0,0.0,pub fn as_mut(&mut self) -> RcVecMut<T> {
+1625,src/rcvec.rs,84,0,0,1,2,0.0,0.0,0.0,RcVecMut {
+1626,src/rcvec.rs,87,0,0,1,2,0.0,0.0,0.0,}
+1627,src/rcvec.rs,97,0,0,1,2,0.0,0.0,0.0,"pub fn push(&mut self, element: T) {"
+1628,src/rcvec.rs,98,0,0,1,2,0.0,0.0,0.0,self.inner.push(element);
+1629,src/rcvec.rs,99,0,0,1,2,0.0,0.0,0.0,}
+1630,src/rcvec.rs,101,0,0,1,2,0.0,0.0,0.0,"pub fn extend(&mut self, iter: impl IntoIterator<Item = T>) {"
+1631,src/rcvec.rs,102,0,0,1,2,0.0,0.0,0.0,self.inner.extend(iter);
+1632,src/rcvec.rs,103,0,0,1,2,0.0,0.0,0.0,}
+1633,src/rcvec.rs,105,0,0,1,2,0.0,0.0,0.0,pub fn pop(&mut self) -> Option<T> {
+1634,src/rcvec.rs,106,0,0,1,2,0.0,0.0,0.0,self.inner.pop()
+1635,src/rcvec.rs,107,0,0,1,2,0.0,0.0,0.0,}
+1636,src/rcvec.rs,109,0,0,1,2,0.0,0.0,0.0,pub fn as_mut(&mut self) -> RcVecMut<T> {
+1637,src/rcvec.rs,110,0,0,1,2,0.0,0.0,0.0,RcVecMut { inner: self.inner }
+1638,src/rcvec.rs,111,0,0,1,2,0.0,0.0,0.0,}
+1639,src/rcvec.rs,115,0,0,1,2,0.0,0.0,0.0,fn clone(&self) -> Self {
+1640,src/rcvec.rs,116,0,0,1,2,0.0,0.0,0.0,RcVec {
+1641,src/rcvec.rs,119,0,0,1,2,0.0,0.0,0.0,}
+1642,src/rcvec.rs,140,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+1643,src/rcvec.rs,141,0,0,1,2,0.0,0.0,0.0,self.inner.size_hint()
+1644,src/rcvec.rs,142,0,0,1,2,0.0,0.0,0.0,}
+1645,src/wrapper.rs,34,0,0,1,2,0.0,0.0,0.0,fn call_site() -> Self {
+1646,src/wrapper.rs,35,0,0,1,2,0.0,0.0,0.0,LexError::Fallback(fallback::LexError {
+1647,src/wrapper.rs,38,0,0,1,2,0.0,0.0,0.0,}
+1648,src/wrapper.rs,41,0,0,1,2,0.0,0.0,0.0,fn mismatch() -> ! {
+1649,src/wrapper.rs,42,0,0,1,2,0.0,0.0,0.0,"panic!(""compiler/fallback mismatch"")"
+1650,src/wrapper.rs,46,0,0,1,2,0.0,0.0,0.0,fn new(stream: proc_macro::TokenStream) -> Self {
+1651,src/wrapper.rs,47,0,0,1,2,0.0,0.0,0.0,DeferredTokenStream {
+1652,src/wrapper.rs,51,0,0,1,2,0.0,0.0,0.0,}
+1653,src/wrapper.rs,53,0,0,1,2,0.0,0.0,0.0,fn is_empty(&self) -> bool {
+1654,src/wrapper.rs,54,0,0,1,2,0.0,0.0,0.0,self.stream.is_empty() && self.extra.is_empty()
+1655,src/wrapper.rs,55,0,0,1,2,0.0,0.0,0.0,}
+1656,src/wrapper.rs,57,0,0,1,2,0.0,0.0,0.0,fn evaluate_now(&mut self) {
+1657,src/wrapper.rs,61,0,0,1,2,0.0,0.0,0.0,if !self.extra.is_empty() {
+1658,src/wrapper.rs,62,0,0,1,2,0.0,0.0,0.0,self.stream.extend(self.extra.drain(..));
+1659,src/wrapper.rs,63,0,0,1,2,0.0,0.0,0.0,}
+1660,src/wrapper.rs,64,0,0,1,2,0.0,0.0,0.0,}
+1661,src/wrapper.rs,66,0,0,1,2,0.0,0.0,0.0,fn into_token_stream(mut self) -> proc_macro::TokenStream {
+1662,src/wrapper.rs,67,0,0,1,2,0.0,0.0,0.0,self.evaluate_now();
+1663,src/wrapper.rs,68,0,0,1,2,0.0,0.0,0.0,self.stream
+1664,src/wrapper.rs,69,0,0,1,2,0.0,0.0,0.0,}
+1665,src/wrapper.rs,73,0,0,1,2,0.0,0.0,0.0,pub fn new() -> Self {
+1666,src/wrapper.rs,74,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1667,src/wrapper.rs,75,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(DeferredTokenStream::new(proc_macro::TokenStream::new()))
+1668,src/wrapper.rs,77,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(fallback::TokenStream::new())
+1669,src/wrapper.rs,79,0,0,1,2,0.0,0.0,0.0,}
+1670,src/wrapper.rs,81,0,0,1,2,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+1671,src/wrapper.rs,82,0,0,1,2,0.0,0.0,0.0,match self {
+1672,src/wrapper.rs,83,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(tts) => tts.is_empty(),"
+1673,src/wrapper.rs,84,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(tts) => tts.is_empty(),"
+1674,src/wrapper.rs,86,0,0,1,2,0.0,0.0,0.0,}
+1675,src/wrapper.rs,88,0,0,1,2,0.0,0.0,0.0,fn unwrap_nightly(self) -> proc_macro::TokenStream {
+1676,src/wrapper.rs,89,0,0,1,2,0.0,0.0,0.0,match self {
+1677,src/wrapper.rs,90,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(s) => s.into_token_stream(),"
+1678,src/wrapper.rs,91,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(_) => mismatch(),"
+1679,src/wrapper.rs,93,0,0,1,2,0.0,0.0,0.0,}
+1680,src/wrapper.rs,95,0,0,1,2,0.0,0.0,0.0,fn unwrap_stable(self) -> fallback::TokenStream {
+1681,src/wrapper.rs,96,0,0,1,2,0.0,0.0,0.0,match self {
+1682,src/wrapper.rs,97,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(_) => mismatch(),"
+1683,src/wrapper.rs,98,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(s) => s,"
+1684,src/wrapper.rs,100,0,0,1,2,0.0,0.0,0.0,}
+1685,src/wrapper.rs,108,0,0,1,2,0.0,0.0,0.0,Ok(TokenStream::Compiler(DeferredTokenStream::new(
+1686,src/wrapper.rs,109,0,0,1,2,0.0,0.0,0.0,"proc_macro_parse(src)?,"
+1687,src/wrapper.rs,118,0,0,1,2,0.0,0.0,0.0,"fn proc_macro_parse(src: &str) -> Result<proc_macro::TokenStream, LexError> {"
+1688,src/wrapper.rs,119,0,0,1,2,0.0,0.0,0.0,let result = panic::catch_unwind(|| src.parse().map_err(LexError::Compiler));
+1689,src/wrapper.rs,120,0,0,1,2,0.0,0.0,0.0,result.unwrap_or_else(|_| Err(LexError::call_site()))
+1690,src/wrapper.rs,121,0,0,1,2,0.0,0.0,0.0,}
+1691,src/wrapper.rs,124,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1692,src/wrapper.rs,125,0,0,1,2,0.0,0.0,0.0,match self {
+1693,src/wrapper.rs,126,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(tts) => Display::fmt(&tts.clone().into_token_stream(), f),"
+1694,src/wrapper.rs,127,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(tts) => Display::fmt(tts, f),"
+1695,src/wrapper.rs,129,0,0,1,2,0.0,0.0,0.0,}
+1696,src/wrapper.rs,133,0,0,1,2,0.0,0.0,0.0,fn from(inner: proc_macro::TokenStream) -> Self {
+1697,src/wrapper.rs,134,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(DeferredTokenStream::new(inner))
+1698,src/wrapper.rs,135,0,0,1,2,0.0,0.0,0.0,}
+1699,src/wrapper.rs,139,0,0,1,2,0.0,0.0,0.0,fn from(inner: TokenStream) -> Self {
+1700,src/wrapper.rs,140,0,0,1,2,0.0,0.0,0.0,match inner {
+1701,src/wrapper.rs,141,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(inner) => inner.into_token_stream(),"
+1702,src/wrapper.rs,142,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(inner) => inner.to_string().parse().unwrap(),"
+1703,src/wrapper.rs,144,0,0,1,2,0.0,0.0,0.0,}
+1704,src/wrapper.rs,148,0,0,1,2,0.0,0.0,0.0,fn from(inner: fallback::TokenStream) -> Self {
+1705,src/wrapper.rs,149,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(inner)
+1706,src/wrapper.rs,150,0,0,1,2,0.0,0.0,0.0,}
+1707,src/wrapper.rs,154,0,0,1,2,0.0,0.0,0.0,fn into_compiler_token(token: TokenTree) -> proc_macro::TokenTree {
+1708,src/wrapper.rs,155,0,0,1,2,0.0,0.0,0.0,match token {
+1709,src/wrapper.rs,156,0,0,1,2,0.0,0.0,0.0,"TokenTree::Group(tt) => tt.inner.unwrap_nightly().into(),"
+1710,src/wrapper.rs,157,0,0,1,2,0.0,0.0,0.0,TokenTree::Punct(tt) => {
+1711,src/wrapper.rs,158,0,0,1,2,0.0,0.0,0.0,let spacing = match tt.spacing() {
+1712,src/wrapper.rs,159,0,0,1,2,0.0,0.0,0.0,"Spacing::Joint => proc_macro::Spacing::Joint,"
+1713,src/wrapper.rs,160,0,0,1,2,0.0,0.0,0.0,"Spacing::Alone => proc_macro::Spacing::Alone,"
+1714,src/wrapper.rs,162,0,0,1,2,0.0,0.0,0.0,"let mut punct = proc_macro::Punct::new(tt.as_char(), spacing);"
+1715,src/wrapper.rs,163,0,0,1,2,0.0,0.0,0.0,punct.set_span(tt.span().inner.unwrap_nightly());
+1716,src/wrapper.rs,164,0,0,1,2,0.0,0.0,0.0,punct.into()
+1717,src/wrapper.rs,166,0,0,1,2,0.0,0.0,0.0,"TokenTree::Ident(tt) => tt.inner.unwrap_nightly().into(),"
+1718,src/wrapper.rs,167,0,0,1,2,0.0,0.0,0.0,"TokenTree::Literal(tt) => tt.inner.unwrap_nightly().into(),"
+1719,src/wrapper.rs,169,0,0,1,2,0.0,0.0,0.0,}
+1720,src/wrapper.rs,172,0,0,1,2,0.0,0.0,0.0,fn from(token: TokenTree) -> Self {
+1721,src/wrapper.rs,173,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1722,src/wrapper.rs,174,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(DeferredTokenStream::new(into_compiler_token(token).into()))
+1723,src/wrapper.rs,176,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(token.into())
+1724,src/wrapper.rs,178,0,0,1,2,0.0,0.0,0.0,}
+1725,src/wrapper.rs,182,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = TokenTree>>(trees: I) -> Self {
+1726,src/wrapper.rs,183,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1727,src/wrapper.rs,184,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(DeferredTokenStream::new(
+1728,src/wrapper.rs,185,0,0,1,2,0.0,0.0,0.0,"trees.into_iter().map(into_compiler_token).collect(),"
+1729,src/wrapper.rs,188,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(trees.into_iter().collect())
+1730,src/wrapper.rs,190,0,0,1,2,0.0,0.0,0.0,}
+1731,src/wrapper.rs,194,0,0,1,2,0.0,0.0,0.0,fn from_iter<I: IntoIterator<Item = TokenStream>>(streams: I) -> Self {
+1732,src/wrapper.rs,195,0,0,1,2,0.0,0.0,0.0,let mut streams = streams.into_iter();
+1733,src/wrapper.rs,196,0,0,1,2,0.0,0.0,0.0,match streams.next() {
+1734,src/wrapper.rs,197,0,0,1,2,0.0,0.0,0.0,Some(TokenStream::Compiler(mut first)) => {
+1735,src/wrapper.rs,198,0,0,1,2,0.0,0.0,0.0,first.evaluate_now();
+1736,src/wrapper.rs,199,0,0,1,2,0.0,0.0,0.0,first.stream.extend(streams.map(|s| match s {
+1737,src/wrapper.rs,200,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(s) => s.into_token_stream(),"
+1738,src/wrapper.rs,201,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(_) => mismatch(),"
+1739,src/wrapper.rs,202,0,0,1,2,0.0,0.0,0.0,}));
+1740,src/wrapper.rs,203,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(first)
+1741,src/wrapper.rs,205,0,0,1,2,0.0,0.0,0.0,Some(TokenStream::Fallback(mut first)) => {
+1742,src/wrapper.rs,206,0,0,1,2,0.0,0.0,0.0,first.extend(streams.map(|s| match s {
+1743,src/wrapper.rs,207,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(s) => s,"
+1744,src/wrapper.rs,208,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(_) => mismatch(),"
+1745,src/wrapper.rs,209,0,0,1,2,0.0,0.0,0.0,}));
+1746,src/wrapper.rs,210,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(first)
+1747,src/wrapper.rs,212,0,0,1,2,0.0,0.0,0.0,"None => TokenStream::new(),"
+1748,src/wrapper.rs,214,0,0,1,2,0.0,0.0,0.0,}
+1749,src/wrapper.rs,218,0,0,1,2,0.0,0.0,0.0,"fn extend<I: IntoIterator<Item = TokenTree>>(&mut self, stream: I) {"
+1750,src/wrapper.rs,219,0,0,1,2,0.0,0.0,0.0,match self {
+1751,src/wrapper.rs,220,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(tts) => {
+1752,src/wrapper.rs,222,0,0,1,2,0.0,0.0,0.0,for token in stream {
+1753,src/wrapper.rs,223,0,0,1,2,0.0,0.0,0.0,tts.extra.push(into_compiler_token(token));
+1754,src/wrapper.rs,226,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(tts) => tts.extend(stream),"
+1755,src/wrapper.rs,228,0,0,1,2,0.0,0.0,0.0,}
+1756,src/wrapper.rs,232,0,0,1,2,0.0,0.0,0.0,"fn extend<I: IntoIterator<Item = TokenStream>>(&mut self, streams: I) {"
+1757,src/wrapper.rs,233,0,0,1,2,0.0,0.0,0.0,match self {
+1758,src/wrapper.rs,234,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(tts) => {
+1759,src/wrapper.rs,235,0,0,1,2,0.0,0.0,0.0,tts.evaluate_now();
+1760,src/wrapper.rs,236,0,0,1,2,0.0,0.0,0.0,tts.stream
+1761,src/wrapper.rs,237,0,0,1,2,0.0,0.0,0.0,.extend(streams.into_iter().map(TokenStream::unwrap_nightly));
+1762,src/wrapper.rs,239,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(tts) => {
+1763,src/wrapper.rs,240,0,0,1,2,0.0,0.0,0.0,tts.extend(streams.into_iter().map(TokenStream::unwrap_stable));
+1764,src/wrapper.rs,243,0,0,1,2,0.0,0.0,0.0,}
+1765,src/wrapper.rs,247,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1766,src/wrapper.rs,248,0,0,1,2,0.0,0.0,0.0,match self {
+1767,src/wrapper.rs,249,0,0,1,2,0.0,0.0,0.0,"TokenStream::Compiler(tts) => Debug::fmt(&tts.clone().into_token_stream(), f),"
+1768,src/wrapper.rs,250,0,0,1,2,0.0,0.0,0.0,"TokenStream::Fallback(tts) => Debug::fmt(tts, f),"
+1769,src/wrapper.rs,252,0,0,1,2,0.0,0.0,0.0,}
+1770,src/wrapper.rs,256,0,0,1,2,0.0,0.0,0.0,pub(crate) fn span(&self) -> Span {
+1771,src/wrapper.rs,257,0,0,1,2,0.0,0.0,0.0,match self {
+1772,src/wrapper.rs,258,0,0,1,2,0.0,0.0,0.0,"LexError::Compiler(_) => Span::call_site(),"
+1773,src/wrapper.rs,259,0,0,1,2,0.0,0.0,0.0,"LexError::Fallback(e) => Span::Fallback(e.span()),"
+1774,src/wrapper.rs,261,0,0,1,2,0.0,0.0,0.0,}
+1775,src/wrapper.rs,265,0,0,1,2,0.0,0.0,0.0,fn from(e: proc_macro::LexError) -> Self {
+1776,src/wrapper.rs,266,0,0,1,2,0.0,0.0,0.0,LexError::Compiler(e)
+1777,src/wrapper.rs,267,0,0,1,2,0.0,0.0,0.0,}
+1778,src/wrapper.rs,271,0,0,1,2,0.0,0.0,0.0,fn from(e: fallback::LexError) -> Self {
+1779,src/wrapper.rs,272,0,0,1,2,0.0,0.0,0.0,LexError::Fallback(e)
+1780,src/wrapper.rs,273,0,0,1,2,0.0,0.0,0.0,}
+1781,src/wrapper.rs,277,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1782,src/wrapper.rs,278,0,0,1,2,0.0,0.0,0.0,match self {
+1783,src/wrapper.rs,279,0,0,1,2,0.0,0.0,0.0,"LexError::Compiler(e) => Debug::fmt(e, f),"
+1784,src/wrapper.rs,280,0,0,1,2,0.0,0.0,0.0,"LexError::Fallback(e) => Debug::fmt(e, f),"
+1785,src/wrapper.rs,282,0,0,1,2,0.0,0.0,0.0,}
+1786,src/wrapper.rs,286,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1787,src/wrapper.rs,287,0,0,1,2,0.0,0.0,0.0,match self {
+1788,src/wrapper.rs,288,0,0,1,2,0.0,0.0,0.0,"LexError::Compiler(e) => Display::fmt(e, f),"
+1789,src/wrapper.rs,289,0,0,1,2,0.0,0.0,0.0,"LexError::Fallback(e) => Display::fmt(e, f),"
+1790,src/wrapper.rs,291,0,0,1,2,0.0,0.0,0.0,}
+1791,src/wrapper.rs,306,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(tts) => {
+1792,src/wrapper.rs,307,0,0,1,2,0.0,0.0,0.0,TokenTreeIter::Compiler(tts.into_token_stream().into_iter())
+1793,src/wrapper.rs,319,0,0,1,2,0.0,0.0,0.0,"TokenTreeIter::Compiler(iter) => iter.next()?,"
+1794,src/wrapper.rs,322,0,0,1,2,0.0,0.0,0.0,Some(match token {
+1795,src/wrapper.rs,323,0,0,1,2,0.0,0.0,0.0,"proc_macro::TokenTree::Group(tt) => crate::Group::_new(Group::Compiler(tt)).into(),"
+1796,src/wrapper.rs,324,0,0,1,2,0.0,0.0,0.0,proc_macro::TokenTree::Punct(tt) => {
+1797,src/wrapper.rs,325,0,0,1,2,0.0,0.0,0.0,let spacing = match tt.spacing() {
+1798,src/wrapper.rs,326,0,0,1,2,0.0,0.0,0.0,"proc_macro::Spacing::Joint => Spacing::Joint,"
+1799,src/wrapper.rs,327,0,0,1,2,0.0,0.0,0.0,"proc_macro::Spacing::Alone => Spacing::Alone,"
+1800,src/wrapper.rs,329,0,0,1,2,0.0,0.0,0.0,"let mut o = Punct::new(tt.as_char(), spacing);"
+1801,src/wrapper.rs,330,0,0,1,2,0.0,0.0,0.0,o.set_span(crate::Span::_new(Span::Compiler(tt.span())));
+1802,src/wrapper.rs,331,0,0,1,2,0.0,0.0,0.0,o.into()
+1803,src/wrapper.rs,333,0,0,1,2,0.0,0.0,0.0,"proc_macro::TokenTree::Ident(s) => crate::Ident::_new(Ident::Compiler(s)).into(),"
+1804,src/wrapper.rs,334,0,0,1,2,0.0,0.0,0.0,"proc_macro::TokenTree::Literal(l) => crate::Literal::_new(Literal::Compiler(l)).into(),"
+1805,src/wrapper.rs,338,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+1806,src/wrapper.rs,339,0,0,1,2,0.0,0.0,0.0,match self {
+1807,src/wrapper.rs,340,0,0,1,2,0.0,0.0,0.0,"TokenTreeIter::Compiler(tts) => tts.size_hint(),"
+1808,src/wrapper.rs,341,0,0,1,2,0.0,0.0,0.0,"TokenTreeIter::Fallback(tts) => tts.size_hint(),"
+1809,src/wrapper.rs,343,0,0,1,2,0.0,0.0,0.0,}
+1810,src/wrapper.rs,394,0,0,1,2,0.0,0.0,0.0,Span::Compiler(proc_macro::Span::call_site())
+1811,src/wrapper.rs,400,0,0,1,2,0.0,0.0,0.0,pub fn mixed_site() -> Self {
+1812,src/wrapper.rs,401,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1813,src/wrapper.rs,402,0,0,1,2,0.0,0.0,0.0,Span::Compiler(proc_macro::Span::mixed_site())
+1814,src/wrapper.rs,404,0,0,1,2,0.0,0.0,0.0,Span::Fallback(fallback::Span::mixed_site())
+1815,src/wrapper.rs,406,0,0,1,2,0.0,0.0,0.0,}
+1816,src/wrapper.rs,417,0,0,1,2,0.0,0.0,0.0,"pub fn resolved_at(&self, other: Span) -> Span {"
+1817,src/wrapper.rs,418,0,0,1,2,0.0,0.0,0.0,"match (self, other) {"
+1818,src/wrapper.rs,419,0,0,1,2,0.0,0.0,0.0,"(Span::Compiler(a), Span::Compiler(b)) => Span::Compiler(a.resolved_at(b)),"
+1819,src/wrapper.rs,420,0,0,1,2,0.0,0.0,0.0,"(Span::Fallback(a), Span::Fallback(b)) => Span::Fallback(a.resolved_at(b)),"
+1820,src/wrapper.rs,421,0,0,1,2,0.0,0.0,0.0,"_ => mismatch(),"
+1821,src/wrapper.rs,423,0,0,1,2,0.0,0.0,0.0,}
+1822,src/wrapper.rs,425,0,0,1,2,0.0,0.0,0.0,"pub fn located_at(&self, other: Span) -> Span {"
+1823,src/wrapper.rs,426,0,0,1,2,0.0,0.0,0.0,"match (self, other) {"
+1824,src/wrapper.rs,427,0,0,1,2,0.0,0.0,0.0,"(Span::Compiler(a), Span::Compiler(b)) => Span::Compiler(a.located_at(b)),"
+1825,src/wrapper.rs,428,0,0,1,2,0.0,0.0,0.0,"(Span::Fallback(a), Span::Fallback(b)) => Span::Fallback(a.located_at(b)),"
+1826,src/wrapper.rs,429,0,0,1,2,0.0,0.0,0.0,"_ => mismatch(),"
+1827,src/wrapper.rs,431,0,0,1,2,0.0,0.0,0.0,}
+1828,src/wrapper.rs,433,0,0,1,2,0.0,0.0,0.0,pub fn unwrap(self) -> proc_macro::Span {
+1829,src/wrapper.rs,434,0,0,1,2,0.0,0.0,0.0,match self {
+1830,src/wrapper.rs,435,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(s) => s,"
+1831,src/wrapper.rs,436,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(_) => panic!(""proc_macro::Span is only available in procedural macros""),"
+1832,src/wrapper.rs,438,0,0,1,2,0.0,0.0,0.0,}
+1833,src/wrapper.rs,449,0,0,1,2,0.0,0.0,0.0,pub fn start(&self) -> LineColumn {
+1834,src/wrapper.rs,450,0,0,1,2,0.0,0.0,0.0,match self {
+1835,src/wrapper.rs,451,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(_) => LineColumn { line: 0, column: 0 },"
+1836,src/wrapper.rs,452,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(s) => s.start(),"
+1837,src/wrapper.rs,454,0,0,1,2,0.0,0.0,0.0,}
+1838,src/wrapper.rs,457,0,0,1,2,0.0,0.0,0.0,pub fn end(&self) -> LineColumn {
+1839,src/wrapper.rs,458,0,0,1,2,0.0,0.0,0.0,match self {
+1840,src/wrapper.rs,459,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(_) => LineColumn { line: 0, column: 0 },"
+1841,src/wrapper.rs,460,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(s) => s.end(),"
+1842,src/wrapper.rs,462,0,0,1,2,0.0,0.0,0.0,}
+1843,src/wrapper.rs,464,0,0,1,2,0.0,0.0,0.0,"pub fn join(&self, other: Span) -> Option<Span> {"
+1844,src/wrapper.rs,465,0,0,1,2,0.0,0.0,0.0,"let ret = match (self, other) {"
+1845,src/wrapper.rs,468,0,0,1,2,0.0,0.0,0.0,"(Span::Fallback(a), Span::Fallback(b)) => Span::Fallback(a.join(b)?),"
+1846,src/wrapper.rs,469,0,0,1,2,0.0,0.0,0.0,"_ => return None,"
+1847,src/wrapper.rs,471,0,0,1,2,0.0,0.0,0.0,Some(ret)
+1848,src/wrapper.rs,472,0,0,1,2,0.0,0.0,0.0,}
+1849,src/wrapper.rs,486,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(s) => s.source_text(),"
+1850,src/wrapper.rs,493,0,0,1,2,0.0,0.0,0.0,fn unwrap_nightly(self) -> proc_macro::Span {
+1851,src/wrapper.rs,494,0,0,1,2,0.0,0.0,0.0,match self {
+1852,src/wrapper.rs,495,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(s) => s,"
+1853,src/wrapper.rs,496,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(_) => mismatch(),"
+1854,src/wrapper.rs,498,0,0,1,2,0.0,0.0,0.0,}
+1855,src/wrapper.rs,502,0,0,1,2,0.0,0.0,0.0,fn from(proc_span: proc_macro::Span) -> Self {
+1856,src/wrapper.rs,503,0,0,1,2,0.0,0.0,0.0,crate::Span::_new(Span::Compiler(proc_span))
+1857,src/wrapper.rs,504,0,0,1,2,0.0,0.0,0.0,}
+1858,src/wrapper.rs,514,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1859,src/wrapper.rs,515,0,0,1,2,0.0,0.0,0.0,match self {
+1860,src/wrapper.rs,516,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(s) => Debug::fmt(s, f),"
+1861,src/wrapper.rs,517,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(s) => Debug::fmt(s, f),"
+1862,src/wrapper.rs,519,0,0,1,2,0.0,0.0,0.0,}
+1863,src/wrapper.rs,522,0,0,1,2,0.0,0.0,0.0,"pub(crate) fn debug_span_field_if_nontrivial(debug: &mut fmt::DebugStruct, span: Span) {"
+1864,src/wrapper.rs,523,0,0,1,2,0.0,0.0,0.0,match span {
+1865,src/wrapper.rs,524,0,0,1,2,0.0,0.0,0.0,Span::Compiler(s) => {
+1866,src/wrapper.rs,525,0,0,1,2,0.0,0.0,0.0,"debug.field(""span"", &s);"
+1867,src/wrapper.rs,527,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(s) => fallback::debug_span_field_if_nontrivial(debug, s),"
+1868,src/wrapper.rs,529,0,0,1,2,0.0,0.0,0.0,}
+1869,src/wrapper.rs,538,0,0,1,2,0.0,0.0,0.0,"pub fn new(delimiter: Delimiter, stream: TokenStream) -> Self {"
+1870,src/wrapper.rs,539,0,0,1,2,0.0,0.0,0.0,match stream {
+1871,src/wrapper.rs,540,0,0,1,2,0.0,0.0,0.0,TokenStream::Compiler(tts) => {
+1872,src/wrapper.rs,541,0,0,1,2,0.0,0.0,0.0,let delimiter = match delimiter {
+1873,src/wrapper.rs,542,0,0,1,2,0.0,0.0,0.0,"Delimiter::Parenthesis => proc_macro::Delimiter::Parenthesis,"
+1874,src/wrapper.rs,543,0,0,1,2,0.0,0.0,0.0,"Delimiter::Bracket => proc_macro::Delimiter::Bracket,"
+1875,src/wrapper.rs,544,0,0,1,2,0.0,0.0,0.0,"Delimiter::Brace => proc_macro::Delimiter::Brace,"
+1876,src/wrapper.rs,545,0,0,1,2,0.0,0.0,0.0,"Delimiter::None => proc_macro::Delimiter::None,"
+1877,src/wrapper.rs,547,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(proc_macro::Group::new(delimiter, tts.into_token_stream()))"
+1878,src/wrapper.rs,549,0,0,1,2,0.0,0.0,0.0,TokenStream::Fallback(stream) => {
+1879,src/wrapper.rs,550,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(fallback::Group::new(delimiter, stream))"
+1880,src/wrapper.rs,553,0,0,1,2,0.0,0.0,0.0,}
+1881,src/wrapper.rs,555,0,0,1,2,0.0,0.0,0.0,pub fn delimiter(&self) -> Delimiter {
+1882,src/wrapper.rs,556,0,0,1,2,0.0,0.0,0.0,match self {
+1883,src/wrapper.rs,557,0,0,1,2,0.0,0.0,0.0,Group::Compiler(g) => match g.delimiter() {
+1884,src/wrapper.rs,558,0,0,1,2,0.0,0.0,0.0,"proc_macro::Delimiter::Parenthesis => Delimiter::Parenthesis,"
+1885,src/wrapper.rs,559,0,0,1,2,0.0,0.0,0.0,"proc_macro::Delimiter::Bracket => Delimiter::Bracket,"
+1886,src/wrapper.rs,560,0,0,1,2,0.0,0.0,0.0,"proc_macro::Delimiter::Brace => Delimiter::Brace,"
+1887,src/wrapper.rs,561,0,0,1,2,0.0,0.0,0.0,"proc_macro::Delimiter::None => Delimiter::None,"
+1888,src/wrapper.rs,563,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(g) => g.delimiter(),"
+1889,src/wrapper.rs,565,0,0,1,2,0.0,0.0,0.0,}
+1890,src/wrapper.rs,567,0,0,1,2,0.0,0.0,0.0,pub fn stream(&self) -> TokenStream {
+1891,src/wrapper.rs,568,0,0,1,2,0.0,0.0,0.0,match self {
+1892,src/wrapper.rs,569,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(g) => TokenStream::Compiler(DeferredTokenStream::new(g.stream())),"
+1893,src/wrapper.rs,570,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(g) => TokenStream::Fallback(g.stream()),"
+1894,src/wrapper.rs,572,0,0,1,2,0.0,0.0,0.0,}
+1895,src/wrapper.rs,574,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+1896,src/wrapper.rs,575,0,0,1,2,0.0,0.0,0.0,match self {
+1897,src/wrapper.rs,576,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(g) => Span::Compiler(g.span()),"
+1898,src/wrapper.rs,577,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(g) => Span::Fallback(g.span()),"
+1899,src/wrapper.rs,579,0,0,1,2,0.0,0.0,0.0,}
+1900,src/wrapper.rs,581,0,0,1,2,0.0,0.0,0.0,pub fn span_open(&self) -> Span {
+1901,src/wrapper.rs,582,0,0,1,2,0.0,0.0,0.0,match self {
+1902,src/wrapper.rs,583,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(g) => Span::Compiler(g.span_open()),"
+1903,src/wrapper.rs,584,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(g) => Span::Fallback(g.span_open()),"
+1904,src/wrapper.rs,586,0,0,1,2,0.0,0.0,0.0,}
+1905,src/wrapper.rs,588,0,0,1,2,0.0,0.0,0.0,pub fn span_close(&self) -> Span {
+1906,src/wrapper.rs,589,0,0,1,2,0.0,0.0,0.0,match self {
+1907,src/wrapper.rs,590,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(g) => Span::Compiler(g.span_close()),"
+1908,src/wrapper.rs,591,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(g) => Span::Fallback(g.span_close()),"
+1909,src/wrapper.rs,593,0,0,1,2,0.0,0.0,0.0,}
+1910,src/wrapper.rs,595,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+1911,src/wrapper.rs,596,0,0,1,2,0.0,0.0,0.0,"match (self, span) {"
+1912,src/wrapper.rs,597,0,0,1,2,0.0,0.0,0.0,"(Group::Compiler(g), Span::Compiler(s)) => g.set_span(s),"
+1913,src/wrapper.rs,598,0,0,1,2,0.0,0.0,0.0,"(Group::Fallback(g), Span::Fallback(s)) => g.set_span(s),"
+1914,src/wrapper.rs,599,0,0,1,2,0.0,0.0,0.0,"_ => mismatch(),"
+1915,src/wrapper.rs,601,0,0,1,2,0.0,0.0,0.0,}
+1916,src/wrapper.rs,603,0,0,1,2,0.0,0.0,0.0,fn unwrap_nightly(self) -> proc_macro::Group {
+1917,src/wrapper.rs,604,0,0,1,2,0.0,0.0,0.0,match self {
+1918,src/wrapper.rs,605,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(g) => g,"
+1919,src/wrapper.rs,606,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(_) => mismatch(),"
+1920,src/wrapper.rs,608,0,0,1,2,0.0,0.0,0.0,}
+1921,src/wrapper.rs,612,0,0,1,2,0.0,0.0,0.0,fn from(g: fallback::Group) -> Self {
+1922,src/wrapper.rs,613,0,0,1,2,0.0,0.0,0.0,Group::Fallback(g)
+1923,src/wrapper.rs,614,0,0,1,2,0.0,0.0,0.0,}
+1924,src/wrapper.rs,618,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {"
+1925,src/wrapper.rs,619,0,0,1,2,0.0,0.0,0.0,match self {
+1926,src/wrapper.rs,620,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(group) => Display::fmt(group, formatter),"
+1927,src/wrapper.rs,621,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(group) => Display::fmt(group, formatter),"
+1928,src/wrapper.rs,623,0,0,1,2,0.0,0.0,0.0,}
+1929,src/wrapper.rs,627,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {"
+1930,src/wrapper.rs,628,0,0,1,2,0.0,0.0,0.0,match self {
+1931,src/wrapper.rs,629,0,0,1,2,0.0,0.0,0.0,"Group::Compiler(group) => Debug::fmt(group, formatter),"
+1932,src/wrapper.rs,630,0,0,1,2,0.0,0.0,0.0,"Group::Fallback(group) => Debug::fmt(group, formatter),"
+1933,src/wrapper.rs,632,0,0,1,2,0.0,0.0,0.0,}
+1934,src/wrapper.rs,644,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(s) => Ident::Compiler(proc_macro::Ident::new(string, s)),"
+1935,src/wrapper.rs,649,0,0,1,2,0.0,0.0,0.0,"pub fn new_raw(string: &str, span: Span) -> Self {"
+1936,src/wrapper.rs,650,0,0,1,2,0.0,0.0,0.0,match span {
+1937,src/wrapper.rs,651,0,0,1,2,0.0,0.0,0.0,"Span::Compiler(s) => Ident::Compiler(proc_macro::Ident::new_raw(string, s)),"
+1938,src/wrapper.rs,652,0,0,1,2,0.0,0.0,0.0,"Span::Fallback(s) => Ident::Fallback(fallback::Ident::new_raw(string, s)),"
+1939,src/wrapper.rs,654,0,0,1,2,0.0,0.0,0.0,}
+1940,src/wrapper.rs,658,0,0,1,2,0.0,0.0,0.0,"Ident::Compiler(t) => Span::Compiler(t.span()),"
+1941,src/wrapper.rs,665,0,0,1,2,0.0,0.0,0.0,"(Ident::Compiler(t), Span::Compiler(s)) => t.set_span(s),"
+1942,src/wrapper.rs,667,0,0,1,2,0.0,0.0,0.0,"_ => mismatch(),"
+1943,src/wrapper.rs,671,0,0,1,2,0.0,0.0,0.0,fn unwrap_nightly(self) -> proc_macro::Ident {
+1944,src/wrapper.rs,672,0,0,1,2,0.0,0.0,0.0,match self {
+1945,src/wrapper.rs,673,0,0,1,2,0.0,0.0,0.0,"Ident::Compiler(s) => s,"
+1946,src/wrapper.rs,674,0,0,1,2,0.0,0.0,0.0,"Ident::Fallback(_) => mismatch(),"
+1947,src/wrapper.rs,676,0,0,1,2,0.0,0.0,0.0,}
+1948,src/wrapper.rs,680,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &Ident) -> bool {"
+1949,src/wrapper.rs,681,0,0,1,2,0.0,0.0,0.0,"match (self, other) {"
+1950,src/wrapper.rs,682,0,0,1,2,0.0,0.0,0.0,"(Ident::Compiler(t), Ident::Compiler(o)) => t.to_string() == o.to_string(),"
+1951,src/wrapper.rs,683,0,0,1,2,0.0,0.0,0.0,"(Ident::Fallback(t), Ident::Fallback(o)) => t == o,"
+1952,src/wrapper.rs,684,0,0,1,2,0.0,0.0,0.0,"_ => mismatch(),"
+1953,src/wrapper.rs,686,0,0,1,2,0.0,0.0,0.0,}
+1954,src/wrapper.rs,693,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &T) -> bool {"
+1955,src/wrapper.rs,694,0,0,1,2,0.0,0.0,0.0,let other = other.as_ref();
+1956,src/wrapper.rs,695,0,0,1,2,0.0,0.0,0.0,match self {
+1957,src/wrapper.rs,696,0,0,1,2,0.0,0.0,0.0,"Ident::Compiler(t) => t.to_string() == other,"
+1958,src/wrapper.rs,697,0,0,1,2,0.0,0.0,0.0,"Ident::Fallback(t) => t == other,"
+1959,src/wrapper.rs,699,0,0,1,2,0.0,0.0,0.0,}
+1960,src/wrapper.rs,703,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1961,src/wrapper.rs,704,0,0,1,2,0.0,0.0,0.0,match self {
+1962,src/wrapper.rs,705,0,0,1,2,0.0,0.0,0.0,"Ident::Compiler(t) => Display::fmt(t, f),"
+1963,src/wrapper.rs,706,0,0,1,2,0.0,0.0,0.0,"Ident::Fallback(t) => Display::fmt(t, f),"
+1964,src/wrapper.rs,708,0,0,1,2,0.0,0.0,0.0,}
+1965,src/wrapper.rs,712,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+1966,src/wrapper.rs,713,0,0,1,2,0.0,0.0,0.0,match self {
+1967,src/wrapper.rs,714,0,0,1,2,0.0,0.0,0.0,"Ident::Compiler(t) => Debug::fmt(t, f),"
+1968,src/wrapper.rs,715,0,0,1,2,0.0,0.0,0.0,"Ident::Fallback(t) => Debug::fmt(t, f),"
+1969,src/wrapper.rs,717,0,0,1,2,0.0,0.0,0.0,}
+1970,src/wrapper.rs,728,0,0,1,2,0.0,0.0,0.0,pub fn $name(n: $kind) -> Literal {
+1971,src/wrapper.rs,729,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1972,src/wrapper.rs,730,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::$name(n))
+1973,src/wrapper.rs,732,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::$name(n))
+1974,src/wrapper.rs,734,0,0,1,2,0.0,0.0,0.0,}
+1975,src/wrapper.rs,740,0,0,1,2,0.0,0.0,0.0,pub fn $name(n: $kind) -> Literal {
+1976,src/wrapper.rs,741,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1977,src/wrapper.rs,742,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::$name(n))
+1978,src/wrapper.rs,744,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::$name(n))
+1979,src/wrapper.rs,746,0,0,1,2,0.0,0.0,0.0,}
+1980,src/wrapper.rs,751,0,0,1,2,0.0,0.0,0.0,pub unsafe fn from_str_unchecked(repr: &str) -> Self {
+1981,src/wrapper.rs,752,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1982,src/wrapper.rs,753,0,0,1,2,0.0,0.0,0.0,"Literal::Compiler(proc_macro::Literal::from_str(repr).expect(""invalid literal""))"
+1983,src/wrapper.rs,755,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::from_str_unchecked(repr))
+1984,src/wrapper.rs,757,0,0,1,2,0.0,0.0,0.0,}
+1985,src/wrapper.rs,792,0,0,1,2,0.0,0.0,0.0,pub fn f32_unsuffixed(f: f32) -> Literal {
+1986,src/wrapper.rs,793,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1987,src/wrapper.rs,794,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::f32_unsuffixed(f))
+1988,src/wrapper.rs,796,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::f32_unsuffixed(f))
+1989,src/wrapper.rs,798,0,0,1,2,0.0,0.0,0.0,}
+1990,src/wrapper.rs,800,0,0,1,2,0.0,0.0,0.0,pub fn f64_unsuffixed(f: f64) -> Literal {
+1991,src/wrapper.rs,801,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1992,src/wrapper.rs,802,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::f64_unsuffixed(f))
+1993,src/wrapper.rs,804,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::f64_unsuffixed(f))
+1994,src/wrapper.rs,806,0,0,1,2,0.0,0.0,0.0,}
+1995,src/wrapper.rs,808,0,0,1,2,0.0,0.0,0.0,pub fn string(t: &str) -> Literal {
+1996,src/wrapper.rs,809,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+1997,src/wrapper.rs,810,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::string(t))
+1998,src/wrapper.rs,812,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::string(t))
+1999,src/wrapper.rs,814,0,0,1,2,0.0,0.0,0.0,}
+2000,src/wrapper.rs,816,0,0,1,2,0.0,0.0,0.0,pub fn character(t: char) -> Literal {
+2001,src/wrapper.rs,817,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+2002,src/wrapper.rs,818,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::character(t))
+2003,src/wrapper.rs,820,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::character(t))
+2004,src/wrapper.rs,822,0,0,1,2,0.0,0.0,0.0,}
+2005,src/wrapper.rs,824,0,0,1,2,0.0,0.0,0.0,pub fn byte_string(bytes: &[u8]) -> Literal {
+2006,src/wrapper.rs,825,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+2007,src/wrapper.rs,826,0,0,1,2,0.0,0.0,0.0,Literal::Compiler(proc_macro::Literal::byte_string(bytes))
+2008,src/wrapper.rs,828,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(fallback::Literal::byte_string(bytes))
+2009,src/wrapper.rs,830,0,0,1,2,0.0,0.0,0.0,}
+2010,src/wrapper.rs,832,0,0,1,2,0.0,0.0,0.0,pub fn span(&self) -> Span {
+2011,src/wrapper.rs,833,0,0,1,2,0.0,0.0,0.0,match self {
+2012,src/wrapper.rs,834,0,0,1,2,0.0,0.0,0.0,"Literal::Compiler(lit) => Span::Compiler(lit.span()),"
+2013,src/wrapper.rs,835,0,0,1,2,0.0,0.0,0.0,"Literal::Fallback(lit) => Span::Fallback(lit.span()),"
+2014,src/wrapper.rs,837,0,0,1,2,0.0,0.0,0.0,}
+2015,src/wrapper.rs,839,0,0,1,2,0.0,0.0,0.0,"pub fn set_span(&mut self, span: Span) {"
+2016,src/wrapper.rs,840,0,0,1,2,0.0,0.0,0.0,"match (self, span) {"
+2017,src/wrapper.rs,841,0,0,1,2,0.0,0.0,0.0,"(Literal::Compiler(lit), Span::Compiler(s)) => lit.set_span(s),"
+2018,src/wrapper.rs,842,0,0,1,2,0.0,0.0,0.0,"(Literal::Fallback(lit), Span::Fallback(s)) => lit.set_span(s),"
+2019,src/wrapper.rs,843,0,0,1,2,0.0,0.0,0.0,"_ => mismatch(),"
+2020,src/wrapper.rs,845,0,0,1,2,0.0,0.0,0.0,}
+2021,src/wrapper.rs,847,0,0,1,2,0.0,0.0,0.0,"pub fn subspan<R: RangeBounds<usize>>(&self, range: R) -> Option<Span> {"
+2022,src/wrapper.rs,848,0,0,1,2,0.0,0.0,0.0,match self {
+2023,src/wrapper.rs,852,0,0,1,2,0.0,0.0,0.0,"Literal::Compiler(_lit) => None,"
+2024,src/wrapper.rs,853,0,0,1,2,0.0,0.0,0.0,"Literal::Fallback(lit) => lit.subspan(range).map(Span::Fallback),"
+2025,src/wrapper.rs,855,0,0,1,2,0.0,0.0,0.0,}
+2026,src/wrapper.rs,857,0,0,1,2,0.0,0.0,0.0,fn unwrap_nightly(self) -> proc_macro::Literal {
+2027,src/wrapper.rs,858,0,0,1,2,0.0,0.0,0.0,match self {
+2028,src/wrapper.rs,859,0,0,1,2,0.0,0.0,0.0,"Literal::Compiler(s) => s,"
+2029,src/wrapper.rs,860,0,0,1,2,0.0,0.0,0.0,"Literal::Fallback(_) => mismatch(),"
+2030,src/wrapper.rs,862,0,0,1,2,0.0,0.0,0.0,}
+2031,src/wrapper.rs,866,0,0,1,2,0.0,0.0,0.0,fn from(s: fallback::Literal) -> Self {
+2032,src/wrapper.rs,867,0,0,1,2,0.0,0.0,0.0,Literal::Fallback(s)
+2033,src/wrapper.rs,868,0,0,1,2,0.0,0.0,0.0,}
+2034,src/wrapper.rs,874,0,0,1,2,0.0,0.0,0.0,"fn from_str(repr: &str) -> Result<Self, Self::Err> {"
+2035,src/wrapper.rs,875,0,0,1,2,0.0,0.0,0.0,if inside_proc_macro() {
+2036,src/wrapper.rs,876,0,0,1,2,0.0,0.0,0.0,let literal = proc_macro::Literal::from_str(repr)?;
+2037,src/wrapper.rs,877,0,0,1,2,0.0,0.0,0.0,Ok(Literal::Compiler(literal))
+2038,src/wrapper.rs,879,0,0,1,2,0.0,0.0,0.0,let literal = fallback::Literal::from_str(repr)?;
+2039,src/wrapper.rs,880,0,0,1,2,0.0,0.0,0.0,Ok(Literal::Fallback(literal))
+2040,src/wrapper.rs,882,0,0,1,2,0.0,0.0,0.0,}
+2041,src/wrapper.rs,886,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+2042,src/wrapper.rs,887,0,0,1,2,0.0,0.0,0.0,match self {
+2043,src/wrapper.rs,888,0,0,1,2,0.0,0.0,0.0,"Literal::Compiler(t) => Display::fmt(t, f),"
+2044,src/wrapper.rs,889,0,0,1,2,0.0,0.0,0.0,"Literal::Fallback(t) => Display::fmt(t, f),"
+2045,src/wrapper.rs,891,0,0,1,2,0.0,0.0,0.0,}
+2046,src/wrapper.rs,895,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+2047,src/wrapper.rs,896,0,0,1,2,0.0,0.0,0.0,match self {
+2048,src/wrapper.rs,897,0,0,1,2,0.0,0.0,0.0,"Literal::Compiler(t) => Debug::fmt(t, f),"
+2049,src/wrapper.rs,898,0,0,1,2,0.0,0.0,0.0,"Literal::Fallback(t) => Debug::fmt(t, f),"
+2050,src/wrapper.rs,900,0,0,1,2,0.0,0.0,0.0,}

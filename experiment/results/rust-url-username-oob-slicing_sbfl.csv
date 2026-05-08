@@ -1,0 +1,2291 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,url/src/host.rs,122,1,0,0,2,1.0,1.0,inf,"pub fn parse_opaque(input: &str) -> Result<Self, ParseError> {"
+2,url/src/host.rs,123,1,0,0,2,1.0,1.0,inf,if input.starts_with('[') {
+3,url/src/host.rs,128,1,0,0,2,1.0,1.0,inf,}
+4,url/src/host.rs,130,1,0,0,2,1.0,1.0,inf,let is_invalid_host_char = |c| {
+5,url/src/host.rs,151,1,0,0,2,1.0,1.0,inf,if input.find(is_invalid_host_char).is_some() {
+6,url/src/host.rs,154,1,0,0,2,1.0,1.0,inf,Ok(Host::Domain(
+7,url/src/host.rs,158,1,0,0,2,1.0,1.0,inf,}
+8,url/src/parser.rs,176,1,0,0,2,1.0,1.0,inf,"""file"" => SchemeType::File,"
+9,url/src/parser.rs,177,1,0,0,2,1.0,1.0,inf,"_ => SchemeType::NotSpecial,"
+10,url/src/parser.rs,201,1,0,0,2,1.0,1.0,inf,pub fn no_trim(input: &'i str) -> Self {
+11,url/src/parser.rs,202,1,0,0,2,1.0,1.0,inf,Input {
+12,url/src/parser.rs,205,1,0,0,2,1.0,1.0,inf,}
+13,url/src/parser.rs,254,1,0,0,2,1.0,1.0,inf,Some(remaining)
+14,url/src/parser.rs,308,1,0,0,2,1.0,1.0,inf,"fn split_prefix<'i>(self, input: &mut Input<'i>) -> bool {"
+15,url/src/parser.rs,309,1,0,0,2,1.0,1.0,inf,for c in self.chars() {
+16,url/src/parser.rs,310,1,0,0,2,1.0,1.0,inf,if input.next() != Some(c) {
+17,url/src/parser.rs,311,1,0,0,2,1.0,1.0,inf,return false;
+18,url/src/parser.rs,312,1,0,0,2,1.0,1.0,inf,}
+19,url/src/parser.rs,315,1,0,0,2,1.0,1.0,inf,}
+20,url/src/parser.rs,466,1,0,0,2,1.0,1.0,inf,"SchemeType::NotSpecial => self.parse_non_special(input, scheme_type, scheme_end),"
+21,url/src/parser.rs,471,1,0,0,2,1.0,1.0,inf,fn parse_non_special(
+22,url/src/parser.rs,478,1,0,0,2,1.0,1.0,inf,"if let Some(input) = input.split_prefix(""//"") {"
+23,url/src/parser.rs,480,1,0,0,2,1.0,1.0,inf,}
+24,url/src/parser.rs,482,1,0,0,2,1.0,1.0,inf,let path_start = to_u32(self.serialization.len())?;
+25,url/src/parser.rs,483,1,0,0,2,1.0,1.0,inf,let username_end = path_start;
+26,url/src/parser.rs,484,1,0,0,2,1.0,1.0,inf,let host_start = path_start;
+27,url/src/parser.rs,485,1,0,0,2,1.0,1.0,inf,let host_end = path_start;
+28,url/src/parser.rs,486,1,0,0,2,1.0,1.0,inf,let host = HostInternal::None;
+29,url/src/parser.rs,487,1,0,0,2,1.0,1.0,inf,let port = None;
+30,url/src/parser.rs,488,1,0,0,2,1.0,1.0,inf,let remaining = if let Some(input) = input.split_prefix('/') {
+31,url/src/parser.rs,489,1,0,0,2,1.0,1.0,inf,let path_start = self.serialization.len();
+32,url/src/parser.rs,490,1,0,0,2,1.0,1.0,inf,self.serialization.push('/');
+33,url/src/parser.rs,491,1,0,0,2,1.0,1.0,inf,"self.parse_path(scheme_type, &mut false, path_start, input)"
+34,url/src/parser.rs,495,1,0,0,2,1.0,1.0,inf,self.with_query_and_fragment(
+35,url/src/parser.rs,496,1,0,0,2,1.0,1.0,inf,"scheme_type,"
+36,url/src/parser.rs,497,1,0,0,2,1.0,1.0,inf,"scheme_end,"
+37,url/src/parser.rs,498,1,0,0,2,1.0,1.0,inf,"username_end,"
+38,url/src/parser.rs,499,1,0,0,2,1.0,1.0,inf,"host_start,"
+39,url/src/parser.rs,500,1,0,0,2,1.0,1.0,inf,"host_end,"
+40,url/src/parser.rs,501,1,0,0,2,1.0,1.0,inf,"host,"
+41,url/src/parser.rs,502,1,0,0,2,1.0,1.0,inf,"port,"
+42,url/src/parser.rs,503,1,0,0,2,1.0,1.0,inf,"path_start,"
+43,url/src/parser.rs,504,1,0,0,2,1.0,1.0,inf,"remaining,"
+44,url/src/parser.rs,506,1,0,0,2,1.0,1.0,inf,}
+45,url/src/parser.rs,1033,1,0,0,2,1.0,1.0,inf,let host = Host::parse_opaque(host_str)?;
+46,url/src/parser.rs,1034,1,0,0,2,1.0,1.0,inf,"return Ok((host, input));"
+47,url/src/parser.rs,1196,1,0,0,2,1.0,1.0,inf,match c {
+48,url/src/parser.rs,1197,1,0,0,2,1.0,1.0,inf,'/' if self.context != Context::PathSegmentSetter => {
+49,url/src/parser.rs,1198,1,0,0,2,1.0,1.0,inf,self.serialization.push(c);
+50,url/src/parser.rs,1199,1,0,0,2,1.0,1.0,inf,ends_with_slash = true;
+51,url/src/parser.rs,1200,1,0,0,2,1.0,1.0,inf,break;
+52,url/src/parser.rs,1202,1,0,0,2,1.0,1.0,inf,'\\' if self.context != Context::PathSegmentSetter
+53,url/src/parser.rs,1203,1,0,0,2,1.0,1.0,inf,&& scheme_type.is_special() =>
+54,url/src/parser.rs,1232,1,0,0,2,1.0,1.0,inf,self.serialization[segment_start..self.serialization.len() - 1].to_owned()
+55,url/src/parser.rs,1258,1,0,0,2,1.0,1.0,inf,self.serialization.truncate(segment_start);
+56,url/src/parser.rs,1259,1,0,0,2,1.0,1.0,inf,if !self.serialization.ends_with('/') {
+57,url/src/parser.rs,1261,1,0,0,2,1.0,1.0,inf,}
+58,url/src/parser.rs,1286,1,0,0,2,1.0,1.0,inf,}
+59,url/src/quirks.rs,157,1,0,0,2,1.0,1.0,inf,"pub fn set_hostname(url: &mut Url, new_hostname: &str) -> Result<(), ()> {"
+60,url/src/quirks.rs,158,1,0,0,2,1.0,1.0,inf,if url.cannot_be_a_base() {
+61,url/src/quirks.rs,160,1,0,0,2,1.0,1.0,inf,}
+62,url/src/quirks.rs,162,1,0,0,2,1.0,1.0,inf,let input = Input::no_trim(new_hostname);
+63,url/src/quirks.rs,163,1,0,0,2,1.0,1.0,inf,let scheme_type = SchemeType::from(url.scheme());
+64,url/src/quirks.rs,164,1,0,0,2,1.0,1.0,inf,if scheme_type == SchemeType::File && new_hostname.is_empty() {
+65,url/src/quirks.rs,167,1,0,0,2,1.0,1.0,inf,}
+66,url/src/quirks.rs,169,1,0,0,2,1.0,1.0,inf,"if let Ok((host, _remaining)) = Parser::parse_host(input, scheme_type) {"
+67,url/src/quirks.rs,170,1,0,0,2,1.0,1.0,inf,if let Host::Domain(h) = &host {
+68,url/src/quirks.rs,171,1,0,0,2,1.0,1.0,inf,if h.is_empty() {
+69,url/src/quirks.rs,173,1,0,0,2,1.0,1.0,inf,if SchemeType::from(url.scheme()) == SchemeType::SpecialNotFile
+70,url/src/quirks.rs,175,1,0,0,2,1.0,1.0,inf,||!port(&url).is_empty()
+71,url/src/quirks.rs,177,1,0,0,2,1.0,1.0,inf,|| !url.username().is_empty()
+72,url/src/quirks.rs,180,1,0,0,2,1.0,1.0,inf,return Err(());
+73,url/src/quirks.rs,189,1,0,0,2,1.0,1.0,inf,}
+74,url/src/quirks.rs,193,1,0,0,2,1.0,1.0,inf,pub fn port(url: &Url) -> &str {
+75,url/src/quirks.rs,194,1,0,0,2,1.0,1.0,inf,&url[Position::BeforePort..Position::AfterPort]
+76,url/src/quirks.rs,195,1,0,0,2,1.0,1.0,inf,}
+77,url/src/slicing.rs,35,1,0,0,2,1.0,1.0,inf,"fn index(&self, range: Range<Position>) -> &str {"
+78,url/src/slicing.rs,36,1,0,0,2,1.0,1.0,inf,&self.serialization[self.index(range.start)..self.index(range.end)]
+79,url/src/slicing.rs,37,1,0,0,2,1.0,1.0,inf,}
+80,url/src/slicing.rs,102,1,0,0,2,1.0,1.0,inf,"fn index(&self, position: Position) -> usize {"
+81,url/src/slicing.rs,103,1,0,0,2,1.0,1.0,inf,match position {
+82,url/src/slicing.rs,144,1,0,0,2,1.0,1.0,inf,if self.port.is_some() {
+83,url/src/slicing.rs,148,1,0,0,2,1.0,1.0,inf,self.host_end as usize
+84,url/src/slicing.rs,152,1,0,0,2,1.0,1.0,inf,"Position::AfterPort => self.path_start as usize,"
+85,url/src/slicing.rs,186,1,0,0,2,1.0,1.0,inf,}
+86,url/src/lib.rs,644,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,pub fn scheme(&self) -> &str {
+87,url/src/lib.rs,645,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,self.slice(..self.scheme_end)
+88,url/src/lib.rs,646,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+89,url/src/lib.rs,705,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,pub fn cannot_be_a_base(&self) -> bool {
+90,url/src/lib.rs,706,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,!self.slice(self.scheme_end + 1..).starts_with('/')
+91,url/src/lib.rs,707,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+92,url/src/lib.rs,731,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,pub fn username(&self) -> &str {
+93,url/src/lib.rs,732,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,if self.has_authority() {
+94,url/src/lib.rs,733,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"self.slice(self.scheme_end + (""://"".len() as u32)..self.username_end)"
+95,url/src/lib.rs,737,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+96,url/src/lib.rs,2445,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,"fn slice_of<'a>(&self, s: &'a str) -> &'a str {"
+97,url/src/lib.rs,2446,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,&s[..self.end as usize]
+98,url/src/lib.rs,2447,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+99,url/src/lib.rs,239,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn parse(self, input: &str) -> Result<Url, crate::ParseError> {"
+100,url/src/lib.rs,240,1,2,0,0,0.5,0.5773502691896258,0.5,Parser {
+101,url/src/lib.rs,241,1,2,0,0,0.5,0.5773502691896258,0.5,"serialization: String::with_capacity(input.len()),"
+102,url/src/lib.rs,242,1,2,0,0,0.5,0.5773502691896258,0.5,"base_url: self.base_url,"
+103,url/src/lib.rs,243,1,2,0,0,0.5,0.5773502691896258,0.5,"query_encoding_override: self.encoding_override,"
+104,url/src/lib.rs,247,1,2,0,0,0.5,0.5773502691896258,0.5,.parse_url(input)
+105,url/src/lib.rs,248,1,2,0,0,0.5,0.5773502691896258,0.5,}
+106,url/src/lib.rs,274,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn parse(input: &str) -> Result<Url, crate::ParseError> {"
+107,url/src/lib.rs,275,1,2,0,0,0.5,0.5773502691896258,0.5,Url::options().parse(input)
+108,url/src/lib.rs,276,1,2,0,0,0.5,0.5773502691896258,0.5,}
+109,url/src/lib.rs,375,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn options<'a>() -> ParseOptions<'a> {
+110,url/src/lib.rs,376,1,2,0,0,0.5,0.5773502691896258,0.5,ParseOptions {
+111,url/src/lib.rs,377,1,2,0,0,0.5,0.5773502691896258,0.5,"base_url: None,"
+112,url/src/lib.rs,381,1,2,0,0,0.5,0.5773502691896258,0.5,}
+113,url/src/lib.rs,674,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn has_authority(&self) -> bool {
+114,url/src/lib.rs,675,1,2,0,0,0.5,0.5773502691896258,0.5,debug_assert!(self.byte_at(self.scheme_end) == b':');
+115,url/src/lib.rs,676,1,2,0,0,0.5,0.5773502691896258,0.5,"self.slice(self.scheme_end..).starts_with(""://"")"
+116,url/src/lib.rs,677,1,2,0,0,0.5,0.5773502691896258,0.5,}
+117,url/src/lib.rs,2324,1,2,0,0,0.5,0.5773502691896258,0.5,"fn slice<R>(&self, range: R) -> &str"
+118,url/src/lib.rs,2328,1,2,0,0,0.5,0.5773502691896258,0.5,range.slice_of(&self.serialization)
+119,url/src/lib.rs,2329,1,2,0,0,0.5,0.5773502691896258,0.5,}
+120,url/src/lib.rs,2332,1,2,0,0,0.5,0.5773502691896258,0.5,"fn byte_at(&self, i: u32) -> u8 {"
+121,url/src/lib.rs,2333,1,2,0,0,0.5,0.5773502691896258,0.5,self.serialization.as_bytes()[i as usize]
+122,url/src/lib.rs,2334,1,2,0,0,0.5,0.5773502691896258,0.5,}
+123,url/src/lib.rs,2431,1,2,0,0,0.5,0.5773502691896258,0.5,"fn slice_of<'a>(&self, s: &'a str) -> &'a str {"
+124,url/src/lib.rs,2432,1,2,0,0,0.5,0.5773502691896258,0.5,&s[self.start as usize..self.end as usize]
+125,url/src/lib.rs,2433,1,2,0,0,0.5,0.5773502691896258,0.5,}
+126,url/src/lib.rs,2438,1,2,0,0,0.5,0.5773502691896258,0.5,"fn slice_of<'a>(&self, s: &'a str) -> &'a str {"
+127,url/src/lib.rs,2439,1,2,0,0,0.5,0.5773502691896258,0.5,&s[self.start as usize..]
+128,url/src/lib.rs,2440,1,2,0,0,0.5,0.5773502691896258,0.5,}
+129,url/src/parser.rs,165,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn is_special(&self) -> bool {
+130,url/src/parser.rs,166,1,2,0,0,0.5,0.5773502691896258,0.5,"!matches!(*self, SchemeType::NotSpecial)"
+131,url/src/parser.rs,167,1,2,0,0,0.5,0.5773502691896258,0.5,}
+132,url/src/parser.rs,169,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn is_file(&self) -> bool {
+133,url/src/parser.rs,170,1,2,0,0,0.5,0.5773502691896258,0.5,"matches!(*self, SchemeType::File)"
+134,url/src/parser.rs,171,1,2,0,0,0.5,0.5773502691896258,0.5,}
+135,url/src/parser.rs,173,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn from(s: &str) -> Self {
+136,url/src/parser.rs,174,1,2,0,0,0.5,0.5773502691896258,0.5,match s {
+137,url/src/parser.rs,175,1,2,0,0,0.5,0.5773502691896258,0.5,"""http"" | ""https"" | ""ws"" | ""wss"" | ""ftp"" => SchemeType::SpecialNotFile,"
+138,url/src/parser.rs,179,1,2,0,0,0.5,0.5773502691896258,0.5,}
+139,url/src/parser.rs,225,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn with_log(original_input: &'i str, vfn: Option<&dyn Fn(SyntaxViolation)>) -> Self {"
+140,url/src/parser.rs,226,1,2,0,0,0.5,0.5773502691896258,0.5,let input = original_input.trim_matches(c0_control_or_space);
+141,url/src/parser.rs,227,1,2,0,0,0.5,0.5773502691896258,0.5,if let Some(vfn) = vfn {
+142,url/src/parser.rs,234,1,2,0,0,0.5,0.5773502691896258,0.5,}
+143,url/src/parser.rs,235,1,2,0,0,0.5,0.5773502691896258,0.5,Input {
+144,url/src/parser.rs,238,1,2,0,0,0.5,0.5773502691896258,0.5,}
+145,url/src/parser.rs,241,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn is_empty(&self) -> bool {
+146,url/src/parser.rs,242,1,2,0,0,0.5,0.5773502691896258,0.5,self.clone().next().is_none()
+147,url/src/parser.rs,243,1,2,0,0,0.5,0.5773502691896258,0.5,}
+148,url/src/parser.rs,246,1,2,0,0,0.5,0.5773502691896258,0.5,"fn starts_with<P: Pattern>(&self, p: P) -> bool {"
+149,url/src/parser.rs,247,1,2,0,0,0.5,0.5773502691896258,0.5,p.split_prefix(&mut self.clone())
+150,url/src/parser.rs,248,1,2,0,0,0.5,0.5773502691896258,0.5,}
+151,url/src/parser.rs,251,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn split_prefix<P: Pattern>(&self, p: P) -> Option<Self> {"
+152,url/src/parser.rs,252,1,2,0,0,0.5,0.5773502691896258,0.5,let mut remaining = self.clone();
+153,url/src/parser.rs,253,1,2,0,0,0.5,0.5773502691896258,0.5,if p.split_prefix(&mut remaining) {
+154,url/src/parser.rs,256,1,2,0,0,0.5,0.5773502691896258,0.5,None
+155,url/src/parser.rs,258,1,2,0,0,0.5,0.5773502691896258,0.5,}
+156,url/src/parser.rs,282,1,2,0,0,0.5,0.5773502691896258,0.5,"fn next_utf8(&mut self) -> Option<(char, &'i str)> {"
+157,url/src/parser.rs,284,1,2,0,0,0.5,0.5773502691896258,0.5,let utf8 = self.chars.as_str();
+158,url/src/parser.rs,285,1,2,0,0,0.5,0.5773502691896258,0.5,match self.chars.next() {
+159,url/src/parser.rs,286,1,2,0,0,0.5,0.5773502691896258,0.5,Some(c) => {
+160,url/src/parser.rs,287,1,2,0,0,0.5,0.5773502691896258,0.5,"if !matches!(c, '\t' | '\n' | '\r') {"
+161,url/src/parser.rs,288,1,2,0,0,0.5,0.5773502691896258,0.5,"return Some((c, &utf8[..c.len_utf8()]));"
+162,url/src/parser.rs,291,1,2,0,0,0.5,0.5773502691896258,0.5,"None => return None,"
+163,url/src/parser.rs,294,1,2,0,0,0.5,0.5773502691896258,0.5,}
+164,url/src/parser.rs,302,1,2,0,0,0.5,0.5773502691896258,0.5,"fn split_prefix<'i>(self, input: &mut Input<'i>) -> bool {"
+165,url/src/parser.rs,303,1,2,0,0,0.5,0.5773502691896258,0.5,input.next() == Some(self)
+166,url/src/parser.rs,304,1,2,0,0,0.5,0.5773502691896258,0.5,}
+167,url/src/parser.rs,319,1,2,0,0,0.5,0.5773502691896258,0.5,"fn split_prefix<'i>(self, input: &mut Input<'i>) -> bool {"
+168,url/src/parser.rs,320,1,2,0,0,0.5,0.5773502691896258,0.5,"input.next().map_or(false, self)"
+169,url/src/parser.rs,321,1,2,0,0,0.5,0.5773502691896258,0.5,}
+170,url/src/parser.rs,326,1,2,0,0,0.5,0.5773502691896258,0.5,fn next(&mut self) -> Option<char> {
+171,url/src/parser.rs,327,1,2,0,0,0.5,0.5773502691896258,0.5,self.chars
+172,url/src/parser.rs,329,1,2,0,0,0.5,0.5773502691896258,0.5,".find(|&c| !matches!(c, '\t' | '\n' | '\r'))"
+173,url/src/parser.rs,330,1,2,0,0,0.5,0.5773502691896258,0.5,}
+174,url/src/parser.rs,374,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn parse_url(mut self, input: &str) -> ParseResult<Url> {"
+175,url/src/parser.rs,375,1,2,0,0,0.5,0.5773502691896258,0.5,"let input = Input::with_log(input, self.violation_fn);"
+176,url/src/parser.rs,376,1,2,0,0,0.5,0.5773502691896258,0.5,if let Ok(remaining) = self.parse_scheme(input.clone()) {
+177,url/src/parser.rs,377,1,2,0,0,0.5,0.5773502691896258,0.5,return self.parse_with_scheme(remaining);
+178,url/src/parser.rs,397,1,2,0,0,0.5,0.5773502691896258,0.5,}
+179,url/src/parser.rs,399,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn parse_scheme<'i>(&mut self, mut input: Input<'i>) -> Result<Input<'i>, ()> {"
+180,url/src/parser.rs,400,1,2,0,0,0.5,0.5773502691896258,0.5,if input.is_empty() || !input.starts_with(ascii_alpha) {
+181,url/src/parser.rs,402,1,2,0,0,0.5,0.5773502691896258,0.5,}
+182,url/src/parser.rs,403,1,2,0,0,0.5,0.5773502691896258,0.5,debug_assert!(self.serialization.is_empty());
+183,url/src/parser.rs,404,1,2,0,0,0.5,0.5773502691896258,0.5,while let Some(c) = input.next() {
+184,url/src/parser.rs,405,1,2,0,0,0.5,0.5773502691896258,0.5,match c {
+185,url/src/parser.rs,406,1,2,0,0,0.5,0.5773502691896258,0.5,'a'..='z' | 'A'..='Z' | '0'..='9' | '+' | '-' | '.' => {
+186,url/src/parser.rs,407,1,2,0,0,0.5,0.5773502691896258,0.5,self.serialization.push(c.to_ascii_lowercase())
+187,url/src/parser.rs,409,1,2,0,0,0.5,0.5773502691896258,0.5,"':' => return Ok(input),"
+188,url/src/parser.rs,423,1,2,0,0,0.5,0.5773502691896258,0.5,}
+189,url/src/parser.rs,425,1,2,0,0,0.5,0.5773502691896258,0.5,"fn parse_with_scheme(mut self, input: Input<'_>) -> ParseResult<Url> {"
+190,url/src/parser.rs,427,1,2,0,0,0.5,0.5773502691896258,0.5,let scheme_end = to_u32(self.serialization.len())?;
+191,url/src/parser.rs,428,1,2,0,0,0.5,0.5773502691896258,0.5,let scheme_type = SchemeType::from(&self.serialization);
+192,url/src/parser.rs,429,1,2,0,0,0.5,0.5773502691896258,0.5,self.serialization.push(':');
+193,url/src/parser.rs,430,1,2,0,0,0.5,0.5773502691896258,0.5,match scheme_type {
+194,url/src/parser.rs,468,1,2,0,0,0.5,0.5773502691896258,0.5,}
+195,url/src/parser.rs,983,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn parse_host(
+196,url/src/parser.rs,987,1,2,0,0,0.5,0.5773502691896258,0.5,if scheme_type.is_file() {
+197,url/src/parser.rs,989,1,2,0,0,0.5,0.5773502691896258,0.5,}
+198,url/src/parser.rs,992,1,2,0,0,0.5,0.5773502691896258,0.5,let input_str = input.chars.as_str();
+199,url/src/parser.rs,993,1,2,0,0,0.5,0.5773502691896258,0.5,let mut inside_square_brackets = false;
+200,url/src/parser.rs,994,1,2,0,0,0.5,0.5773502691896258,0.5,let mut has_ignored_chars = false;
+201,url/src/parser.rs,995,1,2,0,0,0.5,0.5773502691896258,0.5,let mut non_ignored_chars = 0;
+202,url/src/parser.rs,996,1,2,0,0,0.5,0.5773502691896258,0.5,let mut bytes = 0;
+203,url/src/parser.rs,997,1,2,0,0,0.5,0.5773502691896258,0.5,for c in input_str.chars() {
+204,url/src/parser.rs,1001,1,2,0,0,0.5,0.5773502691896258,0.5,"'/' | '?' | '#' => break,"
+205,url/src/parser.rs,1020,1,2,0,0,0.5,0.5773502691896258,0.5,let host_input = input.by_ref().take(non_ignored_chars);
+206,url/src/parser.rs,1021,1,2,0,0,0.5,0.5773502691896258,0.5,if has_ignored_chars {
+207,url/src/parser.rs,1025,1,2,0,0,0.5,0.5773502691896258,0.5,for _ in host_input {}
+208,url/src/parser.rs,1026,1,2,0,0,0.5,0.5773502691896258,0.5,host_str = &input_str[..bytes]
+209,url/src/parser.rs,1029,1,2,0,0,0.5,0.5773502691896258,0.5,if scheme_type == SchemeType::SpecialNotFile && host_str.is_empty() {
+210,url/src/parser.rs,1031,1,2,0,0,0.5,0.5773502691896258,0.5,}
+211,url/src/parser.rs,1032,1,2,0,0,0.5,0.5773502691896258,0.5,if !scheme_type.is_special() {
+212,url/src/parser.rs,1038,1,2,0,0,0.5,0.5773502691896258,0.5,}
+213,url/src/parser.rs,1178,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn parse_path<'i>(
+214,url/src/parser.rs,1187,1,2,0,0,0.5,0.5773502691896258,0.5,let segment_start = self.serialization.len();
+215,url/src/parser.rs,1188,1,2,0,0,0.5,0.5773502691896258,0.5,let mut ends_with_slash = false;
+216,url/src/parser.rs,1190,1,2,0,0,0.5,0.5773502691896258,0.5,let input_before_c = input.clone();
+217,url/src/parser.rs,1191,1,2,0,0,0.5,0.5773502691896258,0.5,"let (c, utf8_c) = if let Some(x) = input.next_utf8() {"
+218,url/src/parser.rs,1192,1,2,0,0,0.5,0.5773502691896258,0.5,x
+219,url/src/parser.rs,1194,1,2,0,0,0.5,0.5773502691896258,0.5,break;
+220,url/src/parser.rs,1215,1,2,0,0,0.5,0.5773502691896258,0.5,"self.check_url_code_point(c, &input);"
+221,url/src/parser.rs,1216,1,2,0,0,0.5,0.5773502691896258,0.5,if self.context == Context::PathSegmentSetter {
+222,url/src/parser.rs,1224,1,2,0,0,0.5,0.5773502691896258,0.5,} else {
+223,url/src/parser.rs,1225,1,2,0,0,0.5,0.5773502691896258,0.5,"self.serialization.extend(utf8_percent_encode(utf8_c, PATH));"
+224,url/src/parser.rs,1231,1,2,0,0,0.5,0.5773502691896258,0.5,let before_slash_string = if ends_with_slash {
+225,url/src/parser.rs,1234,1,2,0,0,0.5,0.5773502691896258,0.5,self.serialization[segment_start..self.serialization.len()].to_owned()
+226,url/src/parser.rs,1236,1,2,0,0,0.5,0.5773502691896258,0.5,let segment_before_slash: &str = &before_slash_string;
+227,url/src/parser.rs,1237,1,2,0,0,0.5,0.5773502691896258,0.5,match segment_before_slash {
+228,url/src/parser.rs,1239,1,2,0,0,0.5,0.5773502691896258,0.5,""".."" | ""%2e%2e"" | ""%2e%2E"" | ""%2E%2e"" | ""%2E%2E"" | ""%2e."" | ""%2E."" | "".%2e"""
+229,url/src/parser.rs,1240,1,2,0,0,0.5,0.5773502691896258,0.5,"| "".%2E"" => {"
+230,url/src/parser.rs,1257,1,2,0,0,0.5,0.5773502691896258,0.5,"""."" | ""%2e"" | ""%2E"" => {"
+231,url/src/parser.rs,1265,1,2,0,0,0.5,0.5773502691896258,0.5,if scheme_type.is_file() && is_windows_drive_letter(segment_before_slash) {
+232,url/src/parser.rs,1281,1,2,0,0,0.5,0.5773502691896258,0.5,}
+233,url/src/parser.rs,1284,1,2,0,0,0.5,0.5773502691896258,0.5,if !ends_with_slash {
+234,url/src/parser.rs,1285,1,2,0,0,0.5,0.5773502691896258,0.5,break;
+235,url/src/parser.rs,1288,1,2,0,0,0.5,0.5773502691896258,0.5,if scheme_type.is_file() {
+236,url/src/parser.rs,1296,1,2,0,0,0.5,0.5773502691896258,0.5,}
+237,url/src/parser.rs,1298,1,2,0,0,0.5,0.5773502691896258,0.5,input
+238,url/src/parser.rs,1299,1,2,0,0,0.5,0.5773502691896258,0.5,}
+239,url/src/parser.rs,1362,1,2,0,0,0.5,0.5773502691896258,0.5,fn with_query_and_fragment(
+240,url/src/parser.rs,1374,1,2,0,0,0.5,0.5773502691896258,0.5,"let (query_start, fragment_start) ="
+241,url/src/parser.rs,1375,1,2,0,0,0.5,0.5773502691896258,0.5,"self.parse_query_and_fragment(scheme_type, scheme_end, remaining)?;"
+242,url/src/parser.rs,1376,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(Url {
+243,url/src/parser.rs,1377,1,2,0,0,0.5,0.5773502691896258,0.5,"serialization: self.serialization,"
+244,url/src/parser.rs,1378,1,2,0,0,0.5,0.5773502691896258,0.5,"scheme_end,"
+245,url/src/parser.rs,1379,1,2,0,0,0.5,0.5773502691896258,0.5,"username_end,"
+246,url/src/parser.rs,1380,1,2,0,0,0.5,0.5773502691896258,0.5,"host_start,"
+247,url/src/parser.rs,1381,1,2,0,0,0.5,0.5773502691896258,0.5,"host_end,"
+248,url/src/parser.rs,1382,1,2,0,0,0.5,0.5773502691896258,0.5,"host,"
+249,url/src/parser.rs,1383,1,2,0,0,0.5,0.5773502691896258,0.5,"port,"
+250,url/src/parser.rs,1384,1,2,0,0,0.5,0.5773502691896258,0.5,"path_start,"
+251,url/src/parser.rs,1388,1,2,0,0,0.5,0.5773502691896258,0.5,}
+252,url/src/parser.rs,1391,1,2,0,0,0.5,0.5773502691896258,0.5,fn parse_query_and_fragment(
+253,url/src/parser.rs,1397,1,2,0,0,0.5,0.5773502691896258,0.5,let mut query_start = None;
+254,url/src/parser.rs,1398,1,2,0,0,0.5,0.5773502691896258,0.5,match input.next() {
+255,url/src/parser.rs,1410,1,2,0,0,0.5,0.5773502691896258,0.5,"None => return Ok((None, None)),"
+256,url/src/parser.rs,1418,1,2,0,0,0.5,0.5773502691896258,0.5,}
+257,url/src/parser.rs,1488,1,2,0,0,0.5,0.5773502691896258,0.5,"fn check_url_code_point(&self, c: char, input: &Input<'_>) {"
+258,url/src/parser.rs,1489,1,2,0,0,0.5,0.5773502691896258,0.5,if let Some(vfn) = self.violation_fn {
+259,url/src/parser.rs,1500,1,2,0,0,0.5,0.5773502691896258,0.5,}
+260,url/src/parser.rs,1501,1,2,0,0,0.5,0.5773502691896258,0.5,}
+261,url/src/parser.rs,1537,1,2,0,0,0.5,0.5773502691896258,0.5,fn c0_control_or_space(ch: char) -> bool {
+262,url/src/parser.rs,1538,1,2,0,0,0.5,0.5773502691896258,0.5,ch <= ' ' // U+0000 to U+0020
+263,url/src/parser.rs,1539,1,2,0,0,0.5,0.5773502691896258,0.5,}
+264,url/src/parser.rs,1549,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn ascii_alpha(ch: char) -> bool {
+265,url/src/parser.rs,1550,1,2,0,0,0.5,0.5773502691896258,0.5,"matches!(ch, 'a'..='z' | 'A'..='Z')"
+266,url/src/parser.rs,1551,1,2,0,0,0.5,0.5773502691896258,0.5,}
+267,url/src/parser.rs,1554,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn to_u32(i: usize) -> ParseResult<u32> {
+268,url/src/parser.rs,1555,1,2,0,0,0.5,0.5773502691896258,0.5,if i <= ::std::u32::MAX as usize {
+269,url/src/parser.rs,1556,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(i as u32)
+270,url/src/parser.rs,1560,1,2,0,0,0.5,0.5773502691896258,0.5,}
+271,url/src/host.rs,29,0,2,1,0,0.0,0.0,0.0,fn from(host: Host<String>) -> HostInternal {
+272,url/src/host.rs,30,0,2,1,0,0.0,0.0,0.0,match host {
+273,url/src/host.rs,31,0,2,1,0,0.0,0.0,0.0,"Host::Domain(ref s) if s.is_empty() => HostInternal::None,"
+274,url/src/host.rs,32,0,2,1,0,0.0,0.0,0.0,"Host::Domain(_) => HostInternal::Domain,"
+275,url/src/host.rs,33,0,0,1,2,0.0,0.0,0.0,"Host::Ipv4(address) => HostInternal::Ipv4(address),"
+276,url/src/host.rs,34,0,0,1,2,0.0,0.0,0.0,"Host::Ipv6(address) => HostInternal::Ipv6(address),"
+277,url/src/host.rs,36,0,2,1,0,0.0,0.0,0.0,}
+278,url/src/host.rs,64,0,0,1,2,0.0,0.0,0.0,pub fn to_owned(&self) -> Host<String> {
+279,url/src/host.rs,65,0,0,1,2,0.0,0.0,0.0,match *self {
+280,url/src/host.rs,66,0,0,1,2,0.0,0.0,0.0,"Host::Domain(domain) => Host::Domain(domain.to_owned()),"
+281,url/src/host.rs,67,0,0,1,2,0.0,0.0,0.0,"Host::Ipv4(address) => Host::Ipv4(address),"
+282,url/src/host.rs,68,0,0,1,2,0.0,0.0,0.0,"Host::Ipv6(address) => Host::Ipv6(address),"
+283,url/src/host.rs,70,0,0,1,2,0.0,0.0,0.0,}
+284,url/src/host.rs,77,0,2,1,0,0.0,0.0,0.0,"pub fn parse(input: &str) -> Result<Self, ParseError> {"
+285,url/src/host.rs,78,0,2,1,0,0.0,0.0,0.0,if input.starts_with('[') {
+286,url/src/host.rs,79,0,0,1,2,0.0,0.0,0.0,if !input.ends_with(']') {
+287,url/src/host.rs,80,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+288,url/src/host.rs,81,0,0,1,2,0.0,0.0,0.0,}
+289,url/src/host.rs,82,0,0,1,2,0.0,0.0,0.0,return parse_ipv6addr(&input[1..input.len() - 1]).map(Host::Ipv6);
+290,url/src/host.rs,83,0,2,1,0,0.0,0.0,0.0,}
+291,url/src/host.rs,84,0,2,1,0,0.0,0.0,0.0,let domain = percent_decode(input.as_bytes()).decode_utf8_lossy();
+292,url/src/host.rs,85,0,2,1,0,0.0,0.0,0.0,let domain = idna::domain_to_ascii(&domain)?;
+293,url/src/host.rs,86,0,2,1,0,0.0,0.0,0.0,if domain.is_empty() {
+294,url/src/host.rs,87,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+295,url/src/host.rs,88,0,2,1,0,0.0,0.0,0.0,}
+296,url/src/host.rs,90,0,2,1,0,0.0,0.0,0.0,let is_invalid_domain_char = |c| {
+297,url/src/host.rs,91,0,2,1,0,0.0,0.0,0.0,matches!(
+298,url/src/host.rs,92,0,2,1,0,0.0,0.0,0.0,"c,"
+299,url/src/host.rs,110,0,2,1,0,0.0,0.0,0.0,};
+300,url/src/host.rs,112,0,2,1,0,0.0,0.0,0.0,if domain.find(is_invalid_domain_char).is_some() {
+301,url/src/host.rs,113,0,0,1,2,0.0,0.0,0.0,Err(ParseError::InvalidDomainCharacter)
+302,url/src/host.rs,114,0,2,1,0,0.0,0.0,0.0,} else if let Some(address) = parse_ipv4addr(&domain)? {
+303,url/src/host.rs,115,0,0,1,2,0.0,0.0,0.0,Ok(Host::Ipv4(address))
+304,url/src/host.rs,117,0,2,1,0,0.0,0.0,0.0,Ok(Host::Domain(domain))
+305,url/src/host.rs,119,0,2,1,0,0.0,0.0,0.0,}
+306,url/src/host.rs,124,0,0,1,2,0.0,0.0,0.0,if !input.ends_with(']') {
+307,url/src/host.rs,125,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+308,url/src/host.rs,126,0,0,1,2,0.0,0.0,0.0,}
+309,url/src/host.rs,127,0,0,1,2,0.0,0.0,0.0,return parse_ipv6addr(&input[1..input.len() - 1]).map(Host::Ipv6);
+310,url/src/host.rs,131,0,0,1,2,0.0,0.0,0.0,matches!(
+311,url/src/host.rs,132,0,0,1,2,0.0,0.0,0.0,"c,"
+312,url/src/host.rs,149,0,0,1,2,0.0,0.0,0.0,};
+313,url/src/host.rs,152,0,0,1,2,0.0,0.0,0.0,Err(ParseError::InvalidDomainCharacter)
+314,url/src/host.rs,162,0,2,1,0,0.0,0.0,0.0,"fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {"
+315,url/src/host.rs,163,0,2,1,0,0.0,0.0,0.0,match *self {
+316,url/src/host.rs,164,0,2,1,0,0.0,0.0,0.0,"Host::Domain(ref domain) => domain.as_ref().fmt(f),"
+317,url/src/host.rs,165,0,0,1,2,0.0,0.0,0.0,"Host::Ipv4(ref addr) => addr.fmt(f),"
+318,url/src/host.rs,166,0,0,1,2,0.0,0.0,0.0,Host::Ipv6(ref addr) => {
+319,url/src/host.rs,167,0,0,1,2,0.0,0.0,0.0,"f.write_str(""["")?;"
+320,url/src/host.rs,168,0,0,1,2,0.0,0.0,0.0,"write_ipv6(addr, f)?;"
+321,url/src/host.rs,169,0,0,1,2,0.0,0.0,0.0,"f.write_str(""]"")"
+322,url/src/host.rs,172,0,2,1,0,0.0,0.0,0.0,}
+323,url/src/host.rs,179,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &Host<T>) -> bool {"
+324,url/src/host.rs,180,0,0,1,2,0.0,0.0,0.0,"match (self, other) {"
+325,url/src/host.rs,181,0,0,1,2,0.0,0.0,0.0,"(Host::Domain(a), Host::Domain(b)) => a == b,"
+326,url/src/host.rs,182,0,0,1,2,0.0,0.0,0.0,"(Host::Ipv4(a), Host::Ipv4(b)) => a == b,"
+327,url/src/host.rs,183,0,0,1,2,0.0,0.0,0.0,"(Host::Ipv6(a), Host::Ipv6(b)) => a == b,"
+328,url/src/host.rs,184,0,0,1,2,0.0,0.0,0.0,"(_, _) => false,"
+329,url/src/host.rs,186,0,0,1,2,0.0,0.0,0.0,}
+330,url/src/host.rs,189,0,0,1,2,0.0,0.0,0.0,"fn write_ipv6(addr: &Ipv6Addr, f: &mut Formatter<'_>) -> fmt::Result {"
+331,url/src/host.rs,190,0,0,1,2,0.0,0.0,0.0,let segments = addr.segments();
+332,url/src/host.rs,191,0,0,1,2,0.0,0.0,0.0,"let (compress_start, compress_end) = longest_zero_sequence(&segments);"
+333,url/src/host.rs,192,0,0,1,2,0.0,0.0,0.0,let mut i = 0;
+334,url/src/host.rs,193,0,0,1,2,0.0,0.0,0.0,while i < 8 {
+335,url/src/host.rs,194,0,0,1,2,0.0,0.0,0.0,if i == compress_start {
+336,url/src/host.rs,195,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+337,url/src/host.rs,196,0,0,1,2,0.0,0.0,0.0,if i == 0 {
+338,url/src/host.rs,197,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+339,url/src/host.rs,198,0,0,1,2,0.0,0.0,0.0,}
+340,url/src/host.rs,199,0,0,1,2,0.0,0.0,0.0,if compress_end < 8 {
+341,url/src/host.rs,202,0,0,1,2,0.0,0.0,0.0,break;
+342,url/src/host.rs,204,0,0,1,2,0.0,0.0,0.0,}
+343,url/src/host.rs,205,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{:x}"", segments[i as usize])?;"
+344,url/src/host.rs,206,0,0,1,2,0.0,0.0,0.0,if i < 7 {
+345,url/src/host.rs,207,0,0,1,2,0.0,0.0,0.0,"f.write_str("":"")?;"
+346,url/src/host.rs,208,0,0,1,2,0.0,0.0,0.0,}
+347,url/src/host.rs,209,0,0,1,2,0.0,0.0,0.0,i += 1;
+348,url/src/host.rs,211,0,0,1,2,0.0,0.0,0.0,Ok(())
+349,url/src/host.rs,212,0,0,1,2,0.0,0.0,0.0,}
+350,url/src/host.rs,215,0,0,1,2,0.0,0.0,0.0,"fn longest_zero_sequence(pieces: &[u16; 8]) -> (isize, isize) {"
+351,url/src/host.rs,216,0,0,1,2,0.0,0.0,0.0,let mut longest = -1;
+352,url/src/host.rs,217,0,0,1,2,0.0,0.0,0.0,let mut longest_length = -1;
+353,url/src/host.rs,218,0,0,1,2,0.0,0.0,0.0,let mut start = -1;
+354,url/src/host.rs,230,0,0,1,2,0.0,0.0,0.0,for i in 0..8 {
+355,url/src/host.rs,231,0,0,1,2,0.0,0.0,0.0,if pieces[i as usize] == 0 {
+356,url/src/host.rs,232,0,0,1,2,0.0,0.0,0.0,if start < 0 {
+357,url/src/host.rs,234,0,0,1,2,0.0,0.0,0.0,}
+358,url/src/host.rs,236,0,0,1,2,0.0,0.0,0.0,finish_sequence!(i);
+359,url/src/host.rs,237,0,0,1,2,0.0,0.0,0.0,start = -1;
+360,url/src/host.rs,240,0,0,1,2,0.0,0.0,0.0,finish_sequence!(8);
+361,url/src/host.rs,243,0,0,1,2,0.0,0.0,0.0,if longest_length < 2 {
+362,url/src/host.rs,244,0,0,1,2,0.0,0.0,0.0,"(-1, -2)"
+363,url/src/host.rs,246,0,0,1,2,0.0,0.0,0.0,"(longest, longest + longest_length)"
+364,url/src/host.rs,248,0,0,1,2,0.0,0.0,0.0,}
+365,url/src/host.rs,251,0,2,1,0,0.0,0.0,0.0,"fn parse_ipv4number(mut input: &str) -> Result<Option<u32>, ()> {"
+366,url/src/host.rs,252,0,2,1,0,0.0,0.0,0.0,let mut r = 10;
+367,url/src/host.rs,253,0,2,1,0,0.0,0.0,0.0,"if input.starts_with(""0x"") || input.starts_with(""0X"") {"
+368,url/src/host.rs,256,0,2,1,0,0.0,0.0,0.0,} else if input.len() >= 2 && input.starts_with('0') {
+369,url/src/host.rs,259,0,2,1,0,0.0,0.0,0.0,}
+370,url/src/host.rs,265,0,2,1,0,0.0,0.0,0.0,let valid_number = match r {
+371,url/src/host.rs,266,0,0,1,2,0.0,0.0,0.0,"8 => input.chars().all(|c| c >= '0' && c <= '7'),"
+372,url/src/host.rs,267,0,2,1,0,0.0,0.0,0.0,"10 => input.chars().all(|c| c >= '0' && c <= '9'),"
+373,url/src/host.rs,268,0,0,1,2,0.0,0.0,0.0,16 => input
+374,url/src/host.rs,270,0,0,1,2,0.0,0.0,0.0,".all(|c| (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')),"
+375,url/src/host.rs,271,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+376,url/src/host.rs,274,0,2,1,0,0.0,0.0,0.0,if !valid_number {
+377,url/src/host.rs,275,0,2,1,0,0.0,0.0,0.0,return Ok(None);
+378,url/src/host.rs,276,0,0,1,2,0.0,0.0,0.0,}
+379,url/src/host.rs,278,0,0,1,2,0.0,0.0,0.0,if input.is_empty() {
+380,url/src/host.rs,279,0,0,1,2,0.0,0.0,0.0,return Ok(Some(0));
+381,url/src/host.rs,280,0,0,1,2,0.0,0.0,0.0,}
+382,url/src/host.rs,281,0,0,1,2,0.0,0.0,0.0,if input.starts_with('+') {
+383,url/src/host.rs,282,0,0,1,2,0.0,0.0,0.0,return Ok(None);
+384,url/src/host.rs,283,0,0,1,2,0.0,0.0,0.0,}
+385,url/src/host.rs,284,0,0,1,2,0.0,0.0,0.0,"match u32::from_str_radix(input, r) {"
+386,url/src/host.rs,285,0,0,1,2,0.0,0.0,0.0,"Ok(number) => Ok(Some(number)),"
+387,url/src/host.rs,286,0,0,1,2,0.0,0.0,0.0,"Err(_) => Err(()),"
+388,url/src/host.rs,288,0,2,1,0,0.0,0.0,0.0,}
+389,url/src/host.rs,291,0,2,1,0,0.0,0.0,0.0,fn parse_ipv4addr(input: &str) -> ParseResult<Option<Ipv4Addr>> {
+390,url/src/host.rs,292,0,2,1,0,0.0,0.0,0.0,if input.is_empty() {
+391,url/src/host.rs,293,0,0,1,2,0.0,0.0,0.0,return Ok(None);
+392,url/src/host.rs,294,0,2,1,0,0.0,0.0,0.0,}
+393,url/src/host.rs,295,0,2,1,0,0.0,0.0,0.0,let mut parts: Vec<&str> = input.split('.').collect();
+394,url/src/host.rs,296,0,2,1,0,0.0,0.0,0.0,"if parts.last() == Some(&"""") {"
+395,url/src/host.rs,298,0,2,1,0,0.0,0.0,0.0,}
+396,url/src/host.rs,299,0,2,1,0,0.0,0.0,0.0,if parts.len() > 4 {
+397,url/src/host.rs,300,0,0,1,2,0.0,0.0,0.0,return Ok(None);
+398,url/src/host.rs,301,0,2,1,0,0.0,0.0,0.0,}
+399,url/src/host.rs,302,0,2,1,0,0.0,0.0,0.0,let mut numbers: Vec<u32> = Vec::new();
+400,url/src/host.rs,303,0,2,1,0,0.0,0.0,0.0,let mut overflow = false;
+401,url/src/host.rs,304,0,2,1,0,0.0,0.0,0.0,for part in parts {
+402,url/src/host.rs,305,0,2,1,0,0.0,0.0,0.0,"if part == """" {"
+403,url/src/host.rs,306,0,0,1,2,0.0,0.0,0.0,return Ok(None);
+404,url/src/host.rs,307,0,2,1,0,0.0,0.0,0.0,}
+405,url/src/host.rs,308,0,2,1,0,0.0,0.0,0.0,match parse_ipv4number(part) {
+406,url/src/host.rs,309,0,0,1,2,0.0,0.0,0.0,"Ok(Some(n)) => numbers.push(n),"
+407,url/src/host.rs,310,0,2,1,0,0.0,0.0,0.0,"Ok(None) => return Ok(None),"
+408,url/src/host.rs,311,0,0,1,2,0.0,0.0,0.0,"Err(()) => overflow = true,"
+409,url/src/host.rs,314,0,0,1,2,0.0,0.0,0.0,if overflow {
+410,url/src/host.rs,315,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv4Address);
+411,url/src/host.rs,316,0,0,1,2,0.0,0.0,0.0,}
+412,url/src/host.rs,317,0,0,1,2,0.0,0.0,0.0,"let mut ipv4 = numbers.pop().expect(""a non-empty list of numbers"");"
+413,url/src/host.rs,319,0,0,1,2,0.0,0.0,0.0,if ipv4 > u32::max_value() >> (8 * numbers.len() as u32) {
+414,url/src/host.rs,320,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv4Address);
+415,url/src/host.rs,321,0,0,1,2,0.0,0.0,0.0,}
+416,url/src/host.rs,322,0,0,1,2,0.0,0.0,0.0,if numbers.iter().any(|x| *x > 255) {
+417,url/src/host.rs,323,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv4Address);
+418,url/src/host.rs,324,0,0,1,2,0.0,0.0,0.0,}
+419,url/src/host.rs,325,0,0,1,2,0.0,0.0,0.0,"for (counter, n) in numbers.iter().enumerate() {"
+420,url/src/host.rs,326,0,0,1,2,0.0,0.0,0.0,ipv4 += n << (8 * (3 - counter as u32))
+421,url/src/host.rs,328,0,0,1,2,0.0,0.0,0.0,Ok(Some(Ipv4Addr::from(ipv4)))
+422,url/src/host.rs,329,0,2,1,0,0.0,0.0,0.0,}
+423,url/src/host.rs,332,0,0,1,2,0.0,0.0,0.0,fn parse_ipv6addr(input: &str) -> ParseResult<Ipv6Addr> {
+424,url/src/host.rs,333,0,0,1,2,0.0,0.0,0.0,let input = input.as_bytes();
+425,url/src/host.rs,334,0,0,1,2,0.0,0.0,0.0,let len = input.len();
+426,url/src/host.rs,335,0,0,1,2,0.0,0.0,0.0,let mut is_ip_v4 = false;
+427,url/src/host.rs,336,0,0,1,2,0.0,0.0,0.0,"let mut pieces = [0, 0, 0, 0, 0, 0, 0, 0];"
+428,url/src/host.rs,337,0,0,1,2,0.0,0.0,0.0,let mut piece_pointer = 0;
+429,url/src/host.rs,338,0,0,1,2,0.0,0.0,0.0,let mut compress_pointer = None;
+430,url/src/host.rs,339,0,0,1,2,0.0,0.0,0.0,let mut i = 0;
+431,url/src/host.rs,341,0,0,1,2,0.0,0.0,0.0,if len < 2 {
+432,url/src/host.rs,342,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+433,url/src/host.rs,343,0,0,1,2,0.0,0.0,0.0,}
+434,url/src/host.rs,345,0,0,1,2,0.0,0.0,0.0,if input[0] == b':' {
+435,url/src/host.rs,346,0,0,1,2,0.0,0.0,0.0,if input[1] != b':' {
+436,url/src/host.rs,347,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+437,url/src/host.rs,348,0,0,1,2,0.0,0.0,0.0,}
+438,url/src/host.rs,349,0,0,1,2,0.0,0.0,0.0,i = 2;
+439,url/src/host.rs,350,0,0,1,2,0.0,0.0,0.0,piece_pointer = 1;
+440,url/src/host.rs,351,0,0,1,2,0.0,0.0,0.0,compress_pointer = Some(1);
+441,url/src/host.rs,352,0,0,1,2,0.0,0.0,0.0,}
+442,url/src/host.rs,354,0,0,1,2,0.0,0.0,0.0,while i < len {
+443,url/src/host.rs,355,0,0,1,2,0.0,0.0,0.0,if piece_pointer == 8 {
+444,url/src/host.rs,356,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+445,url/src/host.rs,357,0,0,1,2,0.0,0.0,0.0,}
+446,url/src/host.rs,358,0,0,1,2,0.0,0.0,0.0,if input[i] == b':' {
+447,url/src/host.rs,359,0,0,1,2,0.0,0.0,0.0,if compress_pointer.is_some() {
+448,url/src/host.rs,360,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+449,url/src/host.rs,361,0,0,1,2,0.0,0.0,0.0,}
+450,url/src/host.rs,362,0,0,1,2,0.0,0.0,0.0,i += 1;
+451,url/src/host.rs,363,0,0,1,2,0.0,0.0,0.0,piece_pointer += 1;
+452,url/src/host.rs,364,0,0,1,2,0.0,0.0,0.0,compress_pointer = Some(piece_pointer);
+453,url/src/host.rs,365,0,0,1,2,0.0,0.0,0.0,continue;
+454,url/src/host.rs,366,0,0,1,2,0.0,0.0,0.0,}
+455,url/src/host.rs,367,0,0,1,2,0.0,0.0,0.0,let start = i;
+456,url/src/host.rs,368,0,0,1,2,0.0,0.0,0.0,"let end = cmp::min(len, start + 4);"
+457,url/src/host.rs,369,0,0,1,2,0.0,0.0,0.0,let mut value = 0u16;
+458,url/src/host.rs,370,0,0,1,2,0.0,0.0,0.0,while i < end {
+459,url/src/host.rs,371,0,0,1,2,0.0,0.0,0.0,match (input[i] as char).to_digit(16) {
+460,url/src/host.rs,372,0,0,1,2,0.0,0.0,0.0,Some(digit) => {
+461,url/src/host.rs,376,0,0,1,2,0.0,0.0,0.0,"None => break,"
+462,url/src/host.rs,379,0,0,1,2,0.0,0.0,0.0,if i < len {
+463,url/src/host.rs,380,0,0,1,2,0.0,0.0,0.0,match input[i] {
+464,url/src/host.rs,382,0,0,1,2,0.0,0.0,0.0,if i == start {
+465,url/src/host.rs,383,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+466,url/src/host.rs,384,0,0,1,2,0.0,0.0,0.0,}
+467,url/src/host.rs,385,0,0,1,2,0.0,0.0,0.0,i = start;
+468,url/src/host.rs,386,0,0,1,2,0.0,0.0,0.0,if piece_pointer > 6 {
+469,url/src/host.rs,387,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+470,url/src/host.rs,388,0,0,1,2,0.0,0.0,0.0,}
+471,url/src/host.rs,389,0,0,1,2,0.0,0.0,0.0,is_ip_v4 = true;
+472,url/src/host.rs,392,0,0,1,2,0.0,0.0,0.0,i += 1;
+473,url/src/host.rs,393,0,0,1,2,0.0,0.0,0.0,if i == len {
+474,url/src/host.rs,394,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+475,url/src/host.rs,395,0,0,1,2,0.0,0.0,0.0,}
+476,url/src/host.rs,397,0,0,1,2,0.0,0.0,0.0,"_ => return Err(ParseError::InvalidIpv6Address),"
+477,url/src/host.rs,399,0,0,1,2,0.0,0.0,0.0,}
+478,url/src/host.rs,400,0,0,1,2,0.0,0.0,0.0,if is_ip_v4 {
+479,url/src/host.rs,401,0,0,1,2,0.0,0.0,0.0,break;
+480,url/src/host.rs,402,0,0,1,2,0.0,0.0,0.0,}
+481,url/src/host.rs,403,0,0,1,2,0.0,0.0,0.0,pieces[piece_pointer] = value;
+482,url/src/host.rs,404,0,0,1,2,0.0,0.0,0.0,piece_pointer += 1;
+483,url/src/host.rs,407,0,0,1,2,0.0,0.0,0.0,if is_ip_v4 {
+484,url/src/host.rs,408,0,0,1,2,0.0,0.0,0.0,if piece_pointer > 6 {
+485,url/src/host.rs,409,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+486,url/src/host.rs,410,0,0,1,2,0.0,0.0,0.0,}
+487,url/src/host.rs,411,0,0,1,2,0.0,0.0,0.0,let mut numbers_seen = 0;
+488,url/src/host.rs,412,0,0,1,2,0.0,0.0,0.0,while i < len {
+489,url/src/host.rs,413,0,0,1,2,0.0,0.0,0.0,if numbers_seen > 0 {
+490,url/src/host.rs,414,0,0,1,2,0.0,0.0,0.0,if numbers_seen < 4 && (i < len && input[i] == b'.') {
+491,url/src/host.rs,415,0,0,1,2,0.0,0.0,0.0,i += 1
+492,url/src/host.rs,417,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+493,url/src/host.rs,419,0,0,1,2,0.0,0.0,0.0,}
+494,url/src/host.rs,421,0,0,1,2,0.0,0.0,0.0,let mut ipv4_piece = None;
+495,url/src/host.rs,422,0,0,1,2,0.0,0.0,0.0,while i < len {
+496,url/src/host.rs,423,0,0,1,2,0.0,0.0,0.0,let digit = match input[i] {
+497,url/src/host.rs,424,0,0,1,2,0.0,0.0,0.0,"c @ b'0'..=b'9' => c - b'0',"
+498,url/src/host.rs,425,0,0,1,2,0.0,0.0,0.0,"_ => break,"
+499,url/src/host.rs,427,0,0,1,2,0.0,0.0,0.0,match ipv4_piece {
+500,url/src/host.rs,428,0,0,1,2,0.0,0.0,0.0,"None => ipv4_piece = Some(digit as u16),"
+501,url/src/host.rs,429,0,0,1,2,0.0,0.0,0.0,"Some(0) => return Err(ParseError::InvalidIpv6Address), // No leading zero"
+502,url/src/host.rs,430,0,0,1,2,0.0,0.0,0.0,Some(ref mut v) => {
+503,url/src/host.rs,431,0,0,1,2,0.0,0.0,0.0,*v = *v * 10 + digit as u16;
+504,url/src/host.rs,432,0,0,1,2,0.0,0.0,0.0,if *v > 255 {
+505,url/src/host.rs,433,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+506,url/src/host.rs,434,0,0,1,2,0.0,0.0,0.0,}
+507,url/src/host.rs,437,0,0,1,2,0.0,0.0,0.0,i += 1;
+508,url/src/host.rs,440,0,0,1,2,0.0,0.0,0.0,pieces[piece_pointer] = if let Some(v) = ipv4_piece {
+509,url/src/host.rs,441,0,0,1,2,0.0,0.0,0.0,pieces[piece_pointer] * 0x100 + v
+510,url/src/host.rs,443,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+511,url/src/host.rs,445,0,0,1,2,0.0,0.0,0.0,numbers_seen += 1;
+512,url/src/host.rs,447,0,0,1,2,0.0,0.0,0.0,if numbers_seen == 2 || numbers_seen == 4 {
+513,url/src/host.rs,449,0,0,1,2,0.0,0.0,0.0,}
+514,url/src/host.rs,452,0,0,1,2,0.0,0.0,0.0,if numbers_seen != 4 {
+515,url/src/host.rs,453,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+516,url/src/host.rs,454,0,0,1,2,0.0,0.0,0.0,}
+517,url/src/host.rs,455,0,0,1,2,0.0,0.0,0.0,}
+518,url/src/host.rs,457,0,0,1,2,0.0,0.0,0.0,if i < len {
+519,url/src/host.rs,458,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+520,url/src/host.rs,459,0,0,1,2,0.0,0.0,0.0,}
+521,url/src/host.rs,461,0,0,1,2,0.0,0.0,0.0,match compress_pointer {
+522,url/src/host.rs,462,0,0,1,2,0.0,0.0,0.0,Some(compress_pointer) => {
+523,url/src/host.rs,463,0,0,1,2,0.0,0.0,0.0,let mut swaps = piece_pointer - compress_pointer;
+524,url/src/host.rs,464,0,0,1,2,0.0,0.0,0.0,piece_pointer = 7;
+525,url/src/host.rs,465,0,0,1,2,0.0,0.0,0.0,while swaps > 0 {
+526,url/src/host.rs,466,0,0,1,2,0.0,0.0,0.0,"pieces.swap(piece_pointer, compress_pointer + swaps - 1);"
+527,url/src/host.rs,472,0,0,1,2,0.0,0.0,0.0,if piece_pointer != 8 {
+528,url/src/host.rs,473,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidIpv6Address);
+529,url/src/host.rs,474,0,0,1,2,0.0,0.0,0.0,}
+530,url/src/host.rs,477,0,0,1,2,0.0,0.0,0.0,Ok(Ipv6Addr::new(
+531,url/src/host.rs,478,0,0,1,2,0.0,0.0,0.0,"pieces[0], pieces[1], pieces[2], pieces[3], pieces[4], pieces[5], pieces[6], pieces[7],"
+532,url/src/host.rs,480,0,0,1,2,0.0,0.0,0.0,}
+533,url/src/lib.rs,199,0,0,1,2,0.0,0.0,0.0,"pub fn base_url(mut self, new: Option<&'a Url>) -> Self {"
+534,url/src/lib.rs,200,0,0,1,2,0.0,0.0,0.0,self.base_url = new;
+535,url/src/lib.rs,201,0,0,1,2,0.0,0.0,0.0,self
+536,url/src/lib.rs,202,0,0,1,2,0.0,0.0,0.0,}
+537,url/src/lib.rs,206,0,0,1,2,0.0,0.0,0.0,"pub fn encoding_override(mut self, new: EncodingOverride<'a>) -> Self {"
+538,url/src/lib.rs,207,0,0,1,2,0.0,0.0,0.0,self.encoding_override = new;
+539,url/src/lib.rs,208,0,0,1,2,0.0,0.0,0.0,self
+540,url/src/lib.rs,209,0,0,1,2,0.0,0.0,0.0,}
+541,url/src/lib.rs,233,0,0,1,2,0.0,0.0,0.0,"pub fn syntax_violation_callback(mut self, new: Option<&'a dyn Fn(SyntaxViolation)>) -> Self {"
+542,url/src/lib.rs,234,0,0,1,2,0.0,0.0,0.0,self.violation_fn = new;
+543,url/src/lib.rs,235,0,0,1,2,0.0,0.0,0.0,self
+544,url/src/lib.rs,236,0,0,1,2,0.0,0.0,0.0,}
+545,url/src/lib.rs,304,0,0,1,2,0.0,0.0,0.0,"pub fn parse_with_params<I, K, V>(input: &str, iter: I) -> Result<Url, crate::ParseError>"
+546,url/src/lib.rs,311,0,0,1,2,0.0,0.0,0.0,let mut url = Url::options().parse(input);
+547,url/src/lib.rs,313,0,0,1,2,0.0,0.0,0.0,if let Ok(ref mut url) = url {
+548,url/src/lib.rs,314,0,0,1,2,0.0,0.0,0.0,url.query_pairs_mut().extend_pairs(iter);
+549,url/src/lib.rs,315,0,0,1,2,0.0,0.0,0.0,}
+550,url/src/lib.rs,317,0,0,1,2,0.0,0.0,0.0,url
+551,url/src/lib.rs,318,0,0,1,2,0.0,0.0,0.0,}
+552,url/src/lib.rs,352,0,0,1,2,0.0,0.0,0.0,"pub fn join(&self, input: &str) -> Result<Url, crate::ParseError> {"
+553,url/src/lib.rs,353,0,0,1,2,0.0,0.0,0.0,Url::options().base_url(Some(self)).parse(input)
+554,url/src/lib.rs,354,0,0,1,2,0.0,0.0,0.0,}
+555,url/src/lib.rs,402,0,0,1,2,0.0,0.0,0.0,pub fn as_str(&self) -> &str {
+556,url/src/lib.rs,403,0,0,1,2,0.0,0.0,0.0,&self.serialization
+557,url/src/lib.rs,404,0,0,1,2,0.0,0.0,0.0,}
+558,url/src/lib.rs,425,0,0,1,2,0.0,0.0,0.0,pub fn into_string(self) -> String {
+559,url/src/lib.rs,426,0,0,1,2,0.0,0.0,0.0,self.serialization
+560,url/src/lib.rs,427,0,0,1,2,0.0,0.0,0.0,}
+561,url/src/lib.rs,435,0,0,1,2,0.0,0.0,0.0,"pub fn check_invariants(&self) -> Result<(), String> {"
+562,url/src/lib.rs,462,0,0,1,2,0.0,0.0,0.0,assert!(self.scheme_end >= 1);
+563,url/src/lib.rs,463,0,0,1,2,0.0,0.0,0.0,"assert!(matches!(self.byte_at(0), b'a'..=b'z' | b'A'..=b'Z'));"
+564,url/src/lib.rs,464,0,0,1,2,0.0,0.0,0.0,assert!(self
+565,url/src/lib.rs,467,0,0,1,2,0.0,0.0,0.0,".all(|c| matches!(c, 'a'..='z' | 'A'..='Z' | '0'..='9' | '+' | '-' | '.')));"
+566,url/src/lib.rs,468,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.byte_at(self.scheme_end), b':');"
+567,url/src/lib.rs,470,0,0,1,2,0.0,0.0,0.0,"if self.slice(self.scheme_end + 1..).starts_with(""//"") {"
+568,url/src/lib.rs,472,0,0,1,2,0.0,0.0,0.0,if self.username_end != self.serialization.len() as u32 {
+569,url/src/lib.rs,473,0,0,1,2,0.0,0.0,0.0,match self.byte_at(self.username_end) {
+570,url/src/lib.rs,475,0,0,1,2,0.0,0.0,0.0,assert!(self.host_start >= self.username_end + 2);
+571,url/src/lib.rs,476,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.byte_at(self.host_start - 1), b'@');"
+572,url/src/lib.rs,478,0,0,1,2,0.0,0.0,0.0,"b'@' => assert!(self.host_start == self.username_end + 1),"
+573,url/src/lib.rs,479,0,0,1,2,0.0,0.0,0.0,"_ => assert_eq!(self.username_end, self.scheme_end + 3),"
+574,url/src/lib.rs,481,0,0,1,2,0.0,0.0,0.0,}
+575,url/src/lib.rs,482,0,0,1,2,0.0,0.0,0.0,assert!(self.host_start >= self.username_end);
+576,url/src/lib.rs,483,0,0,1,2,0.0,0.0,0.0,assert!(self.host_end >= self.host_start);
+577,url/src/lib.rs,484,0,0,1,2,0.0,0.0,0.0,let host_str = self.slice(self.host_start..self.host_end);
+578,url/src/lib.rs,485,0,0,1,2,0.0,0.0,0.0,match self.host {
+579,url/src/lib.rs,486,0,0,1,2,0.0,0.0,0.0,"HostInternal::None => assert_eq!(host_str, """"),"
+580,url/src/lib.rs,487,0,0,1,2,0.0,0.0,0.0,"HostInternal::Ipv4(address) => assert_eq!(host_str, address.to_string()),"
+581,url/src/lib.rs,488,0,0,1,2,0.0,0.0,0.0,HostInternal::Ipv6(address) => {
+582,url/src/lib.rs,489,0,0,1,2,0.0,0.0,0.0,let h: Host<String> = Host::Ipv6(address);
+583,url/src/lib.rs,490,0,0,1,2,0.0,0.0,0.0,"assert_eq!(host_str, h.to_string())"
+584,url/src/lib.rs,493,0,0,1,2,0.0,0.0,0.0,if SchemeType::from(self.scheme()).is_special() {
+585,url/src/lib.rs,494,0,0,1,2,0.0,0.0,0.0,assert!(!host_str.is_empty())
+586,url/src/lib.rs,495,0,0,1,2,0.0,0.0,0.0,}
+587,url/src/lib.rs,498,0,0,1,2,0.0,0.0,0.0,if self.path_start == self.host_end {
+588,url/src/lib.rs,499,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.port, None);"
+589,url/src/lib.rs,501,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.byte_at(self.host_end), b':');"
+590,url/src/lib.rs,502,0,0,1,2,0.0,0.0,0.0,let port_str = self.slice(self.host_end + 1..self.path_start);
+591,url/src/lib.rs,503,0,0,1,2,0.0,0.0,0.0,assert_eq!(
+592,url/src/lib.rs,504,0,0,1,2,0.0,0.0,0.0,"self.port,"
+593,url/src/lib.rs,505,0,0,1,2,0.0,0.0,0.0,"Some(port_str.parse::<u16>().expect(""Couldn't parse port?""))"
+594,url/src/lib.rs,508,0,0,1,2,0.0,0.0,0.0,assert!(
+595,url/src/lib.rs,509,0,0,1,2,0.0,0.0,0.0,self.path_start as usize == self.serialization.len()
+596,url/src/lib.rs,510,0,0,1,2,0.0,0.0,0.0,"|| matches!(self.byte_at(self.path_start), b'/' | b'#' | b'?')"
+597,url/src/lib.rs,514,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.username_end, self.scheme_end + 1);"
+598,url/src/lib.rs,515,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.host_start, self.scheme_end + 1);"
+599,url/src/lib.rs,516,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.host_end, self.scheme_end + 1);"
+600,url/src/lib.rs,517,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.host, HostInternal::None);"
+601,url/src/lib.rs,518,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.port, None);"
+602,url/src/lib.rs,519,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.path_start, self.scheme_end + 1);"
+603,url/src/lib.rs,521,0,0,1,2,0.0,0.0,0.0,if let Some(start) = self.query_start {
+604,url/src/lib.rs,522,0,0,1,2,0.0,0.0,0.0,assert!(start >= self.path_start);
+605,url/src/lib.rs,523,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.byte_at(start), b'?');"
+606,url/src/lib.rs,524,0,0,1,2,0.0,0.0,0.0,}
+607,url/src/lib.rs,525,0,0,1,2,0.0,0.0,0.0,if let Some(start) = self.fragment_start {
+608,url/src/lib.rs,526,0,0,1,2,0.0,0.0,0.0,assert!(start >= self.path_start);
+609,url/src/lib.rs,527,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.byte_at(start), b'#');"
+610,url/src/lib.rs,528,0,0,1,2,0.0,0.0,0.0,}
+611,url/src/lib.rs,529,0,0,1,2,0.0,0.0,0.0,"if let (Some(query_start), Some(fragment_start)) = (self.query_start, self.fragment_start) {"
+612,url/src/lib.rs,530,0,0,1,2,0.0,0.0,0.0,assert!(fragment_start > query_start);
+613,url/src/lib.rs,531,0,0,1,2,0.0,0.0,0.0,}
+614,url/src/lib.rs,533,0,0,1,2,0.0,0.0,0.0,"let other = Url::parse(self.as_str()).expect(""Failed to parse myself?"");"
+615,url/src/lib.rs,534,0,0,1,2,0.0,0.0,0.0,"assert_eq!(&self.serialization, &other.serialization);"
+616,url/src/lib.rs,535,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.scheme_end, other.scheme_end);"
+617,url/src/lib.rs,536,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.username_end, other.username_end);"
+618,url/src/lib.rs,537,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.host_start, other.host_start);"
+619,url/src/lib.rs,538,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.host_end, other.host_end);"
+620,url/src/lib.rs,539,0,0,1,2,0.0,0.0,0.0,assert!(
+621,url/src/lib.rs,540,0,0,1,2,0.0,0.0,0.0,self.host == other.host ||
+622,url/src/lib.rs,543,0,0,1,2,0.0,0.0,0.0,"(self.host_str(), other.host_str()) == (None, Some(""""))"
+623,url/src/lib.rs,545,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.port, other.port);"
+624,url/src/lib.rs,546,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.path_start, other.path_start);"
+625,url/src/lib.rs,547,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.query_start, other.query_start);"
+626,url/src/lib.rs,548,0,0,1,2,0.0,0.0,0.0,"assert_eq!(self.fragment_start, other.fragment_start);"
+627,url/src/lib.rs,549,0,0,1,2,0.0,0.0,0.0,Ok(())
+628,url/src/lib.rs,550,0,0,1,2,0.0,0.0,0.0,}
+629,url/src/lib.rs,624,0,0,1,2,0.0,0.0,0.0,pub fn origin(&self) -> Origin {
+630,url/src/lib.rs,625,0,0,1,2,0.0,0.0,0.0,origin::url_origin(self)
+631,url/src/lib.rs,626,0,0,1,2,0.0,0.0,0.0,}
+632,url/src/lib.rs,735,0,0,1,2,0.0,0.0,0.0,""""""
+633,url/src/lib.rs,763,0,0,1,2,0.0,0.0,0.0,pub fn password(&self) -> Option<&str> {
+634,url/src/lib.rs,766,0,0,1,2,0.0,0.0,0.0,if self.has_authority()
+635,url/src/lib.rs,767,0,0,1,2,0.0,0.0,0.0,&& self.username_end != self.serialization.len() as u32
+636,url/src/lib.rs,768,0,0,1,2,0.0,0.0,0.0,&& self.byte_at(self.username_end) == b':'
+637,url/src/lib.rs,770,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(self.host_start - 1) == b'@');
+638,url/src/lib.rs,771,0,0,1,2,0.0,0.0,0.0,Some(self.slice(self.username_end + 1..self.host_start - 1))
+639,url/src/lib.rs,773,0,0,1,2,0.0,0.0,0.0,None
+640,url/src/lib.rs,775,0,0,1,2,0.0,0.0,0.0,}
+641,url/src/lib.rs,798,0,1,1,1,0.0,0.0,0.0,pub fn has_host(&self) -> bool {
+642,url/src/lib.rs,799,0,1,1,1,0.0,0.0,0.0,"!matches!(self.host, HostInternal::None)"
+643,url/src/lib.rs,800,0,1,1,1,0.0,0.0,0.0,}
+644,url/src/lib.rs,834,0,1,1,1,0.0,0.0,0.0,pub fn host_str(&self) -> Option<&str> {
+645,url/src/lib.rs,835,0,1,1,1,0.0,0.0,0.0,if self.has_host() {
+646,url/src/lib.rs,836,0,1,1,1,0.0,0.0,0.0,Some(self.slice(self.host_start..self.host_end))
+647,url/src/lib.rs,838,0,0,1,2,0.0,0.0,0.0,None
+648,url/src/lib.rs,840,0,1,1,1,0.0,0.0,0.0,}
+649,url/src/lib.rs,872,0,0,1,2,0.0,0.0,0.0,pub fn host(&self) -> Option<Host<&str>> {
+650,url/src/lib.rs,873,0,0,1,2,0.0,0.0,0.0,match self.host {
+651,url/src/lib.rs,874,0,0,1,2,0.0,0.0,0.0,"HostInternal::None => None,"
+652,url/src/lib.rs,875,0,0,1,2,0.0,0.0,0.0,"HostInternal::Domain => Some(Host::Domain(self.slice(self.host_start..self.host_end))),"
+653,url/src/lib.rs,876,0,0,1,2,0.0,0.0,0.0,"HostInternal::Ipv4(address) => Some(Host::Ipv4(address)),"
+654,url/src/lib.rs,877,0,0,1,2,0.0,0.0,0.0,"HostInternal::Ipv6(address) => Some(Host::Ipv6(address)),"
+655,url/src/lib.rs,879,0,0,1,2,0.0,0.0,0.0,}
+656,url/src/lib.rs,902,0,0,1,2,0.0,0.0,0.0,pub fn domain(&self) -> Option<&str> {
+657,url/src/lib.rs,903,0,0,1,2,0.0,0.0,0.0,match self.host {
+658,url/src/lib.rs,904,0,0,1,2,0.0,0.0,0.0,"HostInternal::Domain => Some(self.slice(self.host_start..self.host_end)),"
+659,url/src/lib.rs,905,0,0,1,2,0.0,0.0,0.0,"_ => None,"
+660,url/src/lib.rs,907,0,0,1,2,0.0,0.0,0.0,}
+661,url/src/lib.rs,934,0,0,1,2,0.0,0.0,0.0,pub fn port(&self) -> Option<u16> {
+662,url/src/lib.rs,935,0,0,1,2,0.0,0.0,0.0,self.port
+663,url/src/lib.rs,936,0,0,1,2,0.0,0.0,0.0,}
+664,url/src/lib.rs,966,0,0,1,2,0.0,0.0,0.0,pub fn port_or_known_default(&self) -> Option<u16> {
+665,url/src/lib.rs,967,0,0,1,2,0.0,0.0,0.0,self.port.or_else(|| parser::default_port(self.scheme()))
+666,url/src/lib.rs,968,0,0,1,2,0.0,0.0,0.0,}
+667,url/src/lib.rs,997,0,0,1,2,0.0,0.0,0.0,pub fn socket_addrs(
+668,url/src/lib.rs,1009,0,0,1,2,0.0,0.0,0.0,"fn io_result<T>(opt: Option<T>, message: &str) -> io::Result<T> {"
+669,url/src/lib.rs,1010,0,0,1,2,0.0,0.0,0.0,"opt.ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, message))"
+670,url/src/lib.rs,1011,0,0,1,2,0.0,0.0,0.0,}
+671,url/src/lib.rs,1013,0,0,1,2,0.0,0.0,0.0,"let host = io_result(self.host(), ""No host name in the URL"")?;"
+672,url/src/lib.rs,1014,0,0,1,2,0.0,0.0,0.0,let port = io_result(
+673,url/src/lib.rs,1015,0,0,1,2,0.0,0.0,0.0,"self.port_or_known_default().or_else(default_port_number),"
+674,url/src/lib.rs,1016,0,0,1,2,0.0,0.0,0.0,"""No port number in the URL"","
+675,url/src/lib.rs,1017,0,0,1,2,0.0,0.0,0.0,)?;
+676,url/src/lib.rs,1018,0,0,1,2,0.0,0.0,0.0,Ok(match host {
+677,url/src/lib.rs,1019,0,0,1,2,0.0,0.0,0.0,"Host::Domain(domain) => (domain, port).to_socket_addrs()?.collect(),"
+678,url/src/lib.rs,1020,0,0,1,2,0.0,0.0,0.0,"Host::Ipv4(ip) => vec![(ip, port).into()],"
+679,url/src/lib.rs,1021,0,0,1,2,0.0,0.0,0.0,"Host::Ipv6(ip) => vec![(ip, port).into()],"
+680,url/src/lib.rs,1023,0,0,1,2,0.0,0.0,0.0,}
+681,url/src/lib.rs,1048,0,0,1,2,0.0,0.0,0.0,pub fn path(&self) -> &str {
+682,url/src/lib.rs,1049,0,0,1,2,0.0,0.0,0.0,"match (self.query_start, self.fragment_start) {"
+683,url/src/lib.rs,1050,0,0,1,2,0.0,0.0,0.0,"(None, None) => self.slice(self.path_start..),"
+684,url/src/lib.rs,1051,0,0,1,2,0.0,0.0,0.0,"(Some(next_component_start), _) | (None, Some(next_component_start)) => {"
+685,url/src/lib.rs,1052,0,0,1,2,0.0,0.0,0.0,self.slice(self.path_start..next_component_start)
+686,url/src/lib.rs,1055,0,0,1,2,0.0,0.0,0.0,}
+687,url/src/lib.rs,1096,0,0,1,2,0.0,0.0,0.0,"pub fn path_segments(&self) -> Option<str::Split<'_, char>> {"
+688,url/src/lib.rs,1097,0,0,1,2,0.0,0.0,0.0,let path = self.path();
+689,url/src/lib.rs,1098,0,0,1,2,0.0,0.0,0.0,if path.starts_with('/') {
+690,url/src/lib.rs,1099,0,0,1,2,0.0,0.0,0.0,Some(path[1..].split('/'))
+691,url/src/lib.rs,1101,0,0,1,2,0.0,0.0,0.0,None
+692,url/src/lib.rs,1103,0,0,1,2,0.0,0.0,0.0,}
+693,url/src/lib.rs,1129,0,0,1,2,0.0,0.0,0.0,pub fn query(&self) -> Option<&str> {
+694,url/src/lib.rs,1130,0,0,1,2,0.0,0.0,0.0,"match (self.query_start, self.fragment_start) {"
+695,url/src/lib.rs,1131,0,0,1,2,0.0,0.0,0.0,"(None, _) => None,"
+696,url/src/lib.rs,1132,0,0,1,2,0.0,0.0,0.0,"(Some(query_start), None) => {"
+697,url/src/lib.rs,1133,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(query_start) == b'?');
+698,url/src/lib.rs,1134,0,0,1,2,0.0,0.0,0.0,Some(self.slice(query_start + 1..))
+699,url/src/lib.rs,1136,0,0,1,2,0.0,0.0,0.0,"(Some(query_start), Some(fragment_start)) => {"
+700,url/src/lib.rs,1137,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(query_start) == b'?');
+701,url/src/lib.rs,1138,0,0,1,2,0.0,0.0,0.0,Some(self.slice(query_start + 1..fragment_start))
+702,url/src/lib.rs,1141,0,0,1,2,0.0,0.0,0.0,}
+703,url/src/lib.rs,1168,0,0,1,2,0.0,0.0,0.0,pub fn query_pairs(&self) -> form_urlencoded::Parse<'_> {
+704,url/src/lib.rs,1169,0,0,1,2,0.0,0.0,0.0,"form_urlencoded::parse(self.query().unwrap_or("""").as_bytes())"
+705,url/src/lib.rs,1170,0,0,1,2,0.0,0.0,0.0,}
+706,url/src/lib.rs,1204,0,0,1,2,0.0,0.0,0.0,pub fn fragment(&self) -> Option<&str> {
+707,url/src/lib.rs,1205,0,0,1,2,0.0,0.0,0.0,self.fragment_start.map(|start| {
+708,url/src/lib.rs,1206,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(start) == b'#');
+709,url/src/lib.rs,1207,0,0,1,2,0.0,0.0,0.0,self.slice(start + 1..)
+710,url/src/lib.rs,1208,0,0,1,2,0.0,0.0,0.0,})
+711,url/src/lib.rs,1209,0,0,1,2,0.0,0.0,0.0,}
+712,url/src/lib.rs,1211,0,0,1,2,0.0,0.0,0.0,"fn mutate<F: FnOnce(&mut Parser<'_>) -> R, R>(&mut self, f: F) -> R {"
+713,url/src/lib.rs,1212,0,0,1,2,0.0,0.0,0.0,"let mut parser = Parser::for_setter(mem::replace(&mut self.serialization, String::new()));"
+714,url/src/lib.rs,1213,0,0,1,2,0.0,0.0,0.0,let result = f(&mut parser);
+715,url/src/lib.rs,1214,0,0,1,2,0.0,0.0,0.0,self.serialization = parser.serialization;
+716,url/src/lib.rs,1215,0,0,1,2,0.0,0.0,0.0,result
+717,url/src/lib.rs,1216,0,0,1,2,0.0,0.0,0.0,}
+718,url/src/lib.rs,1241,0,0,1,2,0.0,0.0,0.0,"pub fn set_fragment(&mut self, fragment: Option<&str>) {"
+719,url/src/lib.rs,1243,0,0,1,2,0.0,0.0,0.0,if let Some(start) = self.fragment_start {
+720,url/src/lib.rs,1244,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(start) == b'#');
+721,url/src/lib.rs,1245,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(start as usize);
+722,url/src/lib.rs,1246,0,0,1,2,0.0,0.0,0.0,}
+723,url/src/lib.rs,1248,0,0,1,2,0.0,0.0,0.0,if let Some(input) = fragment {
+724,url/src/lib.rs,1249,0,0,1,2,0.0,0.0,0.0,self.fragment_start = Some(to_u32(self.serialization.len()).unwrap());
+725,url/src/lib.rs,1250,0,0,1,2,0.0,0.0,0.0,self.serialization.push('#');
+726,url/src/lib.rs,1251,0,0,1,2,0.0,0.0,0.0,self.mutate(|parser| parser.parse_fragment(parser::Input::no_trim(input)))
+727,url/src/lib.rs,1253,0,0,1,2,0.0,0.0,0.0,self.fragment_start = None
+728,url/src/lib.rs,1255,0,0,1,2,0.0,0.0,0.0,}
+729,url/src/lib.rs,1257,0,0,1,2,0.0,0.0,0.0,fn take_fragment(&mut self) -> Option<String> {
+730,url/src/lib.rs,1258,0,0,1,2,0.0,0.0,0.0,self.fragment_start.take().map(|start| {
+731,url/src/lib.rs,1259,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(start) == b'#');
+732,url/src/lib.rs,1260,0,0,1,2,0.0,0.0,0.0,let fragment = self.slice(start + 1..).to_owned();
+733,url/src/lib.rs,1261,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(start as usize);
+734,url/src/lib.rs,1262,0,0,1,2,0.0,0.0,0.0,fragment
+735,url/src/lib.rs,1263,0,0,1,2,0.0,0.0,0.0,})
+736,url/src/lib.rs,1264,0,0,1,2,0.0,0.0,0.0,}
+737,url/src/lib.rs,1266,0,0,1,2,0.0,0.0,0.0,"fn restore_already_parsed_fragment(&mut self, fragment: Option<String>) {"
+738,url/src/lib.rs,1267,0,0,1,2,0.0,0.0,0.0,if let Some(ref fragment) = fragment {
+739,url/src/lib.rs,1268,0,0,1,2,0.0,0.0,0.0,assert!(self.fragment_start.is_none());
+740,url/src/lib.rs,1269,0,0,1,2,0.0,0.0,0.0,self.fragment_start = Some(to_u32(self.serialization.len()).unwrap());
+741,url/src/lib.rs,1270,0,0,1,2,0.0,0.0,0.0,self.serialization.push('#');
+742,url/src/lib.rs,1271,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(fragment);
+743,url/src/lib.rs,1272,0,0,1,2,0.0,0.0,0.0,}
+744,url/src/lib.rs,1273,0,0,1,2,0.0,0.0,0.0,}
+745,url/src/lib.rs,1294,0,0,1,2,0.0,0.0,0.0,"pub fn set_query(&mut self, query: Option<&str>) {"
+746,url/src/lib.rs,1295,0,0,1,2,0.0,0.0,0.0,let fragment = self.take_fragment();
+747,url/src/lib.rs,1298,0,0,1,2,0.0,0.0,0.0,if let Some(start) = self.query_start.take() {
+748,url/src/lib.rs,1299,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(start) == b'?');
+749,url/src/lib.rs,1300,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(start as usize);
+750,url/src/lib.rs,1301,0,0,1,2,0.0,0.0,0.0,}
+751,url/src/lib.rs,1303,0,0,1,2,0.0,0.0,0.0,if let Some(input) = query {
+752,url/src/lib.rs,1304,0,0,1,2,0.0,0.0,0.0,self.query_start = Some(to_u32(self.serialization.len()).unwrap());
+753,url/src/lib.rs,1305,0,0,1,2,0.0,0.0,0.0,self.serialization.push('?');
+754,url/src/lib.rs,1306,0,0,1,2,0.0,0.0,0.0,let scheme_type = SchemeType::from(self.scheme());
+755,url/src/lib.rs,1307,0,0,1,2,0.0,0.0,0.0,let scheme_end = self.scheme_end;
+756,url/src/lib.rs,1308,0,0,1,2,0.0,0.0,0.0,self.mutate(|parser| {
+757,url/src/lib.rs,1309,0,0,1,2,0.0,0.0,0.0,let vfn = parser.violation_fn;
+758,url/src/lib.rs,1310,0,0,1,2,0.0,0.0,0.0,parser.parse_query(
+759,url/src/lib.rs,1311,0,0,1,2,0.0,0.0,0.0,"scheme_type,"
+760,url/src/lib.rs,1312,0,0,1,2,0.0,0.0,0.0,"scheme_end,"
+761,url/src/lib.rs,1313,0,0,1,2,0.0,0.0,0.0,"parser::Input::trim_tab_and_newlines(input, vfn),"
+762,url/src/lib.rs,1315,0,0,1,2,0.0,0.0,0.0,});
+763,url/src/lib.rs,1316,0,0,1,2,0.0,0.0,0.0,}
+764,url/src/lib.rs,1318,0,0,1,2,0.0,0.0,0.0,self.restore_already_parsed_fragment(fragment);
+765,url/src/lib.rs,1319,0,0,1,2,0.0,0.0,0.0,}
+766,url/src/lib.rs,1353,0,0,1,2,0.0,0.0,0.0,"pub fn query_pairs_mut(&mut self) -> form_urlencoded::Serializer<'_, UrlQuery<'_>> {"
+767,url/src/lib.rs,1354,0,0,1,2,0.0,0.0,0.0,let fragment = self.take_fragment();
+768,url/src/lib.rs,1357,0,0,1,2,0.0,0.0,0.0,if let Some(start) = self.query_start {
+769,url/src/lib.rs,1358,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(start) == b'?');
+770,url/src/lib.rs,1359,0,0,1,2,0.0,0.0,0.0,query_start = start as usize;
+771,url/src/lib.rs,1360,0,0,1,2,0.0,0.0,0.0,} else {
+772,url/src/lib.rs,1361,0,0,1,2,0.0,0.0,0.0,query_start = self.serialization.len();
+773,url/src/lib.rs,1362,0,0,1,2,0.0,0.0,0.0,self.query_start = Some(to_u32(query_start).unwrap());
+774,url/src/lib.rs,1366,0,0,1,2,0.0,0.0,0.0,let query = UrlQuery {
+775,url/src/lib.rs,1370,0,0,1,2,0.0,0.0,0.0,"form_urlencoded::Serializer::for_suffix(query, query_start + ""?"".len())"
+776,url/src/lib.rs,1371,0,0,1,2,0.0,0.0,0.0,}
+777,url/src/lib.rs,1373,0,0,1,2,0.0,0.0,0.0,fn take_after_path(&mut self) -> String {
+778,url/src/lib.rs,1374,0,0,1,2,0.0,0.0,0.0,"match (self.query_start, self.fragment_start) {"
+779,url/src/lib.rs,1375,0,0,1,2,0.0,0.0,0.0,"(Some(i), _) | (None, Some(i)) => {"
+780,url/src/lib.rs,1376,0,0,1,2,0.0,0.0,0.0,let after_path = self.slice(i..).to_owned();
+781,url/src/lib.rs,1377,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(i as usize);
+782,url/src/lib.rs,1378,0,0,1,2,0.0,0.0,0.0,after_path
+783,url/src/lib.rs,1380,0,0,1,2,0.0,0.0,0.0,"(None, None) => String::new(),"
+784,url/src/lib.rs,1382,0,0,1,2,0.0,0.0,0.0,}
+785,url/src/lib.rs,1406,0,0,1,2,0.0,0.0,0.0,"pub fn set_path(&mut self, mut path: &str) {"
+786,url/src/lib.rs,1407,0,0,1,2,0.0,0.0,0.0,let after_path = self.take_after_path();
+787,url/src/lib.rs,1408,0,0,1,2,0.0,0.0,0.0,let old_after_path_pos = to_u32(self.serialization.len()).unwrap();
+788,url/src/lib.rs,1409,0,0,1,2,0.0,0.0,0.0,let cannot_be_a_base = self.cannot_be_a_base();
+789,url/src/lib.rs,1410,0,0,1,2,0.0,0.0,0.0,let scheme_type = SchemeType::from(self.scheme());
+790,url/src/lib.rs,1411,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(self.path_start as usize);
+791,url/src/lib.rs,1412,0,0,1,2,0.0,0.0,0.0,self.mutate(|parser| {
+792,url/src/lib.rs,1413,0,0,1,2,0.0,0.0,0.0,if cannot_be_a_base {
+793,url/src/lib.rs,1414,0,0,1,2,0.0,0.0,0.0,if path.starts_with('/') {
+794,url/src/lib.rs,1415,0,0,1,2,0.0,0.0,0.0,"parser.serialization.push_str(""%2F"");"
+795,url/src/lib.rs,1417,0,0,1,2,0.0,0.0,0.0,}
+796,url/src/lib.rs,1418,0,0,1,2,0.0,0.0,0.0,parser.parse_cannot_be_a_base_path(parser::Input::new(path));
+797,url/src/lib.rs,1419,0,0,1,2,0.0,0.0,0.0,} else {
+798,url/src/lib.rs,1420,0,0,1,2,0.0,0.0,0.0,let mut has_host = true; // FIXME
+799,url/src/lib.rs,1421,0,0,1,2,0.0,0.0,0.0,"parser.parse_path_start(scheme_type, &mut has_host, parser::Input::new(path));"
+800,url/src/lib.rs,1423,0,0,1,2,0.0,0.0,0.0,});
+801,url/src/lib.rs,1424,0,0,1,2,0.0,0.0,0.0,"self.restore_after_path(old_after_path_pos, &after_path);"
+802,url/src/lib.rs,1425,0,0,1,2,0.0,0.0,0.0,}
+803,url/src/lib.rs,1430,0,0,1,2,0.0,0.0,0.0,"pub fn path_segments_mut(&mut self) -> Result<PathSegmentsMut<'_>, ()> {"
+804,url/src/lib.rs,1431,0,0,1,2,0.0,0.0,0.0,if self.cannot_be_a_base() {
+805,url/src/lib.rs,1432,0,0,1,2,0.0,0.0,0.0,Err(())
+806,url/src/lib.rs,1434,0,0,1,2,0.0,0.0,0.0,Ok(path_segments::new(self))
+807,url/src/lib.rs,1436,0,0,1,2,0.0,0.0,0.0,}
+808,url/src/lib.rs,1438,0,0,1,2,0.0,0.0,0.0,"fn restore_after_path(&mut self, old_after_path_position: u32, after_path: &str) {"
+809,url/src/lib.rs,1439,0,0,1,2,0.0,0.0,0.0,let new_after_path_position = to_u32(self.serialization.len()).unwrap();
+810,url/src/lib.rs,1440,0,0,1,2,0.0,0.0,0.0,let adjust = |index: &mut u32| {
+811,url/src/lib.rs,1441,0,0,1,2,0.0,0.0,0.0,*index -= old_after_path_position;
+812,url/src/lib.rs,1442,0,0,1,2,0.0,0.0,0.0,*index += new_after_path_position;
+813,url/src/lib.rs,1443,0,0,1,2,0.0,0.0,0.0,};
+814,url/src/lib.rs,1444,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+815,url/src/lib.rs,1445,0,0,1,2,0.0,0.0,0.0,adjust(index)
+816,url/src/lib.rs,1446,0,0,1,2,0.0,0.0,0.0,}
+817,url/src/lib.rs,1447,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+818,url/src/lib.rs,1448,0,0,1,2,0.0,0.0,0.0,adjust(index)
+819,url/src/lib.rs,1449,0,0,1,2,0.0,0.0,0.0,}
+820,url/src/lib.rs,1450,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(after_path)
+821,url/src/lib.rs,1451,0,0,1,2,0.0,0.0,0.0,}
+822,url/src/lib.rs,1513,0,0,1,2,0.0,0.0,0.0,"pub fn set_port(&mut self, mut port: Option<u16>) -> Result<(), ()> {"
+823,url/src/lib.rs,1515,0,0,1,2,0.0,0.0,0.0,"if !self.has_host() || self.host() == Some(Host::Domain("""")) || self.scheme() == ""file"" {"
+824,url/src/lib.rs,1516,0,0,1,2,0.0,0.0,0.0,return Err(());
+825,url/src/lib.rs,1517,0,0,1,2,0.0,0.0,0.0,}
+826,url/src/lib.rs,1518,0,0,1,2,0.0,0.0,0.0,if port.is_some() && port == parser::default_port(self.scheme()) {
+827,url/src/lib.rs,1519,0,0,1,2,0.0,0.0,0.0,port = None
+828,url/src/lib.rs,1520,0,0,1,2,0.0,0.0,0.0,}
+829,url/src/lib.rs,1521,0,0,1,2,0.0,0.0,0.0,self.set_port_internal(port);
+830,url/src/lib.rs,1522,0,0,1,2,0.0,0.0,0.0,Ok(())
+831,url/src/lib.rs,1523,0,0,1,2,0.0,0.0,0.0,}
+832,url/src/lib.rs,1525,0,0,1,2,0.0,0.0,0.0,"fn set_port_internal(&mut self, port: Option<u16>) {"
+833,url/src/lib.rs,1526,0,0,1,2,0.0,0.0,0.0,"match (self.port, port) {"
+834,url/src/lib.rs,1527,0,0,1,2,0.0,0.0,0.0,"(None, None) => {}"
+835,url/src/lib.rs,1529,0,0,1,2,0.0,0.0,0.0,self.serialization
+836,url/src/lib.rs,1530,0,0,1,2,0.0,0.0,0.0,.drain(self.host_end as usize..self.path_start as usize);
+837,url/src/lib.rs,1531,0,0,1,2,0.0,0.0,0.0,let offset = self.path_start - self.host_end;
+838,url/src/lib.rs,1532,0,0,1,2,0.0,0.0,0.0,self.path_start = self.host_end;
+839,url/src/lib.rs,1533,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+840,url/src/lib.rs,1534,0,0,1,2,0.0,0.0,0.0,*index -= offset
+841,url/src/lib.rs,1535,0,0,1,2,0.0,0.0,0.0,}
+842,url/src/lib.rs,1536,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+843,url/src/lib.rs,1537,0,0,1,2,0.0,0.0,0.0,*index -= offset
+844,url/src/lib.rs,1538,0,0,1,2,0.0,0.0,0.0,}
+845,url/src/lib.rs,1540,0,0,1,2,0.0,0.0,0.0,"(Some(old), Some(new)) if old == new => {}"
+846,url/src/lib.rs,1541,0,0,1,2,0.0,0.0,0.0,"(_, Some(new)) => {"
+847,url/src/lib.rs,1542,0,0,1,2,0.0,0.0,0.0,let path_and_after = self.slice(self.path_start..).to_owned();
+848,url/src/lib.rs,1543,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(self.host_end as usize);
+849,url/src/lib.rs,1544,0,0,1,2,0.0,0.0,0.0,"write!(&mut self.serialization, "":{}"", new).unwrap();"
+850,url/src/lib.rs,1545,0,0,1,2,0.0,0.0,0.0,let old_path_start = self.path_start;
+851,url/src/lib.rs,1546,0,0,1,2,0.0,0.0,0.0,let new_path_start = to_u32(self.serialization.len()).unwrap();
+852,url/src/lib.rs,1547,0,0,1,2,0.0,0.0,0.0,self.path_start = new_path_start;
+853,url/src/lib.rs,1548,0,0,1,2,0.0,0.0,0.0,let adjust = |index: &mut u32| {
+854,url/src/lib.rs,1549,0,0,1,2,0.0,0.0,0.0,*index -= old_path_start;
+855,url/src/lib.rs,1550,0,0,1,2,0.0,0.0,0.0,*index += new_path_start;
+856,url/src/lib.rs,1551,0,0,1,2,0.0,0.0,0.0,};
+857,url/src/lib.rs,1552,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+858,url/src/lib.rs,1553,0,0,1,2,0.0,0.0,0.0,adjust(index)
+859,url/src/lib.rs,1554,0,0,1,2,0.0,0.0,0.0,}
+860,url/src/lib.rs,1555,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+861,url/src/lib.rs,1556,0,0,1,2,0.0,0.0,0.0,adjust(index)
+862,url/src/lib.rs,1557,0,0,1,2,0.0,0.0,0.0,}
+863,url/src/lib.rs,1558,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(&path_and_after);
+864,url/src/lib.rs,1561,0,0,1,2,0.0,0.0,0.0,self.port = port;
+865,url/src/lib.rs,1562,0,0,1,2,0.0,0.0,0.0,}
+866,url/src/lib.rs,1646,0,1,1,1,0.0,0.0,0.0,"pub fn set_host(&mut self, host: Option<&str>) -> Result<(), ParseError> {"
+867,url/src/lib.rs,1647,0,1,1,1,0.0,0.0,0.0,if self.cannot_be_a_base() {
+868,url/src/lib.rs,1648,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::SetHostOnCannotBeABaseUrl);
+869,url/src/lib.rs,1649,0,1,1,1,0.0,0.0,0.0,}
+870,url/src/lib.rs,1651,0,1,1,1,0.0,0.0,0.0,if let Some(host) = host {
+871,url/src/lib.rs,1652,0,1,1,1,0.0,0.0,0.0,"if host == """" && SchemeType::from(self.scheme()).is_special() {"
+872,url/src/lib.rs,1653,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+873,url/src/lib.rs,1654,0,1,1,1,0.0,0.0,0.0,}
+874,url/src/lib.rs,1655,0,1,1,1,0.0,0.0,0.0,let mut host_substr = host;
+875,url/src/lib.rs,1657,0,1,1,1,0.0,0.0,0.0,if !host.starts_with('[') || !host.ends_with(']') {
+876,url/src/lib.rs,1658,0,1,1,1,0.0,0.0,0.0,match host.find(':') {
+877,url/src/lib.rs,1661,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidDomainCharacter);
+878,url/src/lib.rs,1664,0,0,1,2,0.0,0.0,0.0,Some(colon_index) => {
+879,url/src/lib.rs,1667,0,1,1,1,0.0,0.0,0.0,None => {}
+880,url/src/lib.rs,1669,0,0,1,2,0.0,0.0,0.0,}
+881,url/src/lib.rs,1670,0,1,1,1,0.0,0.0,0.0,if SchemeType::from(self.scheme()).is_special() {
+882,url/src/lib.rs,1671,0,1,1,1,0.0,0.0,0.0,"self.set_host_internal(Host::parse(host_substr)?, None);"
+883,url/src/lib.rs,1673,0,0,1,2,0.0,0.0,0.0,"self.set_host_internal(Host::parse_opaque(host_substr)?, None);"
+884,url/src/lib.rs,1675,0,0,1,2,0.0,0.0,0.0,} else if self.has_host() {
+885,url/src/lib.rs,1676,0,0,1,2,0.0,0.0,0.0,let scheme_type = SchemeType::from(self.scheme());
+886,url/src/lib.rs,1677,0,0,1,2,0.0,0.0,0.0,if scheme_type.is_special() {
+887,url/src/lib.rs,1678,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+888,url/src/lib.rs,1679,0,0,1,2,0.0,0.0,0.0,} else if self.serialization.len() == self.path_start as usize {
+889,url/src/lib.rs,1681,0,0,1,2,0.0,0.0,0.0,}
+890,url/src/lib.rs,1682,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(self.scheme_end) == b':');
+891,url/src/lib.rs,1683,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(self.path_start) == b'/');
+892,url/src/lib.rs,1684,0,0,1,2,0.0,0.0,0.0,let new_path_start = self.scheme_end + 1;
+893,url/src/lib.rs,1685,0,0,1,2,0.0,0.0,0.0,self.serialization
+894,url/src/lib.rs,1686,0,0,1,2,0.0,0.0,0.0,.drain(new_path_start as usize..self.path_start as usize);
+895,url/src/lib.rs,1687,0,0,1,2,0.0,0.0,0.0,let offset = self.path_start - new_path_start;
+896,url/src/lib.rs,1688,0,0,1,2,0.0,0.0,0.0,self.path_start = new_path_start;
+897,url/src/lib.rs,1689,0,0,1,2,0.0,0.0,0.0,self.username_end = new_path_start;
+898,url/src/lib.rs,1690,0,0,1,2,0.0,0.0,0.0,self.host_start = new_path_start;
+899,url/src/lib.rs,1691,0,0,1,2,0.0,0.0,0.0,self.host_end = new_path_start;
+900,url/src/lib.rs,1692,0,0,1,2,0.0,0.0,0.0,self.port = None;
+901,url/src/lib.rs,1693,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+902,url/src/lib.rs,1694,0,0,1,2,0.0,0.0,0.0,*index -= offset
+903,url/src/lib.rs,1695,0,0,1,2,0.0,0.0,0.0,}
+904,url/src/lib.rs,1696,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+905,url/src/lib.rs,1697,0,0,1,2,0.0,0.0,0.0,*index -= offset
+906,url/src/lib.rs,1698,0,0,1,2,0.0,0.0,0.0,}
+907,url/src/lib.rs,1699,0,0,1,2,0.0,0.0,0.0,}
+908,url/src/lib.rs,1700,0,1,1,1,0.0,0.0,0.0,Ok(())
+909,url/src/lib.rs,1701,0,1,1,1,0.0,0.0,0.0,}
+910,url/src/lib.rs,1704,0,1,1,1,0.0,0.0,0.0,"fn set_host_internal(&mut self, host: Host<String>, opt_new_port: Option<Option<u16>>) {"
+911,url/src/lib.rs,1705,0,1,1,1,0.0,0.0,0.0,let old_suffix_pos = if opt_new_port.is_some() {
+912,url/src/lib.rs,1706,0,0,1,2,0.0,0.0,0.0,self.path_start
+913,url/src/lib.rs,1708,0,1,1,1,0.0,0.0,0.0,self.host_end
+914,url/src/lib.rs,1710,0,1,1,1,0.0,0.0,0.0,let suffix = self.slice(old_suffix_pos..).to_owned();
+915,url/src/lib.rs,1711,0,1,1,1,0.0,0.0,0.0,self.serialization.truncate(self.host_start as usize);
+916,url/src/lib.rs,1712,0,1,1,1,0.0,0.0,0.0,if !self.has_authority() {
+917,url/src/lib.rs,1713,0,0,1,2,0.0,0.0,0.0,"debug_assert!(self.slice(self.scheme_end..self.host_start) == "":"");"
+918,url/src/lib.rs,1714,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.username_end == self.host_start);
+919,url/src/lib.rs,1715,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+920,url/src/lib.rs,1716,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+921,url/src/lib.rs,1717,0,0,1,2,0.0,0.0,0.0,self.username_end += 2;
+922,url/src/lib.rs,1718,0,0,1,2,0.0,0.0,0.0,self.host_start += 2;
+923,url/src/lib.rs,1719,0,1,1,1,0.0,0.0,0.0,}
+924,url/src/lib.rs,1720,0,1,1,1,0.0,0.0,0.0,"write!(&mut self.serialization, ""{}"", host).unwrap();"
+925,url/src/lib.rs,1721,0,1,1,1,0.0,0.0,0.0,self.host_end = to_u32(self.serialization.len()).unwrap();
+926,url/src/lib.rs,1722,0,1,1,1,0.0,0.0,0.0,self.host = host.into();
+927,url/src/lib.rs,1724,0,1,1,1,0.0,0.0,0.0,if let Some(new_port) = opt_new_port {
+928,url/src/lib.rs,1725,0,0,1,2,0.0,0.0,0.0,self.port = new_port;
+929,url/src/lib.rs,1726,0,0,1,2,0.0,0.0,0.0,if let Some(port) = new_port {
+930,url/src/lib.rs,1727,0,0,1,2,0.0,0.0,0.0,"write!(&mut self.serialization, "":{}"", port).unwrap();"
+931,url/src/lib.rs,1728,0,0,1,2,0.0,0.0,0.0,}
+932,url/src/lib.rs,1729,0,1,1,1,0.0,0.0,0.0,}
+933,url/src/lib.rs,1730,0,1,1,1,0.0,0.0,0.0,let new_suffix_pos = to_u32(self.serialization.len()).unwrap();
+934,url/src/lib.rs,1731,0,1,1,1,0.0,0.0,0.0,self.serialization.push_str(&suffix);
+935,url/src/lib.rs,1733,0,1,1,1,0.0,0.0,0.0,let adjust = |index: &mut u32| {
+936,url/src/lib.rs,1734,0,1,1,1,0.0,0.0,0.0,*index -= old_suffix_pos;
+937,url/src/lib.rs,1735,0,1,1,1,0.0,0.0,0.0,*index += new_suffix_pos;
+938,url/src/lib.rs,1736,0,1,1,1,0.0,0.0,0.0,};
+939,url/src/lib.rs,1737,0,1,1,1,0.0,0.0,0.0,adjust(&mut self.path_start);
+940,url/src/lib.rs,1738,0,1,1,1,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+941,url/src/lib.rs,1739,0,0,1,2,0.0,0.0,0.0,adjust(index)
+942,url/src/lib.rs,1740,0,1,1,1,0.0,0.0,0.0,}
+943,url/src/lib.rs,1741,0,1,1,1,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+944,url/src/lib.rs,1742,0,0,1,2,0.0,0.0,0.0,adjust(index)
+945,url/src/lib.rs,1743,0,1,1,1,0.0,0.0,0.0,}
+946,url/src/lib.rs,1744,0,1,1,1,0.0,0.0,0.0,}
+947,url/src/lib.rs,1783,0,0,1,2,0.0,0.0,0.0,"pub fn set_ip_host(&mut self, address: IpAddr) -> Result<(), ()> {"
+948,url/src/lib.rs,1784,0,0,1,2,0.0,0.0,0.0,if self.cannot_be_a_base() {
+949,url/src/lib.rs,1785,0,0,1,2,0.0,0.0,0.0,return Err(());
+950,url/src/lib.rs,1786,0,0,1,2,0.0,0.0,0.0,}
+951,url/src/lib.rs,1788,0,0,1,2,0.0,0.0,0.0,let address = match address {
+952,url/src/lib.rs,1789,0,0,1,2,0.0,0.0,0.0,"IpAddr::V4(address) => Host::Ipv4(address),"
+953,url/src/lib.rs,1790,0,0,1,2,0.0,0.0,0.0,"IpAddr::V6(address) => Host::Ipv6(address),"
+954,url/src/lib.rs,1792,0,0,1,2,0.0,0.0,0.0,"self.set_host_internal(address, None);"
+955,url/src/lib.rs,1793,0,0,1,2,0.0,0.0,0.0,Ok(())
+956,url/src/lib.rs,1794,0,0,1,2,0.0,0.0,0.0,}
+957,url/src/lib.rs,1822,0,0,1,2,0.0,0.0,0.0,"pub fn set_password(&mut self, password: Option<&str>) -> Result<(), ()> {"
+958,url/src/lib.rs,1824,0,0,1,2,0.0,0.0,0.0,"if !self.has_host() || self.host() == Some(Host::Domain("""")) || self.scheme() == ""file"" {"
+959,url/src/lib.rs,1825,0,0,1,2,0.0,0.0,0.0,return Err(());
+960,url/src/lib.rs,1826,0,0,1,2,0.0,0.0,0.0,}
+961,url/src/lib.rs,1827,0,0,1,2,0.0,0.0,0.0,if let Some(password) = password {
+962,url/src/lib.rs,1828,0,0,1,2,0.0,0.0,0.0,let host_and_after = self.slice(self.host_start..).to_owned();
+963,url/src/lib.rs,1829,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(self.username_end as usize);
+964,url/src/lib.rs,1830,0,0,1,2,0.0,0.0,0.0,self.serialization.push(':');
+965,url/src/lib.rs,1831,0,0,1,2,0.0,0.0,0.0,self.serialization
+966,url/src/lib.rs,1832,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(password, USERINFO));"
+967,url/src/lib.rs,1833,0,0,1,2,0.0,0.0,0.0,self.serialization.push('@');
+968,url/src/lib.rs,1835,0,0,1,2,0.0,0.0,0.0,let old_host_start = self.host_start;
+969,url/src/lib.rs,1836,0,0,1,2,0.0,0.0,0.0,let new_host_start = to_u32(self.serialization.len()).unwrap();
+970,url/src/lib.rs,1837,0,0,1,2,0.0,0.0,0.0,let adjust = |index: &mut u32| {
+971,url/src/lib.rs,1838,0,0,1,2,0.0,0.0,0.0,*index -= old_host_start;
+972,url/src/lib.rs,1839,0,0,1,2,0.0,0.0,0.0,*index += new_host_start;
+973,url/src/lib.rs,1840,0,0,1,2,0.0,0.0,0.0,};
+974,url/src/lib.rs,1841,0,0,1,2,0.0,0.0,0.0,self.host_start = new_host_start;
+975,url/src/lib.rs,1842,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.host_end);
+976,url/src/lib.rs,1843,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.path_start);
+977,url/src/lib.rs,1844,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+978,url/src/lib.rs,1845,0,0,1,2,0.0,0.0,0.0,adjust(index)
+979,url/src/lib.rs,1846,0,0,1,2,0.0,0.0,0.0,}
+980,url/src/lib.rs,1847,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+981,url/src/lib.rs,1848,0,0,1,2,0.0,0.0,0.0,adjust(index)
+982,url/src/lib.rs,1849,0,0,1,2,0.0,0.0,0.0,}
+983,url/src/lib.rs,1851,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(&host_and_after);
+984,url/src/lib.rs,1852,0,0,1,2,0.0,0.0,0.0,} else if self.byte_at(self.username_end) == b':' {
+985,url/src/lib.rs,1854,0,0,1,2,0.0,0.0,0.0,let has_username_or_password = self.byte_at(self.host_start - 1) == b'@';
+986,url/src/lib.rs,1855,0,0,1,2,0.0,0.0,0.0,debug_assert!(has_username_or_password);
+987,url/src/lib.rs,1856,0,0,1,2,0.0,0.0,0.0,let username_start = self.scheme_end + 3;
+988,url/src/lib.rs,1857,0,0,1,2,0.0,0.0,0.0,let empty_username = username_start == self.username_end;
+989,url/src/lib.rs,1858,0,0,1,2,0.0,0.0,0.0,let start = self.username_end; // Remove the ':'
+990,url/src/lib.rs,1859,0,0,1,2,0.0,0.0,0.0,let end = if empty_username {
+991,url/src/lib.rs,1860,0,0,1,2,0.0,0.0,0.0,self.host_start // Remove the '@' as well
+992,url/src/lib.rs,1862,0,0,1,2,0.0,0.0,0.0,self.host_start - 1 // Keep the '@' to separate the username from the host
+993,url/src/lib.rs,1864,0,0,1,2,0.0,0.0,0.0,self.serialization.drain(start as usize..end as usize);
+994,url/src/lib.rs,1865,0,0,1,2,0.0,0.0,0.0,let offset = end - start;
+995,url/src/lib.rs,1866,0,0,1,2,0.0,0.0,0.0,self.host_start -= offset;
+996,url/src/lib.rs,1867,0,0,1,2,0.0,0.0,0.0,self.host_end -= offset;
+997,url/src/lib.rs,1868,0,0,1,2,0.0,0.0,0.0,self.path_start -= offset;
+998,url/src/lib.rs,1869,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+999,url/src/lib.rs,1870,0,0,1,2,0.0,0.0,0.0,*index -= offset
+1000,url/src/lib.rs,1871,0,0,1,2,0.0,0.0,0.0,}
+1001,url/src/lib.rs,1872,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+1002,url/src/lib.rs,1873,0,0,1,2,0.0,0.0,0.0,*index -= offset
+1003,url/src/lib.rs,1874,0,0,1,2,0.0,0.0,0.0,}
+1004,url/src/lib.rs,1875,0,0,1,2,0.0,0.0,0.0,}
+1005,url/src/lib.rs,1876,0,0,1,2,0.0,0.0,0.0,Ok(())
+1006,url/src/lib.rs,1877,0,0,1,2,0.0,0.0,0.0,}
+1007,url/src/lib.rs,1914,0,0,1,2,0.0,0.0,0.0,"pub fn set_username(&mut self, username: &str) -> Result<(), ()> {"
+1008,url/src/lib.rs,1916,0,0,1,2,0.0,0.0,0.0,"if !self.has_host() || self.host() == Some(Host::Domain("""")) || self.scheme() == ""file"" {"
+1009,url/src/lib.rs,1917,0,0,1,2,0.0,0.0,0.0,return Err(());
+1010,url/src/lib.rs,1918,0,0,1,2,0.0,0.0,0.0,}
+1011,url/src/lib.rs,1919,0,0,1,2,0.0,0.0,0.0,let username_start = self.scheme_end + 3;
+1012,url/src/lib.rs,1920,0,0,1,2,0.0,0.0,0.0,"debug_assert!(self.slice(self.scheme_end..username_start) == ""://"");"
+1013,url/src/lib.rs,1921,0,0,1,2,0.0,0.0,0.0,if self.slice(username_start..self.username_end) == username {
+1014,url/src/lib.rs,1922,0,0,1,2,0.0,0.0,0.0,return Ok(());
+1015,url/src/lib.rs,1923,0,0,1,2,0.0,0.0,0.0,}
+1016,url/src/lib.rs,1924,0,0,1,2,0.0,0.0,0.0,let after_username = self.slice(self.username_end..).to_owned();
+1017,url/src/lib.rs,1925,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(username_start as usize);
+1018,url/src/lib.rs,1926,0,0,1,2,0.0,0.0,0.0,self.serialization
+1019,url/src/lib.rs,1927,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(username, USERINFO));"
+1020,url/src/lib.rs,1929,0,0,1,2,0.0,0.0,0.0,let mut removed_bytes = self.username_end;
+1021,url/src/lib.rs,1930,0,0,1,2,0.0,0.0,0.0,self.username_end = to_u32(self.serialization.len()).unwrap();
+1022,url/src/lib.rs,1931,0,0,1,2,0.0,0.0,0.0,let mut added_bytes = self.username_end;
+1023,url/src/lib.rs,1933,0,0,1,2,0.0,0.0,0.0,let new_username_is_empty = self.username_end == username_start;
+1024,url/src/lib.rs,1934,0,0,1,2,0.0,0.0,0.0,"match (new_username_is_empty, after_username.chars().next()) {"
+1025,url/src/lib.rs,1935,0,0,1,2,0.0,0.0,0.0,"(true, Some('@')) => {"
+1026,url/src/lib.rs,1936,0,0,1,2,0.0,0.0,0.0,removed_bytes += 1;
+1027,url/src/lib.rs,1937,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(&after_username[1..]);
+1028,url/src/lib.rs,1939,0,0,1,2,0.0,0.0,0.0,"(false, Some('@')) | (_, Some(':')) | (true, _) => {"
+1029,url/src/lib.rs,1940,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(&after_username);
+1030,url/src/lib.rs,1942,0,0,1,2,0.0,0.0,0.0,"(false, _) => {"
+1031,url/src/lib.rs,1943,0,0,1,2,0.0,0.0,0.0,added_bytes += 1;
+1032,url/src/lib.rs,1944,0,0,1,2,0.0,0.0,0.0,self.serialization.push('@');
+1033,url/src/lib.rs,1945,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(&after_username);
+1034,url/src/lib.rs,1949,0,0,1,2,0.0,0.0,0.0,let adjust = |index: &mut u32| {
+1035,url/src/lib.rs,1950,0,0,1,2,0.0,0.0,0.0,*index -= removed_bytes;
+1036,url/src/lib.rs,1951,0,0,1,2,0.0,0.0,0.0,*index += added_bytes;
+1037,url/src/lib.rs,1952,0,0,1,2,0.0,0.0,0.0,};
+1038,url/src/lib.rs,1953,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.host_start);
+1039,url/src/lib.rs,1954,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.host_end);
+1040,url/src/lib.rs,1955,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.path_start);
+1041,url/src/lib.rs,1956,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+1042,url/src/lib.rs,1957,0,0,1,2,0.0,0.0,0.0,adjust(index)
+1043,url/src/lib.rs,1958,0,0,1,2,0.0,0.0,0.0,}
+1044,url/src/lib.rs,1959,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+1045,url/src/lib.rs,1960,0,0,1,2,0.0,0.0,0.0,adjust(index)
+1046,url/src/lib.rs,1961,0,0,1,2,0.0,0.0,0.0,}
+1047,url/src/lib.rs,1962,0,0,1,2,0.0,0.0,0.0,Ok(())
+1048,url/src/lib.rs,1963,0,0,1,2,0.0,0.0,0.0,}
+1049,url/src/lib.rs,2075,0,0,1,2,0.0,0.0,0.0,"pub fn set_scheme(&mut self, scheme: &str) -> Result<(), ()> {"
+1050,url/src/lib.rs,2076,0,0,1,2,0.0,0.0,0.0,let mut parser = Parser::for_setter(String::new());
+1051,url/src/lib.rs,2077,0,0,1,2,0.0,0.0,0.0,let remaining = parser.parse_scheme(parser::Input::new(scheme))?;
+1052,url/src/lib.rs,2078,0,0,1,2,0.0,0.0,0.0,let new_scheme_type = SchemeType::from(&parser.serialization);
+1053,url/src/lib.rs,2079,0,0,1,2,0.0,0.0,0.0,let old_scheme_type = SchemeType::from(self.scheme());
+1054,url/src/lib.rs,2081,0,0,1,2,0.0,0.0,0.0,if (new_scheme_type.is_special() && !old_scheme_type.is_special()) ||
+1055,url/src/lib.rs,2083,0,0,1,2,0.0,0.0,0.0,(!new_scheme_type.is_special() && old_scheme_type.is_special()) ||
+1056,url/src/lib.rs,2086,0,0,1,2,0.0,0.0,0.0,(new_scheme_type.is_file() && self.has_authority())
+1057,url/src/lib.rs,2088,0,0,1,2,0.0,0.0,0.0,return Err(());
+1058,url/src/lib.rs,2089,0,0,1,2,0.0,0.0,0.0,}
+1059,url/src/lib.rs,2091,0,0,1,2,0.0,0.0,0.0,if !remaining.is_empty() || (!self.has_host() && new_scheme_type.is_special()) {
+1060,url/src/lib.rs,2092,0,0,1,2,0.0,0.0,0.0,return Err(());
+1061,url/src/lib.rs,2093,0,0,1,2,0.0,0.0,0.0,}
+1062,url/src/lib.rs,2094,0,0,1,2,0.0,0.0,0.0,let old_scheme_end = self.scheme_end;
+1063,url/src/lib.rs,2095,0,0,1,2,0.0,0.0,0.0,let new_scheme_end = to_u32(parser.serialization.len()).unwrap();
+1064,url/src/lib.rs,2096,0,0,1,2,0.0,0.0,0.0,let adjust = |index: &mut u32| {
+1065,url/src/lib.rs,2097,0,0,1,2,0.0,0.0,0.0,*index -= old_scheme_end;
+1066,url/src/lib.rs,2098,0,0,1,2,0.0,0.0,0.0,*index += new_scheme_end;
+1067,url/src/lib.rs,2099,0,0,1,2,0.0,0.0,0.0,};
+1068,url/src/lib.rs,2101,0,0,1,2,0.0,0.0,0.0,self.scheme_end = new_scheme_end;
+1069,url/src/lib.rs,2102,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.username_end);
+1070,url/src/lib.rs,2103,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.host_start);
+1071,url/src/lib.rs,2104,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.host_end);
+1072,url/src/lib.rs,2105,0,0,1,2,0.0,0.0,0.0,adjust(&mut self.path_start);
+1073,url/src/lib.rs,2106,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.query_start {
+1074,url/src/lib.rs,2107,0,0,1,2,0.0,0.0,0.0,adjust(index)
+1075,url/src/lib.rs,2108,0,0,1,2,0.0,0.0,0.0,}
+1076,url/src/lib.rs,2109,0,0,1,2,0.0,0.0,0.0,if let Some(ref mut index) = self.fragment_start {
+1077,url/src/lib.rs,2110,0,0,1,2,0.0,0.0,0.0,adjust(index)
+1078,url/src/lib.rs,2111,0,0,1,2,0.0,0.0,0.0,}
+1079,url/src/lib.rs,2113,0,0,1,2,0.0,0.0,0.0,parser.serialization.push_str(self.slice(old_scheme_end..));
+1080,url/src/lib.rs,2114,0,0,1,2,0.0,0.0,0.0,self.serialization = parser.serialization;
+1081,url/src/lib.rs,2120,0,0,1,2,0.0,0.0,0.0,let previous_port = self.port();
+1082,url/src/lib.rs,2121,0,0,1,2,0.0,0.0,0.0,let _ = self.set_port(previous_port);
+1083,url/src/lib.rs,2123,0,0,1,2,0.0,0.0,0.0,Ok(())
+1084,url/src/lib.rs,2124,0,0,1,2,0.0,0.0,0.0,}
+1085,url/src/lib.rs,2154,0,0,1,2,0.0,0.0,0.0,"pub fn from_file_path<P: AsRef<Path>>(path: P) -> Result<Url, ()> {"
+1086,url/src/lib.rs,2155,0,0,1,2,0.0,0.0,0.0,"let mut serialization = ""file://"".to_owned();"
+1087,url/src/lib.rs,2156,0,0,1,2,0.0,0.0,0.0,let host_start = serialization.len() as u32;
+1088,url/src/lib.rs,2157,0,0,1,2,0.0,0.0,0.0,"let (host_end, host) = path_to_file_url_segments(path.as_ref(), &mut serialization)?;"
+1089,url/src/lib.rs,2158,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1090,url/src/lib.rs,2159,0,0,1,2,0.0,0.0,0.0,"serialization,"
+1091,url/src/lib.rs,2160,0,0,1,2,0.0,0.0,0.0,"scheme_end: ""file"".len() as u32,"
+1092,url/src/lib.rs,2161,0,0,1,2,0.0,0.0,0.0,"username_end: host_start,"
+1093,url/src/lib.rs,2162,0,0,1,2,0.0,0.0,0.0,"host_start,"
+1094,url/src/lib.rs,2163,0,0,1,2,0.0,0.0,0.0,"host_end,"
+1095,url/src/lib.rs,2164,0,0,1,2,0.0,0.0,0.0,"host,"
+1096,url/src/lib.rs,2165,0,0,1,2,0.0,0.0,0.0,"port: None,"
+1097,url/src/lib.rs,2166,0,0,1,2,0.0,0.0,0.0,"path_start: host_end,"
+1098,url/src/lib.rs,2170,0,0,1,2,0.0,0.0,0.0,}
+1099,url/src/lib.rs,2190,0,0,1,2,0.0,0.0,0.0,"pub fn from_directory_path<P: AsRef<Path>>(path: P) -> Result<Url, ()> {"
+1100,url/src/lib.rs,2191,0,0,1,2,0.0,0.0,0.0,let mut url = Url::from_file_path(path)?;
+1101,url/src/lib.rs,2192,0,0,1,2,0.0,0.0,0.0,if !url.serialization.ends_with('/') {
+1102,url/src/lib.rs,2193,0,0,1,2,0.0,0.0,0.0,url.serialization.push('/')
+1103,url/src/lib.rs,2194,0,0,1,2,0.0,0.0,0.0,}
+1104,url/src/lib.rs,2195,0,0,1,2,0.0,0.0,0.0,Ok(url)
+1105,url/src/lib.rs,2196,0,0,1,2,0.0,0.0,0.0,}
+1106,url/src/lib.rs,2306,0,0,1,2,0.0,0.0,0.0,"pub fn to_file_path(&self) -> Result<PathBuf, ()> {"
+1107,url/src/lib.rs,2307,0,0,1,2,0.0,0.0,0.0,if let Some(segments) = self.path_segments() {
+1108,url/src/lib.rs,2308,0,0,1,2,0.0,0.0,0.0,let host = match self.host() {
+1109,url/src/lib.rs,2309,0,0,1,2,0.0,0.0,0.0,"None | Some(Host::Domain(""localhost"")) => None,"
+1110,url/src/lib.rs,2310,0,0,1,2,0.0,0.0,0.0,"Some(_) if cfg!(windows) && self.scheme() == ""file"" => {"
+1111,url/src/lib.rs,2311,0,0,1,2,0.0,0.0,0.0,Some(&self.serialization[self.host_start as usize..self.host_end as usize])
+1112,url/src/lib.rs,2313,0,0,1,2,0.0,0.0,0.0,"_ => return Err(()),"
+1113,url/src/lib.rs,2316,0,0,1,2,0.0,0.0,0.0,"return file_url_segments_to_pathbuf(host, segments);"
+1114,url/src/lib.rs,2317,0,0,1,2,0.0,0.0,0.0,}
+1115,url/src/lib.rs,2318,0,0,1,2,0.0,0.0,0.0,Err(())
+1116,url/src/lib.rs,2319,0,0,1,2,0.0,0.0,0.0,}
+1117,url/src/lib.rs,2342,0,0,1,2,0.0,0.0,0.0,"fn from_str(input: &str) -> Result<Url, crate::ParseError> {"
+1118,url/src/lib.rs,2343,0,0,1,2,0.0,0.0,0.0,Url::parse(input)
+1119,url/src/lib.rs,2344,0,0,1,2,0.0,0.0,0.0,}
+1120,url/src/lib.rs,2350,0,0,1,2,0.0,0.0,0.0,"fn try_from(s: &'a str) -> Result<Self, Self::Error> {"
+1121,url/src/lib.rs,2351,0,0,1,2,0.0,0.0,0.0,Url::parse(s)
+1122,url/src/lib.rs,2352,0,0,1,2,0.0,0.0,0.0,}
+1123,url/src/lib.rs,2358,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {"
+1124,url/src/lib.rs,2359,0,0,1,2,0.0,0.0,0.0,"fmt::Display::fmt(&self.serialization, formatter)"
+1125,url/src/lib.rs,2360,0,0,1,2,0.0,0.0,0.0,}
+1126,url/src/lib.rs,2366,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {"
+1127,url/src/lib.rs,2367,0,0,1,2,0.0,0.0,0.0,formatter
+1128,url/src/lib.rs,2369,0,0,1,2,0.0,0.0,0.0,".field(""scheme"", &self.scheme())"
+1129,url/src/lib.rs,2370,0,0,1,2,0.0,0.0,0.0,".field(""host"", &self.host())"
+1130,url/src/lib.rs,2371,0,0,1,2,0.0,0.0,0.0,".field(""port"", &self.port())"
+1131,url/src/lib.rs,2372,0,0,1,2,0.0,0.0,0.0,".field(""path"", &self.path())"
+1132,url/src/lib.rs,2373,0,0,1,2,0.0,0.0,0.0,".field(""query"", &self.query())"
+1133,url/src/lib.rs,2374,0,0,1,2,0.0,0.0,0.0,".field(""fragment"", &self.fragment())"
+1134,url/src/lib.rs,2375,0,0,1,2,0.0,0.0,0.0,.finish()
+1135,url/src/lib.rs,2376,0,0,1,2,0.0,0.0,0.0,}
+1136,url/src/lib.rs,2385,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &Self) -> bool {"
+1137,url/src/lib.rs,2386,0,0,1,2,0.0,0.0,0.0,self.serialization == other.serialization
+1138,url/src/lib.rs,2387,0,0,1,2,0.0,0.0,0.0,}
+1139,url/src/lib.rs,2393,0,0,1,2,0.0,0.0,0.0,"fn cmp(&self, other: &Self) -> cmp::Ordering {"
+1140,url/src/lib.rs,2394,0,0,1,2,0.0,0.0,0.0,self.serialization.cmp(&other.serialization)
+1141,url/src/lib.rs,2395,0,0,1,2,0.0,0.0,0.0,}
+1142,url/src/lib.rs,2401,0,0,1,2,0.0,0.0,0.0,"fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {"
+1143,url/src/lib.rs,2402,0,0,1,2,0.0,0.0,0.0,self.serialization.partial_cmp(&other.serialization)
+1144,url/src/lib.rs,2403,0,0,1,2,0.0,0.0,0.0,}
+1145,url/src/lib.rs,2409,0,0,1,2,0.0,0.0,0.0,"fn hash<H>(&self, state: &mut H)"
+1146,url/src/lib.rs,2413,0,0,1,2,0.0,0.0,0.0,"hash::Hash::hash(&self.serialization, state)"
+1147,url/src/lib.rs,2414,0,0,1,2,0.0,0.0,0.0,}
+1148,url/src/lib.rs,2420,0,0,1,2,0.0,0.0,0.0,fn as_ref(&self) -> &str {
+1149,url/src/lib.rs,2421,0,0,1,2,0.0,0.0,0.0,&self.serialization
+1150,url/src/lib.rs,2422,0,0,1,2,0.0,0.0,0.0,}
+1151,url/src/lib.rs,2497,0,0,1,2,0.0,0.0,0.0,fn path_to_file_url_segments(
+1152,url/src/lib.rs,2502,0,0,1,2,0.0,0.0,0.0,if !path.is_absolute() {
+1153,url/src/lib.rs,2503,0,0,1,2,0.0,0.0,0.0,return Err(());
+1154,url/src/lib.rs,2504,0,0,1,2,0.0,0.0,0.0,}
+1155,url/src/lib.rs,2505,0,0,1,2,0.0,0.0,0.0,let host_end = to_u32(serialization.len()).unwrap();
+1156,url/src/lib.rs,2506,0,0,1,2,0.0,0.0,0.0,let mut empty = true;
+1157,url/src/lib.rs,2508,0,0,1,2,0.0,0.0,0.0,for component in path.components().skip(1) {
+1158,url/src/lib.rs,2509,0,0,1,2,0.0,0.0,0.0,empty = false;
+1159,url/src/lib.rs,2510,0,0,1,2,0.0,0.0,0.0,serialization.push('/');
+1160,url/src/lib.rs,2511,0,0,1,2,0.0,0.0,0.0,serialization.extend(percent_encode(
+1161,url/src/lib.rs,2516,0,0,1,2,0.0,0.0,0.0,if empty {
+1162,url/src/lib.rs,2519,0,0,1,2,0.0,0.0,0.0,}
+1163,url/src/lib.rs,2520,0,0,1,2,0.0,0.0,0.0,"Ok((host_end, HostInternal::None))"
+1164,url/src/lib.rs,2521,0,0,1,2,0.0,0.0,0.0,}
+1165,url/src/lib.rs,2533,0,0,1,2,0.0,0.0,0.0,fn path_to_file_url_segments_windows(
+1166,url/src/lib.rs,2538,0,0,1,2,0.0,0.0,0.0,if !path.is_absolute() {
+1167,url/src/lib.rs,2539,0,0,1,2,0.0,0.0,0.0,return Err(());
+1168,url/src/lib.rs,2540,0,0,1,2,0.0,0.0,0.0,}
+1169,url/src/lib.rs,2541,0,0,1,2,0.0,0.0,0.0,let mut components = path.components();
+1170,url/src/lib.rs,2543,0,0,1,2,0.0,0.0,0.0,let host_start = serialization.len() + 1;
+1171,url/src/lib.rs,2546,0,0,1,2,0.0,0.0,0.0,match components.next() {
+1172,url/src/lib.rs,2547,0,0,1,2,0.0,0.0,0.0,Some(Component::Prefix(ref p)) => match p.kind() {
+1173,url/src/lib.rs,2548,0,0,1,2,0.0,0.0,0.0,Prefix::Disk(letter) | Prefix::VerbatimDisk(letter) => {
+1174,url/src/lib.rs,2549,0,0,1,2,0.0,0.0,0.0,host_end = to_u32(serialization.len()).unwrap();
+1175,url/src/lib.rs,2550,0,0,1,2,0.0,0.0,0.0,host_internal = HostInternal::None;
+1176,url/src/lib.rs,2551,0,0,1,2,0.0,0.0,0.0,serialization.push('/');
+1177,url/src/lib.rs,2552,0,0,1,2,0.0,0.0,0.0,serialization.push(letter as char);
+1178,url/src/lib.rs,2555,0,0,1,2,0.0,0.0,0.0,"Prefix::UNC(server, share) | Prefix::VerbatimUNC(server, share) => {"
+1179,url/src/lib.rs,2556,0,0,1,2,0.0,0.0,0.0,let host = Host::parse(server.to_str().ok_or(())?).map_err(|_| ())?;
+1180,url/src/lib.rs,2557,0,0,1,2,0.0,0.0,0.0,"write!(serialization, ""{}"", host).unwrap();"
+1181,url/src/lib.rs,2558,0,0,1,2,0.0,0.0,0.0,host_end = to_u32(serialization.len()).unwrap();
+1182,url/src/lib.rs,2559,0,0,1,2,0.0,0.0,0.0,host_internal = host.into();
+1183,url/src/lib.rs,2560,0,0,1,2,0.0,0.0,0.0,serialization.push('/');
+1184,url/src/lib.rs,2561,0,0,1,2,0.0,0.0,0.0,let share = share.to_str().ok_or(())?;
+1185,url/src/lib.rs,2562,0,0,1,2,0.0,0.0,0.0,"serialization.extend(percent_encode(share.as_bytes(), PATH_SEGMENT));"
+1186,url/src/lib.rs,2564,0,0,1,2,0.0,0.0,0.0,"_ => return Err(()),"
+1187,url/src/lib.rs,2567,0,0,1,2,0.0,0.0,0.0,"_ => return Err(()),"
+1188,url/src/lib.rs,2570,0,0,1,2,0.0,0.0,0.0,let mut path_only_has_prefix = true;
+1189,url/src/lib.rs,2571,0,0,1,2,0.0,0.0,0.0,for component in components {
+1190,url/src/lib.rs,2572,0,0,1,2,0.0,0.0,0.0,if component == Component::RootDir {
+1191,url/src/lib.rs,2573,0,0,1,2,0.0,0.0,0.0,continue;
+1192,url/src/lib.rs,2574,0,0,1,2,0.0,0.0,0.0,}
+1193,url/src/lib.rs,2575,0,0,1,2,0.0,0.0,0.0,path_only_has_prefix = false;
+1194,url/src/lib.rs,2577,0,0,1,2,0.0,0.0,0.0,let component = component.as_os_str().to_str().ok_or(())?;
+1195,url/src/lib.rs,2578,0,0,1,2,0.0,0.0,0.0,serialization.push('/');
+1196,url/src/lib.rs,2579,0,0,1,2,0.0,0.0,0.0,"serialization.extend(percent_encode(component.as_bytes(), PATH_SEGMENT));"
+1197,url/src/lib.rs,2582,0,0,1,2,0.0,0.0,0.0,if serialization.len() > host_start
+1198,url/src/lib.rs,2583,0,0,1,2,0.0,0.0,0.0,&& parser::is_windows_drive_letter(&serialization[host_start..])
+1199,url/src/lib.rs,2584,0,0,1,2,0.0,0.0,0.0,&& path_only_has_prefix
+1200,url/src/lib.rs,2585,0,0,1,2,0.0,0.0,0.0,{
+1201,url/src/lib.rs,2587,0,0,1,2,0.0,0.0,0.0,}
+1202,url/src/lib.rs,2588,0,0,1,2,0.0,0.0,0.0,"Ok((host_end, host_internal))"
+1203,url/src/lib.rs,2589,0,0,1,2,0.0,0.0,0.0,}
+1204,url/src/lib.rs,2592,0,0,1,2,0.0,0.0,0.0,fn file_url_segments_to_pathbuf(
+1205,url/src/lib.rs,2599,0,0,1,2,0.0,0.0,0.0,if host.is_some() {
+1206,url/src/lib.rs,2600,0,0,1,2,0.0,0.0,0.0,return Err(());
+1207,url/src/lib.rs,2601,0,0,1,2,0.0,0.0,0.0,}
+1208,url/src/lib.rs,2603,0,0,1,2,0.0,0.0,0.0,"let mut bytes = if cfg!(target_os = ""redox"") {"
+1209,url/src/lib.rs,2604,0,0,1,2,0.0,0.0,0.0,"b""file:"".to_vec()"
+1210,url/src/lib.rs,2606,0,0,1,2,0.0,0.0,0.0,Vec::new()
+1211,url/src/lib.rs,2608,0,0,1,2,0.0,0.0,0.0,for segment in segments {
+1212,url/src/lib.rs,2609,0,0,1,2,0.0,0.0,0.0,bytes.push(b'/');
+1213,url/src/lib.rs,2610,0,0,1,2,0.0,0.0,0.0,bytes.extend(percent_decode(segment.as_bytes()));
+1214,url/src/lib.rs,2613,0,0,1,2,0.0,0.0,0.0,if bytes.len() > 2
+1215,url/src/lib.rs,2614,0,0,1,2,0.0,0.0,0.0,"&& matches!(bytes[bytes.len() - 2], b'a'..=b'z' | b'A'..=b'Z')"
+1216,url/src/lib.rs,2615,0,0,1,2,0.0,0.0,0.0,"&& matches!(bytes[bytes.len() - 1], b':' | b'|')"
+1217,url/src/lib.rs,2616,0,0,1,2,0.0,0.0,0.0,{
+1218,url/src/lib.rs,2618,0,0,1,2,0.0,0.0,0.0,}
+1219,url/src/lib.rs,2619,0,0,1,2,0.0,0.0,0.0,let os_str = OsStr::from_bytes(&bytes);
+1220,url/src/lib.rs,2620,0,0,1,2,0.0,0.0,0.0,let path = PathBuf::from(os_str);
+1221,url/src/lib.rs,2621,0,0,1,2,0.0,0.0,0.0,debug_assert!(
+1222,url/src/lib.rs,2622,0,0,1,2,0.0,0.0,0.0,"path.is_absolute(),"
+1223,url/src/lib.rs,2625,0,0,1,2,0.0,0.0,0.0,Ok(path)
+1224,url/src/lib.rs,2626,0,0,1,2,0.0,0.0,0.0,}
+1225,url/src/lib.rs,2638,0,0,1,2,0.0,0.0,0.0,fn file_url_segments_to_pathbuf_windows(
+1226,url/src/lib.rs,2642,0,0,1,2,0.0,0.0,0.0,let mut string = if let Some(host) = host {
+1227,url/src/lib.rs,2643,0,0,1,2,0.0,0.0,0.0,"r""\\"".to_owned() + host"
+1228,url/src/lib.rs,2645,0,0,1,2,0.0,0.0,0.0,let first = segments.next().ok_or(())?;
+1229,url/src/lib.rs,2647,0,0,1,2,0.0,0.0,0.0,match first.len() {
+1230,url/src/lib.rs,2649,0,0,1,2,0.0,0.0,0.0,if !first.starts_with(parser::ascii_alpha) || first.as_bytes()[1] != b':' {
+1231,url/src/lib.rs,2650,0,0,1,2,0.0,0.0,0.0,return Err(());
+1232,url/src/lib.rs,2651,0,0,1,2,0.0,0.0,0.0,}
+1233,url/src/lib.rs,2653,0,0,1,2,0.0,0.0,0.0,first.to_owned()
+1234,url/src/lib.rs,2657,0,0,1,2,0.0,0.0,0.0,if !first.starts_with(parser::ascii_alpha) {
+1235,url/src/lib.rs,2658,0,0,1,2,0.0,0.0,0.0,return Err(());
+1236,url/src/lib.rs,2659,0,0,1,2,0.0,0.0,0.0,}
+1237,url/src/lib.rs,2660,0,0,1,2,0.0,0.0,0.0,let bytes = first.as_bytes();
+1238,url/src/lib.rs,2661,0,0,1,2,0.0,0.0,0.0,if bytes[1] != b'%' || bytes[2] != b'3' || (bytes[3] != b'a' && bytes[3] != b'A') {
+1239,url/src/lib.rs,2662,0,0,1,2,0.0,0.0,0.0,return Err(());
+1240,url/src/lib.rs,2663,0,0,1,2,0.0,0.0,0.0,}
+1241,url/src/lib.rs,2665,0,0,1,2,0.0,0.0,0.0,"first[0..1].to_owned() + "":"""
+1242,url/src/lib.rs,2668,0,0,1,2,0.0,0.0,0.0,"_ => return Err(()),"
+1243,url/src/lib.rs,2672,0,0,1,2,0.0,0.0,0.0,for segment in segments {
+1244,url/src/lib.rs,2673,0,0,1,2,0.0,0.0,0.0,string.push('\\');
+1245,url/src/lib.rs,2676,0,0,1,2,0.0,0.0,0.0,match String::from_utf8(percent_decode(segment.as_bytes()).collect()) {
+1246,url/src/lib.rs,2677,0,0,1,2,0.0,0.0,0.0,"Ok(s) => string.push_str(&s),"
+1247,url/src/lib.rs,2678,0,0,1,2,0.0,0.0,0.0,"Err(..) => return Err(()),"
+1248,url/src/lib.rs,2681,0,0,1,2,0.0,0.0,0.0,let path = PathBuf::from(string);
+1249,url/src/lib.rs,2682,0,0,1,2,0.0,0.0,0.0,debug_assert!(
+1250,url/src/lib.rs,2683,0,0,1,2,0.0,0.0,0.0,"path.is_absolute(),"
+1251,url/src/lib.rs,2686,0,0,1,2,0.0,0.0,0.0,Ok(path)
+1252,url/src/lib.rs,2687,0,0,1,2,0.0,0.0,0.0,}
+1253,url/src/lib.rs,2707,0,0,1,2,0.0,0.0,0.0,fn as_mut_string(&mut self) -> &mut String {
+1254,url/src/lib.rs,2708,0,0,1,2,0.0,0.0,0.0,&mut self.url.as_mut().unwrap().serialization
+1255,url/src/lib.rs,2709,0,0,1,2,0.0,0.0,0.0,}
+1256,url/src/lib.rs,2711,0,0,1,2,0.0,0.0,0.0,fn finish(mut self) -> &'a mut Url {
+1257,url/src/lib.rs,2712,0,0,1,2,0.0,0.0,0.0,let url = self.url.take().unwrap();
+1258,url/src/lib.rs,2713,0,0,1,2,0.0,0.0,0.0,url.restore_already_parsed_fragment(self.fragment.take());
+1259,url/src/lib.rs,2714,0,0,1,2,0.0,0.0,0.0,url
+1260,url/src/lib.rs,2715,0,0,1,2,0.0,0.0,0.0,}
+1261,url/src/lib.rs,2721,0,0,1,2,0.0,0.0,0.0,fn drop(&mut self) {
+1262,url/src/lib.rs,2722,0,0,1,2,0.0,0.0,0.0,if let Some(url) = self.url.take() {
+1263,url/src/lib.rs,2723,0,0,1,2,0.0,0.0,0.0,url.restore_already_parsed_fragment(self.fragment.take())
+1264,url/src/lib.rs,2724,0,0,1,2,0.0,0.0,0.0,}
+1265,url/src/lib.rs,2725,0,0,1,2,0.0,0.0,0.0,}
+1266,url/src/origin.rs,15,0,0,1,2,0.0,0.0,0.0,pub fn url_origin(url: &Url) -> Origin {
+1267,url/src/origin.rs,16,0,0,1,2,0.0,0.0,0.0,let scheme = url.scheme();
+1268,url/src/origin.rs,17,0,0,1,2,0.0,0.0,0.0,match scheme {
+1269,url/src/origin.rs,18,0,0,1,2,0.0,0.0,0.0,"""blob"" => {"
+1270,url/src/origin.rs,19,0,0,1,2,0.0,0.0,0.0,let result = Url::parse(url.path());
+1271,url/src/origin.rs,20,0,0,1,2,0.0,0.0,0.0,match result {
+1272,url/src/origin.rs,21,0,0,1,2,0.0,0.0,0.0,"Ok(ref url) => url_origin(url),"
+1273,url/src/origin.rs,22,0,0,1,2,0.0,0.0,0.0,"Err(_) => Origin::new_opaque(),"
+1274,url/src/origin.rs,25,0,0,1,2,0.0,0.0,0.0,"""ftp"" | ""http"" | ""https"" | ""ws"" | ""wss"" => Origin::Tuple("
+1275,url/src/origin.rs,26,0,0,1,2,0.0,0.0,0.0,"scheme.to_owned(),"
+1276,url/src/origin.rs,27,0,0,1,2,0.0,0.0,0.0,"url.host().unwrap().to_owned(),"
+1277,url/src/origin.rs,28,0,0,1,2,0.0,0.0,0.0,"url.port_or_known_default().unwrap(),"
+1278,url/src/origin.rs,31,0,0,1,2,0.0,0.0,0.0,"""file"" => Origin::new_opaque(),"
+1279,url/src/origin.rs,32,0,0,1,2,0.0,0.0,0.0,"_ => Origin::new_opaque(),"
+1280,url/src/origin.rs,34,0,0,1,2,0.0,0.0,0.0,}
+1281,url/src/origin.rs,64,0,0,1,2,0.0,0.0,0.0,pub fn new_opaque() -> Origin {
+1282,url/src/origin.rs,66,0,0,1,2,0.0,0.0,0.0,"Origin::Opaque(OpaqueOrigin(COUNTER.fetch_add(1, Ordering::SeqCst)))"
+1283,url/src/origin.rs,67,0,0,1,2,0.0,0.0,0.0,}
+1284,url/src/origin.rs,71,0,0,1,2,0.0,0.0,0.0,pub fn is_tuple(&self) -> bool {
+1285,url/src/origin.rs,72,0,0,1,2,0.0,0.0,0.0,"matches!(*self, Origin::Tuple(..))"
+1286,url/src/origin.rs,73,0,0,1,2,0.0,0.0,0.0,}
+1287,url/src/origin.rs,76,0,0,1,2,0.0,0.0,0.0,pub fn ascii_serialization(&self) -> String {
+1288,url/src/origin.rs,77,0,0,1,2,0.0,0.0,0.0,match *self {
+1289,url/src/origin.rs,78,0,0,1,2,0.0,0.0,0.0,"Origin::Opaque(_) => ""null"".to_owned(),"
+1290,url/src/origin.rs,79,0,0,1,2,0.0,0.0,0.0,"Origin::Tuple(ref scheme, ref host, port) => {"
+1291,url/src/origin.rs,80,0,0,1,2,0.0,0.0,0.0,if default_port(scheme) == Some(port) {
+1292,url/src/origin.rs,81,0,0,1,2,0.0,0.0,0.0,"format!(""{}://{}"", scheme, host)"
+1293,url/src/origin.rs,83,0,0,1,2,0.0,0.0,0.0,"format!(""{}://{}:{}"", scheme, host, port)"
+1294,url/src/origin.rs,87,0,0,1,2,0.0,0.0,0.0,}
+1295,url/src/origin.rs,90,0,0,1,2,0.0,0.0,0.0,pub fn unicode_serialization(&self) -> String {
+1296,url/src/origin.rs,91,0,0,1,2,0.0,0.0,0.0,match *self {
+1297,url/src/origin.rs,92,0,0,1,2,0.0,0.0,0.0,"Origin::Opaque(_) => ""null"".to_owned(),"
+1298,url/src/origin.rs,93,0,0,1,2,0.0,0.0,0.0,"Origin::Tuple(ref scheme, ref host, port) => {"
+1299,url/src/origin.rs,94,0,0,1,2,0.0,0.0,0.0,let host = match *host {
+1300,url/src/origin.rs,95,0,0,1,2,0.0,0.0,0.0,Host::Domain(ref domain) => {
+1301,url/src/origin.rs,96,0,0,1,2,0.0,0.0,0.0,"let (domain, _errors) = domain_to_unicode(domain);"
+1302,url/src/origin.rs,97,0,0,1,2,0.0,0.0,0.0,Host::Domain(domain)
+1303,url/src/origin.rs,99,0,0,1,2,0.0,0.0,0.0,"_ => host.clone(),"
+1304,url/src/origin.rs,101,0,0,1,2,0.0,0.0,0.0,if default_port(scheme) == Some(port) {
+1305,url/src/origin.rs,102,0,0,1,2,0.0,0.0,0.0,"format!(""{}://{}"", scheme, host)"
+1306,url/src/origin.rs,104,0,0,1,2,0.0,0.0,0.0,"format!(""{}://{}:{}"", scheme, host, port)"
+1307,url/src/origin.rs,108,0,0,1,2,0.0,0.0,0.0,}
+1308,url/src/parser.rs,67,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {"
+1309,url/src/parser.rs,68,0,0,1,2,0.0,0.0,0.0,match *self {
+1310,url/src/parser.rs,70,0,0,1,2,0.0,0.0,0.0,"ParseError::$name => fmt.write_str($description),"
+1311,url/src/parser.rs,73,0,0,1,2,0.0,0.0,0.0,"unreachable!(""Don't abuse the FutureProof!"");"
+1312,url/src/parser.rs,76,0,0,1,2,0.0,0.0,0.0,}
+1313,url/src/parser.rs,97,0,0,1,2,0.0,0.0,0.0,fn from(_: ::idna::Errors) -> ParseError {
+1314,url/src/parser.rs,98,0,0,1,2,0.0,0.0,0.0,ParseError::IdnaError
+1315,url/src/parser.rs,99,0,0,1,2,0.0,0.0,0.0,}
+1316,url/src/parser.rs,120,0,0,1,2,0.0,0.0,0.0,pub fn description(&self) -> &'static str {
+1317,url/src/parser.rs,121,0,0,1,2,0.0,0.0,0.0,match *self {
+1318,url/src/parser.rs,126,0,0,1,2,0.0,0.0,0.0,"unreachable!(""Don't abuse the FutureProof!"");"
+1319,url/src/parser.rs,129,0,0,1,2,0.0,0.0,0.0,}
+1320,url/src/parser.rs,152,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {"
+1321,url/src/parser.rs,153,0,0,1,2,0.0,0.0,0.0,"fmt::Display::fmt(self.description(), f)"
+1322,url/src/parser.rs,154,0,0,1,2,0.0,0.0,0.0,}
+1323,url/src/parser.rs,182,0,0,1,2,0.0,0.0,0.0,pub fn default_port(scheme: &str) -> Option<u16> {
+1324,url/src/parser.rs,183,0,0,1,2,0.0,0.0,0.0,match scheme {
+1325,url/src/parser.rs,184,0,0,1,2,0.0,0.0,0.0,"""http"" | ""ws"" => Some(80),"
+1326,url/src/parser.rs,185,0,0,1,2,0.0,0.0,0.0,"""https"" | ""wss"" => Some(443),"
+1327,url/src/parser.rs,186,0,0,1,2,0.0,0.0,0.0,"""ftp"" => Some(21),"
+1328,url/src/parser.rs,187,0,0,1,2,0.0,0.0,0.0,"_ => None,"
+1329,url/src/parser.rs,189,0,0,1,2,0.0,0.0,0.0,}
+1330,url/src/parser.rs,197,0,0,1,2,0.0,0.0,0.0,pub fn new(input: &'i str) -> Self {
+1331,url/src/parser.rs,198,0,0,1,2,0.0,0.0,0.0,"Input::with_log(input, None)"
+1332,url/src/parser.rs,199,0,0,1,2,0.0,0.0,0.0,}
+1333,url/src/parser.rs,207,0,0,1,2,0.0,0.0,0.0,pub fn trim_tab_and_newlines(
+1334,url/src/parser.rs,211,0,0,1,2,0.0,0.0,0.0,let input = original_input.trim_matches(ascii_tab_or_new_line);
+1335,url/src/parser.rs,212,0,0,1,2,0.0,0.0,0.0,if let Some(vfn) = vfn {
+1336,url/src/parser.rs,213,0,0,1,2,0.0,0.0,0.0,if input.len() < original_input.len() {
+1337,url/src/parser.rs,214,0,0,1,2,0.0,0.0,0.0,vfn(SyntaxViolation::C0SpaceIgnored)
+1338,url/src/parser.rs,215,0,0,1,2,0.0,0.0,0.0,}
+1339,url/src/parser.rs,216,0,0,1,2,0.0,0.0,0.0,"if input.chars().any(|c| matches!(c, '\t' | '\n' | '\r')) {"
+1340,url/src/parser.rs,217,0,0,1,2,0.0,0.0,0.0,vfn(SyntaxViolation::TabOrNewlineIgnored)
+1341,url/src/parser.rs,218,0,0,1,2,0.0,0.0,0.0,}
+1342,url/src/parser.rs,219,0,0,1,2,0.0,0.0,0.0,}
+1343,url/src/parser.rs,220,0,0,1,2,0.0,0.0,0.0,Input {
+1344,url/src/parser.rs,223,0,0,1,2,0.0,0.0,0.0,}
+1345,url/src/parser.rs,228,0,0,1,2,0.0,0.0,0.0,if input.len() < original_input.len() {
+1346,url/src/parser.rs,229,0,0,1,2,0.0,0.0,0.0,vfn(SyntaxViolation::C0SpaceIgnored)
+1347,url/src/parser.rs,230,0,0,1,2,0.0,0.0,0.0,}
+1348,url/src/parser.rs,231,0,0,1,2,0.0,0.0,0.0,"if input.chars().any(|c| matches!(c, '\t' | '\n' | '\r')) {"
+1349,url/src/parser.rs,232,0,0,1,2,0.0,0.0,0.0,vfn(SyntaxViolation::TabOrNewlineIgnored)
+1350,url/src/parser.rs,233,0,0,1,2,0.0,0.0,0.0,}
+1351,url/src/parser.rs,261,0,2,1,0,0.0,0.0,0.0,"fn split_first(&self) -> (Option<char>, Self) {"
+1352,url/src/parser.rs,262,0,2,1,0,0.0,0.0,0.0,let mut remaining = self.clone();
+1353,url/src/parser.rs,263,0,2,1,0,0.0,0.0,0.0,"(remaining.next(), remaining)"
+1354,url/src/parser.rs,264,0,2,1,0,0.0,0.0,0.0,}
+1355,url/src/parser.rs,267,0,2,1,0,0.0,0.0,0.0,"fn count_matching<F: Fn(char) -> bool>(&self, f: F) -> (u32, Self) {"
+1356,url/src/parser.rs,268,0,2,1,0,0.0,0.0,0.0,let mut count = 0;
+1357,url/src/parser.rs,269,0,2,1,0,0.0,0.0,0.0,let mut remaining = self.clone();
+1358,url/src/parser.rs,271,0,2,1,0,0.0,0.0,0.0,let mut input = remaining.clone();
+1359,url/src/parser.rs,272,0,2,1,0,0.0,0.0,0.0,"if matches!(input.next(), Some(c) if f(c)) {"
+1360,url/src/parser.rs,276,0,2,1,0,0.0,0.0,0.0,"return (count, remaining);"
+1361,url/src/parser.rs,279,0,2,1,0,0.0,0.0,0.0,}
+1362,url/src/parser.rs,289,0,0,1,2,0.0,0.0,0.0,}
+1363,url/src/parser.rs,314,0,0,1,2,0.0,0.0,0.0,true
+1364,url/src/parser.rs,349,0,0,1,2,0.0,0.0,0.0,"fn log_violation(&self, v: SyntaxViolation) {"
+1365,url/src/parser.rs,350,0,0,1,2,0.0,0.0,0.0,if let Some(f) = self.violation_fn {
+1366,url/src/parser.rs,351,0,0,1,2,0.0,0.0,0.0,f(v)
+1367,url/src/parser.rs,352,0,0,1,2,0.0,0.0,0.0,}
+1368,url/src/parser.rs,353,0,0,1,2,0.0,0.0,0.0,}
+1369,url/src/parser.rs,355,0,2,1,0,0.0,0.0,0.0,"fn log_violation_if(&self, v: SyntaxViolation, test: impl FnOnce() -> bool) {"
+1370,url/src/parser.rs,356,0,2,1,0,0.0,0.0,0.0,if let Some(f) = self.violation_fn {
+1371,url/src/parser.rs,357,0,0,1,2,0.0,0.0,0.0,if test() {
+1372,url/src/parser.rs,358,0,0,1,2,0.0,0.0,0.0,f(v)
+1373,url/src/parser.rs,359,0,0,1,2,0.0,0.0,0.0,}
+1374,url/src/parser.rs,360,0,2,1,0,0.0,0.0,0.0,}
+1375,url/src/parser.rs,361,0,2,1,0,0.0,0.0,0.0,}
+1376,url/src/parser.rs,363,0,0,1,2,0.0,0.0,0.0,pub fn for_setter(serialization: String) -> Parser<'a> {
+1377,url/src/parser.rs,364,0,0,1,2,0.0,0.0,0.0,Parser {
+1378,url/src/parser.rs,365,0,0,1,2,0.0,0.0,0.0,"serialization,"
+1379,url/src/parser.rs,366,0,0,1,2,0.0,0.0,0.0,"base_url: None,"
+1380,url/src/parser.rs,367,0,0,1,2,0.0,0.0,0.0,"query_encoding_override: None,"
+1381,url/src/parser.rs,371,0,0,1,2,0.0,0.0,0.0,}
+1382,url/src/parser.rs,378,0,0,1,2,0.0,0.0,0.0,}
+1383,url/src/parser.rs,381,0,0,1,2,0.0,0.0,0.0,if let Some(base_url) = self.base_url {
+1384,url/src/parser.rs,382,0,0,1,2,0.0,0.0,0.0,if input.starts_with('#') {
+1385,url/src/parser.rs,383,0,0,1,2,0.0,0.0,0.0,"self.fragment_only(base_url, input)"
+1386,url/src/parser.rs,384,0,0,1,2,0.0,0.0,0.0,} else if base_url.cannot_be_a_base() {
+1387,url/src/parser.rs,385,0,0,1,2,0.0,0.0,0.0,Err(ParseError::RelativeUrlWithCannotBeABaseBase)
+1388,url/src/parser.rs,387,0,0,1,2,0.0,0.0,0.0,let scheme_type = SchemeType::from(base_url.scheme());
+1389,url/src/parser.rs,388,0,0,1,2,0.0,0.0,0.0,if scheme_type.is_file() {
+1390,url/src/parser.rs,389,0,0,1,2,0.0,0.0,0.0,"self.parse_file(input, scheme_type, Some(base_url))"
+1391,url/src/parser.rs,391,0,0,1,2,0.0,0.0,0.0,"self.parse_relative(input, scheme_type, base_url)"
+1392,url/src/parser.rs,395,0,0,1,2,0.0,0.0,0.0,Err(ParseError::RelativeUrlWithoutBase)
+1393,url/src/parser.rs,401,0,0,1,2,0.0,0.0,0.0,return Err(());
+1394,url/src/parser.rs,411,0,0,1,2,0.0,0.0,0.0,self.serialization.clear();
+1395,url/src/parser.rs,412,0,0,1,2,0.0,0.0,0.0,return Err(());
+1396,url/src/parser.rs,417,0,0,1,2,0.0,0.0,0.0,if self.context == Context::Setter {
+1397,url/src/parser.rs,418,0,0,1,2,0.0,0.0,0.0,Ok(input)
+1398,url/src/parser.rs,420,0,0,1,2,0.0,0.0,0.0,self.serialization.clear();
+1399,url/src/parser.rs,421,0,0,1,2,0.0,0.0,0.0,Err(())
+1400,url/src/parser.rs,432,0,0,1,2,0.0,0.0,0.0,"self.log_violation_if(ExpectedFileDoubleSlash, || !input.starts_with(""//""));"
+1401,url/src/parser.rs,433,0,0,1,2,0.0,0.0,0.0,let base_file_url = self.base_url.and_then(|base| {
+1402,url/src/parser.rs,434,0,0,1,2,0.0,0.0,0.0,"if base.scheme() == ""file"" {"
+1403,url/src/parser.rs,435,0,0,1,2,0.0,0.0,0.0,Some(base)
+1404,url/src/parser.rs,437,0,0,1,2,0.0,0.0,0.0,None
+1405,url/src/parser.rs,439,0,0,1,2,0.0,0.0,0.0,});
+1406,url/src/parser.rs,440,0,0,1,2,0.0,0.0,0.0,self.serialization.clear();
+1407,url/src/parser.rs,441,0,0,1,2,0.0,0.0,0.0,"self.parse_file(input, scheme_type, base_file_url)"
+1408,url/src/parser.rs,445,0,2,1,0,0.0,0.0,0.0,"let (slashes_count, remaining) = input.count_matching(|c| matches!(c, '/' | '\\'));"
+1409,url/src/parser.rs,446,0,2,1,0,0.0,0.0,0.0,if let Some(base_url) = self.base_url {
+1410,url/src/parser.rs,447,0,0,1,2,0.0,0.0,0.0,if slashes_count < 2
+1411,url/src/parser.rs,448,0,0,1,2,0.0,0.0,0.0,&& base_url.scheme() == &self.serialization[..scheme_end as usize]
+1412,url/src/parser.rs,451,0,0,1,2,0.0,0.0,0.0,debug_assert!(!base_url.cannot_be_a_base());
+1413,url/src/parser.rs,452,0,0,1,2,0.0,0.0,0.0,self.serialization.clear();
+1414,url/src/parser.rs,453,0,0,1,2,0.0,0.0,0.0,"return self.parse_relative(input, scheme_type, base_url);"
+1415,url/src/parser.rs,454,0,0,1,2,0.0,0.0,0.0,}
+1416,url/src/parser.rs,455,0,2,1,0,0.0,0.0,0.0,}
+1417,url/src/parser.rs,457,0,2,1,0,0.0,0.0,0.0,"self.log_violation_if(ExpectedDoubleSlash, || {"
+1418,url/src/parser.rs,458,0,0,1,2,0.0,0.0,0.0,input
+1419,url/src/parser.rs,459,0,0,1,2,0.0,0.0,0.0,.clone()
+1420,url/src/parser.rs,460,0,0,1,2,0.0,0.0,0.0,".take_while(|&c| matches!(c, '/' | '\\'))"
+1421,url/src/parser.rs,461,0,0,1,2,0.0,0.0,0.0,.collect::<String>()
+1422,url/src/parser.rs,462,0,0,1,2,0.0,0.0,0.0,"!= ""//"""
+1423,url/src/parser.rs,463,0,0,1,2,0.0,0.0,0.0,});
+1424,url/src/parser.rs,464,0,2,1,0,0.0,0.0,0.0,"self.after_double_slash(remaining, scheme_type, scheme_end)"
+1425,url/src/parser.rs,479,0,0,1,2,0.0,0.0,0.0,"return self.after_double_slash(input, scheme_type, scheme_end);"
+1426,url/src/parser.rs,493,0,0,1,2,0.0,0.0,0.0,self.parse_cannot_be_a_base_path(input)
+1427,url/src/parser.rs,508,0,0,1,2,0.0,0.0,0.0,fn parse_file(
+1428,url/src/parser.rs,516,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.serialization.is_empty());
+1429,url/src/parser.rs,517,0,0,1,2,0.0,0.0,0.0,"let (first_char, input_after_first_char) = input.split_first();"
+1430,url/src/parser.rs,518,0,0,1,2,0.0,0.0,0.0,"if matches!(first_char, Some('/') | Some('\\')) {"
+1431,url/src/parser.rs,519,0,0,1,2,0.0,0.0,0.0,"self.log_violation_if(SyntaxViolation::Backslash, || first_char == Some('\\'));"
+1432,url/src/parser.rs,521,0,0,1,2,0.0,0.0,0.0,"let (next_char, input_after_next_char) = input_after_first_char.split_first();"
+1433,url/src/parser.rs,522,0,0,1,2,0.0,0.0,0.0,"if matches!(next_char, Some('/') | Some('\\')) {"
+1434,url/src/parser.rs,523,0,0,1,2,0.0,0.0,0.0,"self.log_violation_if(Backslash, || next_char == Some('\\'));"
+1435,url/src/parser.rs,525,0,0,1,2,0.0,0.0,0.0,"self.serialization.push_str(""file://"");"
+1436,url/src/parser.rs,526,0,0,1,2,0.0,0.0,0.0,"let scheme_end = ""file"".len() as u32;"
+1437,url/src/parser.rs,527,0,0,1,2,0.0,0.0,0.0,"let host_start = ""file://"".len() as u32;"
+1438,url/src/parser.rs,528,0,0,1,2,0.0,0.0,0.0,"let (path_start, mut host, remaining) ="
+1439,url/src/parser.rs,529,0,0,1,2,0.0,0.0,0.0,self.parse_file_host(input_after_next_char)?;
+1440,url/src/parser.rs,530,0,0,1,2,0.0,0.0,0.0,let mut host_end = to_u32(self.serialization.len())?;
+1441,url/src/parser.rs,531,0,0,1,2,0.0,0.0,0.0,"let mut has_host = !matches!(host, HostInternal::None);"
+1442,url/src/parser.rs,532,0,0,1,2,0.0,0.0,0.0,let remaining = if path_start {
+1443,url/src/parser.rs,533,0,0,1,2,0.0,0.0,0.0,"self.parse_path_start(SchemeType::File, &mut has_host, remaining)"
+1444,url/src/parser.rs,535,0,0,1,2,0.0,0.0,0.0,let path_start = self.serialization.len();
+1445,url/src/parser.rs,536,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+1446,url/src/parser.rs,537,0,0,1,2,0.0,0.0,0.0,"self.parse_path(SchemeType::File, &mut has_host, path_start, remaining)"
+1447,url/src/parser.rs,542,0,0,1,2,0.0,0.0,0.0,if !has_host {
+1448,url/src/parser.rs,543,0,0,1,2,0.0,0.0,0.0,self.serialization
+1449,url/src/parser.rs,544,0,0,1,2,0.0,0.0,0.0,.drain(host_start as usize..host_end as usize);
+1450,url/src/parser.rs,547,0,0,1,2,0.0,0.0,0.0,}
+1451,url/src/parser.rs,548,0,0,1,2,0.0,0.0,0.0,"let (query_start, fragment_start) ="
+1452,url/src/parser.rs,549,0,0,1,2,0.0,0.0,0.0,"self.parse_query_and_fragment(scheme_type, scheme_end, remaining)?;"
+1453,url/src/parser.rs,550,0,0,1,2,0.0,0.0,0.0,return Ok(Url {
+1454,url/src/parser.rs,551,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1455,url/src/parser.rs,552,0,0,1,2,0.0,0.0,0.0,"scheme_end,"
+1456,url/src/parser.rs,553,0,0,1,2,0.0,0.0,0.0,"username_end: host_start,"
+1457,url/src/parser.rs,554,0,0,1,2,0.0,0.0,0.0,"host_start,"
+1458,url/src/parser.rs,555,0,0,1,2,0.0,0.0,0.0,"host_end,"
+1459,url/src/parser.rs,556,0,0,1,2,0.0,0.0,0.0,"host,"
+1460,url/src/parser.rs,557,0,0,1,2,0.0,0.0,0.0,"port: None,"
+1461,url/src/parser.rs,558,0,0,1,2,0.0,0.0,0.0,"path_start: host_end,"
+1462,url/src/parser.rs,563,0,0,1,2,0.0,0.0,0.0,"self.serialization.push_str(""file://"");"
+1463,url/src/parser.rs,564,0,0,1,2,0.0,0.0,0.0,"let scheme_end = ""file"".len() as u32;"
+1464,url/src/parser.rs,565,0,0,1,2,0.0,0.0,0.0,"let host_start = ""file://"".len();"
+1465,url/src/parser.rs,566,0,0,1,2,0.0,0.0,0.0,let mut host_end = host_start;
+1466,url/src/parser.rs,567,0,0,1,2,0.0,0.0,0.0,let mut host = HostInternal::None;
+1467,url/src/parser.rs,568,0,0,1,2,0.0,0.0,0.0,if !starts_with_windows_drive_letter_segment(&input_after_first_char) {
+1468,url/src/parser.rs,569,0,0,1,2,0.0,0.0,0.0,if let Some(base_url) = base_file_url {
+1469,url/src/parser.rs,570,0,0,1,2,0.0,0.0,0.0,let first_segment = base_url.path_segments().unwrap().next().unwrap();
+1470,url/src/parser.rs,571,0,0,1,2,0.0,0.0,0.0,if is_normalized_windows_drive_letter(first_segment) {
+1471,url/src/parser.rs,572,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+1472,url/src/parser.rs,573,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(first_segment);
+1473,url/src/parser.rs,574,0,0,1,2,0.0,0.0,0.0,} else if let Some(host_str) = base_url.host_str() {
+1474,url/src/parser.rs,575,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(host_str);
+1475,url/src/parser.rs,578,0,0,1,2,0.0,0.0,0.0,}
+1476,url/src/parser.rs,579,0,0,1,2,0.0,0.0,0.0,}
+1477,url/src/parser.rs,580,0,0,1,2,0.0,0.0,0.0,}
+1478,url/src/parser.rs,582,0,0,1,2,0.0,0.0,0.0,let parse_path_input = if let Some(c) = first_char {
+1479,url/src/parser.rs,583,0,0,1,2,0.0,0.0,0.0,if c == '/' || c == '\\' || c == '?' || c == '#' {
+1480,url/src/parser.rs,584,0,0,1,2,0.0,0.0,0.0,input
+1481,url/src/parser.rs,586,0,0,1,2,0.0,0.0,0.0,input_after_first_char
+1482,url/src/parser.rs,589,0,0,1,2,0.0,0.0,0.0,input_after_first_char
+1483,url/src/parser.rs,592,0,0,1,2,0.0,0.0,0.0,let remaining =
+1484,url/src/parser.rs,593,0,0,1,2,0.0,0.0,0.0,"self.parse_path(SchemeType::File, &mut false, host_end, parse_path_input);"
+1485,url/src/parser.rs,595,0,0,1,2,0.0,0.0,0.0,let host_start = host_start as u32;
+1486,url/src/parser.rs,597,0,0,1,2,0.0,0.0,0.0,"let (query_start, fragment_start) ="
+1487,url/src/parser.rs,598,0,0,1,2,0.0,0.0,0.0,"self.parse_query_and_fragment(scheme_type, scheme_end, remaining)?;"
+1488,url/src/parser.rs,600,0,0,1,2,0.0,0.0,0.0,let host_end = host_end as u32;
+1489,url/src/parser.rs,601,0,0,1,2,0.0,0.0,0.0,return Ok(Url {
+1490,url/src/parser.rs,602,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1491,url/src/parser.rs,603,0,0,1,2,0.0,0.0,0.0,"scheme_end,"
+1492,url/src/parser.rs,604,0,0,1,2,0.0,0.0,0.0,"username_end: host_start,"
+1493,url/src/parser.rs,605,0,0,1,2,0.0,0.0,0.0,"host_start,"
+1494,url/src/parser.rs,606,0,0,1,2,0.0,0.0,0.0,"host_end,"
+1495,url/src/parser.rs,607,0,0,1,2,0.0,0.0,0.0,"host,"
+1496,url/src/parser.rs,608,0,0,1,2,0.0,0.0,0.0,"port: None,"
+1497,url/src/parser.rs,609,0,0,1,2,0.0,0.0,0.0,"path_start: host_end,"
+1498,url/src/parser.rs,614,0,0,1,2,0.0,0.0,0.0,}
+1499,url/src/parser.rs,615,0,0,1,2,0.0,0.0,0.0,if let Some(base_url) = base_file_url {
+1500,url/src/parser.rs,616,0,0,1,2,0.0,0.0,0.0,match first_char {
+1501,url/src/parser.rs,619,0,0,1,2,0.0,0.0,0.0,let before_fragment = match base_url.fragment_start {
+1502,url/src/parser.rs,620,0,0,1,2,0.0,0.0,0.0,"Some(i) => &base_url.serialization[..i as usize],"
+1503,url/src/parser.rs,621,0,0,1,2,0.0,0.0,0.0,"None => &*base_url.serialization,"
+1504,url/src/parser.rs,623,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_fragment);
+1505,url/src/parser.rs,624,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1506,url/src/parser.rs,632,0,0,1,2,0.0,0.0,0.0,"let before_query = match (base_url.query_start, base_url.fragment_start) {"
+1507,url/src/parser.rs,633,0,0,1,2,0.0,0.0,0.0,"(None, None) => &*base_url.serialization,"
+1508,url/src/parser.rs,634,0,0,1,2,0.0,0.0,0.0,"(Some(i), _) | (None, Some(i)) => base_url.slice(..i),"
+1509,url/src/parser.rs,636,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_query);
+1510,url/src/parser.rs,637,0,0,1,2,0.0,0.0,0.0,"let (query_start, fragment_start) ="
+1511,url/src/parser.rs,638,0,0,1,2,0.0,0.0,0.0,"self.parse_query_and_fragment(scheme_type, base_url.scheme_end, input)?;"
+1512,url/src/parser.rs,639,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1513,url/src/parser.rs,640,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1514,url/src/parser.rs,646,0,0,1,2,0.0,0.0,0.0,"Some('#') => self.fragment_only(base_url, input),"
+1515,url/src/parser.rs,648,0,0,1,2,0.0,0.0,0.0,if !starts_with_windows_drive_letter_segment(&input) {
+1516,url/src/parser.rs,649,0,0,1,2,0.0,0.0,0.0,"let before_query = match (base_url.query_start, base_url.fragment_start) {"
+1517,url/src/parser.rs,650,0,0,1,2,0.0,0.0,0.0,"(None, None) => &*base_url.serialization,"
+1518,url/src/parser.rs,651,0,0,1,2,0.0,0.0,0.0,"(Some(i), _) | (None, Some(i)) => base_url.slice(..i),"
+1519,url/src/parser.rs,653,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_query);
+1520,url/src/parser.rs,654,0,0,1,2,0.0,0.0,0.0,"self.shorten_path(SchemeType::File, base_url.path_start as usize);"
+1521,url/src/parser.rs,655,0,0,1,2,0.0,0.0,0.0,let remaining = self.parse_path(
+1522,url/src/parser.rs,656,0,0,1,2,0.0,0.0,0.0,"SchemeType::File,"
+1523,url/src/parser.rs,657,0,0,1,2,0.0,0.0,0.0,"&mut true,"
+1524,url/src/parser.rs,658,0,0,1,2,0.0,0.0,0.0,"base_url.path_start as usize,"
+1525,url/src/parser.rs,659,0,0,1,2,0.0,0.0,0.0,"input,"
+1526,url/src/parser.rs,661,0,0,1,2,0.0,0.0,0.0,self.with_query_and_fragment(
+1527,url/src/parser.rs,662,0,0,1,2,0.0,0.0,0.0,"SchemeType::File,"
+1528,url/src/parser.rs,663,0,0,1,2,0.0,0.0,0.0,"base_url.scheme_end,"
+1529,url/src/parser.rs,664,0,0,1,2,0.0,0.0,0.0,"base_url.username_end,"
+1530,url/src/parser.rs,665,0,0,1,2,0.0,0.0,0.0,"base_url.host_start,"
+1531,url/src/parser.rs,666,0,0,1,2,0.0,0.0,0.0,"base_url.host_end,"
+1532,url/src/parser.rs,667,0,0,1,2,0.0,0.0,0.0,"base_url.host,"
+1533,url/src/parser.rs,668,0,0,1,2,0.0,0.0,0.0,"base_url.port,"
+1534,url/src/parser.rs,669,0,0,1,2,0.0,0.0,0.0,"base_url.path_start,"
+1535,url/src/parser.rs,670,0,0,1,2,0.0,0.0,0.0,"remaining,"
+1536,url/src/parser.rs,673,0,0,1,2,0.0,0.0,0.0,"self.serialization.push_str(""file:///"");"
+1537,url/src/parser.rs,674,0,0,1,2,0.0,0.0,0.0,"let scheme_end = ""file"".len() as u32;"
+1538,url/src/parser.rs,675,0,0,1,2,0.0,0.0,0.0,"let path_start = ""file://"".len();"
+1539,url/src/parser.rs,676,0,0,1,2,0.0,0.0,0.0,let remaining =
+1540,url/src/parser.rs,677,0,0,1,2,0.0,0.0,0.0,"self.parse_path(SchemeType::File, &mut false, path_start, input);"
+1541,url/src/parser.rs,678,0,0,1,2,0.0,0.0,0.0,"let (query_start, fragment_start) ="
+1542,url/src/parser.rs,679,0,0,1,2,0.0,0.0,0.0,"self.parse_query_and_fragment(SchemeType::File, scheme_end, remaining)?;"
+1543,url/src/parser.rs,680,0,0,1,2,0.0,0.0,0.0,let path_start = path_start as u32;
+1544,url/src/parser.rs,681,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1545,url/src/parser.rs,682,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1546,url/src/parser.rs,683,0,0,1,2,0.0,0.0,0.0,"scheme_end,"
+1547,url/src/parser.rs,684,0,0,1,2,0.0,0.0,0.0,"username_end: path_start,"
+1548,url/src/parser.rs,685,0,0,1,2,0.0,0.0,0.0,"host_start: path_start,"
+1549,url/src/parser.rs,686,0,0,1,2,0.0,0.0,0.0,"host_end: path_start,"
+1550,url/src/parser.rs,687,0,0,1,2,0.0,0.0,0.0,"host: HostInternal::None,"
+1551,url/src/parser.rs,688,0,0,1,2,0.0,0.0,0.0,"port: None,"
+1552,url/src/parser.rs,689,0,0,1,2,0.0,0.0,0.0,"path_start,"
+1553,url/src/parser.rs,697,0,0,1,2,0.0,0.0,0.0,"self.serialization.push_str(""file:///"");"
+1554,url/src/parser.rs,698,0,0,1,2,0.0,0.0,0.0,"let scheme_end = ""file"".len() as u32;"
+1555,url/src/parser.rs,699,0,0,1,2,0.0,0.0,0.0,"let path_start = ""file://"".len();"
+1556,url/src/parser.rs,700,0,0,1,2,0.0,0.0,0.0,"let remaining = self.parse_path(SchemeType::File, &mut false, path_start, input);"
+1557,url/src/parser.rs,701,0,0,1,2,0.0,0.0,0.0,"let (query_start, fragment_start) ="
+1558,url/src/parser.rs,702,0,0,1,2,0.0,0.0,0.0,"self.parse_query_and_fragment(SchemeType::File, scheme_end, remaining)?;"
+1559,url/src/parser.rs,703,0,0,1,2,0.0,0.0,0.0,let path_start = path_start as u32;
+1560,url/src/parser.rs,704,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1561,url/src/parser.rs,705,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1562,url/src/parser.rs,706,0,0,1,2,0.0,0.0,0.0,"scheme_end,"
+1563,url/src/parser.rs,707,0,0,1,2,0.0,0.0,0.0,"username_end: path_start,"
+1564,url/src/parser.rs,708,0,0,1,2,0.0,0.0,0.0,"host_start: path_start,"
+1565,url/src/parser.rs,709,0,0,1,2,0.0,0.0,0.0,"host_end: path_start,"
+1566,url/src/parser.rs,710,0,0,1,2,0.0,0.0,0.0,"host: HostInternal::None,"
+1567,url/src/parser.rs,711,0,0,1,2,0.0,0.0,0.0,"port: None,"
+1568,url/src/parser.rs,712,0,0,1,2,0.0,0.0,0.0,"path_start,"
+1569,url/src/parser.rs,717,0,0,1,2,0.0,0.0,0.0,}
+1570,url/src/parser.rs,719,0,0,1,2,0.0,0.0,0.0,fn parse_relative(
+1571,url/src/parser.rs,726,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.serialization.is_empty());
+1572,url/src/parser.rs,727,0,0,1,2,0.0,0.0,0.0,"let (first_char, input_after_first_char) = input.split_first();"
+1573,url/src/parser.rs,728,0,0,1,2,0.0,0.0,0.0,match first_char {
+1574,url/src/parser.rs,731,0,0,1,2,0.0,0.0,0.0,let before_fragment = match base_url.fragment_start {
+1575,url/src/parser.rs,732,0,0,1,2,0.0,0.0,0.0,"Some(i) => &base_url.serialization[..i as usize],"
+1576,url/src/parser.rs,733,0,0,1,2,0.0,0.0,0.0,"None => &*base_url.serialization,"
+1577,url/src/parser.rs,735,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_fragment);
+1578,url/src/parser.rs,736,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1579,url/src/parser.rs,744,0,0,1,2,0.0,0.0,0.0,"let before_query = match (base_url.query_start, base_url.fragment_start) {"
+1580,url/src/parser.rs,745,0,0,1,2,0.0,0.0,0.0,"(None, None) => &*base_url.serialization,"
+1581,url/src/parser.rs,746,0,0,1,2,0.0,0.0,0.0,"(Some(i), _) | (None, Some(i)) => base_url.slice(..i),"
+1582,url/src/parser.rs,748,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_query);
+1583,url/src/parser.rs,749,0,0,1,2,0.0,0.0,0.0,"let (query_start, fragment_start) ="
+1584,url/src/parser.rs,750,0,0,1,2,0.0,0.0,0.0,"self.parse_query_and_fragment(scheme_type, base_url.scheme_end, input)?;"
+1585,url/src/parser.rs,751,0,0,1,2,0.0,0.0,0.0,Ok(Url {
+1586,url/src/parser.rs,752,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1587,url/src/parser.rs,758,0,0,1,2,0.0,0.0,0.0,"Some('#') => self.fragment_only(base_url, input),"
+1588,url/src/parser.rs,760,0,0,1,2,0.0,0.0,0.0,"let (slashes_count, remaining) = input.count_matching(|c| matches!(c, '/' | '\\'));"
+1589,url/src/parser.rs,761,0,0,1,2,0.0,0.0,0.0,if slashes_count >= 2 {
+1590,url/src/parser.rs,762,0,0,1,2,0.0,0.0,0.0,"self.log_violation_if(SyntaxViolation::ExpectedDoubleSlash, || {"
+1591,url/src/parser.rs,763,0,0,1,2,0.0,0.0,0.0,input
+1592,url/src/parser.rs,764,0,0,1,2,0.0,0.0,0.0,.clone()
+1593,url/src/parser.rs,765,0,0,1,2,0.0,0.0,0.0,".take_while(|&c| matches!(c, '/' | '\\'))"
+1594,url/src/parser.rs,766,0,0,1,2,0.0,0.0,0.0,.collect::<String>()
+1595,url/src/parser.rs,767,0,0,1,2,0.0,0.0,0.0,"!= ""//"""
+1596,url/src/parser.rs,768,0,0,1,2,0.0,0.0,0.0,});
+1597,url/src/parser.rs,769,0,0,1,2,0.0,0.0,0.0,let scheme_end = base_url.scheme_end;
+1598,url/src/parser.rs,770,0,0,1,2,0.0,0.0,0.0,debug_assert!(base_url.byte_at(scheme_end) == b':');
+1599,url/src/parser.rs,771,0,0,1,2,0.0,0.0,0.0,self.serialization
+1600,url/src/parser.rs,772,0,0,1,2,0.0,0.0,0.0,.push_str(base_url.slice(..scheme_end + 1));
+1601,url/src/parser.rs,773,0,0,1,2,0.0,0.0,0.0,"if let Some(after_prefix) = input.split_prefix(""//"") {"
+1602,url/src/parser.rs,774,0,0,1,2,0.0,0.0,0.0,"return self.after_double_slash(after_prefix, scheme_type, scheme_end);"
+1603,url/src/parser.rs,775,0,0,1,2,0.0,0.0,0.0,}
+1604,url/src/parser.rs,776,0,0,1,2,0.0,0.0,0.0,"return self.after_double_slash(remaining, scheme_type, scheme_end);"
+1605,url/src/parser.rs,777,0,0,1,2,0.0,0.0,0.0,}
+1606,url/src/parser.rs,778,0,0,1,2,0.0,0.0,0.0,let path_start = base_url.path_start;
+1607,url/src/parser.rs,779,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(base_url.slice(..path_start));
+1608,url/src/parser.rs,780,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+1609,url/src/parser.rs,781,0,0,1,2,0.0,0.0,0.0,let remaining = self.parse_path(
+1610,url/src/parser.rs,782,0,0,1,2,0.0,0.0,0.0,"scheme_type,"
+1611,url/src/parser.rs,783,0,0,1,2,0.0,0.0,0.0,"&mut true,"
+1612,url/src/parser.rs,784,0,0,1,2,0.0,0.0,0.0,"path_start as usize,"
+1613,url/src/parser.rs,785,0,0,1,2,0.0,0.0,0.0,"input_after_first_char,"
+1614,url/src/parser.rs,787,0,0,1,2,0.0,0.0,0.0,self.with_query_and_fragment(
+1615,url/src/parser.rs,788,0,0,1,2,0.0,0.0,0.0,"scheme_type,"
+1616,url/src/parser.rs,789,0,0,1,2,0.0,0.0,0.0,"base_url.scheme_end,"
+1617,url/src/parser.rs,790,0,0,1,2,0.0,0.0,0.0,"base_url.username_end,"
+1618,url/src/parser.rs,791,0,0,1,2,0.0,0.0,0.0,"base_url.host_start,"
+1619,url/src/parser.rs,792,0,0,1,2,0.0,0.0,0.0,"base_url.host_end,"
+1620,url/src/parser.rs,793,0,0,1,2,0.0,0.0,0.0,"base_url.host,"
+1621,url/src/parser.rs,794,0,0,1,2,0.0,0.0,0.0,"base_url.port,"
+1622,url/src/parser.rs,795,0,0,1,2,0.0,0.0,0.0,"base_url.path_start,"
+1623,url/src/parser.rs,796,0,0,1,2,0.0,0.0,0.0,"remaining,"
+1624,url/src/parser.rs,800,0,0,1,2,0.0,0.0,0.0,"let before_query = match (base_url.query_start, base_url.fragment_start) {"
+1625,url/src/parser.rs,801,0,0,1,2,0.0,0.0,0.0,"(None, None) => &*base_url.serialization,"
+1626,url/src/parser.rs,802,0,0,1,2,0.0,0.0,0.0,"(Some(i), _) | (None, Some(i)) => base_url.slice(..i),"
+1627,url/src/parser.rs,804,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_query);
+1628,url/src/parser.rs,806,0,0,1,2,0.0,0.0,0.0,"self.pop_path(scheme_type, base_url.path_start as usize);"
+1629,url/src/parser.rs,809,0,0,1,2,0.0,0.0,0.0,if self.serialization.len() == base_url.path_start as usize
+1630,url/src/parser.rs,810,0,0,1,2,0.0,0.0,0.0,&& (SchemeType::from(base_url.scheme()).is_special() || !input.is_empty())
+1631,url/src/parser.rs,811,0,0,1,2,0.0,0.0,0.0,{
+1632,url/src/parser.rs,813,0,0,1,2,0.0,0.0,0.0,}
+1633,url/src/parser.rs,814,0,0,1,2,0.0,0.0,0.0,let remaining = match input.split_first() {
+1634,url/src/parser.rs,815,0,0,1,2,0.0,0.0,0.0,"(Some('/'), remaining) => self.parse_path("
+1635,url/src/parser.rs,816,0,0,1,2,0.0,0.0,0.0,"scheme_type,"
+1636,url/src/parser.rs,817,0,0,1,2,0.0,0.0,0.0,"&mut true,"
+1637,url/src/parser.rs,818,0,0,1,2,0.0,0.0,0.0,"base_url.path_start as usize,"
+1638,url/src/parser.rs,819,0,0,1,2,0.0,0.0,0.0,"remaining,"
+1639,url/src/parser.rs,822,0,0,1,2,0.0,0.0,0.0,"self.parse_path(scheme_type, &mut true, base_url.path_start as usize, input)"
+1640,url/src/parser.rs,825,0,0,1,2,0.0,0.0,0.0,self.with_query_and_fragment(
+1641,url/src/parser.rs,826,0,0,1,2,0.0,0.0,0.0,"scheme_type,"
+1642,url/src/parser.rs,827,0,0,1,2,0.0,0.0,0.0,"base_url.scheme_end,"
+1643,url/src/parser.rs,828,0,0,1,2,0.0,0.0,0.0,"base_url.username_end,"
+1644,url/src/parser.rs,829,0,0,1,2,0.0,0.0,0.0,"base_url.host_start,"
+1645,url/src/parser.rs,830,0,0,1,2,0.0,0.0,0.0,"base_url.host_end,"
+1646,url/src/parser.rs,831,0,0,1,2,0.0,0.0,0.0,"base_url.host,"
+1647,url/src/parser.rs,832,0,0,1,2,0.0,0.0,0.0,"base_url.port,"
+1648,url/src/parser.rs,833,0,0,1,2,0.0,0.0,0.0,"base_url.path_start,"
+1649,url/src/parser.rs,834,0,0,1,2,0.0,0.0,0.0,"remaining,"
+1650,url/src/parser.rs,838,0,0,1,2,0.0,0.0,0.0,}
+1651,url/src/parser.rs,840,0,2,1,0,0.0,0.0,0.0,fn after_double_slash(
+1652,url/src/parser.rs,846,0,2,1,0,0.0,0.0,0.0,self.serialization.push('/');
+1653,url/src/parser.rs,847,0,2,1,0,0.0,0.0,0.0,self.serialization.push('/');
+1654,url/src/parser.rs,849,0,2,1,0,0.0,0.0,0.0,let before_authority = self.serialization.len();
+1655,url/src/parser.rs,850,0,2,1,0,0.0,0.0,0.0,"let (username_end, remaining) = self.parse_userinfo(input, scheme_type)?;"
+1656,url/src/parser.rs,851,0,2,1,0,0.0,0.0,0.0,let has_authority = before_authority != self.serialization.len();
+1657,url/src/parser.rs,853,0,2,1,0,0.0,0.0,0.0,let host_start = to_u32(self.serialization.len())?;
+1658,url/src/parser.rs,854,0,2,1,0,0.0,0.0,0.0,"let (host_end, host, port, remaining) ="
+1659,url/src/parser.rs,855,0,2,1,0,0.0,0.0,0.0,"self.parse_host_and_port(remaining, scheme_end, scheme_type)?;"
+1660,url/src/parser.rs,856,0,2,1,0,0.0,0.0,0.0,if host == HostInternal::None && has_authority {
+1661,url/src/parser.rs,857,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+1662,url/src/parser.rs,858,0,2,1,0,0.0,0.0,0.0,}
+1663,url/src/parser.rs,860,0,2,1,0,0.0,0.0,0.0,let path_start = to_u32(self.serialization.len())?;
+1664,url/src/parser.rs,861,0,2,1,0,0.0,0.0,0.0,"let remaining = self.parse_path_start(scheme_type, &mut true, remaining);"
+1665,url/src/parser.rs,862,0,2,1,0,0.0,0.0,0.0,self.with_query_and_fragment(
+1666,url/src/parser.rs,863,0,2,1,0,0.0,0.0,0.0,"scheme_type,"
+1667,url/src/parser.rs,864,0,2,1,0,0.0,0.0,0.0,"scheme_end,"
+1668,url/src/parser.rs,865,0,2,1,0,0.0,0.0,0.0,"username_end,"
+1669,url/src/parser.rs,866,0,2,1,0,0.0,0.0,0.0,"host_start,"
+1670,url/src/parser.rs,867,0,2,1,0,0.0,0.0,0.0,"host_end,"
+1671,url/src/parser.rs,868,0,2,1,0,0.0,0.0,0.0,"host,"
+1672,url/src/parser.rs,869,0,2,1,0,0.0,0.0,0.0,"port,"
+1673,url/src/parser.rs,870,0,2,1,0,0.0,0.0,0.0,"path_start,"
+1674,url/src/parser.rs,871,0,2,1,0,0.0,0.0,0.0,"remaining,"
+1675,url/src/parser.rs,873,0,2,1,0,0.0,0.0,0.0,}
+1676,url/src/parser.rs,876,0,2,1,0,0.0,0.0,0.0,fn parse_userinfo<'i>(
+1677,url/src/parser.rs,881,0,2,1,0,0.0,0.0,0.0,let mut last_at = None;
+1678,url/src/parser.rs,882,0,2,1,0,0.0,0.0,0.0,let mut remaining = input.clone();
+1679,url/src/parser.rs,883,0,2,1,0,0.0,0.0,0.0,let mut char_count = 0;
+1680,url/src/parser.rs,884,0,2,1,0,0.0,0.0,0.0,while let Some(c) = remaining.next() {
+1681,url/src/parser.rs,885,0,0,1,2,0.0,0.0,0.0,match c {
+1682,url/src/parser.rs,887,0,0,1,2,0.0,0.0,0.0,if last_at.is_some() {
+1683,url/src/parser.rs,888,0,0,1,2,0.0,0.0,0.0,self.log_violation(SyntaxViolation::UnencodedAtSign)
+1684,url/src/parser.rs,890,0,0,1,2,0.0,0.0,0.0,self.log_violation(SyntaxViolation::EmbeddedCredentials)
+1685,url/src/parser.rs,892,0,0,1,2,0.0,0.0,0.0,"last_at = Some((char_count, remaining.clone()))"
+1686,url/src/parser.rs,894,0,2,1,0,0.0,0.0,0.0,"'/' | '?' | '#' => break,"
+1687,url/src/parser.rs,895,0,0,1,2,0.0,0.0,0.0,"'\\' if scheme_type.is_special() => break,"
+1688,url/src/parser.rs,896,0,2,1,0,0.0,0.0,0.0,"_ => (),"
+1689,url/src/parser.rs,898,0,2,1,0,0.0,0.0,0.0,char_count += 1;
+1690,url/src/parser.rs,900,0,2,1,0,0.0,0.0,0.0,"let (mut userinfo_char_count, remaining) = match last_at {"
+1691,url/src/parser.rs,901,0,2,1,0,0.0,0.0,0.0,"None => return Ok((to_u32(self.serialization.len())?, input)),"
+1692,url/src/parser.rs,902,0,0,1,2,0.0,0.0,0.0,"Some((0, remaining)) => {"
+1693,url/src/parser.rs,907,0,0,1,2,0.0,0.0,0.0,"if let (Some(c), _) = remaining.split_first() {"
+1694,url/src/parser.rs,908,0,0,1,2,0.0,0.0,0.0,if c == '/' || c == '?' || c == '#' || (scheme_type.is_special() && c == '\\') {
+1695,url/src/parser.rs,909,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+1696,url/src/parser.rs,910,0,0,1,2,0.0,0.0,0.0,}
+1697,url/src/parser.rs,911,0,0,1,2,0.0,0.0,0.0,}
+1698,url/src/parser.rs,912,0,0,1,2,0.0,0.0,0.0,"return Ok((to_u32(self.serialization.len())?, remaining));"
+1699,url/src/parser.rs,914,0,0,1,2,0.0,0.0,0.0,"Some(x) => x,"
+1700,url/src/parser.rs,917,0,0,1,2,0.0,0.0,0.0,let mut username_end = None;
+1701,url/src/parser.rs,918,0,0,1,2,0.0,0.0,0.0,let mut has_password = false;
+1702,url/src/parser.rs,919,0,0,1,2,0.0,0.0,0.0,let mut has_username = false;
+1703,url/src/parser.rs,920,0,0,1,2,0.0,0.0,0.0,while userinfo_char_count > 0 {
+1704,url/src/parser.rs,921,0,0,1,2,0.0,0.0,0.0,"let (c, utf8_c) = input.next_utf8().unwrap();"
+1705,url/src/parser.rs,922,0,0,1,2,0.0,0.0,0.0,userinfo_char_count -= 1;
+1706,url/src/parser.rs,923,0,0,1,2,0.0,0.0,0.0,if c == ':' && username_end.is_none() {
+1707,url/src/parser.rs,925,0,0,1,2,0.0,0.0,0.0,username_end = Some(to_u32(self.serialization.len())?);
+1708,url/src/parser.rs,927,0,0,1,2,0.0,0.0,0.0,if userinfo_char_count > 0 {
+1709,url/src/parser.rs,928,0,0,1,2,0.0,0.0,0.0,self.serialization.push(':');
+1710,url/src/parser.rs,930,0,0,1,2,0.0,0.0,0.0,}
+1711,url/src/parser.rs,932,0,0,1,2,0.0,0.0,0.0,if !has_password {
+1712,url/src/parser.rs,934,0,0,1,2,0.0,0.0,0.0,}
+1713,url/src/parser.rs,935,0,0,1,2,0.0,0.0,0.0,"self.check_url_code_point(c, &input);"
+1714,url/src/parser.rs,936,0,0,1,2,0.0,0.0,0.0,self.serialization
+1715,url/src/parser.rs,937,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(utf8_c, USERINFO));"
+1716,url/src/parser.rs,940,0,0,1,2,0.0,0.0,0.0,let username_end = match username_end {
+1717,url/src/parser.rs,941,0,0,1,2,0.0,0.0,0.0,"Some(i) => i,"
+1718,url/src/parser.rs,942,0,0,1,2,0.0,0.0,0.0,"None => to_u32(self.serialization.len())?,"
+1719,url/src/parser.rs,944,0,0,1,2,0.0,0.0,0.0,if has_username || has_password {
+1720,url/src/parser.rs,946,0,0,1,2,0.0,0.0,0.0,}
+1721,url/src/parser.rs,947,0,0,1,2,0.0,0.0,0.0,"Ok((username_end, remaining))"
+1722,url/src/parser.rs,948,0,2,1,0,0.0,0.0,0.0,}
+1723,url/src/parser.rs,950,0,2,1,0,0.0,0.0,0.0,fn parse_host_and_port<'i>(
+1724,url/src/parser.rs,956,0,2,1,0,0.0,0.0,0.0,"let (host, remaining) = Parser::parse_host(input, scheme_type)?;"
+1725,url/src/parser.rs,957,0,2,1,0,0.0,0.0,0.0,"write!(&mut self.serialization, ""{}"", host).unwrap();"
+1726,url/src/parser.rs,958,0,2,1,0,0.0,0.0,0.0,let host_end = to_u32(self.serialization.len())?;
+1727,url/src/parser.rs,959,0,2,1,0,0.0,0.0,0.0,if let Host::Domain(h) = &host {
+1728,url/src/parser.rs,960,0,2,1,0,0.0,0.0,0.0,if h.is_empty() {
+1729,url/src/parser.rs,962,0,0,1,2,0.0,0.0,0.0,"if remaining.starts_with("":"") {"
+1730,url/src/parser.rs,963,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+1731,url/src/parser.rs,964,0,0,1,2,0.0,0.0,0.0,}
+1732,url/src/parser.rs,965,0,0,1,2,0.0,0.0,0.0,if scheme_type.is_special() {
+1733,url/src/parser.rs,966,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+1734,url/src/parser.rs,967,0,0,1,2,0.0,0.0,0.0,}
+1735,url/src/parser.rs,968,0,2,1,0,0.0,0.0,0.0,}
+1736,url/src/parser.rs,969,0,0,1,2,0.0,0.0,0.0,};
+1737,url/src/parser.rs,971,0,2,1,0,0.0,0.0,0.0,"let (port, remaining) = if let Some(remaining) = remaining.split_prefix(':') {"
+1738,url/src/parser.rs,972,0,0,1,2,0.0,0.0,0.0,let scheme = || default_port(&self.serialization[..scheme_end as usize]);
+1739,url/src/parser.rs,973,0,0,1,2,0.0,0.0,0.0,"Parser::parse_port(remaining, scheme, self.context)?"
+1740,url/src/parser.rs,975,0,2,1,0,0.0,0.0,0.0,"(None, remaining)"
+1741,url/src/parser.rs,977,0,2,1,0,0.0,0.0,0.0,if let Some(port) = port {
+1742,url/src/parser.rs,978,0,0,1,2,0.0,0.0,0.0,"write!(&mut self.serialization, "":{}"", port).unwrap()"
+1743,url/src/parser.rs,979,0,2,1,0,0.0,0.0,0.0,}
+1744,url/src/parser.rs,980,0,2,1,0,0.0,0.0,0.0,"Ok((host_end, host.into(), port, remaining))"
+1745,url/src/parser.rs,981,0,2,1,0,0.0,0.0,0.0,}
+1746,url/src/parser.rs,988,0,0,1,2,0.0,0.0,0.0,return Parser::get_file_host(input);
+1747,url/src/parser.rs,998,0,0,1,2,0.0,0.0,0.0,match c {
+1748,url/src/parser.rs,999,0,0,1,2,0.0,0.0,0.0,"':' if !inside_square_brackets => break,"
+1749,url/src/parser.rs,1000,0,0,1,2,0.0,0.0,0.0,"'\\' if scheme_type.is_special() => break,"
+1750,url/src/parser.rs,1002,0,0,1,2,0.0,0.0,0.0,'\t' | '\n' | '\r' => {
+1751,url/src/parser.rs,1006,0,0,1,2,0.0,0.0,0.0,inside_square_brackets = true;
+1752,url/src/parser.rs,1007,0,0,1,2,0.0,0.0,0.0,non_ignored_chars += 1
+1753,url/src/parser.rs,1010,0,0,1,2,0.0,0.0,0.0,inside_square_brackets = false;
+1754,url/src/parser.rs,1011,0,0,1,2,0.0,0.0,0.0,non_ignored_chars += 1
+1755,url/src/parser.rs,1013,0,2,1,0,0.0,0.0,0.0,"_ => non_ignored_chars += 1,"
+1756,url/src/parser.rs,1015,0,2,1,0,0.0,0.0,0.0,bytes += c.len_utf8();
+1757,url/src/parser.rs,1022,0,0,1,2,0.0,0.0,0.0,replaced = host_input.collect();
+1758,url/src/parser.rs,1023,0,0,1,2,0.0,0.0,0.0,host_str = &*replaced
+1759,url/src/parser.rs,1030,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::EmptyHost);
+1760,url/src/parser.rs,1035,0,2,1,0,0.0,0.0,0.0,}
+1761,url/src/parser.rs,1036,0,2,1,0,0.0,0.0,0.0,let host = Host::parse(host_str)?;
+1762,url/src/parser.rs,1037,0,2,1,0,0.0,0.0,0.0,"Ok((host, input))"
+1763,url/src/parser.rs,1040,0,0,1,2,0.0,0.0,0.0,"fn get_file_host(input: Input<'_>) -> ParseResult<(Host<String>, Input<'_>)> {"
+1764,url/src/parser.rs,1041,0,0,1,2,0.0,0.0,0.0,"let (_, host_str, remaining) = Parser::file_host(input)?;"
+1765,url/src/parser.rs,1042,0,0,1,2,0.0,0.0,0.0,let host = match Host::parse(&host_str)? {
+1766,url/src/parser.rs,1043,0,0,1,2,0.0,0.0,0.0,"Host::Domain(ref d) if d == ""localhost"" => Host::Domain("""".to_string()),"
+1767,url/src/parser.rs,1044,0,0,1,2,0.0,0.0,0.0,"host => host,"
+1768,url/src/parser.rs,1046,0,0,1,2,0.0,0.0,0.0,"Ok((host, remaining))"
+1769,url/src/parser.rs,1047,0,0,1,2,0.0,0.0,0.0,}
+1770,url/src/parser.rs,1049,0,0,1,2,0.0,0.0,0.0,fn parse_file_host<'i>(
+1771,url/src/parser.rs,1054,0,0,1,2,0.0,0.0,0.0,"let (_, host_str, remaining) = Parser::file_host(input)?;"
+1772,url/src/parser.rs,1055,0,0,1,2,0.0,0.0,0.0,let host = if host_str.is_empty() {
+1773,url/src/parser.rs,1056,0,0,1,2,0.0,0.0,0.0,has_host = false;
+1774,url/src/parser.rs,1057,0,0,1,2,0.0,0.0,0.0,HostInternal::None
+1775,url/src/parser.rs,1059,0,0,1,2,0.0,0.0,0.0,match Host::parse(&host_str)? {
+1776,url/src/parser.rs,1060,0,0,1,2,0.0,0.0,0.0,"Host::Domain(ref d) if d == ""localhost"" => {"
+1777,url/src/parser.rs,1061,0,0,1,2,0.0,0.0,0.0,has_host = false;
+1778,url/src/parser.rs,1062,0,0,1,2,0.0,0.0,0.0,HostInternal::None
+1779,url/src/parser.rs,1064,0,0,1,2,0.0,0.0,0.0,host => {
+1780,url/src/parser.rs,1065,0,0,1,2,0.0,0.0,0.0,"write!(&mut self.serialization, ""{}"", host).unwrap();"
+1781,url/src/parser.rs,1066,0,0,1,2,0.0,0.0,0.0,has_host = true;
+1782,url/src/parser.rs,1067,0,0,1,2,0.0,0.0,0.0,host.into()
+1783,url/src/parser.rs,1071,0,0,1,2,0.0,0.0,0.0,"Ok((has_host, host, remaining))"
+1784,url/src/parser.rs,1072,0,0,1,2,0.0,0.0,0.0,}
+1785,url/src/parser.rs,1074,0,0,1,2,0.0,0.0,0.0,"pub fn file_host<'i>(input: Input<'i>) -> ParseResult<(bool, String, Input<'i>)> {"
+1786,url/src/parser.rs,1077,0,0,1,2,0.0,0.0,0.0,let input_str = input.chars.as_str();
+1787,url/src/parser.rs,1078,0,0,1,2,0.0,0.0,0.0,let mut has_ignored_chars = false;
+1788,url/src/parser.rs,1079,0,0,1,2,0.0,0.0,0.0,let mut non_ignored_chars = 0;
+1789,url/src/parser.rs,1080,0,0,1,2,0.0,0.0,0.0,let mut bytes = 0;
+1790,url/src/parser.rs,1081,0,0,1,2,0.0,0.0,0.0,for c in input_str.chars() {
+1791,url/src/parser.rs,1082,0,0,1,2,0.0,0.0,0.0,match c {
+1792,url/src/parser.rs,1083,0,0,1,2,0.0,0.0,0.0,"'/' | '\\' | '?' | '#' => break,"
+1793,url/src/parser.rs,1084,0,0,1,2,0.0,0.0,0.0,"'\t' | '\n' | '\r' => has_ignored_chars = true,"
+1794,url/src/parser.rs,1085,0,0,1,2,0.0,0.0,0.0,"_ => non_ignored_chars += 1,"
+1795,url/src/parser.rs,1087,0,0,1,2,0.0,0.0,0.0,bytes += c.len_utf8();
+1796,url/src/parser.rs,1091,0,0,1,2,0.0,0.0,0.0,let mut remaining = input.clone();
+1797,url/src/parser.rs,1093,0,0,1,2,0.0,0.0,0.0,let host_input = remaining.by_ref().take(non_ignored_chars);
+1798,url/src/parser.rs,1094,0,0,1,2,0.0,0.0,0.0,if has_ignored_chars {
+1799,url/src/parser.rs,1095,0,0,1,2,0.0,0.0,0.0,replaced = host_input.collect();
+1800,url/src/parser.rs,1096,0,0,1,2,0.0,0.0,0.0,host_str = &*replaced
+1801,url/src/parser.rs,1098,0,0,1,2,0.0,0.0,0.0,for _ in host_input {}
+1802,url/src/parser.rs,1099,0,0,1,2,0.0,0.0,0.0,host_str = &input_str[..bytes]
+1803,url/src/parser.rs,1102,0,0,1,2,0.0,0.0,0.0,if is_windows_drive_letter(host_str) {
+1804,url/src/parser.rs,1103,0,0,1,2,0.0,0.0,0.0,"return Ok((false, """".to_string(), input));"
+1805,url/src/parser.rs,1104,0,0,1,2,0.0,0.0,0.0,}
+1806,url/src/parser.rs,1105,0,0,1,2,0.0,0.0,0.0,"Ok((true, host_str.to_string(), remaining))"
+1807,url/src/parser.rs,1106,0,0,1,2,0.0,0.0,0.0,}
+1808,url/src/parser.rs,1108,0,0,1,2,0.0,0.0,0.0,pub fn parse_port<P>(
+1809,url/src/parser.rs,1116,0,0,1,2,0.0,0.0,0.0,let mut port: u32 = 0;
+1810,url/src/parser.rs,1117,0,0,1,2,0.0,0.0,0.0,let mut has_any_digit = false;
+1811,url/src/parser.rs,1118,0,0,1,2,0.0,0.0,0.0,"while let (Some(c), remaining) = input.split_first() {"
+1812,url/src/parser.rs,1119,0,0,1,2,0.0,0.0,0.0,if let Some(digit) = c.to_digit(10) {
+1813,url/src/parser.rs,1120,0,0,1,2,0.0,0.0,0.0,port = port * 10 + digit;
+1814,url/src/parser.rs,1121,0,0,1,2,0.0,0.0,0.0,if port > ::std::u16::MAX as u32 {
+1815,url/src/parser.rs,1122,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidPort);
+1816,url/src/parser.rs,1123,0,0,1,2,0.0,0.0,0.0,}
+1817,url/src/parser.rs,1124,0,0,1,2,0.0,0.0,0.0,has_any_digit = true;
+1818,url/src/parser.rs,1125,0,0,1,2,0.0,0.0,0.0,"} else if context == Context::UrlParser && !matches!(c, '/' | '\\' | '?' | '#') {"
+1819,url/src/parser.rs,1126,0,0,1,2,0.0,0.0,0.0,return Err(ParseError::InvalidPort);
+1820,url/src/parser.rs,1128,0,0,1,2,0.0,0.0,0.0,break;
+1821,url/src/parser.rs,1130,0,0,1,2,0.0,0.0,0.0,input = remaining;
+1822,url/src/parser.rs,1132,0,0,1,2,0.0,0.0,0.0,let mut opt_port = Some(port as u16);
+1823,url/src/parser.rs,1133,0,0,1,2,0.0,0.0,0.0,if !has_any_digit || opt_port == default_port() {
+1824,url/src/parser.rs,1135,0,0,1,2,0.0,0.0,0.0,}
+1825,url/src/parser.rs,1136,0,0,1,2,0.0,0.0,0.0,"Ok((opt_port, input))"
+1826,url/src/parser.rs,1137,0,0,1,2,0.0,0.0,0.0,}
+1827,url/src/parser.rs,1139,0,2,1,0,0.0,0.0,0.0,pub fn parse_path_start<'i>(
+1828,url/src/parser.rs,1145,0,2,1,0,0.0,0.0,0.0,let path_start = self.serialization.len();
+1829,url/src/parser.rs,1146,0,2,1,0,0.0,0.0,0.0,"let (maybe_c, remaining) = input.split_first();"
+1830,url/src/parser.rs,1148,0,2,1,0,0.0,0.0,0.0,if scheme_type.is_special() {
+1831,url/src/parser.rs,1149,0,2,1,0,0.0,0.0,0.0,if maybe_c == Some('\\') {
+1832,url/src/parser.rs,1151,0,0,1,2,0.0,0.0,0.0,self.log_violation(SyntaxViolation::Backslash);
+1833,url/src/parser.rs,1152,0,2,1,0,0.0,0.0,0.0,}
+1834,url/src/parser.rs,1154,0,2,1,0,0.0,0.0,0.0,if !self.serialization.ends_with('/') {
+1835,url/src/parser.rs,1155,0,2,1,0,0.0,0.0,0.0,self.serialization.push('/');
+1836,url/src/parser.rs,1157,0,2,1,0,0.0,0.0,0.0,if maybe_c == Some('/') || maybe_c == Some('\\') {
+1837,url/src/parser.rs,1158,0,2,1,0,0.0,0.0,0.0,"return self.parse_path(scheme_type, has_host, path_start, remaining);"
+1838,url/src/parser.rs,1159,0,0,1,2,0.0,0.0,0.0,}
+1839,url/src/parser.rs,1160,0,0,1,2,0.0,0.0,0.0,}
+1840,url/src/parser.rs,1161,0,0,1,2,0.0,0.0,0.0,"return self.parse_path(scheme_type, has_host, path_start, input);"
+1841,url/src/parser.rs,1162,0,0,1,2,0.0,0.0,0.0,} else if maybe_c == Some('?') || maybe_c == Some('#') {
+1842,url/src/parser.rs,1168,0,0,1,2,0.0,0.0,0.0,return input;
+1843,url/src/parser.rs,1169,0,0,1,2,0.0,0.0,0.0,}
+1844,url/src/parser.rs,1171,0,0,1,2,0.0,0.0,0.0,if maybe_c != None && maybe_c != Some('/') {
+1845,url/src/parser.rs,1173,0,0,1,2,0.0,0.0,0.0,}
+1846,url/src/parser.rs,1175,0,0,1,2,0.0,0.0,0.0,"self.parse_path(scheme_type, has_host, path_start, input)"
+1847,url/src/parser.rs,1176,0,2,1,0,0.0,0.0,0.0,}
+1848,url/src/parser.rs,1205,0,0,1,2,0.0,0.0,0.0,self.log_violation(SyntaxViolation::Backslash);
+1849,url/src/parser.rs,1206,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+1850,url/src/parser.rs,1207,0,0,1,2,0.0,0.0,0.0,ends_with_slash = true;
+1851,url/src/parser.rs,1208,0,0,1,2,0.0,0.0,0.0,break;
+1852,url/src/parser.rs,1210,0,0,1,2,0.0,0.0,0.0,'?' | '#' if self.context == Context::UrlParser => {
+1853,url/src/parser.rs,1211,0,0,1,2,0.0,0.0,0.0,input = input_before_c;
+1854,url/src/parser.rs,1212,0,0,1,2,0.0,0.0,0.0,break;
+1855,url/src/parser.rs,1217,0,0,1,2,0.0,0.0,0.0,if scheme_type.is_special() {
+1856,url/src/parser.rs,1218,0,0,1,2,0.0,0.0,0.0,self.serialization
+1857,url/src/parser.rs,1219,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(utf8_c, SPECIAL_PATH_SEGMENT));"
+1858,url/src/parser.rs,1220,0,0,1,2,0.0,0.0,0.0,} else {
+1859,url/src/parser.rs,1221,0,0,1,2,0.0,0.0,0.0,self.serialization
+1860,url/src/parser.rs,1222,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(utf8_c, PATH_SEGMENT));"
+1861,url/src/parser.rs,1241,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.serialization.as_bytes()[segment_start - 1] == b'/');
+1862,url/src/parser.rs,1242,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(segment_start);
+1863,url/src/parser.rs,1243,0,0,1,2,0.0,0.0,0.0,if self.serialization.ends_with('/')
+1864,url/src/parser.rs,1244,0,0,1,2,0.0,0.0,0.0,"&& Parser::last_slash_can_be_removed(&self.serialization, path_start)"
+1865,url/src/parser.rs,1245,0,0,1,2,0.0,0.0,0.0,{
+1866,url/src/parser.rs,1247,0,0,1,2,0.0,0.0,0.0,}
+1867,url/src/parser.rs,1248,0,0,1,2,0.0,0.0,0.0,"self.shorten_path(scheme_type, path_start);"
+1868,url/src/parser.rs,1251,0,0,1,2,0.0,0.0,0.0,if ends_with_slash && !self.serialization.ends_with('/') {
+1869,url/src/parser.rs,1253,0,0,1,2,0.0,0.0,0.0,}
+1870,url/src/parser.rs,1267,0,0,1,2,0.0,0.0,0.0,if let Some(c) = segment_before_slash.chars().next() {
+1871,url/src/parser.rs,1268,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(segment_start);
+1872,url/src/parser.rs,1269,0,0,1,2,0.0,0.0,0.0,self.serialization.push(c);
+1873,url/src/parser.rs,1270,0,0,1,2,0.0,0.0,0.0,self.serialization.push(':');
+1874,url/src/parser.rs,1271,0,0,1,2,0.0,0.0,0.0,if ends_with_slash {
+1875,url/src/parser.rs,1273,0,0,1,2,0.0,0.0,0.0,}
+1876,url/src/parser.rs,1274,0,0,1,2,0.0,0.0,0.0,}
+1877,url/src/parser.rs,1277,0,0,1,2,0.0,0.0,0.0,if *has_host {
+1878,url/src/parser.rs,1278,0,0,1,2,0.0,0.0,0.0,self.log_violation(SyntaxViolation::FileWithHostAndWindowsDrive);
+1879,url/src/parser.rs,1280,0,0,1,2,0.0,0.0,0.0,}
+1880,url/src/parser.rs,1293,0,0,1,2,0.0,0.0,0.0,let path = self.serialization.split_off(path_start);
+1881,url/src/parser.rs,1294,0,0,1,2,0.0,0.0,0.0,self.serialization.push('/');
+1882,url/src/parser.rs,1295,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(&path.trim_start_matches('/'));
+1883,url/src/parser.rs,1301,0,0,1,2,0.0,0.0,0.0,"fn last_slash_can_be_removed(serialization: &str, path_start: usize) -> bool {"
+1884,url/src/parser.rs,1302,0,0,1,2,0.0,0.0,0.0,let url_before_segment = &serialization[..serialization.len() - 1];
+1885,url/src/parser.rs,1303,0,0,1,2,0.0,0.0,0.0,if let Some(segment_before_start) = url_before_segment.rfind('/') {
+1886,url/src/parser.rs,1305,0,0,1,2,0.0,0.0,0.0,segment_before_start >= path_start
+1887,url/src/parser.rs,1307,0,0,1,2,0.0,0.0,0.0,&& !path_starts_with_windows_drive_letter(&serialization[segment_before_start..])
+1888,url/src/parser.rs,1309,0,0,1,2,0.0,0.0,0.0,false
+1889,url/src/parser.rs,1311,0,0,1,2,0.0,0.0,0.0,}
+1890,url/src/parser.rs,1314,0,0,1,2,0.0,0.0,0.0,"fn shorten_path(&mut self, scheme_type: SchemeType, path_start: usize) {"
+1891,url/src/parser.rs,1316,0,0,1,2,0.0,0.0,0.0,if self.serialization.len() == path_start {
+1892,url/src/parser.rs,1317,0,0,1,2,0.0,0.0,0.0,return;
+1893,url/src/parser.rs,1318,0,0,1,2,0.0,0.0,0.0,}
+1894,url/src/parser.rs,1320,0,0,1,2,0.0,0.0,0.0,if scheme_type.is_file()
+1895,url/src/parser.rs,1321,0,0,1,2,0.0,0.0,0.0,&& is_normalized_windows_drive_letter(&self.serialization[path_start..])
+1896,url/src/parser.rs,1323,0,0,1,2,0.0,0.0,0.0,return;
+1897,url/src/parser.rs,1324,0,0,1,2,0.0,0.0,0.0,}
+1898,url/src/parser.rs,1326,0,0,1,2,0.0,0.0,0.0,"self.pop_path(scheme_type, path_start);"
+1899,url/src/parser.rs,1327,0,0,1,2,0.0,0.0,0.0,}
+1900,url/src/parser.rs,1330,0,0,1,2,0.0,0.0,0.0,"fn pop_path(&mut self, scheme_type: SchemeType, path_start: usize) {"
+1901,url/src/parser.rs,1331,0,0,1,2,0.0,0.0,0.0,if self.serialization.len() > path_start {
+1902,url/src/parser.rs,1332,0,0,1,2,0.0,0.0,0.0,let slash_position = self.serialization[path_start..].rfind('/').unwrap();
+1903,url/src/parser.rs,1334,0,0,1,2,0.0,0.0,0.0,let segment_start = path_start + slash_position + 1;
+1904,url/src/parser.rs,1336,0,0,1,2,0.0,0.0,0.0,if !(scheme_type.is_file()
+1905,url/src/parser.rs,1337,0,0,1,2,0.0,0.0,0.0,&& is_normalized_windows_drive_letter(&self.serialization[segment_start..]))
+1906,url/src/parser.rs,1338,0,0,1,2,0.0,0.0,0.0,{
+1907,url/src/parser.rs,1339,0,0,1,2,0.0,0.0,0.0,self.serialization.truncate(segment_start);
+1908,url/src/parser.rs,1340,0,0,1,2,0.0,0.0,0.0,}
+1909,url/src/parser.rs,1341,0,0,1,2,0.0,0.0,0.0,}
+1910,url/src/parser.rs,1342,0,0,1,2,0.0,0.0,0.0,}
+1911,url/src/parser.rs,1344,0,0,1,2,0.0,0.0,0.0,"pub fn parse_cannot_be_a_base_path<'i>(&mut self, mut input: Input<'i>) -> Input<'i> {"
+1912,url/src/parser.rs,1346,0,0,1,2,0.0,0.0,0.0,let input_before_c = input.clone();
+1913,url/src/parser.rs,1347,0,0,1,2,0.0,0.0,0.0,match input.next_utf8() {
+1914,url/src/parser.rs,1348,0,0,1,2,0.0,0.0,0.0,"Some(('?', _)) | Some(('#', _)) if self.context == Context::UrlParser => {"
+1915,url/src/parser.rs,1349,0,0,1,2,0.0,0.0,0.0,return input_before_c
+1916,url/src/parser.rs,1351,0,0,1,2,0.0,0.0,0.0,"Some((c, utf8_c)) => {"
+1917,url/src/parser.rs,1352,0,0,1,2,0.0,0.0,0.0,"self.check_url_code_point(c, &input);"
+1918,url/src/parser.rs,1353,0,0,1,2,0.0,0.0,0.0,self.serialization
+1919,url/src/parser.rs,1354,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(utf8_c, CONTROLS));"
+1920,url/src/parser.rs,1356,0,0,1,2,0.0,0.0,0.0,"None => return input,"
+1921,url/src/parser.rs,1359,0,0,1,2,0.0,0.0,0.0,}
+1922,url/src/parser.rs,1399,0,0,1,2,0.0,0.0,0.0,Some('#') => {}
+1923,url/src/parser.rs,1401,0,0,1,2,0.0,0.0,0.0,query_start = Some(to_u32(self.serialization.len())?);
+1924,url/src/parser.rs,1402,0,0,1,2,0.0,0.0,0.0,self.serialization.push('?');
+1925,url/src/parser.rs,1403,0,0,1,2,0.0,0.0,0.0,"let remaining = self.parse_query(scheme_type, scheme_end, input);"
+1926,url/src/parser.rs,1404,0,0,1,2,0.0,0.0,0.0,if let Some(remaining) = remaining {
+1927,url/src/parser.rs,1405,0,0,1,2,0.0,0.0,0.0,input = remaining
+1928,url/src/parser.rs,1407,0,0,1,2,0.0,0.0,0.0,"return Ok((query_start, None));"
+1929,url/src/parser.rs,1411,0,0,1,2,0.0,0.0,0.0,"_ => panic!(""Programming error. parse_query_and_fragment() called without ? or #""),"
+1930,url/src/parser.rs,1414,0,0,1,2,0.0,0.0,0.0,let fragment_start = to_u32(self.serialization.len())?;
+1931,url/src/parser.rs,1415,0,0,1,2,0.0,0.0,0.0,self.serialization.push('#');
+1932,url/src/parser.rs,1416,0,0,1,2,0.0,0.0,0.0,self.parse_fragment(input);
+1933,url/src/parser.rs,1417,0,0,1,2,0.0,0.0,0.0,"Ok((query_start, Some(fragment_start)))"
+1934,url/src/parser.rs,1420,0,0,1,2,0.0,0.0,0.0,pub fn parse_query<'i>(
+1935,url/src/parser.rs,1426,0,0,1,2,0.0,0.0,0.0,let mut query = String::new(); // FIXME: use a streaming decoder instead
+1936,url/src/parser.rs,1427,0,0,1,2,0.0,0.0,0.0,let mut remaining = None;
+1937,url/src/parser.rs,1428,0,0,1,2,0.0,0.0,0.0,while let Some(c) = input.next() {
+1938,url/src/parser.rs,1429,0,0,1,2,0.0,0.0,0.0,if c == '#' && self.context == Context::UrlParser {
+1939,url/src/parser.rs,1430,0,0,1,2,0.0,0.0,0.0,remaining = Some(input);
+1940,url/src/parser.rs,1431,0,0,1,2,0.0,0.0,0.0,break;
+1941,url/src/parser.rs,1432,0,0,1,2,0.0,0.0,0.0,} else {
+1942,url/src/parser.rs,1433,0,0,1,2,0.0,0.0,0.0,"self.check_url_code_point(c, &input);"
+1943,url/src/parser.rs,1434,0,0,1,2,0.0,0.0,0.0,query.push(c);
+1944,url/src/parser.rs,1438,0,0,1,2,0.0,0.0,0.0,let encoding = match &self.serialization[..scheme_end as usize] {
+1945,url/src/parser.rs,1439,0,0,1,2,0.0,0.0,0.0,"""http"" | ""https"" | ""file"" | ""ftp"" => self.query_encoding_override,"
+1946,url/src/parser.rs,1440,0,0,1,2,0.0,0.0,0.0,"_ => None,"
+1947,url/src/parser.rs,1442,0,0,1,2,0.0,0.0,0.0,let query_bytes = if let Some(o) = encoding {
+1948,url/src/parser.rs,1443,0,0,1,2,0.0,0.0,0.0,o(&query)
+1949,url/src/parser.rs,1445,0,0,1,2,0.0,0.0,0.0,query.as_bytes().into()
+1950,url/src/parser.rs,1447,0,0,1,2,0.0,0.0,0.0,let set = if scheme_type.is_special() {
+1951,url/src/parser.rs,1448,0,0,1,2,0.0,0.0,0.0,SPECIAL_QUERY
+1952,url/src/parser.rs,1450,0,0,1,2,0.0,0.0,0.0,QUERY
+1953,url/src/parser.rs,1452,0,0,1,2,0.0,0.0,0.0,"self.serialization.extend(percent_encode(&query_bytes, set));"
+1954,url/src/parser.rs,1453,0,0,1,2,0.0,0.0,0.0,remaining
+1955,url/src/parser.rs,1454,0,0,1,2,0.0,0.0,0.0,}
+1956,url/src/parser.rs,1456,0,0,1,2,0.0,0.0,0.0,"fn fragment_only(mut self, base_url: &Url, mut input: Input<'_>) -> ParseResult<Url> {"
+1957,url/src/parser.rs,1457,0,0,1,2,0.0,0.0,0.0,let before_fragment = match base_url.fragment_start {
+1958,url/src/parser.rs,1458,0,0,1,2,0.0,0.0,0.0,"Some(i) => base_url.slice(..i),"
+1959,url/src/parser.rs,1459,0,0,1,2,0.0,0.0,0.0,"None => &*base_url.serialization,"
+1960,url/src/parser.rs,1461,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.serialization.is_empty());
+1961,url/src/parser.rs,1462,0,0,1,2,0.0,0.0,0.0,self.serialization
+1962,url/src/parser.rs,1463,0,0,1,2,0.0,0.0,0.0,.reserve(before_fragment.len() + input.chars.as_str().len());
+1963,url/src/parser.rs,1464,0,0,1,2,0.0,0.0,0.0,self.serialization.push_str(before_fragment);
+1964,url/src/parser.rs,1465,0,0,1,2,0.0,0.0,0.0,self.serialization.push('#');
+1965,url/src/parser.rs,1466,0,0,1,2,0.0,0.0,0.0,let next = input.next();
+1966,url/src/parser.rs,1467,0,0,1,2,0.0,0.0,0.0,debug_assert!(next == Some('#'));
+1967,url/src/parser.rs,1468,0,0,1,2,0.0,0.0,0.0,self.parse_fragment(input);
+1968,url/src/parser.rs,1470,0,0,1,2,0.0,0.0,0.0,"serialization: self.serialization,"
+1969,url/src/parser.rs,1471,0,0,1,2,0.0,0.0,0.0,"fragment_start: Some(to_u32(before_fragment.len())?),"
+1970,url/src/parser.rs,1474,0,0,1,2,0.0,0.0,0.0,}
+1971,url/src/parser.rs,1476,0,0,1,2,0.0,0.0,0.0,"pub fn parse_fragment(&mut self, mut input: Input<'_>) {"
+1972,url/src/parser.rs,1477,0,0,1,2,0.0,0.0,0.0,"while let Some((c, utf8_c)) = input.next_utf8() {"
+1973,url/src/parser.rs,1478,0,0,1,2,0.0,0.0,0.0,if c == '\0' {
+1974,url/src/parser.rs,1479,0,0,1,2,0.0,0.0,0.0,self.log_violation(SyntaxViolation::NullInFragment)
+1975,url/src/parser.rs,1480,0,0,1,2,0.0,0.0,0.0,} else {
+1976,url/src/parser.rs,1481,0,0,1,2,0.0,0.0,0.0,"self.check_url_code_point(c, &input);"
+1977,url/src/parser.rs,1483,0,0,1,2,0.0,0.0,0.0,self.serialization
+1978,url/src/parser.rs,1484,0,0,1,2,0.0,0.0,0.0,".extend(utf8_percent_encode(utf8_c, FRAGMENT));"
+1979,url/src/parser.rs,1486,0,0,1,2,0.0,0.0,0.0,}
+1980,url/src/parser.rs,1490,0,0,1,2,0.0,0.0,0.0,if c == '%' {
+1981,url/src/parser.rs,1491,0,0,1,2,0.0,0.0,0.0,let mut input = input.clone();
+1982,url/src/parser.rs,1492,0,0,1,2,0.0,0.0,0.0,"if !matches!((input.next(), input.next()), (Some(a), Some(b))"
+1983,url/src/parser.rs,1493,0,0,1,2,0.0,0.0,0.0,if is_ascii_hex_digit(a) && is_ascii_hex_digit(b))
+1984,url/src/parser.rs,1495,0,0,1,2,0.0,0.0,0.0,vfn(SyntaxViolation::PercentDecode)
+1985,url/src/parser.rs,1496,0,0,1,2,0.0,0.0,0.0,}
+1986,url/src/parser.rs,1497,0,0,1,2,0.0,0.0,0.0,} else if !is_url_code_point(c) {
+1987,url/src/parser.rs,1498,0,0,1,2,0.0,0.0,0.0,vfn(SyntaxViolation::NonUrlCodePoint)
+1988,url/src/parser.rs,1499,0,0,1,2,0.0,0.0,0.0,}
+1989,url/src/parser.rs,1505,0,0,1,2,0.0,0.0,0.0,fn is_ascii_hex_digit(c: char) -> bool {
+1990,url/src/parser.rs,1506,0,0,1,2,0.0,0.0,0.0,"matches!(c, 'a'..='f' | 'A'..='F' | '0'..='9')"
+1991,url/src/parser.rs,1507,0,0,1,2,0.0,0.0,0.0,}
+1992,url/src/parser.rs,1517,0,0,1,2,0.0,0.0,0.0,fn is_url_code_point(c: char) -> bool {
+1993,url/src/parser.rs,1518,0,0,1,2,0.0,0.0,0.0,"matches!(c,"
+1994,url/src/parser.rs,1519,0,0,1,2,0.0,0.0,0.0,'a'..='z' |
+1995,url/src/parser.rs,1520,0,0,1,2,0.0,0.0,0.0,'A'..='Z' |
+1996,url/src/parser.rs,1521,0,0,1,2,0.0,0.0,0.0,'0'..='9' |
+1997,url/src/parser.rs,1524,0,0,1,2,0.0,0.0,0.0,'\u{A0}'..='\u{D7FF}' | '\u{E000}'..='\u{FDCF}' | '\u{FDF0}'..='\u{FFFD}' |
+1998,url/src/parser.rs,1525,0,0,1,2,0.0,0.0,0.0,'\u{10000}'..='\u{1FFFD}' | '\u{20000}'..='\u{2FFFD}' |
+1999,url/src/parser.rs,1526,0,0,1,2,0.0,0.0,0.0,'\u{30000}'..='\u{3FFFD}' | '\u{40000}'..='\u{4FFFD}' |
+2000,url/src/parser.rs,1527,0,0,1,2,0.0,0.0,0.0,'\u{50000}'..='\u{5FFFD}' | '\u{60000}'..='\u{6FFFD}' |
+2001,url/src/parser.rs,1528,0,0,1,2,0.0,0.0,0.0,'\u{70000}'..='\u{7FFFD}' | '\u{80000}'..='\u{8FFFD}' |
+2002,url/src/parser.rs,1529,0,0,1,2,0.0,0.0,0.0,'\u{90000}'..='\u{9FFFD}' | '\u{A0000}'..='\u{AFFFD}' |
+2003,url/src/parser.rs,1530,0,0,1,2,0.0,0.0,0.0,'\u{B0000}'..='\u{BFFFD}' | '\u{C0000}'..='\u{CFFFD}' |
+2004,url/src/parser.rs,1531,0,0,1,2,0.0,0.0,0.0,'\u{D0000}'..='\u{DFFFD}' | '\u{E1000}'..='\u{EFFFD}' |
+2005,url/src/parser.rs,1532,0,0,1,2,0.0,0.0,0.0,'\u{F0000}'..='\u{FFFFD}' | '\u{100000}'..='\u{10FFFD}')
+2006,url/src/parser.rs,1533,0,0,1,2,0.0,0.0,0.0,}
+2007,url/src/parser.rs,1543,0,0,1,2,0.0,0.0,0.0,fn ascii_tab_or_new_line(ch: char) -> bool {
+2008,url/src/parser.rs,1544,0,0,1,2,0.0,0.0,0.0,"matches!(ch, '\t' | '\r' | '\n')"
+2009,url/src/parser.rs,1545,0,0,1,2,0.0,0.0,0.0,}
+2010,url/src/parser.rs,1558,0,0,1,2,0.0,0.0,0.0,Err(ParseError::Overflow)
+2011,url/src/parser.rs,1562,0,0,1,2,0.0,0.0,0.0,fn is_normalized_windows_drive_letter(segment: &str) -> bool {
+2012,url/src/parser.rs,1563,0,0,1,2,0.0,0.0,0.0,is_windows_drive_letter(segment) && segment.as_bytes()[1] == b':'
+2013,url/src/parser.rs,1564,0,0,1,2,0.0,0.0,0.0,}
+2014,url/src/parser.rs,1569,0,0,1,2,0.0,0.0,0.0,pub fn is_windows_drive_letter(segment: &str) -> bool {
+2015,url/src/parser.rs,1570,0,0,1,2,0.0,0.0,0.0,segment.len() == 2 && starts_with_windows_drive_letter(segment)
+2016,url/src/parser.rs,1571,0,0,1,2,0.0,0.0,0.0,}
+2017,url/src/parser.rs,1575,0,0,1,2,0.0,0.0,0.0,fn path_starts_with_windows_drive_letter(s: &str) -> bool {
+2018,url/src/parser.rs,1576,0,0,1,2,0.0,0.0,0.0,if let Some(c) = s.as_bytes().get(0) {
+2019,url/src/parser.rs,1577,0,0,1,2,0.0,0.0,0.0,"matches!(c, b'/' | b'\\' | b'?' | b'#') && starts_with_windows_drive_letter(&s[1..])"
+2020,url/src/parser.rs,1579,0,0,1,2,0.0,0.0,0.0,false
+2021,url/src/parser.rs,1581,0,0,1,2,0.0,0.0,0.0,}
+2022,url/src/parser.rs,1583,0,0,1,2,0.0,0.0,0.0,fn starts_with_windows_drive_letter(s: &str) -> bool {
+2023,url/src/parser.rs,1584,0,0,1,2,0.0,0.0,0.0,s.len() >= 2
+2024,url/src/parser.rs,1585,0,0,1,2,0.0,0.0,0.0,&& ascii_alpha(s.as_bytes()[0] as char)
+2025,url/src/parser.rs,1586,0,0,1,2,0.0,0.0,0.0,"&& matches!(s.as_bytes()[1], b':' | b'|')"
+2026,url/src/parser.rs,1587,0,0,1,2,0.0,0.0,0.0,"&& (s.len() == 2 || matches!(s.as_bytes()[2], b'/' | b'\\' | b'?' | b'#'))"
+2027,url/src/parser.rs,1588,0,0,1,2,0.0,0.0,0.0,}
+2028,url/src/parser.rs,1591,0,0,1,2,0.0,0.0,0.0,fn starts_with_windows_drive_letter_segment(input: &Input<'_>) -> bool {
+2029,url/src/parser.rs,1592,0,0,1,2,0.0,0.0,0.0,let mut input = input.clone();
+2030,url/src/parser.rs,1593,0,0,1,2,0.0,0.0,0.0,"match (input.next(), input.next(), input.next()) {"
+2031,url/src/parser.rs,1596,0,0,1,2,0.0,0.0,0.0,"(Some(a), Some(b), Some(c))"
+2032,url/src/parser.rs,1597,0,0,1,2,0.0,0.0,0.0,"if ascii_alpha(a) && matches!(b, ':' | '|') && matches!(c, '/' | '\\' | '?' | '#') =>"
+2033,url/src/parser.rs,1599,0,0,1,2,0.0,0.0,0.0,true
+2034,url/src/parser.rs,1603,0,0,1,2,0.0,0.0,0.0,"(Some(a), Some(b), None) if ascii_alpha(a) && matches!(b, ':' | '|') => true,"
+2035,url/src/parser.rs,1604,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+2036,url/src/parser.rs,1606,0,0,1,2,0.0,0.0,0.0,}
+2037,url/src/path_segments.rs,45,0,0,1,2,0.0,0.0,0.0,pub fn new(url: &mut Url) -> PathSegmentsMut<'_> {
+2038,url/src/path_segments.rs,46,0,0,1,2,0.0,0.0,0.0,let after_path = url.take_after_path();
+2039,url/src/path_segments.rs,47,0,0,1,2,0.0,0.0,0.0,let old_after_path_position = to_u32(url.serialization.len()).unwrap();
+2040,url/src/path_segments.rs,49,0,0,1,2,0.0,0.0,0.0,if SchemeType::from(url.scheme()).is_special() {
+2041,url/src/path_segments.rs,50,0,0,1,2,0.0,0.0,0.0,debug_assert!(url.byte_at(url.path_start) == b'/');
+2042,url/src/path_segments.rs,52,0,0,1,2,0.0,0.0,0.0,debug_assert!(
+2043,url/src/path_segments.rs,53,0,0,1,2,0.0,0.0,0.0,url.serialization.len() == url.path_start as usize
+2044,url/src/path_segments.rs,54,0,0,1,2,0.0,0.0,0.0,|| url.byte_at(url.path_start) == b'/'
+2045,url/src/path_segments.rs,57,0,0,1,2,0.0,0.0,0.0,PathSegmentsMut {
+2046,url/src/path_segments.rs,58,0,0,1,2,0.0,0.0,0.0,"after_first_slash: url.path_start as usize + ""/"".len(),"
+2047,url/src/path_segments.rs,59,0,0,1,2,0.0,0.0,0.0,"url,"
+2048,url/src/path_segments.rs,63,0,0,1,2,0.0,0.0,0.0,}
+2049,url/src/path_segments.rs,66,0,0,1,2,0.0,0.0,0.0,fn drop(&mut self) {
+2050,url/src/path_segments.rs,67,0,0,1,2,0.0,0.0,0.0,self.url
+2051,url/src/path_segments.rs,68,0,0,1,2,0.0,0.0,0.0,".restore_after_path(self.old_after_path_position, &self.after_path)"
+2052,url/src/path_segments.rs,69,0,0,1,2,0.0,0.0,0.0,}
+2053,url/src/path_segments.rs,92,0,0,1,2,0.0,0.0,0.0,pub fn clear(&mut self) -> &mut Self {
+2054,url/src/path_segments.rs,93,0,0,1,2,0.0,0.0,0.0,self.url.serialization.truncate(self.after_first_slash);
+2055,url/src/path_segments.rs,94,0,0,1,2,0.0,0.0,0.0,self
+2056,url/src/path_segments.rs,95,0,0,1,2,0.0,0.0,0.0,}
+2057,url/src/path_segments.rs,125,0,0,1,2,0.0,0.0,0.0,pub fn pop_if_empty(&mut self) -> &mut Self {
+2058,url/src/path_segments.rs,126,0,0,1,2,0.0,0.0,0.0,if self.url.serialization[self.after_first_slash..].ends_with('/') {
+2059,url/src/path_segments.rs,128,0,0,1,2,0.0,0.0,0.0,}
+2060,url/src/path_segments.rs,129,0,0,1,2,0.0,0.0,0.0,self
+2061,url/src/path_segments.rs,130,0,0,1,2,0.0,0.0,0.0,}
+2062,url/src/path_segments.rs,137,0,0,1,2,0.0,0.0,0.0,pub fn pop(&mut self) -> &mut Self {
+2063,url/src/path_segments.rs,138,0,0,1,2,0.0,0.0,0.0,let last_slash = self.url.serialization[self.after_first_slash..]
+2064,url/src/path_segments.rs,139,0,0,1,2,0.0,0.0,0.0,.rfind('/')
+2065,url/src/path_segments.rs,140,0,0,1,2,0.0,0.0,0.0,.unwrap_or(0);
+2066,url/src/path_segments.rs,141,0,0,1,2,0.0,0.0,0.0,self.url
+2067,url/src/path_segments.rs,143,0,0,1,2,0.0,0.0,0.0,.truncate(self.after_first_slash + last_slash);
+2068,url/src/path_segments.rs,144,0,0,1,2,0.0,0.0,0.0,self
+2069,url/src/path_segments.rs,145,0,0,1,2,0.0,0.0,0.0,}
+2070,url/src/path_segments.rs,152,0,0,1,2,0.0,0.0,0.0,"pub fn push(&mut self, segment: &str) -> &mut Self {"
+2071,url/src/path_segments.rs,153,0,0,1,2,0.0,0.0,0.0,self.extend(Some(segment))
+2072,url/src/path_segments.rs,154,0,0,1,2,0.0,0.0,0.0,}
+2073,url/src/path_segments.rs,209,0,0,1,2,0.0,0.0,0.0,"pub fn extend<I>(&mut self, segments: I) -> &mut Self"
+2074,url/src/path_segments.rs,214,0,0,1,2,0.0,0.0,0.0,let scheme_type = SchemeType::from(self.url.scheme());
+2075,url/src/path_segments.rs,215,0,0,1,2,0.0,0.0,0.0,let path_start = self.url.path_start as usize;
+2076,url/src/path_segments.rs,216,0,0,1,2,0.0,0.0,0.0,self.url.mutate(|parser| {
+2077,url/src/path_segments.rs,217,0,0,1,2,0.0,0.0,0.0,parser.context = parser::Context::PathSegmentSetter;
+2078,url/src/path_segments.rs,218,0,0,1,2,0.0,0.0,0.0,for segment in segments {
+2079,url/src/path_segments.rs,219,0,0,1,2,0.0,0.0,0.0,let segment = segment.as_ref();
+2080,url/src/path_segments.rs,220,0,0,1,2,0.0,0.0,0.0,"if matches!(segment, ""."" | "".."") {"
+2081,url/src/path_segments.rs,221,0,0,1,2,0.0,0.0,0.0,continue;
+2082,url/src/path_segments.rs,222,0,0,1,2,0.0,0.0,0.0,}
+2083,url/src/path_segments.rs,223,0,0,1,2,0.0,0.0,0.0,if parser.serialization.len() > path_start + 1
+2084,url/src/path_segments.rs,225,0,0,1,2,0.0,0.0,0.0,|| parser.serialization.len() == path_start
+2085,url/src/path_segments.rs,226,0,0,1,2,0.0,0.0,0.0,{
+2086,url/src/path_segments.rs,228,0,0,1,2,0.0,0.0,0.0,}
+2087,url/src/path_segments.rs,229,0,0,1,2,0.0,0.0,0.0,let mut has_host = true; // FIXME account for this?
+2088,url/src/path_segments.rs,230,0,0,1,2,0.0,0.0,0.0,parser.parse_path(
+2089,url/src/path_segments.rs,231,0,0,1,2,0.0,0.0,0.0,"scheme_type,"
+2090,url/src/path_segments.rs,232,0,0,1,2,0.0,0.0,0.0,"&mut has_host,"
+2091,url/src/path_segments.rs,233,0,0,1,2,0.0,0.0,0.0,"path_start,"
+2092,url/src/path_segments.rs,234,0,0,1,2,0.0,0.0,0.0,"parser::Input::new(segment),"
+2093,url/src/path_segments.rs,237,0,0,1,2,0.0,0.0,0.0,});
+2094,url/src/path_segments.rs,238,0,0,1,2,0.0,0.0,0.0,self
+2095,url/src/path_segments.rs,239,0,0,1,2,0.0,0.0,0.0,}
+2096,url/src/quirks.rs,18,0,0,1,2,0.0,0.0,0.0,pub fn domain_to_ascii(domain: &str) -> String {
+2097,url/src/quirks.rs,19,0,0,1,2,0.0,0.0,0.0,match Host::parse(domain) {
+2098,url/src/quirks.rs,20,0,0,1,2,0.0,0.0,0.0,"Ok(Host::Domain(domain)) => domain,"
+2099,url/src/quirks.rs,21,0,0,1,2,0.0,0.0,0.0,"_ => String::new(),"
+2100,url/src/quirks.rs,23,0,0,1,2,0.0,0.0,0.0,}
+2101,url/src/quirks.rs,26,0,0,1,2,0.0,0.0,0.0,pub fn domain_to_unicode(domain: &str) -> String {
+2102,url/src/quirks.rs,27,0,0,1,2,0.0,0.0,0.0,match Host::parse(domain) {
+2103,url/src/quirks.rs,28,0,0,1,2,0.0,0.0,0.0,Ok(Host::Domain(ref domain)) => {
+2104,url/src/quirks.rs,29,0,0,1,2,0.0,0.0,0.0,"let (unicode, _errors) = idna::domain_to_unicode(domain);"
+2105,url/src/quirks.rs,30,0,0,1,2,0.0,0.0,0.0,unicode
+2106,url/src/quirks.rs,32,0,0,1,2,0.0,0.0,0.0,"_ => String::new(),"
+2107,url/src/quirks.rs,34,0,0,1,2,0.0,0.0,0.0,}
+2108,url/src/quirks.rs,37,0,0,1,2,0.0,0.0,0.0,pub fn href(url: &Url) -> &str {
+2109,url/src/quirks.rs,38,0,0,1,2,0.0,0.0,0.0,url.as_str()
+2110,url/src/quirks.rs,39,0,0,1,2,0.0,0.0,0.0,}
+2111,url/src/quirks.rs,42,0,0,1,2,0.0,0.0,0.0,"pub fn set_href(url: &mut Url, value: &str) -> Result<(), ParseError> {"
+2112,url/src/quirks.rs,43,0,0,1,2,0.0,0.0,0.0,*url = Url::parse(value)?;
+2113,url/src/quirks.rs,44,0,0,1,2,0.0,0.0,0.0,Ok(())
+2114,url/src/quirks.rs,45,0,0,1,2,0.0,0.0,0.0,}
+2115,url/src/quirks.rs,48,0,0,1,2,0.0,0.0,0.0,pub fn origin(url: &Url) -> String {
+2116,url/src/quirks.rs,49,0,0,1,2,0.0,0.0,0.0,url.origin().ascii_serialization()
+2117,url/src/quirks.rs,50,0,0,1,2,0.0,0.0,0.0,}
+2118,url/src/quirks.rs,54,0,0,1,2,0.0,0.0,0.0,pub fn protocol(url: &Url) -> &str {
+2119,url/src/quirks.rs,55,0,0,1,2,0.0,0.0,0.0,"&url.as_str()[..url.scheme().len() + "":"".len()]"
+2120,url/src/quirks.rs,56,0,0,1,2,0.0,0.0,0.0,}
+2121,url/src/quirks.rs,59,0,0,1,2,0.0,0.0,0.0,"pub fn set_protocol(url: &mut Url, mut new_protocol: &str) -> Result<(), ()> {"
+2122,url/src/quirks.rs,62,0,0,1,2,0.0,0.0,0.0,if let Some(position) = new_protocol.find(':') {
+2123,url/src/quirks.rs,64,0,0,1,2,0.0,0.0,0.0,}
+2124,url/src/quirks.rs,65,0,0,1,2,0.0,0.0,0.0,url.set_scheme(new_protocol)
+2125,url/src/quirks.rs,66,0,0,1,2,0.0,0.0,0.0,}
+2126,url/src/quirks.rs,70,0,0,1,2,0.0,0.0,0.0,pub fn username(url: &Url) -> &str {
+2127,url/src/quirks.rs,71,0,0,1,2,0.0,0.0,0.0,url.username()
+2128,url/src/quirks.rs,72,0,0,1,2,0.0,0.0,0.0,}
+2129,url/src/quirks.rs,75,0,0,1,2,0.0,0.0,0.0,"pub fn set_username(url: &mut Url, new_username: &str) -> Result<(), ()> {"
+2130,url/src/quirks.rs,76,0,0,1,2,0.0,0.0,0.0,url.set_username(new_username)
+2131,url/src/quirks.rs,77,0,0,1,2,0.0,0.0,0.0,}
+2132,url/src/quirks.rs,81,0,0,1,2,0.0,0.0,0.0,pub fn password(url: &Url) -> &str {
+2133,url/src/quirks.rs,82,0,0,1,2,0.0,0.0,0.0,"url.password().unwrap_or("""")"
+2134,url/src/quirks.rs,83,0,0,1,2,0.0,0.0,0.0,}
+2135,url/src/quirks.rs,86,0,0,1,2,0.0,0.0,0.0,"pub fn set_password(url: &mut Url, new_password: &str) -> Result<(), ()> {"
+2136,url/src/quirks.rs,87,0,0,1,2,0.0,0.0,0.0,url.set_password(if new_password.is_empty() {
+2137,url/src/quirks.rs,88,0,0,1,2,0.0,0.0,0.0,None
+2138,url/src/quirks.rs,90,0,0,1,2,0.0,0.0,0.0,Some(new_password)
+2139,url/src/quirks.rs,92,0,0,1,2,0.0,0.0,0.0,}
+2140,url/src/quirks.rs,96,0,0,1,2,0.0,0.0,0.0,pub fn host(url: &Url) -> &str {
+2141,url/src/quirks.rs,97,0,0,1,2,0.0,0.0,0.0,&url[Position::BeforeHost..Position::AfterPort]
+2142,url/src/quirks.rs,98,0,0,1,2,0.0,0.0,0.0,}
+2143,url/src/quirks.rs,101,0,0,1,2,0.0,0.0,0.0,"pub fn set_host(url: &mut Url, new_host: &str) -> Result<(), ()> {"
+2144,url/src/quirks.rs,103,0,0,1,2,0.0,0.0,0.0,if url.cannot_be_a_base() {
+2145,url/src/quirks.rs,104,0,0,1,2,0.0,0.0,0.0,return Err(());
+2146,url/src/quirks.rs,105,0,0,1,2,0.0,0.0,0.0,}
+2147,url/src/quirks.rs,108,0,0,1,2,0.0,0.0,0.0,let input = Input::no_trim(new_host);
+2148,url/src/quirks.rs,112,0,0,1,2,0.0,0.0,0.0,let scheme = url.scheme();
+2149,url/src/quirks.rs,113,0,0,1,2,0.0,0.0,0.0,let scheme_type = SchemeType::from(scheme);
+2150,url/src/quirks.rs,114,0,0,1,2,0.0,0.0,0.0,if scheme_type == SchemeType::File && new_host.is_empty() {
+2151,url/src/quirks.rs,115,0,0,1,2,0.0,0.0,0.0,"url.set_host_internal(Host::Domain(String::new()), None);"
+2152,url/src/quirks.rs,116,0,0,1,2,0.0,0.0,0.0,return Ok(());
+2153,url/src/quirks.rs,117,0,0,1,2,0.0,0.0,0.0,}
+2154,url/src/quirks.rs,119,0,0,1,2,0.0,0.0,0.0,"if let Ok((h, remaining)) = Parser::parse_host(input, scheme_type) {"
+2155,url/src/quirks.rs,120,0,0,1,2,0.0,0.0,0.0,host = h;
+2156,url/src/quirks.rs,121,0,0,1,2,0.0,0.0,0.0,opt_port = if let Some(remaining) = remaining.split_prefix(':') {
+2157,url/src/quirks.rs,122,0,0,1,2,0.0,0.0,0.0,if remaining.is_empty() {
+2158,url/src/quirks.rs,123,0,0,1,2,0.0,0.0,0.0,None
+2159,url/src/quirks.rs,125,0,0,1,2,0.0,0.0,0.0,"Parser::parse_port(remaining, || default_port(scheme), Context::Setter)"
+2160,url/src/quirks.rs,126,0,0,1,2,0.0,0.0,0.0,.ok()
+2161,url/src/quirks.rs,127,0,0,1,2,0.0,0.0,0.0,".map(|(port, _remaining)| port)"
+2162,url/src/quirks.rs,130,0,0,1,2,0.0,0.0,0.0,None
+2163,url/src/quirks.rs,133,0,0,1,2,0.0,0.0,0.0,return Err(());
+2164,url/src/quirks.rs,137,0,0,1,2,0.0,0.0,0.0,"if host == Host::Domain("""".to_string()) {"
+2165,url/src/quirks.rs,138,0,0,1,2,0.0,0.0,0.0,if !username(&url).is_empty() {
+2166,url/src/quirks.rs,139,0,0,1,2,0.0,0.0,0.0,return Err(());
+2167,url/src/quirks.rs,140,0,0,1,2,0.0,0.0,0.0,} else if let Some(Some(_)) = opt_port {
+2168,url/src/quirks.rs,141,0,0,1,2,0.0,0.0,0.0,return Err(());
+2169,url/src/quirks.rs,142,0,0,1,2,0.0,0.0,0.0,} else if url.port().is_some() {
+2170,url/src/quirks.rs,143,0,0,1,2,0.0,0.0,0.0,return Err(());
+2171,url/src/quirks.rs,144,0,0,1,2,0.0,0.0,0.0,}
+2172,url/src/quirks.rs,145,0,0,1,2,0.0,0.0,0.0,}
+2173,url/src/quirks.rs,146,0,0,1,2,0.0,0.0,0.0,"url.set_host_internal(host, opt_port);"
+2174,url/src/quirks.rs,147,0,0,1,2,0.0,0.0,0.0,Ok(())
+2175,url/src/quirks.rs,148,0,0,1,2,0.0,0.0,0.0,}
+2176,url/src/quirks.rs,152,0,0,1,2,0.0,0.0,0.0,pub fn hostname(url: &Url) -> &str {
+2177,url/src/quirks.rs,153,0,0,1,2,0.0,0.0,0.0,"url.host_str().unwrap_or("""")"
+2178,url/src/quirks.rs,154,0,0,1,2,0.0,0.0,0.0,}
+2179,url/src/quirks.rs,159,0,0,1,2,0.0,0.0,0.0,return Err(());
+2180,url/src/quirks.rs,165,0,0,1,2,0.0,0.0,0.0,"url.set_host_internal(Host::Domain(String::new()), None);"
+2181,url/src/quirks.rs,166,0,0,1,2,0.0,0.0,0.0,return Ok(());
+2182,url/src/quirks.rs,178,0,0,1,2,0.0,0.0,0.0,"|| !url.password().unwrap_or(&"""").is_empty()"
+2183,url/src/quirks.rs,181,0,0,1,2,0.0,0.0,0.0,}
+2184,url/src/quirks.rs,182,0,0,1,2,0.0,0.0,0.0,}
+2185,url/src/quirks.rs,183,0,0,1,2,0.0,0.0,0.0,}
+2186,url/src/quirks.rs,184,0,0,1,2,0.0,0.0,0.0,"url.set_host_internal(host, None);"
+2187,url/src/quirks.rs,185,0,0,1,2,0.0,0.0,0.0,Ok(())
+2188,url/src/quirks.rs,187,0,0,1,2,0.0,0.0,0.0,Err(())
+2189,url/src/quirks.rs,198,0,0,1,2,0.0,0.0,0.0,"pub fn set_port(url: &mut Url, new_port: &str) -> Result<(), ()> {"
+2190,url/src/quirks.rs,202,0,0,1,2,0.0,0.0,0.0,let scheme = url.scheme();
+2191,url/src/quirks.rs,203,0,0,1,2,0.0,0.0,0.0,"if !url.has_host() || url.host() == Some(Host::Domain("""")) || scheme == ""file"" {"
+2192,url/src/quirks.rs,204,0,0,1,2,0.0,0.0,0.0,return Err(());
+2193,url/src/quirks.rs,205,0,0,1,2,0.0,0.0,0.0,}
+2194,url/src/quirks.rs,206,0,0,1,2,0.0,0.0,0.0,result = Parser::parse_port(
+2195,url/src/quirks.rs,207,0,0,1,2,0.0,0.0,0.0,"Input::new(new_port),"
+2196,url/src/quirks.rs,208,0,0,1,2,0.0,0.0,0.0,"|| default_port(scheme),"
+2197,url/src/quirks.rs,209,0,0,1,2,0.0,0.0,0.0,"Context::Setter,"
+2198,url/src/quirks.rs,212,0,0,1,2,0.0,0.0,0.0,"if let Ok((new_port, _remaining)) = result {"
+2199,url/src/quirks.rs,213,0,0,1,2,0.0,0.0,0.0,url.set_port_internal(new_port);
+2200,url/src/quirks.rs,214,0,0,1,2,0.0,0.0,0.0,Ok(())
+2201,url/src/quirks.rs,216,0,0,1,2,0.0,0.0,0.0,Err(())
+2202,url/src/quirks.rs,218,0,0,1,2,0.0,0.0,0.0,}
+2203,url/src/quirks.rs,222,0,0,1,2,0.0,0.0,0.0,pub fn pathname(url: &Url) -> &str {
+2204,url/src/quirks.rs,223,0,0,1,2,0.0,0.0,0.0,url.path()
+2205,url/src/quirks.rs,224,0,0,1,2,0.0,0.0,0.0,}
+2206,url/src/quirks.rs,227,0,0,1,2,0.0,0.0,0.0,"pub fn set_pathname(url: &mut Url, new_pathname: &str) {"
+2207,url/src/quirks.rs,228,0,0,1,2,0.0,0.0,0.0,if url.cannot_be_a_base() {
+2208,url/src/quirks.rs,229,0,0,1,2,0.0,0.0,0.0,return;
+2209,url/src/quirks.rs,230,0,0,1,2,0.0,0.0,0.0,}
+2210,url/src/quirks.rs,231,0,0,1,2,0.0,0.0,0.0,if new_pathname.starts_with('/')
+2211,url/src/quirks.rs,232,0,0,1,2,0.0,0.0,0.0,|| (SchemeType::from(url.scheme()).is_special()
+2212,url/src/quirks.rs,234,0,0,1,2,0.0,0.0,0.0,&& new_pathname.starts_with('\\'))
+2213,url/src/quirks.rs,236,0,0,1,2,0.0,0.0,0.0,url.set_path(new_pathname)
+2214,url/src/quirks.rs,238,0,0,1,2,0.0,0.0,0.0,"let mut path_to_set = String::from(""/"");"
+2215,url/src/quirks.rs,239,0,0,1,2,0.0,0.0,0.0,path_to_set.push_str(new_pathname);
+2216,url/src/quirks.rs,240,0,0,1,2,0.0,0.0,0.0,url.set_path(&path_to_set)
+2217,url/src/quirks.rs,242,0,0,1,2,0.0,0.0,0.0,}
+2218,url/src/quirks.rs,245,0,0,1,2,0.0,0.0,0.0,pub fn search(url: &Url) -> &str {
+2219,url/src/quirks.rs,246,0,0,1,2,0.0,0.0,0.0,trim(&url[Position::AfterPath..Position::AfterQuery])
+2220,url/src/quirks.rs,247,0,0,1,2,0.0,0.0,0.0,}
+2221,url/src/quirks.rs,250,0,0,1,2,0.0,0.0,0.0,"pub fn set_search(url: &mut Url, new_search: &str) {"
+2222,url/src/quirks.rs,251,0,0,1,2,0.0,0.0,0.0,url.set_query(match new_search {
+2223,url/src/quirks.rs,252,0,0,1,2,0.0,0.0,0.0,""""" => None,"
+2224,url/src/quirks.rs,253,0,0,1,2,0.0,0.0,0.0,"_ if new_search.starts_with('?') => Some(&new_search[1..]),"
+2225,url/src/quirks.rs,254,0,0,1,2,0.0,0.0,0.0,"_ => Some(new_search),"
+2226,url/src/quirks.rs,256,0,0,1,2,0.0,0.0,0.0,}
+2227,url/src/quirks.rs,259,0,0,1,2,0.0,0.0,0.0,pub fn hash(url: &Url) -> &str {
+2228,url/src/quirks.rs,260,0,0,1,2,0.0,0.0,0.0,trim(&url[Position::AfterQuery..])
+2229,url/src/quirks.rs,261,0,0,1,2,0.0,0.0,0.0,}
+2230,url/src/quirks.rs,264,0,0,1,2,0.0,0.0,0.0,"pub fn set_hash(url: &mut Url, new_hash: &str) {"
+2231,url/src/quirks.rs,265,0,0,1,2,0.0,0.0,0.0,url.set_fragment(match new_hash {
+2232,url/src/quirks.rs,268,0,0,1,2,0.0,0.0,0.0,""""" => None,"
+2233,url/src/quirks.rs,270,0,0,1,2,0.0,0.0,0.0,"_ if new_hash.starts_with('#') => Some(&new_hash[1..]),"
+2234,url/src/quirks.rs,271,0,0,1,2,0.0,0.0,0.0,"_ => Some(new_hash),"
+2235,url/src/quirks.rs,273,0,0,1,2,0.0,0.0,0.0,}
+2236,url/src/quirks.rs,275,0,0,1,2,0.0,0.0,0.0,fn trim(s: &str) -> &str {
+2237,url/src/quirks.rs,276,0,0,1,2,0.0,0.0,0.0,if s.len() == 1 {
+2238,url/src/quirks.rs,277,0,0,1,2,0.0,0.0,0.0,""""""
+2239,url/src/quirks.rs,279,0,0,1,2,0.0,0.0,0.0,s
+2240,url/src/quirks.rs,281,0,0,1,2,0.0,0.0,0.0,}
+2241,url/src/slicing.rs,14,0,0,1,2,0.0,0.0,0.0,"fn index(&self, _: RangeFull) -> &str {"
+2242,url/src/slicing.rs,15,0,0,1,2,0.0,0.0,0.0,&self.serialization
+2243,url/src/slicing.rs,16,0,0,1,2,0.0,0.0,0.0,}
+2244,url/src/slicing.rs,21,0,0,1,2,0.0,0.0,0.0,"fn index(&self, range: RangeFrom<Position>) -> &str {"
+2245,url/src/slicing.rs,22,0,0,1,2,0.0,0.0,0.0,&self.serialization[self.index(range.start)..]
+2246,url/src/slicing.rs,23,0,0,1,2,0.0,0.0,0.0,}
+2247,url/src/slicing.rs,28,0,0,1,2,0.0,0.0,0.0,"fn index(&self, range: RangeTo<Position>) -> &str {"
+2248,url/src/slicing.rs,29,0,0,1,2,0.0,0.0,0.0,&self.serialization[..self.index(range.end)]
+2249,url/src/slicing.rs,30,0,0,1,2,0.0,0.0,0.0,}
+2250,url/src/slicing.rs,104,0,0,1,2,0.0,0.0,0.0,"Position::BeforeScheme => 0,"
+2251,url/src/slicing.rs,106,0,0,1,2,0.0,0.0,0.0,"Position::AfterScheme => self.scheme_end as usize,"
+2252,url/src/slicing.rs,109,0,0,1,2,0.0,0.0,0.0,if self.has_authority() {
+2253,url/src/slicing.rs,110,0,0,1,2,0.0,0.0,0.0,"self.scheme_end as usize + ""://"".len()"
+2254,url/src/slicing.rs,112,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(self.scheme_end) == b':');
+2255,url/src/slicing.rs,113,0,0,1,2,0.0,0.0,0.0,"debug_assert!(self.scheme_end + "":"".len() as u32 == self.username_end);"
+2256,url/src/slicing.rs,114,0,0,1,2,0.0,0.0,0.0,"self.scheme_end as usize + "":"".len()"
+2257,url/src/slicing.rs,118,0,0,1,2,0.0,0.0,0.0,"Position::AfterUsername => self.username_end as usize,"
+2258,url/src/slicing.rs,121,0,0,1,2,0.0,0.0,0.0,if self.has_authority() && self.byte_at(self.username_end) == b':' {
+2259,url/src/slicing.rs,122,0,0,1,2,0.0,0.0,0.0,"self.username_end as usize + "":"".len()"
+2260,url/src/slicing.rs,124,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.username_end == self.host_start);
+2261,url/src/slicing.rs,125,0,0,1,2,0.0,0.0,0.0,self.username_end as usize
+2262,url/src/slicing.rs,130,0,0,1,2,0.0,0.0,0.0,if self.has_authority() && self.byte_at(self.username_end) == b':' {
+2263,url/src/slicing.rs,131,0,0,1,2,0.0,0.0,0.0,"debug_assert!(self.byte_at(self.host_start - ""@"".len() as u32) == b'@');"
+2264,url/src/slicing.rs,132,0,0,1,2,0.0,0.0,0.0,"self.host_start as usize - ""@"".len()"
+2265,url/src/slicing.rs,134,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.username_end == self.host_start);
+2266,url/src/slicing.rs,135,0,0,1,2,0.0,0.0,0.0,self.host_start as usize
+2267,url/src/slicing.rs,139,0,0,1,2,0.0,0.0,0.0,"Position::BeforeHost => self.host_start as usize,"
+2268,url/src/slicing.rs,141,0,0,1,2,0.0,0.0,0.0,"Position::AfterHost => self.host_end as usize,"
+2269,url/src/slicing.rs,145,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(self.host_end) == b':');
+2270,url/src/slicing.rs,146,0,0,1,2,0.0,0.0,0.0,"self.host_end as usize + "":"".len()"
+2271,url/src/slicing.rs,154,0,0,1,2,0.0,0.0,0.0,"Position::BeforePath => self.path_start as usize,"
+2272,url/src/slicing.rs,156,0,0,1,2,0.0,0.0,0.0,"Position::AfterPath => match (self.query_start, self.fragment_start) {"
+2273,url/src/slicing.rs,157,0,0,1,2,0.0,0.0,0.0,"(Some(q), _) => q as usize,"
+2274,url/src/slicing.rs,158,0,0,1,2,0.0,0.0,0.0,"(None, Some(f)) => f as usize,"
+2275,url/src/slicing.rs,159,0,0,1,2,0.0,0.0,0.0,"(None, None) => self.serialization.len(),"
+2276,url/src/slicing.rs,162,0,0,1,2,0.0,0.0,0.0,"Position::BeforeQuery => match (self.query_start, self.fragment_start) {"
+2277,url/src/slicing.rs,163,0,0,1,2,0.0,0.0,0.0,"(Some(q), _) => {"
+2278,url/src/slicing.rs,164,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(q) == b'?');
+2279,url/src/slicing.rs,165,0,0,1,2,0.0,0.0,0.0,"q as usize + ""?"".len()"
+2280,url/src/slicing.rs,167,0,0,1,2,0.0,0.0,0.0,"(None, Some(f)) => f as usize,"
+2281,url/src/slicing.rs,168,0,0,1,2,0.0,0.0,0.0,"(None, None) => self.serialization.len(),"
+2282,url/src/slicing.rs,171,0,0,1,2,0.0,0.0,0.0,Position::AfterQuery => match self.fragment_start {
+2283,url/src/slicing.rs,172,0,0,1,2,0.0,0.0,0.0,"None => self.serialization.len(),"
+2284,url/src/slicing.rs,173,0,0,1,2,0.0,0.0,0.0,"Some(f) => f as usize,"
+2285,url/src/slicing.rs,176,0,0,1,2,0.0,0.0,0.0,Position::BeforeFragment => match self.fragment_start {
+2286,url/src/slicing.rs,177,0,0,1,2,0.0,0.0,0.0,Some(f) => {
+2287,url/src/slicing.rs,178,0,0,1,2,0.0,0.0,0.0,debug_assert!(self.byte_at(f) == b'#');
+2288,url/src/slicing.rs,179,0,0,1,2,0.0,0.0,0.0,"f as usize + ""#"".len()"
+2289,url/src/slicing.rs,181,0,0,1,2,0.0,0.0,0.0,"None => self.serialization.len(),"
+2290,url/src/slicing.rs,184,0,0,1,2,0.0,0.0,0.0,"Position::AfterFragment => self.serialization.len(),"

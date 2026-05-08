@@ -1,0 +1,34 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index 3b4faab..ce30677 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -414,3 +414,29 @@ mod tests {
+         assert_eq!(format!("{:x}", context.compute()), "aa559b4e3523a6c931f08f4df52d58f2");
+     }
+ }
++
++#[test]
++fn manual_length_overflow_handled() {
++    use std::io::Write;
++    let data = vec![0u8; 8 * 1024 * 1024];
++    let mut ctx = Context::new();
++    for _ in 0..600 {
++        ctx.write(&data).unwrap();
++    }
++}
++
++#[test]
++fn manual_normal_hash() {
++    use std::io::Write;
++    let mut ctx = Context::new();
++    ctx.write(b"hello").unwrap();
++    let result = ctx.compute();
++    assert_eq!(result.len(), 16);
++}
++
++#[test]
++fn manual_empty_hash() {
++    let ctx = Context::new();
++    let result = ctx.compute();
++    assert_eq!(result.len(), 16);
++}

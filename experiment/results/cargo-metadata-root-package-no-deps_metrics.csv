@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/lib.rs:160,true,6,7,6.0,3,0.03468208092485549,0.04046242774566474,5,false,false,false,true,173,src/lib.rs,160,let root = self.resolve.as_ref()?.root.as_ref()?;
+dstar2,src/lib.rs:160,true,6,7,6.0,3,0.03468208092485549,0.04046242774566474,5,false,false,false,true,173,src/lib.rs,160,let root = self.resolve.as_ref()?.root.as_ref()?;
+tarantula,src/lib.rs:160,true,6,7,6.0,3,0.03468208092485549,0.04046242774566474,5,false,false,false,true,173,src/lib.rs,160,let root = self.resolve.as_ref()?.root.as_ref()?;

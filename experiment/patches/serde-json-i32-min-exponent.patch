@@ -1,0 +1,26 @@
+diff --git a/tests/test.rs b/tests/test.rs
+index 954ac90..8b77b41 100644
+--- a/tests/test.rs
++++ b/tests/test.rs
+@@ -834,6 +834,21 @@ fn test_parse_negative_zero() {
+     }
+ }
+ 
++#[test]
++fn manual_parse_f64_i32_min_exponent() {
++    assert_eq!(0.0, from_str::<f64>("3.5E-2147483647").unwrap());
++}
++
++#[test]
++fn manual_parse_f64_large_negative_exponent() {
++    assert_eq!(0.0, from_str::<f64>("3.5E-2147483646").unwrap());
++}
++
++#[test]
++fn manual_parse_f64_small_exponent() {
++    assert_eq!(350.0, from_str::<f64>("3.5E2").unwrap());
++}
++
+ #[test]
+ fn test_parse_f64() {
+     test_parse_ok(vec![

@@ -1,0 +1,29 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index eaeb857..89c055b 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -449,6 +449,24 @@ fn count_ones_panic() {
+     }
+ }
+ 
++#[test]
++fn manual_count_ones_full_even_block_range() {
++    let fb = FixedBitSet::with_capacity(512);
++    assert_eq!(0, fb.count_ones(..));
++}
++
++#[test]
++fn manual_count_ones_partial_even_block_range() {
++    let fb = FixedBitSet::with_capacity(512);
++    assert_eq!(0, fb.count_ones(..511));
++}
++
++#[test]
++fn manual_count_ones_odd_capacity_range() {
++    let fb = FixedBitSet::with_capacity(513);
++    assert_eq!(0, fb.count_ones(..));
++}
++
+ 
+ #[test]
+ fn default() {

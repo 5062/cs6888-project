@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,crates/toml_edit/src/parser/numbers.rs:158,true,6,47,25.5,44,0.0017862459065197975,0.013992259601071748,5,false,false,false,true,3359,crates/toml_edit/src/parser/numbers.rs,158,"float_.map_res(|s| s.replace('_', """").parse()),"
+dstar2,crates/toml_edit/src/parser/numbers.rs:158,true,6,47,25.5,44,0.0017862459065197975,0.013992259601071748,5,false,false,false,true,3359,crates/toml_edit/src/parser/numbers.rs,158,"float_.map_res(|s| s.replace('_', """").parse()),"
+tarantula,crates/toml_edit/src/parser/numbers.rs:158,true,6,47,25.5,44,0.0017862459065197975,0.013992259601071748,5,false,false,false,true,3359,crates/toml_edit/src/parser/numbers.rs,158,"float_.map_res(|s| s.replace('_', """").parse()),"

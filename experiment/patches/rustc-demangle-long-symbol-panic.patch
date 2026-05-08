@@ -1,0 +1,28 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index 3a8e905..58a0a87 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -384,3 +384,23 @@ mod tests {
+         t_nohash!("_ZN9backtrace3foo17hbb467fcdaea5d79bE.llvm.A5310EB9", "backtrace::foo");
+     }
+ }
++
++#[test]
++fn manual_demangle_long_symbol() {
++    let result = demangle("_ZN2222222222222222222222EE");
++    let _ = format!("{}", result);
++}
++
++#[test]
++fn manual_demangle_normal() {
++    let result = demangle("_ZN3foo3barE");
++    let s = format!("{}", result);
++    assert!(!s.is_empty());
++}
++
++#[test]
++fn manual_demangle_empty() {
++    let result = demangle("");
++    let s = format!("{}", result);
++    assert!(!s.is_empty());
++}

@@ -1,0 +1,108 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/lib.rs,83,1,0,0,2,1.0,1.0,inf,pub fn demangle(mut s: &str) -> Demangle {
+2,src/lib.rs,87,1,0,0,2,1.0,1.0,inf,"let llvm = "".llvm."";"
+3,src/lib.rs,88,1,0,0,2,1.0,1.0,inf,if let Some(i) = s.find(llvm) {
+4,src/lib.rs,100,1,0,0,2,1.0,1.0,inf,}
+5,src/lib.rs,105,1,0,0,2,1.0,1.0,inf,let mut valid = true;
+6,src/lib.rs,106,1,0,0,2,1.0,1.0,inf,let mut inner = s;
+7,src/lib.rs,107,1,0,0,2,1.0,1.0,inf,"if s.len() > 4 && s.starts_with(""_ZN"") && s.ends_with('E') {"
+8,src/lib.rs,108,1,0,0,2,1.0,1.0,inf,inner = &s[3..s.len() - 1];
+9,src/lib.rs,120,1,0,0,2,1.0,1.0,inf,let mut elements = 0;
+10,src/lib.rs,121,1,0,0,2,1.0,1.0,inf,if valid {
+11,src/lib.rs,122,1,0,0,2,1.0,1.0,inf,let mut chars = inner.chars();
+12,src/lib.rs,123,1,0,0,2,1.0,1.0,inf,while valid {
+13,src/lib.rs,124,1,0,0,2,1.0,1.0,inf,let mut i = 0;
+14,src/lib.rs,125,1,0,0,2,1.0,1.0,inf,for c in chars.by_ref() {
+15,src/lib.rs,126,1,0,0,2,1.0,1.0,inf,if c.is_digit(10) {
+16,src/lib.rs,129,1,0,0,2,1.0,1.0,inf,break;
+17,src/lib.rs,132,1,0,0,2,1.0,1.0,inf,if i == 0 {
+18,src/lib.rs,133,1,0,0,2,1.0,1.0,inf,valid = chars.next().is_none();
+19,src/lib.rs,134,1,0,0,2,1.0,1.0,inf,break;
+20,src/lib.rs,143,1,0,0,2,1.0,1.0,inf,Demangle {
+21,src/lib.rs,144,1,0,0,2,1.0,1.0,inf,"inner: inner,"
+22,src/lib.rs,145,1,0,0,2,1.0,1.0,inf,"valid: valid,"
+23,src/lib.rs,149,1,0,0,2,1.0,1.0,inf,}
+24,src/lib.rs,89,0,0,1,2,0.0,0.0,0.0,let candidate = &s[i + llvm.len()..];
+25,src/lib.rs,90,0,0,1,2,0.0,0.0,0.0,let all_hex = candidate.chars().all(|c| {
+26,src/lib.rs,91,0,0,1,2,0.0,0.0,0.0,match c {
+27,src/lib.rs,92,0,0,1,2,0.0,0.0,0.0,"'A' ... 'F' | '0' ... '9' => true,"
+28,src/lib.rs,93,0,0,1,2,0.0,0.0,0.0,"_ => false,"
+29,src/lib.rs,95,0,0,1,2,0.0,0.0,0.0,});
+30,src/lib.rs,97,0,0,1,2,0.0,0.0,0.0,if all_hex {
+31,src/lib.rs,99,0,0,1,2,0.0,0.0,0.0,}
+32,src/lib.rs,109,0,0,1,2,0.0,0.0,0.0,"} else if s.len() > 3 && s.starts_with(""ZN"") && s.ends_with('E') {"
+33,src/lib.rs,112,0,0,1,2,0.0,0.0,0.0,inner = &s[2..s.len() - 1];
+34,src/lib.rs,113,0,0,1,2,0.0,0.0,0.0,"} else if s.len() > 5 && s.starts_with(""__ZN"") && s.ends_with('E') {"
+35,src/lib.rs,115,0,0,1,2,0.0,0.0,0.0,inner = &s[4..s.len() - 1];
+36,src/lib.rs,116,0,0,1,2,0.0,0.0,0.0,} else {
+37,src/lib.rs,135,0,0,1,2,0.0,0.0,0.0,} else if chars.by_ref().take(i - 1).count() != i - 1 {
+38,src/lib.rs,137,0,0,1,2,0.0,0.0,0.0,} else {
+39,src/lib.rs,141,0,0,1,2,0.0,0.0,0.0,}
+40,src/lib.rs,171,0,0,1,2,0.0,0.0,0.0,"pub fn try_demangle(s: &str) -> Result<Demangle, TryDemangleError> {"
+41,src/lib.rs,172,0,0,1,2,0.0,0.0,0.0,let sym = demangle(s);
+42,src/lib.rs,173,0,0,1,2,0.0,0.0,0.0,if sym.valid {
+43,src/lib.rs,174,0,0,1,2,0.0,0.0,0.0,Ok(sym)
+44,src/lib.rs,176,0,0,1,2,0.0,0.0,0.0,Err(TryDemangleError { _priv: () })
+45,src/lib.rs,178,0,0,1,2,0.0,0.0,0.0,}
+46,src/lib.rs,182,0,0,1,2,0.0,0.0,0.0,pub fn as_str(&self) -> &'a str {
+47,src/lib.rs,183,0,0,1,2,0.0,0.0,0.0,self.original
+48,src/lib.rs,184,0,0,1,2,0.0,0.0,0.0,}
+49,src/lib.rs,188,0,0,1,2,0.0,0.0,0.0,fn is_rust_hash(s: &str) -> bool {
+50,src/lib.rs,189,0,0,1,2,0.0,0.0,0.0,s.starts_with('h') && s[1..].chars().all(|c| c.is_digit(16))
+51,src/lib.rs,190,0,0,1,2,0.0,0.0,0.0,}
+52,src/lib.rs,193,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+53,src/lib.rs,195,0,0,1,2,0.0,0.0,0.0,if !self.valid {
+54,src/lib.rs,196,0,0,1,2,0.0,0.0,0.0,return f.write_str(self.inner);
+55,src/lib.rs,197,0,0,1,2,0.0,0.0,0.0,}
+56,src/lib.rs,199,0,0,1,2,0.0,0.0,0.0,let mut inner = self.inner;
+57,src/lib.rs,200,0,0,1,2,0.0,0.0,0.0,for element in 0..self.elements {
+58,src/lib.rs,201,0,0,1,2,0.0,0.0,0.0,let mut rest = inner;
+59,src/lib.rs,202,0,0,1,2,0.0,0.0,0.0,while rest.chars().next().unwrap().is_digit(10) {
+60,src/lib.rs,205,0,0,1,2,0.0,0.0,0.0,let i: usize = inner[..(inner.len() - rest.len())].parse().unwrap();
+61,src/lib.rs,206,0,0,1,2,0.0,0.0,0.0,inner = &rest[i..];
+62,src/lib.rs,207,0,0,1,2,0.0,0.0,0.0,rest = &rest[..i];
+63,src/lib.rs,210,0,0,1,2,0.0,0.0,0.0,if f.alternate() && element+1 == self.elements && is_rust_hash(&rest) {
+64,src/lib.rs,211,0,0,1,2,0.0,0.0,0.0,break;
+65,src/lib.rs,212,0,0,1,2,0.0,0.0,0.0,}
+66,src/lib.rs,213,0,0,1,2,0.0,0.0,0.0,if element != 0 {
+67,src/lib.rs,214,0,0,1,2,0.0,0.0,0.0,"try!(f.write_str(""::""));"
+68,src/lib.rs,215,0,0,1,2,0.0,0.0,0.0,}
+69,src/lib.rs,216,0,0,1,2,0.0,0.0,0.0,"if rest.starts_with(""_$"") {"
+70,src/lib.rs,218,0,0,1,2,0.0,0.0,0.0,}
+71,src/lib.rs,219,0,0,1,2,0.0,0.0,0.0,while !rest.is_empty() {
+72,src/lib.rs,220,0,0,1,2,0.0,0.0,0.0,if rest.starts_with('.') {
+73,src/lib.rs,221,0,0,1,2,0.0,0.0,0.0,if let Some('.') = rest[1..].chars().next() {
+74,src/lib.rs,222,0,0,1,2,0.0,0.0,0.0,"try!(f.write_str(""::""));"
+75,src/lib.rs,223,0,0,1,2,0.0,0.0,0.0,rest = &rest[2..];
+76,src/lib.rs,225,0,0,1,2,0.0,0.0,0.0,"try!(f.write_str("".""));"
+77,src/lib.rs,226,0,0,1,2,0.0,0.0,0.0,rest = &rest[1..];
+78,src/lib.rs,228,0,0,1,2,0.0,0.0,0.0,} else if rest.starts_with('$') {
+79,src/lib.rs,244,0,0,1,2,0.0,0.0,0.0,demangle! {
+80,src/lib.rs,245,0,0,1,2,0.0,0.0,0.0,"""$SP$"" => ""@"","
+81,src/lib.rs,246,0,0,1,2,0.0,0.0,0.0,"""$BP$"" => ""*"","
+82,src/lib.rs,247,0,0,1,2,0.0,0.0,0.0,"""$RF$"" => ""&"","
+83,src/lib.rs,248,0,0,1,2,0.0,0.0,0.0,"""$LT$"" => ""<"","
+84,src/lib.rs,249,0,0,1,2,0.0,0.0,0.0,"""$GT$"" => "">"","
+85,src/lib.rs,250,0,0,1,2,0.0,0.0,0.0,"""$LP$"" => ""("","
+86,src/lib.rs,251,0,0,1,2,0.0,0.0,0.0,"""$RP$"" => "")"","
+87,src/lib.rs,252,0,0,1,2,0.0,0.0,0.0,"""$C$"" => "","","
+88,src/lib.rs,256,0,0,1,2,0.0,0.0,0.0,"""$u7e$"" => ""~"","
+89,src/lib.rs,257,0,0,1,2,0.0,0.0,0.0,"""$u20$"" => "" "","
+90,src/lib.rs,258,0,0,1,2,0.0,0.0,0.0,"""$u27$"" => ""'"","
+91,src/lib.rs,259,0,0,1,2,0.0,0.0,0.0,"""$u5b$"" => ""["","
+92,src/lib.rs,260,0,0,1,2,0.0,0.0,0.0,"""$u5d$"" => ""]"","
+93,src/lib.rs,261,0,0,1,2,0.0,0.0,0.0,"""$u7b$"" => ""{"","
+94,src/lib.rs,262,0,0,1,2,0.0,0.0,0.0,"""$u7d$"" => ""}"","
+95,src/lib.rs,263,0,0,1,2,0.0,0.0,0.0,"""$u3b$"" => "";"","
+96,src/lib.rs,264,0,0,1,2,0.0,0.0,0.0,"""$u2b$"" => ""+"","
+97,src/lib.rs,265,0,0,1,2,0.0,0.0,0.0,"""$u22$"" => ""\"""""
+98,src/lib.rs,268,0,0,1,2,0.0,0.0,0.0,"let idx = match rest.char_indices().find(|&(_, c)| c == '$' || c == '.') {"
+99,src/lib.rs,269,0,0,1,2,0.0,0.0,0.0,"None => rest.len(),"
+100,src/lib.rs,270,0,0,1,2,0.0,0.0,0.0,"Some((i, _)) => i,"
+101,src/lib.rs,272,0,0,1,2,0.0,0.0,0.0,try!(f.write_str(&rest[..idx]));
+102,src/lib.rs,273,0,0,1,2,0.0,0.0,0.0,rest = &rest[idx..];
+103,src/lib.rs,278,0,0,1,2,0.0,0.0,0.0,Ok(())
+104,src/lib.rs,279,0,0,1,2,0.0,0.0,0.0,}
+105,src/lib.rs,283,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+106,src/lib.rs,284,0,0,1,2,0.0,0.0,0.0,"fmt::Display::fmt(self, f)"
+107,src/lib.rs,285,0,0,1,2,0.0,0.0,0.0,}

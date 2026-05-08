@@ -1,0 +1,29 @@
+diff --git a/url/tests/unit.rs b/url/tests/unit.rs
+index d27016b..03ae1ae 100644
+--- a/url/tests/unit.rs
++++ b/url/tests/unit.rs
+@@ -1217,3 +1217,24 @@ fn test_authority() {
+         "%C3%A0lex:%C3%A0lex@xn--lex-8ka.xn--p1ai.example.com"
+     );
+ }
++
++#[test]
++fn manual_anarchist_url_roundtrip() {
++    let url = url::Url::parse("         m:/          /%2E.//     \\           ").unwrap();
++    let encoded = url.as_str();
++    let _reparsed = url::Url::parse(encoded).unwrap();
++}
++
++#[test]
++fn manual_http_url_roundtrip() {
++    let url = url::Url::parse("http://example.com/path").unwrap();
++    let encoded = url.as_str();
++    let reparsed = url::Url::parse(encoded).unwrap();
++    assert_eq!(url, reparsed);
++}
++
++#[test]
++fn manual_no_leading_empty_segment() {
++    let url = url::Url::parse("http://example.com/path").unwrap();
++    assert_eq!(url.path(), "/path");
++}

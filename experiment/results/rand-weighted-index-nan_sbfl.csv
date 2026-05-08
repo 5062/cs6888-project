@@ -1,0 +1,987 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/distributions/uniform.rs,300,1,2,0,0,0.5,0.5773502691896258,0.5,fn borrow(&self) -> &Borrowed {
+2,src/distributions/uniform.rs,301,1,2,0,0,0.5,0.5773502691896258,0.5,self
+3,src/distributions/uniform.rs,302,1,2,0,0,0.5,0.5773502691896258,0.5,}
+4,src/distributions/uniform.rs,666,1,2,0,0,0.5,0.5773502691896258,0.5,"fn new<B1, B2>(low_b: B1, high_b: B2) -> Self"
+5,src/distributions/uniform.rs,671,1,2,0,0,0.5,0.5773502691896258,0.5,let low = *low_b.borrow();
+6,src/distributions/uniform.rs,672,1,2,0,0,0.5,0.5773502691896258,0.5,let high = *high_b.borrow();
+7,src/distributions/uniform.rs,673,1,2,0,0,0.5,0.5773502691896258,0.5,"assert!(low.all_lt(high), ""Uniform::new called with `low >= high`"");"
+8,src/distributions/utils.rs,320,1,2,0,0,0.5,0.5773502691896258,0.5,"fn all_lt(self, other: Self) -> bool {"
+9,src/distributions/utils.rs,321,1,2,0,0,0.5,0.5773502691896258,0.5,self < other
+10,src/distributions/utils.rs,322,1,2,0,0,0.5,0.5773502691896258,0.5,}
+11,src/distributions/weighted_index.rs,95,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn new<I>(weights: I) -> Result<WeightedIndex<X>, WeightedError>"
+12,src/distributions/weighted_index.rs,101,1,2,0,0,0.5,0.5773502691896258,0.5,let mut iter = weights.into_iter();
+13,src/distributions/weighted_index.rs,102,1,2,0,0,0.5,0.5773502691896258,0.5,let mut total_weight: X = iter.next().ok_or(WeightedError::NoItem)?.borrow().clone();
+14,src/distributions/weighted_index.rs,104,1,2,0,0,0.5,0.5773502691896258,0.5,let zero = <X as Default>::default();
+15,src/distributions/weighted_index.rs,105,1,2,0,0,0.5,0.5773502691896258,0.5,if total_weight < zero {
+16,src/distributions/weighted_index.rs,107,1,2,0,0,0.5,0.5773502691896258,0.5,}
+17,src/distributions/weighted_index.rs,109,1,2,0,0,0.5,0.5773502691896258,0.5,let mut weights = Vec::<X>::with_capacity(iter.size_hint().0);
+18,src/distributions/weighted_index.rs,110,1,2,0,0,0.5,0.5773502691896258,0.5,for w in iter {
+19,src/distributions/weighted_index.rs,111,1,2,0,0,0.5,0.5773502691896258,0.5,if *w.borrow() < zero {
+20,src/distributions/weighted_index.rs,113,1,2,0,0,0.5,0.5773502691896258,0.5,}
+21,src/distributions/weighted_index.rs,114,1,2,0,0,0.5,0.5773502691896258,0.5,weights.push(total_weight.clone());
+22,src/distributions/weighted_index.rs,115,1,2,0,0,0.5,0.5773502691896258,0.5,total_weight += w.borrow();
+23,src/distributions/weighted_index.rs,118,1,2,0,0,0.5,0.5773502691896258,0.5,if total_weight == zero {
+24,src/distributions/weighted_index.rs,120,1,2,0,0,0.5,0.5773502691896258,0.5,}
+25,src/distributions/weighted_index.rs,121,1,2,0,0,0.5,0.5773502691896258,0.5,"let distr = X::Sampler::new(zero, total_weight.clone());"
+26,src/distributions/weighted_index.rs,123,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(WeightedIndex {
+27,src/distributions/weighted_index.rs,124,1,2,0,0,0.5,0.5773502691896258,0.5,"cumulative_weights: weights,"
+28,src/distributions/weighted_index.rs,128,1,2,0,0,0.5,0.5773502691896258,0.5,}
+29,src/distributions/bernoulli.rs,76,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+30,src/distributions/bernoulli.rs,77,0,0,1,2,0.0,0.0,0.0,f.write_str(match self {
+31,src/distributions/bernoulli.rs,78,0,0,1,2,0.0,0.0,0.0,"BernoulliError::InvalidProbability => ""p is outside [0, 1] in Bernoulli distribution"","
+32,src/distributions/bernoulli.rs,80,0,0,1,2,0.0,0.0,0.0,}
+33,src/distributions/bernoulli.rs,98,0,0,1,2,0.0,0.0,0.0,"pub fn new(p: f64) -> Result<Bernoulli, BernoulliError> {"
+34,src/distributions/bernoulli.rs,99,0,0,1,2,0.0,0.0,0.0,if !(p >= 0.0 && p < 1.0) {
+35,src/distributions/bernoulli.rs,100,0,0,1,2,0.0,0.0,0.0,if p == 1.0 {
+36,src/distributions/bernoulli.rs,101,0,0,1,2,0.0,0.0,0.0,return Ok(Bernoulli { p_int: ALWAYS_TRUE });
+37,src/distributions/bernoulli.rs,102,0,0,1,2,0.0,0.0,0.0,}
+38,src/distributions/bernoulli.rs,103,0,0,1,2,0.0,0.0,0.0,return Err(BernoulliError::InvalidProbability);
+39,src/distributions/bernoulli.rs,104,0,0,1,2,0.0,0.0,0.0,}
+40,src/distributions/bernoulli.rs,105,0,0,1,2,0.0,0.0,0.0,Ok(Bernoulli {
+41,src/distributions/bernoulli.rs,108,0,0,1,2,0.0,0.0,0.0,}
+42,src/distributions/bernoulli.rs,119,0,0,1,2,0.0,0.0,0.0,"pub fn from_ratio(numerator: u32, denominator: u32) -> Result<Bernoulli, BernoulliError> {"
+43,src/distributions/bernoulli.rs,120,0,0,1,2,0.0,0.0,0.0,if numerator > denominator || denominator == 0 {
+44,src/distributions/bernoulli.rs,121,0,0,1,2,0.0,0.0,0.0,return Err(BernoulliError::InvalidProbability);
+45,src/distributions/bernoulli.rs,122,0,0,1,2,0.0,0.0,0.0,}
+46,src/distributions/bernoulli.rs,123,0,0,1,2,0.0,0.0,0.0,if numerator == denominator {
+47,src/distributions/bernoulli.rs,124,0,0,1,2,0.0,0.0,0.0,return Ok(Bernoulli { p_int: ALWAYS_TRUE });
+48,src/distributions/bernoulli.rs,125,0,0,1,2,0.0,0.0,0.0,}
+49,src/distributions/bernoulli.rs,126,0,0,1,2,0.0,0.0,0.0,let p_int = ((f64::from(numerator) / f64::from(denominator)) * SCALE) as u64;
+50,src/distributions/bernoulli.rs,127,0,0,1,2,0.0,0.0,0.0,Ok(Bernoulli { p_int })
+51,src/distributions/bernoulli.rs,128,0,0,1,2,0.0,0.0,0.0,}
+52,src/distributions/bernoulli.rs,133,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> bool {"
+53,src/distributions/bernoulli.rs,135,0,0,1,2,0.0,0.0,0.0,if self.p_int == ALWAYS_TRUE {
+54,src/distributions/bernoulli.rs,136,0,0,1,2,0.0,0.0,0.0,return true;
+55,src/distributions/bernoulli.rs,137,0,0,1,2,0.0,0.0,0.0,}
+56,src/distributions/bernoulli.rs,138,0,0,1,2,0.0,0.0,0.0,let v: u64 = rng.gen();
+57,src/distributions/bernoulli.rs,139,0,0,1,2,0.0,0.0,0.0,v < self.p_int
+58,src/distributions/bernoulli.rs,140,0,0,1,2,0.0,0.0,0.0,}
+59,src/distributions/float.rs,98,0,2,1,0,0.0,0.0,0.0,"fn into_float_with_exponent(self, exponent: i32) -> $ty {"
+60,src/distributions/float.rs,100,0,2,1,0,0.0,0.0,0.0,let exponent_bits: $u_scalar =
+61,src/distributions/float.rs,102,0,2,1,0,0.0,0.0,0.0,$ty::from_bits(self | exponent_bits)
+62,src/distributions/float.rs,103,0,2,1,0,0.0,0.0,0.0,}
+63,src/distributions/float.rs,107,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> $ty {"
+64,src/distributions/float.rs,111,0,0,1,2,0.0,0.0,0.0,let float_size = mem::size_of::<$f_scalar>() as u32 * 8;
+65,src/distributions/float.rs,112,0,0,1,2,0.0,0.0,0.0,let precision = $fraction_bits + 1;
+66,src/distributions/float.rs,113,0,0,1,2,0.0,0.0,0.0,let scale = 1.0 / ((1 as $u_scalar << precision) as $f_scalar);
+67,src/distributions/float.rs,115,0,0,1,2,0.0,0.0,0.0,let value: $uty = rng.gen();
+68,src/distributions/float.rs,116,0,0,1,2,0.0,0.0,0.0,let value = value >> (float_size - precision);
+69,src/distributions/float.rs,117,0,0,1,2,0.0,0.0,0.0,scale * $ty::cast_from_int(value)
+70,src/distributions/float.rs,118,0,0,1,2,0.0,0.0,0.0,}
+71,src/distributions/float.rs,122,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> $ty {"
+72,src/distributions/float.rs,126,0,0,1,2,0.0,0.0,0.0,let float_size = mem::size_of::<$f_scalar>() as u32 * 8;
+73,src/distributions/float.rs,127,0,0,1,2,0.0,0.0,0.0,let precision = $fraction_bits + 1;
+74,src/distributions/float.rs,128,0,0,1,2,0.0,0.0,0.0,let scale = 1.0 / ((1 as $u_scalar << precision) as $f_scalar);
+75,src/distributions/float.rs,130,0,0,1,2,0.0,0.0,0.0,let value: $uty = rng.gen();
+76,src/distributions/float.rs,131,0,0,1,2,0.0,0.0,0.0,let value = value >> (float_size - precision);
+77,src/distributions/float.rs,133,0,0,1,2,0.0,0.0,0.0,scale * $ty::cast_from_int(value + 1)
+78,src/distributions/float.rs,134,0,0,1,2,0.0,0.0,0.0,}
+79,src/distributions/float.rs,138,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> $ty {"
+80,src/distributions/float.rs,143,0,0,1,2,0.0,0.0,0.0,let float_size = mem::size_of::<$f_scalar>() as u32 * 8;
+81,src/distributions/float.rs,145,0,0,1,2,0.0,0.0,0.0,let value: $uty = rng.gen();
+82,src/distributions/float.rs,146,0,0,1,2,0.0,0.0,0.0,let fraction = value >> (float_size - $fraction_bits);
+83,src/distributions/float.rs,147,0,0,1,2,0.0,0.0,0.0,fraction.into_float_with_exponent(0) - (1.0 - EPSILON / 2.0)
+84,src/distributions/float.rs,148,0,0,1,2,0.0,0.0,0.0,}
+85,src/distributions/integer.rs,22,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> u8 {"
+86,src/distributions/integer.rs,23,0,0,1,2,0.0,0.0,0.0,rng.next_u32() as u8
+87,src/distributions/integer.rs,24,0,0,1,2,0.0,0.0,0.0,}
+88,src/distributions/integer.rs,29,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> u16 {"
+89,src/distributions/integer.rs,30,0,0,1,2,0.0,0.0,0.0,rng.next_u32() as u16
+90,src/distributions/integer.rs,31,0,0,1,2,0.0,0.0,0.0,}
+91,src/distributions/integer.rs,36,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> u32 {"
+92,src/distributions/integer.rs,37,0,0,1,2,0.0,0.0,0.0,rng.next_u32()
+93,src/distributions/integer.rs,38,0,0,1,2,0.0,0.0,0.0,}
+94,src/distributions/integer.rs,43,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> u64 {"
+95,src/distributions/integer.rs,44,0,0,1,2,0.0,0.0,0.0,rng.next_u64()
+96,src/distributions/integer.rs,45,0,0,1,2,0.0,0.0,0.0,}
+97,src/distributions/integer.rs,51,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> u128 {"
+98,src/distributions/integer.rs,53,0,0,1,2,0.0,0.0,0.0,let x = u128::from(rng.next_u64());
+99,src/distributions/integer.rs,54,0,0,1,2,0.0,0.0,0.0,let y = u128::from(rng.next_u64());
+100,src/distributions/integer.rs,55,0,0,1,2,0.0,0.0,0.0,(y << 64) | x
+101,src/distributions/integer.rs,56,0,0,1,2,0.0,0.0,0.0,}
+102,src/distributions/integer.rs,68,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> usize {"
+103,src/distributions/integer.rs,69,0,0,1,2,0.0,0.0,0.0,rng.next_u64() as usize
+104,src/distributions/integer.rs,70,0,0,1,2,0.0,0.0,0.0,}
+105,src/distributions/integer.rs,77,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> $ty {"
+106,src/distributions/integer.rs,78,0,0,1,2,0.0,0.0,0.0,rng.gen::<$uty>() as $ty
+107,src/distributions/integer.rs,79,0,0,1,2,0.0,0.0,0.0,}
+108,src/distributions/integer.rs,95,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> $ty {"
+109,src/distributions/integer.rs,97,0,0,1,2,0.0,0.0,0.0,if let Some(nz) = $new(rng.gen()) {
+110,src/distributions/integer.rs,98,0,0,1,2,0.0,0.0,0.0,break nz;
+111,src/distributions/integer.rs,99,0,0,1,2,0.0,0.0,0.0,}
+112,src/distributions/integer.rs,101,0,0,1,2,0.0,0.0,0.0,}
+113,src/distributions/mod.rs,178,0,0,1,2,0.0,0.0,0.0,"fn sample_iter<R>(self, rng: R) -> DistIter<Self, R, T>"
+114,src/distributions/mod.rs,183,0,0,1,2,0.0,0.0,0.0,DistIter {
+115,src/distributions/mod.rs,184,0,0,1,2,0.0,0.0,0.0,"distr: self,"
+116,src/distributions/mod.rs,188,0,0,1,2,0.0,0.0,0.0,}
+117,src/distributions/mod.rs,192,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> T {"
+118,src/distributions/mod.rs,193,0,0,1,2,0.0,0.0,0.0,(*self).sample(rng)
+119,src/distributions/mod.rs,194,0,0,1,2,0.0,0.0,0.0,}
+120,src/distributions/mod.rs,220,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<T> {
+121,src/distributions/mod.rs,224,0,0,1,2,0.0,0.0,0.0,Some(self.distr.sample(&mut self.rng))
+122,src/distributions/mod.rs,225,0,0,1,2,0.0,0.0,0.0,}
+123,src/distributions/mod.rs,227,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+124,src/distributions/mod.rs,228,0,0,1,2,0.0,0.0,0.0,"(usize::max_value(), None)"
+125,src/distributions/mod.rs,229,0,0,1,2,0.0,0.0,0.0,}
+126,src/distributions/mod.rs,336,0,0,1,2,0.0,0.0,0.0,fn test_distributions_iter() {
+127,src/distributions/mod.rs,338,0,0,1,2,0.0,0.0,0.0,let mut rng = crate::test::rng(210);
+128,src/distributions/mod.rs,339,0,0,1,2,0.0,0.0,0.0,let distr = Open01;
+129,src/distributions/mod.rs,340,0,0,1,2,0.0,0.0,0.0,let results: Vec<f32> = distr.sample_iter(&mut rng).take(100).collect();
+130,src/distributions/mod.rs,341,0,0,1,2,0.0,0.0,0.0,"println!(""{:?}"", results);"
+131,src/distributions/mod.rs,342,0,0,1,2,0.0,0.0,0.0,}
+132,src/distributions/mod.rs,345,0,0,1,2,0.0,0.0,0.0,fn test_make_an_iter() {
+133,src/distributions/mod.rs,346,0,0,1,2,0.0,0.0,0.0,"fn ten_dice_rolls_other_than_five<'a, R: Rng>("
+134,src/distributions/mod.rs,349,0,0,1,2,0.0,0.0,0.0,"Uniform::new_inclusive(1, 6)"
+135,src/distributions/mod.rs,350,0,0,1,2,0.0,0.0,0.0,.sample_iter(rng)
+136,src/distributions/mod.rs,351,0,0,1,2,0.0,0.0,0.0,.filter(|x| *x != 5)
+137,src/distributions/mod.rs,352,0,0,1,2,0.0,0.0,0.0,.take(10)
+138,src/distributions/mod.rs,353,0,0,1,2,0.0,0.0,0.0,}
+139,src/distributions/mod.rs,355,0,0,1,2,0.0,0.0,0.0,let mut rng = crate::test::rng(211);
+140,src/distributions/mod.rs,356,0,0,1,2,0.0,0.0,0.0,let mut count = 0;
+141,src/distributions/mod.rs,357,0,0,1,2,0.0,0.0,0.0,for val in ten_dice_rolls_other_than_five(&mut rng) {
+142,src/distributions/mod.rs,358,0,0,1,2,0.0,0.0,0.0,assert!(val >= 1 && val <= 6 && val != 5);
+143,src/distributions/mod.rs,359,0,0,1,2,0.0,0.0,0.0,count += 1;
+144,src/distributions/mod.rs,361,0,0,1,2,0.0,0.0,0.0,"assert_eq!(count, 10);"
+145,src/distributions/mod.rs,362,0,0,1,2,0.0,0.0,0.0,}
+146,src/distributions/other.rs,48,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> char {"
+147,src/distributions/other.rs,57,0,0,1,2,0.0,0.0,0.0,"let range = Uniform::new(GAP_SIZE, 0x11_0000);"
+148,src/distributions/other.rs,59,0,0,1,2,0.0,0.0,0.0,let mut n = range.sample(rng);
+149,src/distributions/other.rs,60,0,0,1,2,0.0,0.0,0.0,if n <= 0xDFFF {
+150,src/distributions/other.rs,62,0,0,1,2,0.0,0.0,0.0,}
+151,src/distributions/other.rs,63,0,0,1,2,0.0,0.0,0.0,unsafe { char::from_u32_unchecked(n) }
+152,src/distributions/other.rs,64,0,0,1,2,0.0,0.0,0.0,}
+153,src/distributions/other.rs,68,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> char {"
+154,src/distributions/other.rs,78,0,0,1,2,0.0,0.0,0.0,let var = rng.next_u32() >> (32 - 6);
+155,src/distributions/other.rs,79,0,0,1,2,0.0,0.0,0.0,if var < RANGE {
+156,src/distributions/other.rs,80,0,0,1,2,0.0,0.0,0.0,return GEN_ASCII_STR_CHARSET[var as usize] as char;
+157,src/distributions/other.rs,81,0,0,1,2,0.0,0.0,0.0,}
+158,src/distributions/other.rs,83,0,0,1,2,0.0,0.0,0.0,}
+159,src/distributions/other.rs,88,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> bool {"
+160,src/distributions/other.rs,93,0,0,1,2,0.0,0.0,0.0,(rng.next_u32() as i32) < 0
+161,src/distributions/other.rs,94,0,0,1,2,0.0,0.0,0.0,}
+162,src/distributions/other.rs,107,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, _rng: &mut R) -> ( $( $tyvar ),* , ) {"
+163,src/distributions/other.rs,108,0,0,1,2,0.0,0.0,0.0,(
+164,src/distributions/other.rs,116,0,0,1,2,0.0,0.0,0.0,}
+165,src/distributions/other.rs,124,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, _: &mut R) -> () {"
+166,src/distributions/other.rs,125,0,0,1,2,0.0,0.0,0.0,()
+167,src/distributions/other.rs,126,0,0,1,2,0.0,0.0,0.0,}
+168,src/distributions/other.rs,148,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, _rng: &mut R) -> [T; $n] {"
+169,src/distributions/other.rs,149,0,0,1,2,0.0,0.0,0.0,"[_rng.gen::<$t>(), $(_rng.gen::<$ts>()),*]"
+170,src/distributions/other.rs,150,0,0,1,2,0.0,0.0,0.0,}
+171,src/distributions/other.rs,156,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, _rng: &mut R) -> [T; $n] { [] }"
+172,src/distributions/other.rs,167,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Option<T> {"
+173,src/distributions/other.rs,169,0,0,1,2,0.0,0.0,0.0,if rng.gen::<bool>() {
+174,src/distributions/other.rs,170,0,0,1,2,0.0,0.0,0.0,Some(rng.gen())
+175,src/distributions/other.rs,172,0,0,1,2,0.0,0.0,0.0,None
+176,src/distributions/other.rs,174,0,0,1,2,0.0,0.0,0.0,}
+177,src/distributions/other.rs,181,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Wrapping<T> {"
+178,src/distributions/other.rs,182,0,0,1,2,0.0,0.0,0.0,Wrapping(rng.gen())
+179,src/distributions/other.rs,183,0,0,1,2,0.0,0.0,0.0,}
+180,src/distributions/uniform.rs,170,0,0,1,2,0.0,0.0,0.0,"pub fn new<B1, B2>(low: B1, high: B2) -> Uniform<X>"
+181,src/distributions/uniform.rs,175,0,0,1,2,0.0,0.0,0.0,"Uniform(X::Sampler::new(low, high))"
+182,src/distributions/uniform.rs,176,0,0,1,2,0.0,0.0,0.0,}
+183,src/distributions/uniform.rs,180,0,0,1,2,0.0,0.0,0.0,"pub fn new_inclusive<B1, B2>(low: B1, high: B2) -> Uniform<X>"
+184,src/distributions/uniform.rs,185,0,0,1,2,0.0,0.0,0.0,"Uniform(X::Sampler::new_inclusive(low, high))"
+185,src/distributions/uniform.rs,186,0,0,1,2,0.0,0.0,0.0,}
+186,src/distributions/uniform.rs,190,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> X {"
+187,src/distributions/uniform.rs,191,0,0,1,2,0.0,0.0,0.0,self.0.sample(rng)
+188,src/distributions/uniform.rs,192,0,0,1,2,0.0,0.0,0.0,}
+189,src/distributions/uniform.rs,263,0,0,1,2,0.0,0.0,0.0,"fn sample_single<R: Rng + ?Sized, B1, B2>(low: B1, high: B2, rng: &mut R) -> Self::X"
+190,src/distributions/uniform.rs,268,0,0,1,2,0.0,0.0,0.0,"let uniform: Self = UniformSampler::new(low, high);"
+191,src/distributions/uniform.rs,269,0,0,1,2,0.0,0.0,0.0,uniform.sample(rng)
+192,src/distributions/uniform.rs,270,0,0,1,2,0.0,0.0,0.0,}
+193,src/distributions/uniform.rs,274,0,0,1,2,0.0,0.0,0.0,fn from(r: ::core::ops::Range<X>) -> Uniform<X> {
+194,src/distributions/uniform.rs,275,0,0,1,2,0.0,0.0,0.0,"Uniform::new(r.start, r.end)"
+195,src/distributions/uniform.rs,276,0,0,1,2,0.0,0.0,0.0,}
+196,src/distributions/uniform.rs,280,0,0,1,2,0.0,0.0,0.0,fn from(r: ::core::ops::RangeInclusive<X>) -> Uniform<X> {
+197,src/distributions/uniform.rs,281,0,0,1,2,0.0,0.0,0.0,"Uniform::new_inclusive(r.start(), r.end())"
+198,src/distributions/uniform.rs,282,0,0,1,2,0.0,0.0,0.0,}
+199,src/distributions/uniform.rs,308,0,0,1,2,0.0,0.0,0.0,fn borrow(&self) -> &Borrowed {
+200,src/distributions/uniform.rs,309,0,0,1,2,0.0,0.0,0.0,*self
+201,src/distributions/uniform.rs,310,0,0,1,2,0.0,0.0,0.0,}
+202,src/distributions/uniform.rs,376,0,0,1,2,0.0,0.0,0.0,"fn new<B1, B2>(low_b: B1, high_b: B2) -> Self"
+203,src/distributions/uniform.rs,381,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+204,src/distributions/uniform.rs,382,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+205,src/distributions/uniform.rs,383,0,0,1,2,0.0,0.0,0.0,"assert!(low < high, ""Uniform::new called with `low >= high`"");"
+206,src/distributions/uniform.rs,384,0,0,1,2,0.0,0.0,0.0,"UniformSampler::new_inclusive(low, high - 1)"
+207,src/distributions/uniform.rs,385,0,0,1,2,0.0,0.0,0.0,}
+208,src/distributions/uniform.rs,389,0,0,1,2,0.0,0.0,0.0,"fn new_inclusive<B1, B2>(low_b: B1, high_b: B2) -> Self"
+209,src/distributions/uniform.rs,394,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+210,src/distributions/uniform.rs,395,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+211,src/distributions/uniform.rs,396,0,0,1,2,0.0,0.0,0.0,assert!(
+212,src/distributions/uniform.rs,397,0,0,1,2,0.0,0.0,0.0,"low <= high,"
+213,src/distributions/uniform.rs,400,0,0,1,2,0.0,0.0,0.0,let unsigned_max = ::core::$u_large::MAX;
+214,src/distributions/uniform.rs,402,0,0,1,2,0.0,0.0,0.0,let range = high.wrapping_sub(low).wrapping_add(1) as $unsigned;
+215,src/distributions/uniform.rs,403,0,0,1,2,0.0,0.0,0.0,let ints_to_reject = if range > 0 {
+216,src/distributions/uniform.rs,404,0,0,1,2,0.0,0.0,0.0,let range = $u_large::from(range);
+217,src/distributions/uniform.rs,405,0,0,1,2,0.0,0.0,0.0,(unsigned_max - range + 1) % range
+218,src/distributions/uniform.rs,407,0,0,1,2,0.0,0.0,0.0,0
+219,src/distributions/uniform.rs,410,0,0,1,2,0.0,0.0,0.0,UniformInt {
+220,src/distributions/uniform.rs,411,0,0,1,2,0.0,0.0,0.0,"low: low,"
+221,src/distributions/uniform.rs,416,0,0,1,2,0.0,0.0,0.0,}
+222,src/distributions/uniform.rs,418,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Self::X {"
+223,src/distributions/uniform.rs,419,0,0,1,2,0.0,0.0,0.0,let range = self.range as $unsigned as $u_large;
+224,src/distributions/uniform.rs,420,0,0,1,2,0.0,0.0,0.0,if range > 0 {
+225,src/distributions/uniform.rs,421,0,0,1,2,0.0,0.0,0.0,let unsigned_max = ::core::$u_large::MAX;
+226,src/distributions/uniform.rs,422,0,0,1,2,0.0,0.0,0.0,let zone = unsigned_max - (self.z as $unsigned as $u_large);
+227,src/distributions/uniform.rs,424,0,0,1,2,0.0,0.0,0.0,let v: $u_large = rng.gen();
+228,src/distributions/uniform.rs,425,0,0,1,2,0.0,0.0,0.0,"let (hi, lo) = v.wmul(range);"
+229,src/distributions/uniform.rs,426,0,0,1,2,0.0,0.0,0.0,if lo <= zone {
+230,src/distributions/uniform.rs,427,0,0,1,2,0.0,0.0,0.0,return self.low.wrapping_add(hi as $ty);
+231,src/distributions/uniform.rs,428,0,0,1,2,0.0,0.0,0.0,}
+232,src/distributions/uniform.rs,432,0,0,1,2,0.0,0.0,0.0,rng.gen()
+233,src/distributions/uniform.rs,434,0,0,1,2,0.0,0.0,0.0,}
+234,src/distributions/uniform.rs,436,0,0,1,2,0.0,0.0,0.0,"fn sample_single<R: Rng + ?Sized, B1, B2>(low_b: B1, high_b: B2, rng: &mut R) -> Self::X"
+235,src/distributions/uniform.rs,441,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+236,src/distributions/uniform.rs,442,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+237,src/distributions/uniform.rs,443,0,0,1,2,0.0,0.0,0.0,"assert!(low < high, ""UniformSampler::sample_single: low >= high"");"
+238,src/distributions/uniform.rs,444,0,0,1,2,0.0,0.0,0.0,let range = high.wrapping_sub(low) as $unsigned as $u_large;
+239,src/distributions/uniform.rs,445,0,0,1,2,0.0,0.0,0.0,let zone = if ::core::$unsigned::MAX <= ::core::u16::MAX as $unsigned {
+240,src/distributions/uniform.rs,449,0,0,1,2,0.0,0.0,0.0,let unsigned_max: $u_large = ::core::$u_large::MAX;
+241,src/distributions/uniform.rs,450,0,0,1,2,0.0,0.0,0.0,let ints_to_reject = (unsigned_max - range + 1) % range;
+242,src/distributions/uniform.rs,451,0,0,1,2,0.0,0.0,0.0,unsigned_max - ints_to_reject
+243,src/distributions/uniform.rs,455,0,0,1,2,0.0,0.0,0.0,(range << range.leading_zeros()).wrapping_sub(1)
+244,src/distributions/uniform.rs,459,0,0,1,2,0.0,0.0,0.0,let v: $u_large = rng.gen();
+245,src/distributions/uniform.rs,460,0,0,1,2,0.0,0.0,0.0,"let (hi, lo) = v.wmul(range);"
+246,src/distributions/uniform.rs,461,0,0,1,2,0.0,0.0,0.0,if lo <= zone {
+247,src/distributions/uniform.rs,462,0,0,1,2,0.0,0.0,0.0,return low.wrapping_add(hi as $ty);
+248,src/distributions/uniform.rs,463,0,0,1,2,0.0,0.0,0.0,}
+249,src/distributions/uniform.rs,465,0,0,1,2,0.0,0.0,0.0,}
+250,src/distributions/uniform.rs,674,0,2,1,0,0.0,0.0,0.0,assert!(
+251,src/distributions/uniform.rs,675,0,2,1,0,0.0,0.0,0.0,"low.all_finite() && high.all_finite(),"
+252,src/distributions/uniform.rs,678,0,2,1,0,0.0,0.0,0.0,let max_rand = <$ty>::splat(
+253,src/distributions/uniform.rs,679,0,2,1,0,0.0,0.0,0.0,"(::core::$u_scalar::MAX >> $bits_to_discard).into_float_with_exponent(0) - 1.0,"
+254,src/distributions/uniform.rs,682,0,2,1,0,0.0,0.0,0.0,let mut scale = high - low;
+255,src/distributions/uniform.rs,685,0,2,1,0,0.0,0.0,0.0,let mask = (scale * max_rand + low).ge_mask(high);
+256,src/distributions/uniform.rs,686,0,2,1,0,0.0,0.0,0.0,if mask.none() {
+257,src/distributions/uniform.rs,687,0,2,1,0,0.0,0.0,0.0,break;
+258,src/distributions/uniform.rs,688,0,0,1,2,0.0,0.0,0.0,}
+259,src/distributions/uniform.rs,689,0,0,1,2,0.0,0.0,0.0,scale = scale.decrease_masked(mask);
+260,src/distributions/uniform.rs,692,0,2,1,0,0.0,0.0,0.0,debug_assert!(<$ty>::splat(0.0).all_le(scale));
+261,src/distributions/uniform.rs,694,0,2,1,0,0.0,0.0,0.0,"UniformFloat { low, scale }"
+262,src/distributions/uniform.rs,695,0,2,1,0,0.0,0.0,0.0,}
+263,src/distributions/uniform.rs,697,0,0,1,2,0.0,0.0,0.0,"fn new_inclusive<B1, B2>(low_b: B1, high_b: B2) -> Self"
+264,src/distributions/uniform.rs,702,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+265,src/distributions/uniform.rs,703,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+266,src/distributions/uniform.rs,704,0,0,1,2,0.0,0.0,0.0,assert!(
+267,src/distributions/uniform.rs,705,0,0,1,2,0.0,0.0,0.0,"low.all_le(high),"
+268,src/distributions/uniform.rs,708,0,0,1,2,0.0,0.0,0.0,assert!(
+269,src/distributions/uniform.rs,709,0,0,1,2,0.0,0.0,0.0,"low.all_finite() && high.all_finite(),"
+270,src/distributions/uniform.rs,712,0,0,1,2,0.0,0.0,0.0,let max_rand = <$ty>::splat(
+271,src/distributions/uniform.rs,713,0,0,1,2,0.0,0.0,0.0,"(::core::$u_scalar::MAX >> $bits_to_discard).into_float_with_exponent(0) - 1.0,"
+272,src/distributions/uniform.rs,716,0,0,1,2,0.0,0.0,0.0,let mut scale = (high - low) / max_rand;
+273,src/distributions/uniform.rs,719,0,0,1,2,0.0,0.0,0.0,let mask = (scale * max_rand + low).gt_mask(high);
+274,src/distributions/uniform.rs,720,0,0,1,2,0.0,0.0,0.0,if mask.none() {
+275,src/distributions/uniform.rs,721,0,0,1,2,0.0,0.0,0.0,break;
+276,src/distributions/uniform.rs,722,0,0,1,2,0.0,0.0,0.0,}
+277,src/distributions/uniform.rs,723,0,0,1,2,0.0,0.0,0.0,scale = scale.decrease_masked(mask);
+278,src/distributions/uniform.rs,726,0,0,1,2,0.0,0.0,0.0,debug_assert!(<$ty>::splat(0.0).all_le(scale));
+279,src/distributions/uniform.rs,728,0,0,1,2,0.0,0.0,0.0,"UniformFloat { low, scale }"
+280,src/distributions/uniform.rs,729,0,0,1,2,0.0,0.0,0.0,}
+281,src/distributions/uniform.rs,731,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Self::X {"
+282,src/distributions/uniform.rs,733,0,0,1,2,0.0,0.0,0.0,let value1_2 = (rng.gen::<$uty>() >> $bits_to_discard).into_float_with_exponent(0);
+283,src/distributions/uniform.rs,737,0,0,1,2,0.0,0.0,0.0,let value0_1 = value1_2 - 1.0;
+284,src/distributions/uniform.rs,744,0,0,1,2,0.0,0.0,0.0,value0_1 * self.scale + self.low
+285,src/distributions/uniform.rs,745,0,0,1,2,0.0,0.0,0.0,}
+286,src/distributions/uniform.rs,748,0,0,1,2,0.0,0.0,0.0,"fn sample_single<R: Rng + ?Sized, B1, B2>(low_b: B1, high_b: B2, rng: &mut R) -> Self::X"
+287,src/distributions/uniform.rs,753,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+288,src/distributions/uniform.rs,754,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+289,src/distributions/uniform.rs,755,0,0,1,2,0.0,0.0,0.0,assert!(
+290,src/distributions/uniform.rs,756,0,0,1,2,0.0,0.0,0.0,"low.all_lt(high),"
+291,src/distributions/uniform.rs,759,0,0,1,2,0.0,0.0,0.0,let mut scale = high - low;
+292,src/distributions/uniform.rs,763,0,0,1,2,0.0,0.0,0.0,let value1_2 =
+293,src/distributions/uniform.rs,764,0,0,1,2,0.0,0.0,0.0,(rng.gen::<$uty>() >> $bits_to_discard).into_float_with_exponent(0);
+294,src/distributions/uniform.rs,768,0,0,1,2,0.0,0.0,0.0,let value0_1 = value1_2 - 1.0;
+295,src/distributions/uniform.rs,772,0,0,1,2,0.0,0.0,0.0,let res = value0_1 * scale + low;
+296,src/distributions/uniform.rs,774,0,0,1,2,0.0,0.0,0.0,debug_assert!(low.all_le(res) || !scale.all_finite());
+297,src/distributions/uniform.rs,775,0,0,1,2,0.0,0.0,0.0,if res.all_lt(high) {
+298,src/distributions/uniform.rs,776,0,0,1,2,0.0,0.0,0.0,return res;
+299,src/distributions/uniform.rs,777,0,0,1,2,0.0,0.0,0.0,}
+300,src/distributions/uniform.rs,806,0,0,1,2,0.0,0.0,0.0,let mask = !scale.finite_mask();
+301,src/distributions/uniform.rs,807,0,0,1,2,0.0,0.0,0.0,if mask.any() {
+302,src/distributions/uniform.rs,808,0,0,1,2,0.0,0.0,0.0,assert!(
+303,src/distributions/uniform.rs,809,0,0,1,2,0.0,0.0,0.0,"low.all_finite() && high.all_finite(),"
+304,src/distributions/uniform.rs,812,0,0,1,2,0.0,0.0,0.0,scale = scale.decrease_masked(mask);
+305,src/distributions/uniform.rs,813,0,0,1,2,0.0,0.0,0.0,}
+306,src/distributions/uniform.rs,815,0,0,1,2,0.0,0.0,0.0,}
+307,src/distributions/uniform.rs,876,0,0,1,2,0.0,0.0,0.0,"fn new<B1, B2>(low_b: B1, high_b: B2) -> Self"
+308,src/distributions/uniform.rs,881,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+309,src/distributions/uniform.rs,882,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+310,src/distributions/uniform.rs,883,0,0,1,2,0.0,0.0,0.0,"assert!(low < high, ""Uniform::new called with `low >= high`"");"
+311,src/distributions/uniform.rs,884,0,0,1,2,0.0,0.0,0.0,"UniformDuration::new_inclusive(low, high - Duration::new(0, 1))"
+312,src/distributions/uniform.rs,885,0,0,1,2,0.0,0.0,0.0,}
+313,src/distributions/uniform.rs,888,0,0,1,2,0.0,0.0,0.0,"fn new_inclusive<B1, B2>(low_b: B1, high_b: B2) -> Self"
+314,src/distributions/uniform.rs,893,0,0,1,2,0.0,0.0,0.0,let low = *low_b.borrow();
+315,src/distributions/uniform.rs,894,0,0,1,2,0.0,0.0,0.0,let high = *high_b.borrow();
+316,src/distributions/uniform.rs,895,0,0,1,2,0.0,0.0,0.0,assert!(
+317,src/distributions/uniform.rs,896,0,0,1,2,0.0,0.0,0.0,"low <= high,"
+318,src/distributions/uniform.rs,900,0,0,1,2,0.0,0.0,0.0,let low_s = low.as_secs();
+319,src/distributions/uniform.rs,901,0,0,1,2,0.0,0.0,0.0,let low_n = low.subsec_nanos();
+320,src/distributions/uniform.rs,902,0,0,1,2,0.0,0.0,0.0,let mut high_s = high.as_secs();
+321,src/distributions/uniform.rs,903,0,0,1,2,0.0,0.0,0.0,let mut high_n = high.subsec_nanos();
+322,src/distributions/uniform.rs,905,0,0,1,2,0.0,0.0,0.0,if high_n < low_n {
+323,src/distributions/uniform.rs,908,0,0,1,2,0.0,0.0,0.0,}
+324,src/distributions/uniform.rs,910,0,0,1,2,0.0,0.0,0.0,let mode = if low_s == high_s {
+325,src/distributions/uniform.rs,911,0,0,1,2,0.0,0.0,0.0,UniformDurationMode::Small {
+326,src/distributions/uniform.rs,912,0,0,1,2,0.0,0.0,0.0,"secs: low_s,"
+327,src/distributions/uniform.rs,913,0,0,1,2,0.0,0.0,0.0,"nanos: Uniform::new_inclusive(low_n, high_n),"
+328,src/distributions/uniform.rs,916,0,0,1,2,0.0,0.0,0.0,let max = high_s
+329,src/distributions/uniform.rs,917,0,0,1,2,0.0,0.0,0.0,.checked_mul(1_000_000_000)
+330,src/distributions/uniform.rs,918,0,0,1,2,0.0,0.0,0.0,.and_then(|n| n.checked_add(u64::from(high_n)));
+331,src/distributions/uniform.rs,920,0,0,1,2,0.0,0.0,0.0,if let Some(higher_bound) = max {
+332,src/distributions/uniform.rs,921,0,0,1,2,0.0,0.0,0.0,let lower_bound = low_s * 1_000_000_000 + u64::from(low_n);
+333,src/distributions/uniform.rs,922,0,0,1,2,0.0,0.0,0.0,UniformDurationMode::Medium {
+334,src/distributions/uniform.rs,923,0,0,1,2,0.0,0.0,0.0,"nanos: Uniform::new_inclusive(lower_bound, higher_bound),"
+335,src/distributions/uniform.rs,927,0,0,1,2,0.0,0.0,0.0,let max_nanos = high_n - low_n;
+336,src/distributions/uniform.rs,928,0,0,1,2,0.0,0.0,0.0,UniformDurationMode::Large {
+337,src/distributions/uniform.rs,929,0,0,1,2,0.0,0.0,0.0,"max_secs: high_s,"
+338,src/distributions/uniform.rs,930,0,0,1,2,0.0,0.0,0.0,"max_nanos,"
+339,src/distributions/uniform.rs,931,0,0,1,2,0.0,0.0,0.0,"secs: Uniform::new_inclusive(low_s, high_s),"
+340,src/distributions/uniform.rs,935,0,0,1,2,0.0,0.0,0.0,UniformDuration {
+341,src/distributions/uniform.rs,939,0,0,1,2,0.0,0.0,0.0,}
+342,src/distributions/uniform.rs,942,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Duration {"
+343,src/distributions/uniform.rs,943,0,0,1,2,0.0,0.0,0.0,match self.mode {
+344,src/distributions/uniform.rs,944,0,0,1,2,0.0,0.0,0.0,"UniformDurationMode::Small { secs, nanos } => {"
+345,src/distributions/uniform.rs,945,0,0,1,2,0.0,0.0,0.0,let n = nanos.sample(rng);
+346,src/distributions/uniform.rs,946,0,0,1,2,0.0,0.0,0.0,"Duration::new(secs, n)"
+347,src/distributions/uniform.rs,948,0,0,1,2,0.0,0.0,0.0,UniformDurationMode::Medium { nanos } => {
+348,src/distributions/uniform.rs,949,0,0,1,2,0.0,0.0,0.0,let nanos = nanos.sample(rng);
+349,src/distributions/uniform.rs,950,0,0,1,2,0.0,0.0,0.0,"Duration::new(nanos / 1_000_000_000, (nanos % 1_000_000_000) as u32)"
+350,src/distributions/uniform.rs,953,0,0,1,2,0.0,0.0,0.0,"max_secs,"
+351,src/distributions/uniform.rs,954,0,0,1,2,0.0,0.0,0.0,"max_nanos,"
+352,src/distributions/uniform.rs,955,0,0,1,2,0.0,0.0,0.0,"secs,"
+353,src/distributions/uniform.rs,958,0,0,1,2,0.0,0.0,0.0,"let nano_range = Uniform::new(0, 1_000_000_000);"
+354,src/distributions/uniform.rs,960,0,0,1,2,0.0,0.0,0.0,let s = secs.sample(rng);
+355,src/distributions/uniform.rs,961,0,0,1,2,0.0,0.0,0.0,let n = nano_range.sample(rng);
+356,src/distributions/uniform.rs,962,0,0,1,2,0.0,0.0,0.0,if !(s == max_secs && n > max_nanos) {
+357,src/distributions/uniform.rs,963,0,0,1,2,0.0,0.0,0.0,let sum = n + self.offset;
+358,src/distributions/uniform.rs,964,0,0,1,2,0.0,0.0,0.0,"break Duration::new(s, sum);"
+359,src/distributions/uniform.rs,965,0,0,1,2,0.0,0.0,0.0,}
+360,src/distributions/uniform.rs,969,0,0,1,2,0.0,0.0,0.0,}
+361,src/distributions/utils.rs,26,0,0,1,2,0.0,0.0,0.0,"fn wmul(self, x: $ty) -> Self::Output {"
+362,src/distributions/utils.rs,27,0,0,1,2,0.0,0.0,0.0,let tmp = (self as $wide) * (x as $wide);
+363,src/distributions/utils.rs,28,0,0,1,2,0.0,0.0,0.0,"((tmp >> $shift) as $ty, tmp as $ty)"
+364,src/distributions/utils.rs,29,0,0,1,2,0.0,0.0,0.0,}
+365,src/distributions/utils.rs,74,0,0,1,2,0.0,0.0,0.0,"fn wmul(self, b: $ty) -> Self::Output {"
+366,src/distributions/utils.rs,76,0,0,1,2,0.0,0.0,0.0,let mut low = (self & LOWER_MASK).wrapping_mul(b & LOWER_MASK);
+367,src/distributions/utils.rs,77,0,0,1,2,0.0,0.0,0.0,let mut t = low >> $half;
+368,src/distributions/utils.rs,78,0,0,1,2,0.0,0.0,0.0,low &= LOWER_MASK;
+369,src/distributions/utils.rs,79,0,0,1,2,0.0,0.0,0.0,t += (self >> $half).wrapping_mul(b & LOWER_MASK);
+370,src/distributions/utils.rs,80,0,0,1,2,0.0,0.0,0.0,low += (t & LOWER_MASK) << $half;
+371,src/distributions/utils.rs,81,0,0,1,2,0.0,0.0,0.0,let mut high = t >> $half;
+372,src/distributions/utils.rs,82,0,0,1,2,0.0,0.0,0.0,t = low >> $half;
+373,src/distributions/utils.rs,83,0,0,1,2,0.0,0.0,0.0,low &= LOWER_MASK;
+374,src/distributions/utils.rs,84,0,0,1,2,0.0,0.0,0.0,t += (b >> $half).wrapping_mul(self & LOWER_MASK);
+375,src/distributions/utils.rs,85,0,0,1,2,0.0,0.0,0.0,low += (t & LOWER_MASK) << $half;
+376,src/distributions/utils.rs,86,0,0,1,2,0.0,0.0,0.0,high += t >> $half;
+377,src/distributions/utils.rs,87,0,0,1,2,0.0,0.0,0.0,high += (self >> $half).wrapping_mul(b >> $half);
+378,src/distributions/utils.rs,89,0,0,1,2,0.0,0.0,0.0,"(high, low)"
+379,src/distributions/utils.rs,90,0,0,1,2,0.0,0.0,0.0,}
+380,src/distributions/utils.rs,134,0,0,1,2,0.0,0.0,0.0,"fn wmul(self, x: usize) -> Self::Output {"
+381,src/distributions/utils.rs,135,0,0,1,2,0.0,0.0,0.0,"let (high, low) = (self as $ty).wmul(x as $ty);"
+382,src/distributions/utils.rs,136,0,0,1,2,0.0,0.0,0.0,"(high as usize, low as usize)"
+383,src/distributions/utils.rs,137,0,0,1,2,0.0,0.0,0.0,}
+384,src/distributions/utils.rs,253,0,0,1,2,0.0,0.0,0.0,fn lanes() -> usize {
+385,src/distributions/utils.rs,254,0,0,1,2,0.0,0.0,0.0,1
+386,src/distributions/utils.rs,255,0,0,1,2,0.0,0.0,0.0,}
+387,src/distributions/utils.rs,257,0,2,1,0,0.0,0.0,0.0,fn splat(scalar: Self) -> Self {
+388,src/distributions/utils.rs,258,0,2,1,0,0.0,0.0,0.0,scalar
+389,src/distributions/utils.rs,259,0,2,1,0,0.0,0.0,0.0,}
+390,src/distributions/utils.rs,261,0,0,1,2,0.0,0.0,0.0,"fn extract(self, index: usize) -> Self {"
+391,src/distributions/utils.rs,262,0,0,1,2,0.0,0.0,0.0,"debug_assert_eq!(index, 0);"
+392,src/distributions/utils.rs,263,0,0,1,2,0.0,0.0,0.0,self
+393,src/distributions/utils.rs,264,0,0,1,2,0.0,0.0,0.0,}
+394,src/distributions/utils.rs,266,0,0,1,2,0.0,0.0,0.0,"fn replace(self, index: usize, new_value: Self) -> Self {"
+395,src/distributions/utils.rs,267,0,0,1,2,0.0,0.0,0.0,"debug_assert_eq!(index, 0);"
+396,src/distributions/utils.rs,268,0,0,1,2,0.0,0.0,0.0,new_value
+397,src/distributions/utils.rs,269,0,0,1,2,0.0,0.0,0.0,}
+398,src/distributions/utils.rs,280,0,0,1,2,0.0,0.0,0.0,fn any(self) -> bool {
+399,src/distributions/utils.rs,281,0,0,1,2,0.0,0.0,0.0,self
+400,src/distributions/utils.rs,282,0,0,1,2,0.0,0.0,0.0,}
+401,src/distributions/utils.rs,285,0,0,1,2,0.0,0.0,0.0,fn all(self) -> bool {
+402,src/distributions/utils.rs,286,0,0,1,2,0.0,0.0,0.0,self
+403,src/distributions/utils.rs,287,0,0,1,2,0.0,0.0,0.0,}
+404,src/distributions/utils.rs,290,0,2,1,0,0.0,0.0,0.0,fn none(self) -> bool {
+405,src/distributions/utils.rs,291,0,2,1,0,0.0,0.0,0.0,!self
+406,src/distributions/utils.rs,292,0,2,1,0,0.0,0.0,0.0,}
+407,src/distributions/utils.rs,300,0,0,1,2,0.0,0.0,0.0,fn is_nan(self) -> bool {
+408,src/distributions/utils.rs,301,0,0,1,2,0.0,0.0,0.0,self != self
+409,src/distributions/utils.rs,302,0,0,1,2,0.0,0.0,0.0,}
+410,src/distributions/utils.rs,305,0,0,1,2,0.0,0.0,0.0,fn is_infinite(self) -> bool {
+411,src/distributions/utils.rs,306,0,0,1,2,0.0,0.0,0.0,self == ::core::$ty::INFINITY || self == ::core::$ty::NEG_INFINITY
+412,src/distributions/utils.rs,307,0,0,1,2,0.0,0.0,0.0,}
+413,src/distributions/utils.rs,310,0,0,1,2,0.0,0.0,0.0,fn is_finite(self) -> bool {
+414,src/distributions/utils.rs,311,0,0,1,2,0.0,0.0,0.0,!(self.is_nan() || self.is_infinite())
+415,src/distributions/utils.rs,312,0,0,1,2,0.0,0.0,0.0,}
+416,src/distributions/utils.rs,325,0,2,1,0,0.0,0.0,0.0,"fn all_le(self, other: Self) -> bool {"
+417,src/distributions/utils.rs,326,0,2,1,0,0.0,0.0,0.0,self <= other
+418,src/distributions/utils.rs,327,0,2,1,0,0.0,0.0,0.0,}
+419,src/distributions/utils.rs,330,0,2,1,0,0.0,0.0,0.0,fn all_finite(self) -> bool {
+420,src/distributions/utils.rs,331,0,2,1,0,0.0,0.0,0.0,self.is_finite()
+421,src/distributions/utils.rs,332,0,2,1,0,0.0,0.0,0.0,}
+422,src/distributions/utils.rs,335,0,0,1,2,0.0,0.0,0.0,fn finite_mask(self) -> Self::Mask {
+423,src/distributions/utils.rs,336,0,0,1,2,0.0,0.0,0.0,self.is_finite()
+424,src/distributions/utils.rs,337,0,0,1,2,0.0,0.0,0.0,}
+425,src/distributions/utils.rs,340,0,0,1,2,0.0,0.0,0.0,"fn gt_mask(self, other: Self) -> Self::Mask {"
+426,src/distributions/utils.rs,341,0,0,1,2,0.0,0.0,0.0,self > other
+427,src/distributions/utils.rs,342,0,0,1,2,0.0,0.0,0.0,}
+428,src/distributions/utils.rs,345,0,2,1,0,0.0,0.0,0.0,"fn ge_mask(self, other: Self) -> Self::Mask {"
+429,src/distributions/utils.rs,346,0,2,1,0,0.0,0.0,0.0,self >= other
+430,src/distributions/utils.rs,347,0,2,1,0,0.0,0.0,0.0,}
+431,src/distributions/utils.rs,350,0,0,1,2,0.0,0.0,0.0,"fn decrease_masked(self, mask: Self::Mask) -> Self {"
+432,src/distributions/utils.rs,351,0,0,1,2,0.0,0.0,0.0,"debug_assert!(mask, ""At least one lane must be set"");"
+433,src/distributions/utils.rs,352,0,0,1,2,0.0,0.0,0.0,<$ty>::from_bits(self.to_bits() - 1)
+434,src/distributions/utils.rs,353,0,0,1,2,0.0,0.0,0.0,}
+435,src/distributions/utils.rs,356,0,0,1,2,0.0,0.0,0.0,fn cast_from_int(i: Self::UInt) -> Self {
+436,src/distributions/utils.rs,357,0,0,1,2,0.0,0.0,0.0,i as $ty
+437,src/distributions/utils.rs,358,0,0,1,2,0.0,0.0,0.0,}
+438,src/distributions/weighted.rs,30,0,0,1,2,0.0,0.0,0.0,"pub fn new(_weights: Vec<W>) -> Result<Self, WeightedError> {"
+439,src/distributions/weighted.rs,31,0,0,1,2,0.0,0.0,0.0,Err(WeightedError::NoItem)
+440,src/distributions/weighted.rs,32,0,0,1,2,0.0,0.0,0.0,}
+441,src/distributions/weighted_index.rs,106,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::InvalidWeight);
+442,src/distributions/weighted_index.rs,112,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::InvalidWeight);
+443,src/distributions/weighted_index.rs,119,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::AllWeightsZero);
+444,src/distributions/weighted_index.rs,139,0,0,1,2,0.0,0.0,0.0,"pub fn update_weights(&mut self, new_weights: &[(usize, &X)]) -> Result<(), WeightedError>"
+445,src/distributions/weighted_index.rs,144,0,0,1,2,0.0,0.0,0.0,if new_weights.is_empty() {
+446,src/distributions/weighted_index.rs,145,0,0,1,2,0.0,0.0,0.0,return Ok(());
+447,src/distributions/weighted_index.rs,146,0,0,1,2,0.0,0.0,0.0,}
+448,src/distributions/weighted_index.rs,148,0,0,1,2,0.0,0.0,0.0,let zero = <X as Default>::default();
+449,src/distributions/weighted_index.rs,150,0,0,1,2,0.0,0.0,0.0,let mut total_weight = self.total_weight.clone();
+450,src/distributions/weighted_index.rs,154,0,0,1,2,0.0,0.0,0.0,let mut prev_i = None;
+451,src/distributions/weighted_index.rs,155,0,0,1,2,0.0,0.0,0.0,"for &(i, w) in new_weights {"
+452,src/distributions/weighted_index.rs,156,0,0,1,2,0.0,0.0,0.0,if let Some(old_i) = prev_i {
+453,src/distributions/weighted_index.rs,157,0,0,1,2,0.0,0.0,0.0,if old_i >= i {
+454,src/distributions/weighted_index.rs,158,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::InvalidWeight);
+455,src/distributions/weighted_index.rs,159,0,0,1,2,0.0,0.0,0.0,}
+456,src/distributions/weighted_index.rs,160,0,0,1,2,0.0,0.0,0.0,}
+457,src/distributions/weighted_index.rs,161,0,0,1,2,0.0,0.0,0.0,if *w < zero {
+458,src/distributions/weighted_index.rs,162,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::InvalidWeight);
+459,src/distributions/weighted_index.rs,163,0,0,1,2,0.0,0.0,0.0,}
+460,src/distributions/weighted_index.rs,164,0,0,1,2,0.0,0.0,0.0,if i >= self.cumulative_weights.len() + 1 {
+461,src/distributions/weighted_index.rs,165,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::TooMany);
+462,src/distributions/weighted_index.rs,166,0,0,1,2,0.0,0.0,0.0,}
+463,src/distributions/weighted_index.rs,168,0,0,1,2,0.0,0.0,0.0,let mut old_w = if i < self.cumulative_weights.len() {
+464,src/distributions/weighted_index.rs,169,0,0,1,2,0.0,0.0,0.0,self.cumulative_weights[i].clone()
+465,src/distributions/weighted_index.rs,171,0,0,1,2,0.0,0.0,0.0,self.total_weight.clone()
+466,src/distributions/weighted_index.rs,173,0,0,1,2,0.0,0.0,0.0,if i > 0 {
+467,src/distributions/weighted_index.rs,174,0,0,1,2,0.0,0.0,0.0,old_w -= &self.cumulative_weights[i - 1];
+468,src/distributions/weighted_index.rs,175,0,0,1,2,0.0,0.0,0.0,}
+469,src/distributions/weighted_index.rs,177,0,0,1,2,0.0,0.0,0.0,total_weight -= &old_w;
+470,src/distributions/weighted_index.rs,178,0,0,1,2,0.0,0.0,0.0,total_weight += w;
+471,src/distributions/weighted_index.rs,179,0,0,1,2,0.0,0.0,0.0,prev_i = Some(i);
+472,src/distributions/weighted_index.rs,181,0,0,1,2,0.0,0.0,0.0,if total_weight <= zero {
+473,src/distributions/weighted_index.rs,182,0,0,1,2,0.0,0.0,0.0,return Err(WeightedError::AllWeightsZero);
+474,src/distributions/weighted_index.rs,183,0,0,1,2,0.0,0.0,0.0,}
+475,src/distributions/weighted_index.rs,187,0,0,1,2,0.0,0.0,0.0,let mut iter = new_weights.iter();
+476,src/distributions/weighted_index.rs,189,0,0,1,2,0.0,0.0,0.0,let mut prev_weight = zero.clone();
+477,src/distributions/weighted_index.rs,190,0,0,1,2,0.0,0.0,0.0,let mut next_new_weight = iter.next();
+478,src/distributions/weighted_index.rs,191,0,0,1,2,0.0,0.0,0.0,"let &(first_new_index, _) = next_new_weight.unwrap();"
+479,src/distributions/weighted_index.rs,192,0,0,1,2,0.0,0.0,0.0,let mut cumulative_weight = if first_new_index > 0 {
+480,src/distributions/weighted_index.rs,193,0,0,1,2,0.0,0.0,0.0,self.cumulative_weights[first_new_index - 1].clone()
+481,src/distributions/weighted_index.rs,195,0,0,1,2,0.0,0.0,0.0,zero.clone()
+482,src/distributions/weighted_index.rs,197,0,0,1,2,0.0,0.0,0.0,for i in first_new_index..self.cumulative_weights.len() {
+483,src/distributions/weighted_index.rs,198,0,0,1,2,0.0,0.0,0.0,match next_new_weight {
+484,src/distributions/weighted_index.rs,199,0,0,1,2,0.0,0.0,0.0,"Some(&(j, w)) if i == j => {"
+485,src/distributions/weighted_index.rs,200,0,0,1,2,0.0,0.0,0.0,cumulative_weight += w;
+486,src/distributions/weighted_index.rs,203,0,0,1,2,0.0,0.0,0.0,_ => {
+487,src/distributions/weighted_index.rs,204,0,0,1,2,0.0,0.0,0.0,let mut tmp = self.cumulative_weights[i].clone();
+488,src/distributions/weighted_index.rs,205,0,0,1,2,0.0,0.0,0.0,tmp -= &prev_weight; // We know this is positive.
+489,src/distributions/weighted_index.rs,209,0,0,1,2,0.0,0.0,0.0,prev_weight = cumulative_weight.clone();
+490,src/distributions/weighted_index.rs,210,0,0,1,2,0.0,0.0,0.0,"core::mem::swap(&mut prev_weight, &mut self.cumulative_weights[i]);"
+491,src/distributions/weighted_index.rs,213,0,0,1,2,0.0,0.0,0.0,self.total_weight = total_weight;
+492,src/distributions/weighted_index.rs,214,0,0,1,2,0.0,0.0,0.0,"self.weight_distribution = X::Sampler::new(zero, self.total_weight.clone());"
+493,src/distributions/weighted_index.rs,216,0,0,1,2,0.0,0.0,0.0,Ok(())
+494,src/distributions/weighted_index.rs,217,0,0,1,2,0.0,0.0,0.0,}
+495,src/distributions/weighted_index.rs,223,0,0,1,2,0.0,0.0,0.0,"fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> usize {"
+496,src/distributions/weighted_index.rs,225,0,0,1,2,0.0,0.0,0.0,let chosen_weight = self.weight_distribution.sample(rng);
+497,src/distributions/weighted_index.rs,227,0,0,1,2,0.0,0.0,0.0,self.cumulative_weights
+498,src/distributions/weighted_index.rs,228,0,0,1,2,0.0,0.0,0.0,.binary_search_by(|w| {
+499,src/distributions/weighted_index.rs,229,0,0,1,2,0.0,0.0,0.0,if *w <= chosen_weight {
+500,src/distributions/weighted_index.rs,230,0,0,1,2,0.0,0.0,0.0,Ordering::Less
+501,src/distributions/weighted_index.rs,232,0,0,1,2,0.0,0.0,0.0,Ordering::Greater
+502,src/distributions/weighted_index.rs,234,0,0,1,2,0.0,0.0,0.0,})
+503,src/distributions/weighted_index.rs,235,0,0,1,2,0.0,0.0,0.0,.unwrap_err()
+504,src/distributions/weighted_index.rs,236,0,0,1,2,0.0,0.0,0.0,}
+505,src/distributions/weighted_index.rs,417,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+506,src/distributions/weighted_index.rs,418,0,0,1,2,0.0,0.0,0.0,match *self {
+507,src/distributions/weighted_index.rs,419,0,0,1,2,0.0,0.0,0.0,"WeightedError::NoItem => write!(f, ""No weights provided.""),"
+508,src/distributions/weighted_index.rs,420,0,0,1,2,0.0,0.0,0.0,"WeightedError::InvalidWeight => write!(f, ""A weight is invalid.""),"
+509,src/distributions/weighted_index.rs,421,0,0,1,2,0.0,0.0,0.0,"WeightedError::AllWeightsZero => write!(f, ""All weights are zero.""),"
+510,src/distributions/weighted_index.rs,422,0,0,1,2,0.0,0.0,0.0,"WeightedError::TooMany => write!(f, ""Too many weights (hit u32::MAX)""),"
+511,src/distributions/weighted_index.rs,424,0,0,1,2,0.0,0.0,0.0,}
+512,src/lib.rs,181,0,0,1,2,0.0,0.0,0.0,pub fn random<T>() -> T
+513,src/lib.rs,183,0,0,1,2,0.0,0.0,0.0,thread_rng().gen()
+514,src/lib.rs,184,0,0,1,2,0.0,0.0,0.0,}
+515,src/rng.rs,91,0,0,1,2,0.0,0.0,0.0,fn gen<T>(&mut self) -> T
+516,src/rng.rs,93,0,0,1,2,0.0,0.0,0.0,Standard.sample(self)
+517,src/rng.rs,94,0,0,1,2,0.0,0.0,0.0,}
+518,src/rng.rs,120,0,0,1,2,0.0,0.0,0.0,"fn gen_range<T: SampleUniform, B1, B2>(&mut self, low: B1, high: B2) -> T"
+519,src/rng.rs,125,0,0,1,2,0.0,0.0,0.0,"T::Sampler::sample_single(low, high, self)"
+520,src/rng.rs,126,0,0,1,2,0.0,0.0,0.0,}
+521,src/rng.rs,142,0,0,1,2,0.0,0.0,0.0,"fn sample<T, D: Distribution<T>>(&mut self, distr: D) -> T {"
+522,src/rng.rs,143,0,0,1,2,0.0,0.0,0.0,distr.sample(self)
+523,src/rng.rs,144,0,0,1,2,0.0,0.0,0.0,}
+524,src/rng.rs,179,0,0,1,2,0.0,0.0,0.0,"fn sample_iter<T, D>(self, distr: D) -> distributions::DistIter<D, Self, T>"
+525,src/rng.rs,184,0,0,1,2,0.0,0.0,0.0,distr.sample_iter(self)
+526,src/rng.rs,185,0,0,1,2,0.0,0.0,0.0,}
+527,src/rng.rs,205,0,0,1,2,0.0,0.0,0.0,"fn fill<T: Fill + ?Sized>(&mut self, dest: &mut T) {"
+528,src/rng.rs,206,0,0,1,2,0.0,0.0,0.0,"dest.try_fill(self).unwrap_or_else(|_| panic!(""Rng::fill failed""))"
+529,src/rng.rs,207,0,0,1,2,0.0,0.0,0.0,}
+530,src/rng.rs,233,0,0,1,2,0.0,0.0,0.0,"fn try_fill<T: Fill + ?Sized>(&mut self, dest: &mut T) -> Result<(), Error> {"
+531,src/rng.rs,234,0,0,1,2,0.0,0.0,0.0,dest.try_fill(self)
+532,src/rng.rs,235,0,0,1,2,0.0,0.0,0.0,}
+533,src/rng.rs,257,0,0,1,2,0.0,0.0,0.0,"fn gen_bool(&mut self, p: f64) -> bool {"
+534,src/rng.rs,258,0,0,1,2,0.0,0.0,0.0,let d = distributions::Bernoulli::new(p).unwrap();
+535,src/rng.rs,259,0,0,1,2,0.0,0.0,0.0,self.sample(d)
+536,src/rng.rs,260,0,0,1,2,0.0,0.0,0.0,}
+537,src/rng.rs,286,0,0,1,2,0.0,0.0,0.0,"fn gen_ratio(&mut self, numerator: u32, denominator: u32) -> bool {"
+538,src/rng.rs,287,0,0,1,2,0.0,0.0,0.0,"let d = distributions::Bernoulli::from_ratio(numerator, denominator).unwrap();"
+539,src/rng.rs,288,0,0,1,2,0.0,0.0,0.0,self.sample(d)
+540,src/rng.rs,289,0,0,1,2,0.0,0.0,0.0,}
+541,src/rng.rs,310,0,0,1,2,0.0,0.0,0.0,"fn try_fill<R: Rng + ?Sized>(&mut self, rng: &mut R) -> Result<(), Error> {"
+542,src/rng.rs,311,0,0,1,2,0.0,0.0,0.0,for elt in self.iter_mut() {
+543,src/rng.rs,314,0,0,1,2,0.0,0.0,0.0,Ok(())
+544,src/rng.rs,315,0,0,1,2,0.0,0.0,0.0,}
+545,src/rng.rs,327,0,0,1,2,0.0,0.0,0.0,"fn try_fill<R: Rng + ?Sized>(&mut self, rng: &mut R) -> Result<(), Error> {"
+546,src/rng.rs,328,0,0,1,2,0.0,0.0,0.0,rng.try_fill_bytes(self)
+547,src/rng.rs,329,0,0,1,2,0.0,0.0,0.0,}
+548,src/rng.rs,337,0,0,1,2,0.0,0.0,0.0,"fn try_fill<R: Rng + ?Sized>(&mut self, rng: &mut R) -> Result<(), Error> {"
+549,src/rng.rs,338,0,0,1,2,0.0,0.0,0.0,if self.len() > 0 {
+550,src/rng.rs,339,0,0,1,2,0.0,0.0,0.0,rng.try_fill_bytes(unsafe {
+551,src/rng.rs,340,0,0,1,2,0.0,0.0,0.0,slice::from_raw_parts_mut(self.as_mut_ptr()
+552,src/rng.rs,341,0,0,1,2,0.0,0.0,0.0,"as *mut u8,"
+553,src/rng.rs,342,0,0,1,2,0.0,0.0,0.0,self.len() * mem::size_of::<$t>()
+554,src/rng.rs,344,0,0,1,2,0.0,0.0,0.0,})?;
+555,src/rng.rs,345,0,0,1,2,0.0,0.0,0.0,for x in self {
+556,src/rng.rs,348,0,0,1,2,0.0,0.0,0.0,}
+557,src/rng.rs,349,0,0,1,2,0.0,0.0,0.0,Ok(())
+558,src/rng.rs,350,0,0,1,2,0.0,0.0,0.0,}
+559,src/rng.rs,355,0,0,1,2,0.0,0.0,0.0,"fn try_fill<R: Rng + ?Sized>(&mut self, rng: &mut R) -> Result<(), Error> {"
+560,src/rng.rs,356,0,0,1,2,0.0,0.0,0.0,if self.len() > 0 {
+561,src/rng.rs,357,0,0,1,2,0.0,0.0,0.0,rng.try_fill_bytes(unsafe {
+562,src/rng.rs,358,0,0,1,2,0.0,0.0,0.0,slice::from_raw_parts_mut(self.as_mut_ptr()
+563,src/rng.rs,359,0,0,1,2,0.0,0.0,0.0,"as *mut u8,"
+564,src/rng.rs,360,0,0,1,2,0.0,0.0,0.0,self.len() * mem::size_of::<$t>()
+565,src/rng.rs,362,0,0,1,2,0.0,0.0,0.0,})?;
+566,src/rng.rs,363,0,0,1,2,0.0,0.0,0.0,for x in self {
+567,src/rng.rs,366,0,0,1,2,0.0,0.0,0.0,}
+568,src/rng.rs,367,0,0,1,2,0.0,0.0,0.0,Ok(())
+569,src/rng.rs,368,0,0,1,2,0.0,0.0,0.0,}
+570,src/rng.rs,390,0,0,1,2,0.0,0.0,0.0,"fn try_fill<R: Rng + ?Sized>(&mut self, rng: &mut R) -> Result<(), Error> {"
+571,src/rng.rs,391,0,0,1,2,0.0,0.0,0.0,self[..].try_fill(rng)
+572,src/rng.rs,392,0,0,1,2,0.0,0.0,0.0,}
+573,src/rngs/adapter/read.rs,53,0,0,1,2,0.0,0.0,0.0,pub fn new(r: R) -> ReadRng<R> {
+574,src/rngs/adapter/read.rs,54,0,0,1,2,0.0,0.0,0.0,ReadRng { reader: r }
+575,src/rngs/adapter/read.rs,55,0,0,1,2,0.0,0.0,0.0,}
+576,src/rngs/adapter/read.rs,59,0,0,1,2,0.0,0.0,0.0,fn next_u32(&mut self) -> u32 {
+577,src/rngs/adapter/read.rs,60,0,0,1,2,0.0,0.0,0.0,impls::next_u32_via_fill(self)
+578,src/rngs/adapter/read.rs,61,0,0,1,2,0.0,0.0,0.0,}
+579,src/rngs/adapter/read.rs,63,0,0,1,2,0.0,0.0,0.0,fn next_u64(&mut self) -> u64 {
+580,src/rngs/adapter/read.rs,64,0,0,1,2,0.0,0.0,0.0,impls::next_u64_via_fill(self)
+581,src/rngs/adapter/read.rs,65,0,0,1,2,0.0,0.0,0.0,}
+582,src/rngs/adapter/read.rs,67,0,0,1,2,0.0,0.0,0.0,"fn fill_bytes(&mut self, dest: &mut [u8]) {"
+583,src/rngs/adapter/read.rs,68,0,0,1,2,0.0,0.0,0.0,self.try_fill_bytes(dest).unwrap_or_else(|err| {
+584,src/rngs/adapter/read.rs,69,0,0,1,2,0.0,0.0,0.0,panic!(
+585,src/rngs/adapter/read.rs,74,0,0,1,2,0.0,0.0,0.0,}
+586,src/rngs/adapter/read.rs,76,0,0,1,2,0.0,0.0,0.0,"fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {"
+587,src/rngs/adapter/read.rs,77,0,0,1,2,0.0,0.0,0.0,if dest.is_empty() {
+588,src/rngs/adapter/read.rs,78,0,0,1,2,0.0,0.0,0.0,return Ok(());
+589,src/rngs/adapter/read.rs,79,0,0,1,2,0.0,0.0,0.0,}
+590,src/rngs/adapter/read.rs,81,0,0,1,2,0.0,0.0,0.0,self.reader
+591,src/rngs/adapter/read.rs,82,0,0,1,2,0.0,0.0,0.0,.read_exact(dest)
+592,src/rngs/adapter/read.rs,83,0,0,1,2,0.0,0.0,0.0,.map_err(|e| Error::new(ReadError(e)))
+593,src/rngs/adapter/read.rs,84,0,0,1,2,0.0,0.0,0.0,}
+594,src/rngs/adapter/read.rs,92,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+595,src/rngs/adapter/read.rs,93,0,0,1,2,0.0,0.0,0.0,"write!(f, ""ReadError: {}"", self.0)"
+596,src/rngs/adapter/read.rs,94,0,0,1,2,0.0,0.0,0.0,}
+597,src/rngs/adapter/read.rs,98,0,0,1,2,0.0,0.0,0.0,fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+598,src/rngs/adapter/read.rs,99,0,0,1,2,0.0,0.0,0.0,Some(&self.0)
+599,src/rngs/adapter/read.rs,100,0,0,1,2,0.0,0.0,0.0,}
+600,src/rngs/adapter/reseeding.rs,95,0,0,1,2,0.0,0.0,0.0,"pub fn new(rng: R, threshold: u64, reseeder: Rsdr) -> Self {"
+601,src/rngs/adapter/reseeding.rs,96,0,0,1,2,0.0,0.0,0.0,"ReseedingRng(BlockRng::new(ReseedingCore::new(rng, threshold, reseeder)))"
+602,src/rngs/adapter/reseeding.rs,97,0,0,1,2,0.0,0.0,0.0,}
+603,src/rngs/adapter/reseeding.rs,100,0,0,1,2,0.0,0.0,0.0,"pub fn reseed(&mut self) -> Result<(), Error> {"
+604,src/rngs/adapter/reseeding.rs,101,0,0,1,2,0.0,0.0,0.0,self.0.core.reseed()
+605,src/rngs/adapter/reseeding.rs,102,0,0,1,2,0.0,0.0,0.0,}
+606,src/rngs/adapter/reseeding.rs,113,0,0,1,2,0.0,0.0,0.0,fn next_u32(&mut self) -> u32 {
+607,src/rngs/adapter/reseeding.rs,114,0,0,1,2,0.0,0.0,0.0,self.0.next_u32()
+608,src/rngs/adapter/reseeding.rs,115,0,0,1,2,0.0,0.0,0.0,}
+609,src/rngs/adapter/reseeding.rs,118,0,0,1,2,0.0,0.0,0.0,fn next_u64(&mut self) -> u64 {
+610,src/rngs/adapter/reseeding.rs,119,0,0,1,2,0.0,0.0,0.0,self.0.next_u64()
+611,src/rngs/adapter/reseeding.rs,120,0,0,1,2,0.0,0.0,0.0,}
+612,src/rngs/adapter/reseeding.rs,122,0,0,1,2,0.0,0.0,0.0,"fn fill_bytes(&mut self, dest: &mut [u8]) {"
+613,src/rngs/adapter/reseeding.rs,123,0,0,1,2,0.0,0.0,0.0,self.0.fill_bytes(dest)
+614,src/rngs/adapter/reseeding.rs,124,0,0,1,2,0.0,0.0,0.0,}
+615,src/rngs/adapter/reseeding.rs,126,0,0,1,2,0.0,0.0,0.0,"fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {"
+616,src/rngs/adapter/reseeding.rs,127,0,0,1,2,0.0,0.0,0.0,self.0.try_fill_bytes(dest)
+617,src/rngs/adapter/reseeding.rs,128,0,0,1,2,0.0,0.0,0.0,}
+618,src/rngs/adapter/reseeding.rs,136,0,0,1,2,0.0,0.0,0.0,"fn clone(&self) -> ReseedingRng<R, Rsdr> {"
+619,src/rngs/adapter/reseeding.rs,139,0,0,1,2,0.0,0.0,0.0,ReseedingRng(BlockRng::new(self.0.core.clone()))
+620,src/rngs/adapter/reseeding.rs,140,0,0,1,2,0.0,0.0,0.0,}
+621,src/rngs/adapter/reseeding.rs,167,0,0,1,2,0.0,0.0,0.0,"fn generate(&mut self, results: &mut Self::Results) {"
+622,src/rngs/adapter/reseeding.rs,168,0,0,1,2,0.0,0.0,0.0,let global_fork_counter = fork::get_fork_counter();
+623,src/rngs/adapter/reseeding.rs,169,0,0,1,2,0.0,0.0,0.0,if self.bytes_until_reseed <= 0 || self.is_forked(global_fork_counter) {
+624,src/rngs/adapter/reseeding.rs,173,0,0,1,2,0.0,0.0,0.0,"return self.reseed_and_generate(results, global_fork_counter);"
+625,src/rngs/adapter/reseeding.rs,174,0,0,1,2,0.0,0.0,0.0,}
+626,src/rngs/adapter/reseeding.rs,175,0,0,1,2,0.0,0.0,0.0,let num_bytes = results.as_ref().len() * size_of::<Self::Item>();
+627,src/rngs/adapter/reseeding.rs,176,0,0,1,2,0.0,0.0,0.0,self.bytes_until_reseed -= num_bytes as i64;
+628,src/rngs/adapter/reseeding.rs,177,0,0,1,2,0.0,0.0,0.0,self.inner.generate(results);
+629,src/rngs/adapter/reseeding.rs,178,0,0,1,2,0.0,0.0,0.0,}
+630,src/rngs/adapter/reseeding.rs,187,0,0,1,2,0.0,0.0,0.0,"fn new(rng: R, threshold: u64, reseeder: Rsdr) -> Self {"
+631,src/rngs/adapter/reseeding.rs,189,0,0,1,2,0.0,0.0,0.0,fork::register_fork_handler();
+632,src/rngs/adapter/reseeding.rs,195,0,0,1,2,0.0,0.0,0.0,let threshold = if threshold == 0 {
+633,src/rngs/adapter/reseeding.rs,196,0,0,1,2,0.0,0.0,0.0,MAX
+634,src/rngs/adapter/reseeding.rs,197,0,0,1,2,0.0,0.0,0.0,} else if threshold <= MAX as u64 {
+635,src/rngs/adapter/reseeding.rs,198,0,0,1,2,0.0,0.0,0.0,threshold as i64
+636,src/rngs/adapter/reseeding.rs,200,0,0,1,2,0.0,0.0,0.0,MAX
+637,src/rngs/adapter/reseeding.rs,203,0,0,1,2,0.0,0.0,0.0,ReseedingCore {
+638,src/rngs/adapter/reseeding.rs,204,0,0,1,2,0.0,0.0,0.0,"inner: rng,"
+639,src/rngs/adapter/reseeding.rs,205,0,0,1,2,0.0,0.0,0.0,"reseeder,"
+640,src/rngs/adapter/reseeding.rs,210,0,0,1,2,0.0,0.0,0.0,}
+641,src/rngs/adapter/reseeding.rs,213,0,0,1,2,0.0,0.0,0.0,"fn reseed(&mut self) -> Result<(), Error> {"
+642,src/rngs/adapter/reseeding.rs,214,0,0,1,2,0.0,0.0,0.0,R::from_rng(&mut self.reseeder).map(|result| {
+643,src/rngs/adapter/reseeding.rs,215,0,0,1,2,0.0,0.0,0.0,self.bytes_until_reseed = self.threshold;
+644,src/rngs/adapter/reseeding.rs,216,0,0,1,2,0.0,0.0,0.0,self.inner = result
+645,src/rngs/adapter/reseeding.rs,217,0,0,1,2,0.0,0.0,0.0,})
+646,src/rngs/adapter/reseeding.rs,218,0,0,1,2,0.0,0.0,0.0,}
+647,src/rngs/adapter/reseeding.rs,220,0,0,1,2,0.0,0.0,0.0,"fn is_forked(&self, global_fork_counter: usize) -> bool {"
+648,src/rngs/adapter/reseeding.rs,231,0,0,1,2,0.0,0.0,0.0,(self.fork_counter.wrapping_sub(global_fork_counter) as isize) < 0
+649,src/rngs/adapter/reseeding.rs,232,0,0,1,2,0.0,0.0,0.0,}
+650,src/rngs/adapter/reseeding.rs,235,0,0,1,2,0.0,0.0,0.0,fn reseed_and_generate(
+651,src/rngs/adapter/reseeding.rs,239,0,0,1,2,0.0,0.0,0.0,if self.is_forked(global_fork_counter) {
+652,src/rngs/adapter/reseeding.rs,241,0,0,1,2,0.0,0.0,0.0,} else {
+653,src/rngs/adapter/reseeding.rs,245,0,0,1,2,0.0,0.0,0.0,let num_bytes = results.as_ref().len() * size_of::<<R as BlockRngCore>::Item>();
+654,src/rngs/adapter/reseeding.rs,247,0,0,1,2,0.0,0.0,0.0,if let Err(e) = self.reseed() {
+655,src/rngs/adapter/reseeding.rs,250,0,0,1,2,0.0,0.0,0.0,}
+656,src/rngs/adapter/reseeding.rs,251,0,0,1,2,0.0,0.0,0.0,self.fork_counter = global_fork_counter;
+657,src/rngs/adapter/reseeding.rs,253,0,0,1,2,0.0,0.0,0.0,self.bytes_until_reseed = self.threshold - num_bytes as i64;
+658,src/rngs/adapter/reseeding.rs,254,0,0,1,2,0.0,0.0,0.0,self.inner.generate(results);
+659,src/rngs/adapter/reseeding.rs,255,0,0,1,2,0.0,0.0,0.0,}
+660,src/rngs/adapter/reseeding.rs,263,0,0,1,2,0.0,0.0,0.0,"fn clone(&self) -> ReseedingCore<R, Rsdr> {"
+661,src/rngs/adapter/reseeding.rs,264,0,0,1,2,0.0,0.0,0.0,ReseedingCore {
+662,src/rngs/adapter/reseeding.rs,265,0,0,1,2,0.0,0.0,0.0,"inner: self.inner.clone(),"
+663,src/rngs/adapter/reseeding.rs,266,0,0,1,2,0.0,0.0,0.0,"reseeder: self.reseeder.clone(),"
+664,src/rngs/adapter/reseeding.rs,271,0,0,1,2,0.0,0.0,0.0,}
+665,src/rngs/adapter/reseeding.rs,301,0,0,1,2,0.0,0.0,0.0,pub fn get_fork_counter() -> usize {
+666,src/rngs/adapter/reseeding.rs,302,0,0,1,2,0.0,0.0,0.0,RESEEDING_RNG_FORK_COUNTER.load(Ordering::Relaxed)
+667,src/rngs/adapter/reseeding.rs,303,0,0,1,2,0.0,0.0,0.0,}
+668,src/rngs/adapter/reseeding.rs,305,0,0,1,2,0.0,0.0,0.0,"extern ""C"" fn fork_handler() {"
+669,src/rngs/adapter/reseeding.rs,308,0,0,1,2,0.0,0.0,0.0,"RESEEDING_RNG_FORK_COUNTER.fetch_add(1, Ordering::Relaxed);"
+670,src/rngs/adapter/reseeding.rs,309,0,0,1,2,0.0,0.0,0.0,}
+671,src/rngs/adapter/reseeding.rs,311,0,0,1,2,0.0,0.0,0.0,pub fn register_fork_handler() {
+672,src/rngs/adapter/reseeding.rs,313,0,0,1,2,0.0,0.0,0.0,REGISTER.call_once(|| unsafe {
+673,src/rngs/adapter/reseeding.rs,314,0,0,1,2,0.0,0.0,0.0,"libc::pthread_atfork(None, None, Some(fork_handler));"
+674,src/rngs/adapter/reseeding.rs,315,0,0,1,2,0.0,0.0,0.0,});
+675,src/rngs/adapter/reseeding.rs,316,0,0,1,2,0.0,0.0,0.0,}
+676,src/rngs/mock.rs,40,0,0,1,2,0.0,0.0,0.0,"pub fn new(initial: u64, increment: u64) -> Self {"
+677,src/rngs/mock.rs,41,0,0,1,2,0.0,0.0,0.0,StepRng {
+678,src/rngs/mock.rs,45,0,0,1,2,0.0,0.0,0.0,}
+679,src/rngs/mock.rs,50,0,0,1,2,0.0,0.0,0.0,fn next_u32(&mut self) -> u32 {
+680,src/rngs/mock.rs,51,0,0,1,2,0.0,0.0,0.0,self.next_u64() as u32
+681,src/rngs/mock.rs,52,0,0,1,2,0.0,0.0,0.0,}
+682,src/rngs/mock.rs,55,0,0,1,2,0.0,0.0,0.0,fn next_u64(&mut self) -> u64 {
+683,src/rngs/mock.rs,56,0,0,1,2,0.0,0.0,0.0,let result = self.v;
+684,src/rngs/mock.rs,57,0,0,1,2,0.0,0.0,0.0,self.v = self.v.wrapping_add(self.a);
+685,src/rngs/mock.rs,58,0,0,1,2,0.0,0.0,0.0,result
+686,src/rngs/mock.rs,59,0,0,1,2,0.0,0.0,0.0,}
+687,src/rngs/mock.rs,62,0,0,1,2,0.0,0.0,0.0,"fn fill_bytes(&mut self, dest: &mut [u8]) {"
+688,src/rngs/mock.rs,63,0,0,1,2,0.0,0.0,0.0,"impls::fill_bytes_via_next(self, dest);"
+689,src/rngs/mock.rs,64,0,0,1,2,0.0,0.0,0.0,}
+690,src/rngs/mock.rs,67,0,0,1,2,0.0,0.0,0.0,"fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {"
+691,src/rngs/mock.rs,68,0,0,1,2,0.0,0.0,0.0,self.fill_bytes(dest);
+692,src/rngs/mock.rs,69,0,0,1,2,0.0,0.0,0.0,Ok(())
+693,src/rngs/mock.rs,70,0,0,1,2,0.0,0.0,0.0,}
+694,src/rngs/std.rs,40,0,0,1,2,0.0,0.0,0.0,fn next_u32(&mut self) -> u32 {
+695,src/rngs/std.rs,41,0,0,1,2,0.0,0.0,0.0,self.0.next_u32()
+696,src/rngs/std.rs,42,0,0,1,2,0.0,0.0,0.0,}
+697,src/rngs/std.rs,45,0,0,1,2,0.0,0.0,0.0,fn next_u64(&mut self) -> u64 {
+698,src/rngs/std.rs,46,0,0,1,2,0.0,0.0,0.0,self.0.next_u64()
+699,src/rngs/std.rs,47,0,0,1,2,0.0,0.0,0.0,}
+700,src/rngs/std.rs,50,0,0,1,2,0.0,0.0,0.0,"fn fill_bytes(&mut self, dest: &mut [u8]) {"
+701,src/rngs/std.rs,51,0,0,1,2,0.0,0.0,0.0,self.0.fill_bytes(dest);
+702,src/rngs/std.rs,52,0,0,1,2,0.0,0.0,0.0,}
+703,src/rngs/std.rs,55,0,0,1,2,0.0,0.0,0.0,"fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {"
+704,src/rngs/std.rs,56,0,0,1,2,0.0,0.0,0.0,self.0.try_fill_bytes(dest)
+705,src/rngs/std.rs,57,0,0,1,2,0.0,0.0,0.0,}
+706,src/rngs/std.rs,64,0,0,1,2,0.0,0.0,0.0,fn from_seed(seed: Self::Seed) -> Self {
+707,src/rngs/std.rs,65,0,0,1,2,0.0,0.0,0.0,StdRng(Rng::from_seed(seed))
+708,src/rngs/std.rs,66,0,0,1,2,0.0,0.0,0.0,}
+709,src/rngs/std.rs,69,0,0,1,2,0.0,0.0,0.0,"fn from_rng<R: RngCore>(rng: R) -> Result<Self, Error> {"
+710,src/rngs/std.rs,70,0,0,1,2,0.0,0.0,0.0,Rng::from_rng(rng).map(StdRng)
+711,src/rngs/std.rs,71,0,0,1,2,0.0,0.0,0.0,}
+712,src/rngs/thread.rs,65,0,0,1,2,0.0,0.0,0.0,"panic!(""could not initialize thread_rng: {}"", err));"
+713,src/rngs/thread.rs,80,0,0,1,2,0.0,0.0,0.0,pub fn thread_rng() -> ThreadRng {
+714,src/rngs/thread.rs,81,0,0,1,2,0.0,0.0,0.0,let raw = THREAD_RNG_KEY.with(|t| t.get());
+715,src/rngs/thread.rs,82,0,0,1,2,0.0,0.0,0.0,let nn = NonNull::new(raw).unwrap();
+716,src/rngs/thread.rs,83,0,0,1,2,0.0,0.0,0.0,ThreadRng { rng: nn }
+717,src/rngs/thread.rs,84,0,0,1,2,0.0,0.0,0.0,}
+718,src/rngs/thread.rs,87,0,0,1,2,0.0,0.0,0.0,fn default() -> ThreadRng {
+719,src/rngs/thread.rs,88,0,0,1,2,0.0,0.0,0.0,crate::prelude::thread_rng()
+720,src/rngs/thread.rs,89,0,0,1,2,0.0,0.0,0.0,}
+721,src/rngs/thread.rs,94,0,0,1,2,0.0,0.0,0.0,fn next_u32(&mut self) -> u32 {
+722,src/rngs/thread.rs,95,0,0,1,2,0.0,0.0,0.0,unsafe { self.rng.as_mut().next_u32() }
+723,src/rngs/thread.rs,96,0,0,1,2,0.0,0.0,0.0,}
+724,src/rngs/thread.rs,99,0,0,1,2,0.0,0.0,0.0,fn next_u64(&mut self) -> u64 {
+725,src/rngs/thread.rs,100,0,0,1,2,0.0,0.0,0.0,unsafe { self.rng.as_mut().next_u64() }
+726,src/rngs/thread.rs,101,0,0,1,2,0.0,0.0,0.0,}
+727,src/rngs/thread.rs,103,0,0,1,2,0.0,0.0,0.0,"fn fill_bytes(&mut self, dest: &mut [u8]) {"
+728,src/rngs/thread.rs,104,0,0,1,2,0.0,0.0,0.0,unsafe { self.rng.as_mut().fill_bytes(dest) }
+729,src/rngs/thread.rs,105,0,0,1,2,0.0,0.0,0.0,}
+730,src/rngs/thread.rs,107,0,0,1,2,0.0,0.0,0.0,"fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {"
+731,src/rngs/thread.rs,108,0,0,1,2,0.0,0.0,0.0,unsafe { self.rng.as_mut().try_fill_bytes(dest) }
+732,src/rngs/thread.rs,109,0,0,1,2,0.0,0.0,0.0,}
+733,src/seq/index.rs,43,0,0,1,2,0.0,0.0,0.0,pub fn len(&self) -> usize {
+734,src/seq/index.rs,44,0,0,1,2,0.0,0.0,0.0,match *self {
+735,src/seq/index.rs,45,0,0,1,2,0.0,0.0,0.0,"IndexVec::U32(ref v) => v.len(),"
+736,src/seq/index.rs,46,0,0,1,2,0.0,0.0,0.0,"IndexVec::USize(ref v) => v.len(),"
+737,src/seq/index.rs,48,0,0,1,2,0.0,0.0,0.0,}
+738,src/seq/index.rs,52,0,0,1,2,0.0,0.0,0.0,pub fn is_empty(&self) -> bool {
+739,src/seq/index.rs,53,0,0,1,2,0.0,0.0,0.0,match *self {
+740,src/seq/index.rs,54,0,0,1,2,0.0,0.0,0.0,"IndexVec::U32(ref v) => v.is_empty(),"
+741,src/seq/index.rs,55,0,0,1,2,0.0,0.0,0.0,"IndexVec::USize(ref v) => v.is_empty(),"
+742,src/seq/index.rs,57,0,0,1,2,0.0,0.0,0.0,}
+743,src/seq/index.rs,64,0,0,1,2,0.0,0.0,0.0,"pub fn index(&self, index: usize) -> usize {"
+744,src/seq/index.rs,65,0,0,1,2,0.0,0.0,0.0,match *self {
+745,src/seq/index.rs,66,0,0,1,2,0.0,0.0,0.0,"IndexVec::U32(ref v) => v[index] as usize,"
+746,src/seq/index.rs,67,0,0,1,2,0.0,0.0,0.0,"IndexVec::USize(ref v) => v[index],"
+747,src/seq/index.rs,69,0,0,1,2,0.0,0.0,0.0,}
+748,src/seq/index.rs,73,0,0,1,2,0.0,0.0,0.0,pub fn into_vec(self) -> Vec<usize> {
+749,src/seq/index.rs,74,0,0,1,2,0.0,0.0,0.0,match self {
+750,src/seq/index.rs,75,0,0,1,2,0.0,0.0,0.0,"IndexVec::U32(v) => v.into_iter().map(|i| i as usize).collect(),"
+751,src/seq/index.rs,76,0,0,1,2,0.0,0.0,0.0,"IndexVec::USize(v) => v,"
+752,src/seq/index.rs,78,0,0,1,2,0.0,0.0,0.0,}
+753,src/seq/index.rs,82,0,0,1,2,0.0,0.0,0.0,pub fn iter(&self) -> IndexVecIter<'_> {
+754,src/seq/index.rs,83,0,0,1,2,0.0,0.0,0.0,match *self {
+755,src/seq/index.rs,84,0,0,1,2,0.0,0.0,0.0,"IndexVec::U32(ref v) => IndexVecIter::U32(v.iter()),"
+756,src/seq/index.rs,85,0,0,1,2,0.0,0.0,0.0,"IndexVec::USize(ref v) => IndexVecIter::USize(v.iter()),"
+757,src/seq/index.rs,87,0,0,1,2,0.0,0.0,0.0,}
+758,src/seq/index.rs,91,0,0,1,2,0.0,0.0,0.0,pub fn into_iter(self) -> IndexVecIntoIter {
+759,src/seq/index.rs,92,0,0,1,2,0.0,0.0,0.0,match self {
+760,src/seq/index.rs,93,0,0,1,2,0.0,0.0,0.0,"IndexVec::U32(v) => IndexVecIntoIter::U32(v.into_iter()),"
+761,src/seq/index.rs,94,0,0,1,2,0.0,0.0,0.0,"IndexVec::USize(v) => IndexVecIntoIter::USize(v.into_iter()),"
+762,src/seq/index.rs,96,0,0,1,2,0.0,0.0,0.0,}
+763,src/seq/index.rs,100,0,0,1,2,0.0,0.0,0.0,"fn eq(&self, other: &IndexVec) -> bool {"
+764,src/seq/index.rs,102,0,0,1,2,0.0,0.0,0.0,"match (self, other) {"
+765,src/seq/index.rs,103,0,0,1,2,0.0,0.0,0.0,"(&U32(ref v1), &U32(ref v2)) => v1 == v2,"
+766,src/seq/index.rs,104,0,0,1,2,0.0,0.0,0.0,"(&USize(ref v1), &USize(ref v2)) => v1 == v2,"
+767,src/seq/index.rs,105,0,0,1,2,0.0,0.0,0.0,"(&U32(ref v1), &USize(ref v2)) => {"
+768,src/seq/index.rs,106,0,0,1,2,0.0,0.0,0.0,"(v1.len() == v2.len()) && (v1.iter().zip(v2.iter()).all(|(x, y)| *x as usize == *y))"
+769,src/seq/index.rs,108,0,0,1,2,0.0,0.0,0.0,"(&USize(ref v1), &U32(ref v2)) => {"
+770,src/seq/index.rs,109,0,0,1,2,0.0,0.0,0.0,"(v1.len() == v2.len()) && (v1.iter().zip(v2.iter()).all(|(x, y)| *x == *y as usize))"
+771,src/seq/index.rs,112,0,0,1,2,0.0,0.0,0.0,}
+772,src/seq/index.rs,117,0,0,1,2,0.0,0.0,0.0,fn from(v: Vec<u32>) -> Self {
+773,src/seq/index.rs,118,0,0,1,2,0.0,0.0,0.0,IndexVec::U32(v)
+774,src/seq/index.rs,119,0,0,1,2,0.0,0.0,0.0,}
+775,src/seq/index.rs,124,0,0,1,2,0.0,0.0,0.0,fn from(v: Vec<usize>) -> Self {
+776,src/seq/index.rs,125,0,0,1,2,0.0,0.0,0.0,IndexVec::USize(v)
+777,src/seq/index.rs,126,0,0,1,2,0.0,0.0,0.0,}
+778,src/seq/index.rs,142,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<usize> {
+779,src/seq/index.rs,144,0,0,1,2,0.0,0.0,0.0,match *self {
+780,src/seq/index.rs,145,0,0,1,2,0.0,0.0,0.0,"U32(ref mut iter) => iter.next().map(|i| *i as usize),"
+781,src/seq/index.rs,146,0,0,1,2,0.0,0.0,0.0,"USize(ref mut iter) => iter.next().cloned(),"
+782,src/seq/index.rs,148,0,0,1,2,0.0,0.0,0.0,}
+783,src/seq/index.rs,151,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+784,src/seq/index.rs,152,0,0,1,2,0.0,0.0,0.0,match *self {
+785,src/seq/index.rs,153,0,0,1,2,0.0,0.0,0.0,"IndexVecIter::U32(ref v) => v.size_hint(),"
+786,src/seq/index.rs,154,0,0,1,2,0.0,0.0,0.0,"IndexVecIter::USize(ref v) => v.size_hint(),"
+787,src/seq/index.rs,156,0,0,1,2,0.0,0.0,0.0,}
+788,src/seq/index.rs,174,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<Self::Item> {
+789,src/seq/index.rs,176,0,0,1,2,0.0,0.0,0.0,match *self {
+790,src/seq/index.rs,177,0,0,1,2,0.0,0.0,0.0,"U32(ref mut v) => v.next().map(|i| i as usize),"
+791,src/seq/index.rs,178,0,0,1,2,0.0,0.0,0.0,"USize(ref mut v) => v.next(),"
+792,src/seq/index.rs,180,0,0,1,2,0.0,0.0,0.0,}
+793,src/seq/index.rs,183,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+794,src/seq/index.rs,185,0,0,1,2,0.0,0.0,0.0,match *self {
+795,src/seq/index.rs,186,0,0,1,2,0.0,0.0,0.0,"U32(ref v) => v.size_hint(),"
+796,src/seq/index.rs,187,0,0,1,2,0.0,0.0,0.0,"USize(ref v) => v.size_hint(),"
+797,src/seq/index.rs,189,0,0,1,2,0.0,0.0,0.0,}
+798,src/seq/index.rs,217,0,0,1,2,0.0,0.0,0.0,"pub fn sample<R>(rng: &mut R, length: usize, amount: usize) -> IndexVec"
+799,src/seq/index.rs,219,0,0,1,2,0.0,0.0,0.0,if amount > length {
+800,src/seq/index.rs,220,0,0,1,2,0.0,0.0,0.0,"panic!(""`amount` of samples must be less than or equal to `length`"");"
+801,src/seq/index.rs,221,0,0,1,2,0.0,0.0,0.0,}
+802,src/seq/index.rs,222,0,0,1,2,0.0,0.0,0.0,if length > (::core::u32::MAX as usize) {
+803,src/seq/index.rs,225,0,0,1,2,0.0,0.0,0.0,"return sample_rejection(rng, length, amount);"
+804,src/seq/index.rs,226,0,0,1,2,0.0,0.0,0.0,}
+805,src/seq/index.rs,227,0,0,1,2,0.0,0.0,0.0,let amount = amount as u32;
+806,src/seq/index.rs,228,0,0,1,2,0.0,0.0,0.0,let length = length as u32;
+807,src/seq/index.rs,234,0,0,1,2,0.0,0.0,0.0,if amount < 163 {
+808,src/seq/index.rs,236,0,0,1,2,0.0,0.0,0.0,let j = if length < 500_000 { 0 } else { 1 };
+809,src/seq/index.rs,237,0,0,1,2,0.0,0.0,0.0,let amount_fp = amount as f32;
+810,src/seq/index.rs,238,0,0,1,2,0.0,0.0,0.0,let m4 = C[0][j] * amount_fp;
+811,src/seq/index.rs,240,0,0,1,2,0.0,0.0,0.0,if amount > 11 && (length as f32) < (C[1][j] + m4) * amount_fp {
+812,src/seq/index.rs,241,0,0,1,2,0.0,0.0,0.0,"sample_inplace(rng, length, amount)"
+813,src/seq/index.rs,243,0,0,1,2,0.0,0.0,0.0,"sample_floyd(rng, length, amount)"
+814,src/seq/index.rs,247,0,0,1,2,0.0,0.0,0.0,let j = if length < 500_000 { 0 } else { 1 };
+815,src/seq/index.rs,248,0,0,1,2,0.0,0.0,0.0,if (length as f32) < C[j] * (amount as f32) {
+816,src/seq/index.rs,249,0,0,1,2,0.0,0.0,0.0,"sample_inplace(rng, length, amount)"
+817,src/seq/index.rs,251,0,0,1,2,0.0,0.0,0.0,"sample_rejection(rng, length, amount)"
+818,src/seq/index.rs,254,0,0,1,2,0.0,0.0,0.0,}
+819,src/seq/index.rs,262,0,0,1,2,0.0,0.0,0.0,"fn sample_floyd<R>(rng: &mut R, length: u32, amount: u32) -> IndexVec"
+820,src/seq/index.rs,267,0,0,1,2,0.0,0.0,0.0,let floyd_shuffle = amount < 50;
+821,src/seq/index.rs,269,0,0,1,2,0.0,0.0,0.0,debug_assert!(amount <= length);
+822,src/seq/index.rs,270,0,0,1,2,0.0,0.0,0.0,let mut indices = Vec::with_capacity(amount as usize);
+823,src/seq/index.rs,271,0,0,1,2,0.0,0.0,0.0,for j in length - amount..length {
+824,src/seq/index.rs,272,0,0,1,2,0.0,0.0,0.0,"let t = rng.gen_range(0, j + 1);"
+825,src/seq/index.rs,273,0,0,1,2,0.0,0.0,0.0,if floyd_shuffle {
+826,src/seq/index.rs,274,0,0,1,2,0.0,0.0,0.0,if let Some(pos) = indices.iter().position(|&x| x == t) {
+827,src/seq/index.rs,275,0,0,1,2,0.0,0.0,0.0,"indices.insert(pos, j);"
+828,src/seq/index.rs,276,0,0,1,2,0.0,0.0,0.0,continue;
+829,src/seq/index.rs,277,0,0,1,2,0.0,0.0,0.0,}
+830,src/seq/index.rs,278,0,0,1,2,0.0,0.0,0.0,} else if indices.contains(&t) {
+831,src/seq/index.rs,279,0,0,1,2,0.0,0.0,0.0,indices.push(j);
+832,src/seq/index.rs,280,0,0,1,2,0.0,0.0,0.0,continue;
+833,src/seq/index.rs,281,0,0,1,2,0.0,0.0,0.0,}
+834,src/seq/index.rs,282,0,0,1,2,0.0,0.0,0.0,indices.push(t);
+835,src/seq/index.rs,284,0,0,1,2,0.0,0.0,0.0,if !floyd_shuffle {
+836,src/seq/index.rs,286,0,0,1,2,0.0,0.0,0.0,for i in (1..amount).rev() {
+837,src/seq/index.rs,288,0,0,1,2,0.0,0.0,0.0,"indices.swap(i as usize, rng.gen_range(0, i + 1) as usize);"
+838,src/seq/index.rs,290,0,0,1,2,0.0,0.0,0.0,}
+839,src/seq/index.rs,291,0,0,1,2,0.0,0.0,0.0,IndexVec::from(indices)
+840,src/seq/index.rs,292,0,0,1,2,0.0,0.0,0.0,}
+841,src/seq/index.rs,306,0,0,1,2,0.0,0.0,0.0,"fn sample_inplace<R>(rng: &mut R, length: u32, amount: u32) -> IndexVec"
+842,src/seq/index.rs,308,0,0,1,2,0.0,0.0,0.0,debug_assert!(amount <= length);
+843,src/seq/index.rs,309,0,0,1,2,0.0,0.0,0.0,let mut indices: Vec<u32> = Vec::with_capacity(length as usize);
+844,src/seq/index.rs,310,0,0,1,2,0.0,0.0,0.0,indices.extend(0..length);
+845,src/seq/index.rs,311,0,0,1,2,0.0,0.0,0.0,for i in 0..amount {
+846,src/seq/index.rs,312,0,0,1,2,0.0,0.0,0.0,"let j: u32 = rng.gen_range(i, length);"
+847,src/seq/index.rs,313,0,0,1,2,0.0,0.0,0.0,"indices.swap(i as usize, j as usize);"
+848,src/seq/index.rs,315,0,0,1,2,0.0,0.0,0.0,indices.truncate(amount as usize);
+849,src/seq/index.rs,316,0,0,1,2,0.0,0.0,0.0,"debug_assert_eq!(indices.len(), amount as usize);"
+850,src/seq/index.rs,317,0,0,1,2,0.0,0.0,0.0,IndexVec::from(indices)
+851,src/seq/index.rs,318,0,0,1,2,0.0,0.0,0.0,}
+852,src/seq/index.rs,326,0,0,1,2,0.0,0.0,0.0,fn zero() -> Self {
+853,src/seq/index.rs,327,0,0,1,2,0.0,0.0,0.0,0
+854,src/seq/index.rs,328,0,0,1,2,0.0,0.0,0.0,}
+855,src/seq/index.rs,331,0,0,1,2,0.0,0.0,0.0,fn as_usize(self) -> usize {
+856,src/seq/index.rs,332,0,0,1,2,0.0,0.0,0.0,self as usize
+857,src/seq/index.rs,333,0,0,1,2,0.0,0.0,0.0,}
+858,src/seq/index.rs,337,0,0,1,2,0.0,0.0,0.0,fn zero() -> Self {
+859,src/seq/index.rs,338,0,0,1,2,0.0,0.0,0.0,0
+860,src/seq/index.rs,339,0,0,1,2,0.0,0.0,0.0,}
+861,src/seq/index.rs,342,0,0,1,2,0.0,0.0,0.0,fn as_usize(self) -> usize {
+862,src/seq/index.rs,343,0,0,1,2,0.0,0.0,0.0,self
+863,src/seq/index.rs,344,0,0,1,2,0.0,0.0,0.0,}
+864,src/seq/index.rs,356,0,0,1,2,0.0,0.0,0.0,"fn sample_rejection<X: UInt, R>(rng: &mut R, length: X, amount: X) -> IndexVec"
+865,src/seq/index.rs,361,0,0,1,2,0.0,0.0,0.0,debug_assert!(amount < length);
+866,src/seq/index.rs,363,0,0,1,2,0.0,0.0,0.0,let mut cache = HashSet::with_capacity(amount.as_usize());
+867,src/seq/index.rs,366,0,0,1,2,0.0,0.0,0.0,"let distr = Uniform::new(X::zero(), length);"
+868,src/seq/index.rs,367,0,0,1,2,0.0,0.0,0.0,let mut indices = Vec::with_capacity(amount.as_usize());
+869,src/seq/index.rs,368,0,0,1,2,0.0,0.0,0.0,for _ in 0..amount.as_usize() {
+870,src/seq/index.rs,369,0,0,1,2,0.0,0.0,0.0,let mut pos = distr.sample(rng);
+871,src/seq/index.rs,370,0,0,1,2,0.0,0.0,0.0,while !cache.insert(pos) {
+872,src/seq/index.rs,371,0,0,1,2,0.0,0.0,0.0,pos = distr.sample(rng);
+873,src/seq/index.rs,373,0,0,1,2,0.0,0.0,0.0,indices.push(pos);
+874,src/seq/index.rs,376,0,0,1,2,0.0,0.0,0.0,"debug_assert_eq!(indices.len(), amount.as_usize());"
+875,src/seq/index.rs,377,0,0,1,2,0.0,0.0,0.0,IndexVec::from(indices)
+876,src/seq/index.rs,378,0,0,1,2,0.0,0.0,0.0,}
+877,src/seq/mod.rs,255,0,0,1,2,0.0,0.0,0.0,"fn choose<R>(mut self, rng: &mut R) -> Option<Self::Item>"
+878,src/seq/mod.rs,257,0,0,1,2,0.0,0.0,0.0,"let (mut lower, mut upper) = self.size_hint();"
+879,src/seq/mod.rs,258,0,0,1,2,0.0,0.0,0.0,let mut consumed = 0;
+880,src/seq/mod.rs,259,0,0,1,2,0.0,0.0,0.0,let mut result = None;
+881,src/seq/mod.rs,261,0,0,1,2,0.0,0.0,0.0,if upper == Some(lower) {
+882,src/seq/mod.rs,262,0,0,1,2,0.0,0.0,0.0,return if lower == 0 {
+883,src/seq/mod.rs,263,0,0,1,2,0.0,0.0,0.0,None
+884,src/seq/mod.rs,265,0,0,1,2,0.0,0.0,0.0,"self.nth(gen_index(rng, lower))"
+885,src/seq/mod.rs,267,0,0,1,2,0.0,0.0,0.0,}
+886,src/seq/mod.rs,271,0,0,1,2,0.0,0.0,0.0,if lower > 1 {
+887,src/seq/mod.rs,272,0,0,1,2,0.0,0.0,0.0,"let ix = gen_index(rng, lower + consumed);"
+888,src/seq/mod.rs,273,0,0,1,2,0.0,0.0,0.0,let skip = if ix < lower {
+889,src/seq/mod.rs,274,0,0,1,2,0.0,0.0,0.0,result = self.nth(ix);
+890,src/seq/mod.rs,275,0,0,1,2,0.0,0.0,0.0,lower - (ix + 1)
+891,src/seq/mod.rs,277,0,0,1,2,0.0,0.0,0.0,lower
+892,src/seq/mod.rs,279,0,0,1,2,0.0,0.0,0.0,if upper == Some(lower) {
+893,src/seq/mod.rs,280,0,0,1,2,0.0,0.0,0.0,return result;
+894,src/seq/mod.rs,281,0,0,1,2,0.0,0.0,0.0,}
+895,src/seq/mod.rs,282,0,0,1,2,0.0,0.0,0.0,consumed += lower;
+896,src/seq/mod.rs,283,0,0,1,2,0.0,0.0,0.0,if skip > 0 {
+897,src/seq/mod.rs,284,0,0,1,2,0.0,0.0,0.0,self.nth(skip - 1);
+898,src/seq/mod.rs,285,0,0,1,2,0.0,0.0,0.0,}
+899,src/seq/mod.rs,287,0,0,1,2,0.0,0.0,0.0,let elem = self.next();
+900,src/seq/mod.rs,288,0,0,1,2,0.0,0.0,0.0,if elem.is_none() {
+901,src/seq/mod.rs,289,0,0,1,2,0.0,0.0,0.0,return result;
+902,src/seq/mod.rs,290,0,0,1,2,0.0,0.0,0.0,}
+903,src/seq/mod.rs,291,0,0,1,2,0.0,0.0,0.0,consumed += 1;
+904,src/seq/mod.rs,292,0,0,1,2,0.0,0.0,0.0,let denom = consumed as f64; // accurate to 2^53 elements
+905,src/seq/mod.rs,293,0,0,1,2,0.0,0.0,0.0,if rng.gen_bool(1.0 / denom) {
+906,src/seq/mod.rs,295,0,0,1,2,0.0,0.0,0.0,}
+907,src/seq/mod.rs,298,0,0,1,2,0.0,0.0,0.0,let hint = self.size_hint();
+908,src/seq/mod.rs,299,0,0,1,2,0.0,0.0,0.0,lower = hint.0;
+909,src/seq/mod.rs,300,0,0,1,2,0.0,0.0,0.0,upper = hint.1;
+910,src/seq/mod.rs,302,0,0,1,2,0.0,0.0,0.0,}
+911,src/seq/mod.rs,317,0,0,1,2,0.0,0.0,0.0,"fn choose_multiple_fill<R>(mut self, rng: &mut R, buf: &mut [Self::Item]) -> usize"
+912,src/seq/mod.rs,319,0,0,1,2,0.0,0.0,0.0,let amount = buf.len();
+913,src/seq/mod.rs,320,0,0,1,2,0.0,0.0,0.0,let mut len = 0;
+914,src/seq/mod.rs,321,0,0,1,2,0.0,0.0,0.0,while len < amount {
+915,src/seq/mod.rs,322,0,0,1,2,0.0,0.0,0.0,if let Some(elem) = self.next() {
+916,src/seq/mod.rs,323,0,0,1,2,0.0,0.0,0.0,buf[len] = elem;
+917,src/seq/mod.rs,327,0,0,1,2,0.0,0.0,0.0,return len;
+918,src/seq/mod.rs,332,0,0,1,2,0.0,0.0,0.0,"for (i, elem) in self.enumerate() {"
+919,src/seq/mod.rs,333,0,0,1,2,0.0,0.0,0.0,"let k = gen_index(rng, i + 1 + amount);"
+920,src/seq/mod.rs,334,0,0,1,2,0.0,0.0,0.0,if let Some(slot) = buf.get_mut(k) {
+921,src/seq/mod.rs,336,0,0,1,2,0.0,0.0,0.0,}
+922,src/seq/mod.rs,338,0,0,1,2,0.0,0.0,0.0,len
+923,src/seq/mod.rs,339,0,0,1,2,0.0,0.0,0.0,}
+924,src/seq/mod.rs,356,0,0,1,2,0.0,0.0,0.0,"fn choose_multiple<R>(mut self, rng: &mut R, amount: usize) -> Vec<Self::Item>"
+925,src/seq/mod.rs,358,0,0,1,2,0.0,0.0,0.0,let mut reservoir = Vec::with_capacity(amount);
+926,src/seq/mod.rs,359,0,0,1,2,0.0,0.0,0.0,reservoir.extend(self.by_ref().take(amount));
+927,src/seq/mod.rs,365,0,0,1,2,0.0,0.0,0.0,if reservoir.len() == amount {
+928,src/seq/mod.rs,366,0,0,1,2,0.0,0.0,0.0,"for (i, elem) in self.enumerate() {"
+929,src/seq/mod.rs,367,0,0,1,2,0.0,0.0,0.0,"let k = gen_index(rng, i + 1 + amount);"
+930,src/seq/mod.rs,368,0,0,1,2,0.0,0.0,0.0,if let Some(slot) = reservoir.get_mut(k) {
+931,src/seq/mod.rs,370,0,0,1,2,0.0,0.0,0.0,}
+932,src/seq/mod.rs,372,0,0,1,2,0.0,0.0,0.0,} else {
+933,src/seq/mod.rs,377,0,0,1,2,0.0,0.0,0.0,reservoir
+934,src/seq/mod.rs,378,0,0,1,2,0.0,0.0,0.0,}
+935,src/seq/mod.rs,385,0,0,1,2,0.0,0.0,0.0,"fn choose<R>(&self, rng: &mut R) -> Option<&Self::Item>"
+936,src/seq/mod.rs,387,0,0,1,2,0.0,0.0,0.0,if self.is_empty() {
+937,src/seq/mod.rs,388,0,0,1,2,0.0,0.0,0.0,None
+938,src/seq/mod.rs,390,0,0,1,2,0.0,0.0,0.0,"Some(&self[gen_index(rng, self.len())])"
+939,src/seq/mod.rs,392,0,0,1,2,0.0,0.0,0.0,}
+940,src/seq/mod.rs,394,0,0,1,2,0.0,0.0,0.0,"fn choose_mut<R>(&mut self, rng: &mut R) -> Option<&mut Self::Item>"
+941,src/seq/mod.rs,396,0,0,1,2,0.0,0.0,0.0,if self.is_empty() {
+942,src/seq/mod.rs,397,0,0,1,2,0.0,0.0,0.0,None
+943,src/seq/mod.rs,399,0,0,1,2,0.0,0.0,0.0,let len = self.len();
+944,src/seq/mod.rs,400,0,0,1,2,0.0,0.0,0.0,"Some(&mut self[gen_index(rng, len)])"
+945,src/seq/mod.rs,402,0,0,1,2,0.0,0.0,0.0,}
+946,src/seq/mod.rs,405,0,0,1,2,0.0,0.0,0.0,"fn choose_multiple<R>(&self, rng: &mut R, amount: usize) -> SliceChooseIter<Self, Self::Item>"
+947,src/seq/mod.rs,407,0,0,1,2,0.0,0.0,0.0,"let amount = ::core::cmp::min(amount, self.len());"
+948,src/seq/mod.rs,408,0,0,1,2,0.0,0.0,0.0,SliceChooseIter {
+949,src/seq/mod.rs,409,0,0,1,2,0.0,0.0,0.0,"slice: self,"
+950,src/seq/mod.rs,410,0,0,1,2,0.0,0.0,0.0,"_phantom: Default::default(),"
+951,src/seq/mod.rs,411,0,0,1,2,0.0,0.0,0.0,"indices: index::sample(rng, self.len(), amount).into_iter(),"
+952,src/seq/mod.rs,413,0,0,1,2,0.0,0.0,0.0,}
+953,src/seq/mod.rs,416,0,0,1,2,0.0,0.0,0.0,"fn choose_weighted<R, F, B, X>("
+954,src/seq/mod.rs,430,0,0,1,2,0.0,0.0,0.0,let distr = WeightedIndex::new(self.iter().map(weight))?;
+955,src/seq/mod.rs,431,0,0,1,2,0.0,0.0,0.0,Ok(&self[distr.sample(rng)])
+956,src/seq/mod.rs,432,0,0,1,2,0.0,0.0,0.0,}
+957,src/seq/mod.rs,435,0,0,1,2,0.0,0.0,0.0,"fn choose_weighted_mut<R, F, B, X>("
+958,src/seq/mod.rs,449,0,0,1,2,0.0,0.0,0.0,let distr = WeightedIndex::new(self.iter().map(weight))?;
+959,src/seq/mod.rs,450,0,0,1,2,0.0,0.0,0.0,Ok(&mut self[distr.sample(rng)])
+960,src/seq/mod.rs,451,0,0,1,2,0.0,0.0,0.0,}
+961,src/seq/mod.rs,453,0,0,1,2,0.0,0.0,0.0,"fn shuffle<R>(&mut self, rng: &mut R)"
+962,src/seq/mod.rs,455,0,0,1,2,0.0,0.0,0.0,for i in (1..self.len()).rev() {
+963,src/seq/mod.rs,457,0,0,1,2,0.0,0.0,0.0,"self.swap(i, gen_index(rng, i + 1));"
+964,src/seq/mod.rs,459,0,0,1,2,0.0,0.0,0.0,}
+965,src/seq/mod.rs,461,0,0,1,2,0.0,0.0,0.0,fn partial_shuffle<R>(
+966,src/seq/mod.rs,470,0,0,1,2,0.0,0.0,0.0,let len = self.len();
+967,src/seq/mod.rs,471,0,0,1,2,0.0,0.0,0.0,let end = if amount >= len { 0 } else { len - amount };
+968,src/seq/mod.rs,473,0,0,1,2,0.0,0.0,0.0,for i in (end..len).rev() {
+969,src/seq/mod.rs,475,0,0,1,2,0.0,0.0,0.0,"self.swap(i, gen_index(rng, i + 1));"
+970,src/seq/mod.rs,477,0,0,1,2,0.0,0.0,0.0,let r = self.split_at_mut(end);
+971,src/seq/mod.rs,478,0,0,1,2,0.0,0.0,0.0,"(r.1, r.0)"
+972,src/seq/mod.rs,479,0,0,1,2,0.0,0.0,0.0,}
+973,src/seq/mod.rs,501,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<Self::Item> {
+974,src/seq/mod.rs,503,0,0,1,2,0.0,0.0,0.0,self.indices.next().map(|i| &self.slice[i as usize])
+975,src/seq/mod.rs,504,0,0,1,2,0.0,0.0,0.0,}
+976,src/seq/mod.rs,506,0,0,1,2,0.0,0.0,0.0,"fn size_hint(&self) -> (usize, Option<usize>) {"
+977,src/seq/mod.rs,507,0,0,1,2,0.0,0.0,0.0,"(self.indices.len(), Some(self.indices.len()))"
+978,src/seq/mod.rs,508,0,0,1,2,0.0,0.0,0.0,}
+979,src/seq/mod.rs,515,0,0,1,2,0.0,0.0,0.0,fn len(&self) -> usize {
+980,src/seq/mod.rs,516,0,0,1,2,0.0,0.0,0.0,self.indices.len()
+981,src/seq/mod.rs,517,0,0,1,2,0.0,0.0,0.0,}
+982,src/seq/mod.rs,525,0,0,1,2,0.0,0.0,0.0,"fn gen_index<R: Rng + ?Sized>(rng: &mut R, ubound: usize) -> usize {"
+983,src/seq/mod.rs,526,0,0,1,2,0.0,0.0,0.0,if ubound <= (core::u32::MAX as usize) {
+984,src/seq/mod.rs,527,0,0,1,2,0.0,0.0,0.0,"rng.gen_range(0, ubound as u32) as usize"
+985,src/seq/mod.rs,529,0,0,1,2,0.0,0.0,0.0,"rng.gen_range(0, ubound)"
+986,src/seq/mod.rs,531,0,0,1,2,0.0,0.0,0.0,}

@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,url/src/host.rs:160,true,10,104,52.5,104,0.004088307440719542,0.04251839738348324,9,false,false,false,true,2446,url/src/host.rs,160,"Cow::Borrowed(_) => input,"
+dstar2,url/src/host.rs:160,true,10,104,52.5,104,0.004088307440719542,0.04251839738348324,9,false,false,false,true,2446,url/src/host.rs,160,"Cow::Borrowed(_) => input,"
+tarantula,url/src/host.rs:160,true,10,104,52.5,104,0.004088307440719542,0.04251839738348324,9,false,false,false,true,2446,url/src/host.rs,160,"Cow::Borrowed(_) => input,"

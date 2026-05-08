@@ -1,0 +1,27 @@
+diff --git a/url/tests/unit.rs b/url/tests/unit.rs
+index 21a7194..ed08127 100644
+--- a/url/tests/unit.rs
++++ b/url/tests/unit.rs
+@@ -665,3 +665,22 @@ fn test_set_scheme_to_file_with_host() {
+     assert_eq!(url.to_string(), "http://localhost:6767/foo/bar");
+     assert_eq!(result, Err(()));
+ }
++
++#[test]
++fn manual_set_hostname_username() {
++    let mut url = url::Url::parse("arhttpsps:/.//eom/dae.com/\\\\t\\:").unwrap();
++    let _ = url::quirks::set_hostname(&mut url, "//eom/datcom/\\\\t\\://eom/data.cs");
++}
++
++#[test]
++fn manual_set_hostname_simple() {
++    let mut url = url::Url::parse("http://example.com/path").unwrap();
++    url.set_host(Some("newhost.com")).unwrap();
++    assert_eq!(url.host_str(), Some("newhost.com"));
++}
++
++#[test]
++fn manual_username_empty() {
++    let url = url::Url::parse("http://example.com/path").unwrap();
++    assert_eq!(url.username(), "");
++}

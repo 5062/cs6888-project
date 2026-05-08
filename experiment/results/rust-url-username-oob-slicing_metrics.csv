@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,url/src/lib.rs:732,true,93,98,92.0,13,0.04061135371179039,0.04279475982532751,92,false,false,false,false,2290,url/src/lib.rs,732,if self.has_authority() {
+dstar2,url/src/lib.rs:732,true,93,98,92.0,13,0.04061135371179039,0.04279475982532751,92,false,false,false,false,2290,url/src/lib.rs,732,if self.has_authority() {
+tarantula,url/src/lib.rs:732,true,93,98,92.0,13,0.04061135371179039,0.04279475982532751,92,false,false,false,false,2290,url/src/lib.rs,732,if self.has_authority() {

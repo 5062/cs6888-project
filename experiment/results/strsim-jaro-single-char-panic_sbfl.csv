@@ -1,0 +1,128 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/lib.rs,46,1,0,0,2,1.0,1.0,inf,"pub fn jaro(a: &str, b: &str) -> f64 {"
+2,src/lib.rs,47,1,0,0,2,1.0,1.0,inf,if a == b { return 1.0; }
+3,src/lib.rs,49,1,0,0,2,1.0,1.0,inf,let a_len = a.chars().count();
+4,src/lib.rs,50,1,0,0,2,1.0,1.0,inf,let b_len = b.chars().count();
+5,src/lib.rs,51,1,0,0,2,1.0,1.0,inf,if a_len == 0 || b_len == 0 { return 0.0; }
+6,src/lib.rs,53,1,0,0,2,1.0,1.0,inf,"let search_range = max(0, (max(a_len, b_len) / 2) - 1);"
+7,src/lib.rs,55,1,0,0,2,1.0,1.0,inf,let mut b_consumed = Vec::with_capacity(b_len);
+8,src/lib.rs,56,1,0,0,2,1.0,1.0,inf,for _ in 0..b_len {
+9,src/lib.rs,59,1,0,0,2,1.0,1.0,inf,let mut matches = 0.0;
+10,src/lib.rs,61,1,0,0,2,1.0,1.0,inf,let mut transpositions = 0.0;
+11,src/lib.rs,62,1,0,0,2,1.0,1.0,inf,let mut b_match_index = 0;
+12,src/lib.rs,64,1,0,0,2,1.0,1.0,inf,"for (i, a_char) in a.chars().enumerate() {"
+13,src/lib.rs,65,1,0,0,2,1.0,1.0,inf,let min_bound =
+14,src/lib.rs,67,1,0,0,2,1.0,1.0,inf,if i > search_range {
+15,src/lib.rs,70,1,0,0,2,1.0,1.0,inf,0
+16,src/lib.rs,73,1,0,0,2,1.0,1.0,inf,"let max_bound = min(b_len - 1, i + search_range);"
+17,src/lib.rs,75,1,0,0,2,1.0,1.0,inf,if min_bound > max_bound {
+18,src/lib.rs,76,1,0,0,2,1.0,1.0,inf,continue;
+19,src/lib.rs,96,1,0,0,2,1.0,1.0,inf,if matches == 0.0 {
+20,src/lib.rs,99,1,0,0,2,1.0,1.0,inf,(1.0 / 3.0) * ((matches / a_len as f64) +
+21,src/lib.rs,103,1,0,0,2,1.0,1.0,inf,}
+22,src/lib.rs,26,0,0,1,2,0.0,0.0,0.0,"pub fn hamming(a: &str, b: &str) -> HammingResult {"
+23,src/lib.rs,27,0,0,1,2,0.0,0.0,0.0,"let (mut ita, mut itb, mut count) = (a.chars(), b.chars(), 0);"
+24,src/lib.rs,29,0,0,1,2,0.0,0.0,0.0,"match (ita.next(), itb.next()){"
+25,src/lib.rs,30,0,0,1,2,0.0,0.0,0.0,"(Some(x), Some(y)) => if x != y { count += 1 },"
+26,src/lib.rs,31,0,0,1,2,0.0,0.0,0.0,"(None, None) => return Ok(count),"
+27,src/lib.rs,32,0,0,1,2,0.0,0.0,0.0,"_ => return Err(StrSimError::DifferentLengthArgs),"
+28,src/lib.rs,35,0,0,1,2,0.0,0.0,0.0,}
+29,src/lib.rs,68,0,0,1,2,0.0,0.0,0.0,"max(0, i - search_range)"
+30,src/lib.rs,77,0,0,1,2,0.0,0.0,0.0,}
+31,src/lib.rs,79,0,0,1,2,0.0,0.0,0.0,"for (j, b_char) in b.chars().enumerate() {"
+32,src/lib.rs,80,0,0,1,2,0.0,0.0,0.0,if min_bound <= j && j <= max_bound {
+33,src/lib.rs,81,0,0,1,2,0.0,0.0,0.0,if a_char == b_char && !b_consumed[j] {
+34,src/lib.rs,82,0,0,1,2,0.0,0.0,0.0,b_consumed[j] = true;
+35,src/lib.rs,83,0,0,1,2,0.0,0.0,0.0,matches += 1.0;
+36,src/lib.rs,85,0,0,1,2,0.0,0.0,0.0,if j < b_match_index {
+37,src/lib.rs,87,0,0,1,2,0.0,0.0,0.0,}
+38,src/lib.rs,88,0,0,1,2,0.0,0.0,0.0,b_match_index = j;
+39,src/lib.rs,90,0,0,1,2,0.0,0.0,0.0,break;
+40,src/lib.rs,91,0,0,1,2,0.0,0.0,0.0,}
+41,src/lib.rs,92,0,0,1,2,0.0,0.0,0.0,}
+42,src/lib.rs,97,0,0,1,2,0.0,0.0,0.0,0.0
+43,src/lib.rs,121,0,0,1,2,0.0,0.0,0.0,"pub fn jaro_against_vec(a: &str, v: &Vec<&str>) -> Vec<f64> {"
+44,src/lib.rs,122,0,0,1,2,0.0,0.0,0.0,let mut r: Vec<f64> = Vec::with_capacity(v.len());
+45,src/lib.rs,123,0,0,1,2,0.0,0.0,0.0,for b in v.iter() {
+46,src/lib.rs,124,0,0,1,2,0.0,0.0,0.0,"r.push(jaro(a, b));"
+47,src/lib.rs,126,0,0,1,2,0.0,0.0,0.0,r
+48,src/lib.rs,127,0,0,1,2,0.0,0.0,0.0,}
+49,src/lib.rs,137,0,0,1,2,0.0,0.0,0.0,"pub fn jaro_winkler(a: &str, b: &str) -> f64 {"
+50,src/lib.rs,138,0,0,1,2,0.0,0.0,0.0,"let jaro_distance = jaro(a, b);"
+51,src/lib.rs,141,0,0,1,2,0.0,0.0,0.0,let prefix_length = a.chars()
+52,src/lib.rs,142,0,0,1,2,0.0,0.0,0.0,.zip(b.chars())
+53,src/lib.rs,143,0,0,1,2,0.0,0.0,0.0,".take_while(|&(a_char, b_char)| a_char == b_char)"
+54,src/lib.rs,144,0,0,1,2,0.0,0.0,0.0,.count();
+55,src/lib.rs,146,0,0,1,2,0.0,0.0,0.0,let jaro_winkler_distance =
+56,src/lib.rs,147,0,0,1,2,0.0,0.0,0.0,jaro_distance + (0.1 * prefix_length as f64 * (1.0 - jaro_distance));
+57,src/lib.rs,149,0,0,1,2,0.0,0.0,0.0,if jaro_winkler_distance <= 1.0 {
+58,src/lib.rs,150,0,0,1,2,0.0,0.0,0.0,jaro_winkler_distance
+59,src/lib.rs,152,0,0,1,2,0.0,0.0,0.0,1.0
+60,src/lib.rs,154,0,0,1,2,0.0,0.0,0.0,}
+61,src/lib.rs,171,0,0,1,2,0.0,0.0,0.0,"pub fn jaro_winkler_against_vec(a: &str, v: &Vec<&str>) -> Vec<f64> {"
+62,src/lib.rs,172,0,0,1,2,0.0,0.0,0.0,let mut r: Vec<f64> = Vec::with_capacity(v.len());
+63,src/lib.rs,173,0,0,1,2,0.0,0.0,0.0,for b in v.iter() {
+64,src/lib.rs,174,0,0,1,2,0.0,0.0,0.0,"r.push(jaro_winkler(a, b));"
+65,src/lib.rs,176,0,0,1,2,0.0,0.0,0.0,r
+66,src/lib.rs,177,0,0,1,2,0.0,0.0,0.0,}
+67,src/lib.rs,187,0,0,1,2,0.0,0.0,0.0,"pub fn levenshtein(a: &str, b: &str) -> usize {"
+68,src/lib.rs,188,0,0,1,2,0.0,0.0,0.0,let a_len = a.chars().count();
+69,src/lib.rs,189,0,0,1,2,0.0,0.0,0.0,let b_len = b.chars().count();
+70,src/lib.rs,190,0,0,1,2,0.0,0.0,0.0,if a == b { return 0; }
+71,src/lib.rs,191,0,0,1,2,0.0,0.0,0.0,else if a_len == 0 { return b_len; }
+72,src/lib.rs,192,0,0,1,2,0.0,0.0,0.0,else if b_len == 0 { return a_len; }
+73,src/lib.rs,194,0,0,1,2,0.0,0.0,0.0,let mut prev_distances: Vec<usize> = Vec::with_capacity(b_len + 1);
+74,src/lib.rs,195,0,0,1,2,0.0,0.0,0.0,let mut curr_distances: Vec<usize> = Vec::with_capacity(b_len + 1);
+75,src/lib.rs,197,0,0,1,2,0.0,0.0,0.0,for i in 0..(b_len + 1) {
+76,src/lib.rs,198,0,0,1,2,0.0,0.0,0.0,prev_distances.push(i);
+77,src/lib.rs,202,0,0,1,2,0.0,0.0,0.0,"for (i, a_char) in a.chars().enumerate() {"
+78,src/lib.rs,203,0,0,1,2,0.0,0.0,0.0,curr_distances[0] = i + 1;
+79,src/lib.rs,205,0,0,1,2,0.0,0.0,0.0,"for (j, b_char) in b.chars().enumerate() {"
+80,src/lib.rs,206,0,0,1,2,0.0,0.0,0.0,let cost = if a_char == b_char { 0 } else { 1 };
+81,src/lib.rs,207,0,0,1,2,0.0,0.0,0.0,"curr_distances[j + 1] = min(curr_distances[j] + 1,"
+82,src/lib.rs,208,0,0,1,2,0.0,0.0,0.0,"min(prev_distances[j + 1] + 1,"
+83,src/lib.rs,212,0,0,1,2,0.0,0.0,0.0,prev_distances.clone_from(&curr_distances);
+84,src/lib.rs,215,0,0,1,2,0.0,0.0,0.0,curr_distances[b_len]
+85,src/lib.rs,216,0,0,1,2,0.0,0.0,0.0,}
+86,src/lib.rs,229,0,0,1,2,0.0,0.0,0.0,"pub fn levenshtein_against_vec(a: &str, v: &Vec<&str>) -> Vec<usize> {"
+87,src/lib.rs,230,0,0,1,2,0.0,0.0,0.0,let mut r: Vec<usize> = Vec::with_capacity(v.len());
+88,src/lib.rs,231,0,0,1,2,0.0,0.0,0.0,for b in v.iter() {
+89,src/lib.rs,232,0,0,1,2,0.0,0.0,0.0,"r.push(levenshtein(a, b));"
+90,src/lib.rs,234,0,0,1,2,0.0,0.0,0.0,r
+91,src/lib.rs,235,0,0,1,2,0.0,0.0,0.0,}
+92,src/lib.rs,244,0,0,1,2,0.0,0.0,0.0,"pub fn damerau_levenshtein(a: &str, b: &str) -> usize {"
+93,src/lib.rs,245,0,0,1,2,0.0,0.0,0.0,let a_len = a.chars().count();
+94,src/lib.rs,246,0,0,1,2,0.0,0.0,0.0,let b_len = b.chars().count();
+95,src/lib.rs,247,0,0,1,2,0.0,0.0,0.0,if a == b { return 0; }
+96,src/lib.rs,248,0,0,1,2,0.0,0.0,0.0,else if a_len == 0 { return b_len; }
+97,src/lib.rs,249,0,0,1,2,0.0,0.0,0.0,else if b_len == 0 { return a_len; }
+98,src/lib.rs,251,0,0,1,2,0.0,0.0,0.0,let mut prev_two_distances: Vec<usize> = Vec::with_capacity(b_len + 1);
+99,src/lib.rs,252,0,0,1,2,0.0,0.0,0.0,let mut prev_distances: Vec<usize> = Vec::with_capacity(b_len + 1);
+100,src/lib.rs,253,0,0,1,2,0.0,0.0,0.0,let mut curr_distances: Vec<usize> = Vec::with_capacity(b_len + 1);
+101,src/lib.rs,255,0,0,1,2,0.0,0.0,0.0,let mut prev_a_char = char::MAX;
+102,src/lib.rs,256,0,0,1,2,0.0,0.0,0.0,let mut prev_b_char = char::MAX;
+103,src/lib.rs,258,0,0,1,2,0.0,0.0,0.0,for i in 0..(b_len + 1) {
+104,src/lib.rs,259,0,0,1,2,0.0,0.0,0.0,prev_two_distances.push(i);
+105,src/lib.rs,260,0,0,1,2,0.0,0.0,0.0,prev_distances.push(i);
+106,src/lib.rs,264,0,0,1,2,0.0,0.0,0.0,"for (i, a_char) in a.chars().enumerate() {"
+107,src/lib.rs,265,0,0,1,2,0.0,0.0,0.0,curr_distances[0] = i + 1;
+108,src/lib.rs,267,0,0,1,2,0.0,0.0,0.0,"for (j, b_char) in b.chars().enumerate() {"
+109,src/lib.rs,268,0,0,1,2,0.0,0.0,0.0,let cost = if a_char == b_char { 0 } else { 1 };
+110,src/lib.rs,269,0,0,1,2,0.0,0.0,0.0,"curr_distances[j + 1] = min(curr_distances[j] + 1,"
+111,src/lib.rs,270,0,0,1,2,0.0,0.0,0.0,"min(prev_distances[j + 1] + 1,"
+112,src/lib.rs,272,0,0,1,2,0.0,0.0,0.0,if i > 0 && j > 0 && a_char != b_char &&
+113,src/lib.rs,273,0,0,1,2,0.0,0.0,0.0,a_char == prev_b_char && b_char == prev_a_char {
+114,src/lib.rs,274,0,0,1,2,0.0,0.0,0.0,"curr_distances[j + 1] = min(curr_distances[j + 1],"
+115,src/lib.rs,276,0,0,1,2,0.0,0.0,0.0,}
+116,src/lib.rs,278,0,0,1,2,0.0,0.0,0.0,prev_b_char = b_char;
+117,src/lib.rs,281,0,0,1,2,0.0,0.0,0.0,prev_two_distances.clone_from(&prev_distances);
+118,src/lib.rs,282,0,0,1,2,0.0,0.0,0.0,prev_distances.clone_from(&curr_distances);
+119,src/lib.rs,283,0,0,1,2,0.0,0.0,0.0,prev_a_char = a_char;
+120,src/lib.rs,286,0,0,1,2,0.0,0.0,0.0,curr_distances[b_len]
+121,src/lib.rs,287,0,0,1,2,0.0,0.0,0.0,}
+122,src/lib.rs,300,0,0,1,2,0.0,0.0,0.0,"pub fn damerau_levenshtein_against_vec(a: &str, v: &Vec<&str>) -> Vec<usize> {"
+123,src/lib.rs,301,0,0,1,2,0.0,0.0,0.0,let mut r: Vec<usize> = Vec::with_capacity(v.len());
+124,src/lib.rs,302,0,0,1,2,0.0,0.0,0.0,for b in v.iter() {
+125,src/lib.rs,303,0,0,1,2,0.0,0.0,0.0,"r.push(damerau_levenshtein(a, b));"
+126,src/lib.rs,305,0,0,1,2,0.0,0.0,0.0,r
+127,src/lib.rs,306,0,0,1,2,0.0,0.0,0.0,}

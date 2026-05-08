@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/date.rs:545;src/date.rs:548;src/date.rs:549;src/date.rs:589,true,108,2520,1260.5,2520,0.04285714285714286,1.0,107,false,false,false,false,2520,src/date.rs,545,(day as i32 + (13 * (month as i32 + 1)) / 5 + adjusted_year + adjusted_year / 4
+dstar2,src/date.rs:545;src/date.rs:548;src/date.rs:549;src/date.rs:589,true,108,2520,1260.5,2520,0.04285714285714286,1.0,107,false,false,false,false,2520,src/date.rs,545,(day as i32 + (13 * (month as i32 + 1)) / 5 + adjusted_year + adjusted_year / 4
+tarantula,src/date.rs:545;src/date.rs:548;src/date.rs:549;src/date.rs:589,true,108,2520,1260.5,2520,0.04285714285714286,1.0,107,false,false,false,false,2520,src/date.rs,545,(day as i32 + (13 * (month as i32 + 1)) / 5 + adjusted_year + adjusted_year / 4

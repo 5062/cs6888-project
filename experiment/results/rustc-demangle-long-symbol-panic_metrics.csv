@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/lib.rs:122;src/lib.rs:124;src/lib.rs:135,true,11,23,12.0,23,0.102803738317757,0.21495327102803738,10,false,false,false,false,107,src/lib.rs,122,let mut chars = inner.chars();
+dstar2,src/lib.rs:122;src/lib.rs:124;src/lib.rs:135,true,11,23,12.0,23,0.102803738317757,0.21495327102803738,10,false,false,false,false,107,src/lib.rs,122,let mut chars = inner.chars();
+tarantula,src/lib.rs:122;src/lib.rs:124;src/lib.rs:135,true,11,23,12.0,23,0.102803738317757,0.21495327102803738,10,false,false,false,false,107,src/lib.rs,122,let mut chars = inner.chars();

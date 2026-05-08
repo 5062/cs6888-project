@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/round.rs:191;src/round.rs:228,true,155,182,122.0,121,0.03718809980806142,0.04366602687140115,154,false,false,false,false,4168,src/round.rs,191,if span < 0 {
+dstar2,src/round.rs:191;src/round.rs:228,true,148,175,115.0,121,0.03550863723608445,0.041986564299424184,147,false,false,false,false,4168,src/round.rs,191,if span < 0 {
+tarantula,src/round.rs:191;src/round.rs:228,true,155,182,122.0,121,0.03718809980806142,0.04366602687140115,154,false,false,false,false,4168,src/round.rs,191,if span < 0 {

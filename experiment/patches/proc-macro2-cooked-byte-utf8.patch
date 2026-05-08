@@ -1,0 +1,26 @@
+diff --git a/tests/test.rs b/tests/test.rs
+index 19f7b27..c792dcb 100644
+--- a/tests/test.rs
++++ b/tests/test.rs
+@@ -161,3 +161,21 @@ fn span_join() {
+ 
+     assert_eq!(joined1.unwrap().source_file(), source1[0].span.source_file());
+ }
++
++#[test]
++fn manual_cooked_byte_utf8_boundary() {
++    let s = std::str::from_utf8(b"b\'\xc2\x86  \x00\x00\x00^\"").unwrap();
++    assert!(s.parse::<proc_macro2::TokenStream>().is_err());
++}
++
++#[test]
++fn manual_cooked_byte_ascii() {
++    let ts: proc_macro2::TokenStream = "b'a'".parse().unwrap();
++    assert_eq!(ts.to_string(), "b'a'");
++}
++
++#[test]
++fn manual_cooked_byte_unicode_char() {
++    let ts: proc_macro2::TokenStream = "'\u{00e9}'".parse().unwrap();
++    assert!(!ts.is_empty());
++}

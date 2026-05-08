@@ -1,0 +1,20 @@
+diff --git a/tests/test_path.rs b/tests/test_path.rs
+index 2ce12066..5f6d95d5 100644
+--- a/tests/test_path.rs
++++ b/tests/test_path.rs
+@@ -50,3 +50,15 @@ fn parse_interpolated_leading_component() {
+     }
+     "###);
+ }
++
++#[test]
++fn manual_incomplete_qualified_path_span() {
++    use syn::spanned::Spanned;
++    use syn::Type;
++    let mut t: Type = syn::parse_quote!(<Self as A>::Q);
++    if let Type::Path(ref mut tp) = &mut t {
++        tp.path.segments.pop();
++        tp.path.segments.pop();
++    }
++    let _ = t.span();
++}

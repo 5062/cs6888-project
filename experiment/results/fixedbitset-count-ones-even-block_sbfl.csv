@@ -1,0 +1,254 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/lib.rs,453,1,0,0,2,1.0,1.0,inf,fn manual_count_ones_full_even_block_range() {
+2,src/lib.rs,454,1,0,0,2,1.0,1.0,inf,let fb = FixedBitSet::with_capacity(512);
+3,src/lib.rs,455,1,0,0,2,1.0,1.0,inf,"assert_eq!(0, fb.count_ones(..));"
+4,src/range.rs,18,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,fn end(&self) -> Option<T> { None }
+5,src/lib.rs,16,1,2,0,0,0.5,0.5773502691896258,0.5,"fn div_rem(x: usize, d: usize) -> (usize, usize)"
+6,src/lib.rs,18,1,2,0,0,0.5,0.5773502691896258,0.5,"(x / d, x % d)"
+7,src/lib.rs,19,1,2,0,0,0.5,0.5773502691896258,0.5,}
+8,src/lib.rs,34,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn with_capacity(bits: usize) -> Self
+9,src/lib.rs,36,1,2,0,0,0.5,0.5773502691896258,0.5,"let (mut blocks, rem) = div_rem(bits, BITS);"
+10,src/lib.rs,37,1,2,0,0,0.5,0.5773502691896258,0.5,blocks += (rem > 0) as usize;
+11,src/lib.rs,38,1,2,0,0,0.5,0.5773502691896258,0.5,FixedBitSet {
+12,src/lib.rs,39,1,2,0,0,0.5,0.5773502691896258,0.5,"data: vec![0; blocks],"
+13,src/lib.rs,42,1,2,0,0,0.5,0.5773502691896258,0.5,}
+14,src/lib.rs,153,1,2,0,0,0.5,0.5773502691896258,0.5,"pub fn count_ones<T: IndexRange>(&self, range: T) -> usize"
+15,src/lib.rs,155,1,2,0,0,0.5,0.5773502691896258,0.5,let start = range.start().unwrap_or(0);
+16,src/lib.rs,156,1,2,0,0,0.5,0.5773502691896258,0.5,let end = range.end().unwrap_or(self.length);
+17,src/lib.rs,157,1,2,0,0,0.5,0.5773502691896258,0.5,assert!(start <= end && end <= self.length);
+18,src/lib.rs,158,1,2,0,0,0.5,0.5773502691896258,0.5,"self.count_ones_impl(start, end)"
+19,src/lib.rs,159,1,2,0,0,0.5,0.5773502691896258,0.5,}
+20,src/lib.rs,162,1,2,0,0,0.5,0.5773502691896258,0.5,"fn count_ones_impl(&self, start: usize, end: usize) -> usize {"
+21,src/lib.rs,163,1,2,0,0,0.5,0.5773502691896258,0.5,"let (first_block, first_rem) = div_rem(start, BITS);"
+22,src/lib.rs,164,1,2,0,0,0.5,0.5773502691896258,0.5,"let (last_block, last_rem) = div_rem(end, BITS);"
+23,src/lib.rs,165,1,2,0,0,0.5,0.5773502691896258,0.5,let mut sum = 0usize;
+24,src/lib.rs,167,1,2,0,0,0.5,0.5773502691896258,0.5,for block in &self.data[first_block..last_block] {
+25,src/lib.rs,171,1,2,0,0,0.5,0.5773502691896258,0.5,let mask = |x| if x != 0 { Block::max_value() >> (BITS - x) } else { 0 };
+26,src/lib.rs,172,1,2,0,0,0.5,0.5773502691896258,0.5,let mask_first_block: Block = mask(first_rem);
+27,src/lib.rs,173,1,2,0,0,0.5,0.5773502691896258,0.5,let mask_last_block: Block = mask(last_rem);
+28,src/lib.rs,174,1,2,0,0,0.5,0.5773502691896258,0.5,sum += (self.data[last_block] & mask_last_block).count_ones() as usize;
+29,src/lib.rs,175,1,2,0,0,0.5,0.5773502691896258,0.5,sum -= (self.data[first_block] & mask_first_block).count_ones() as usize;
+30,src/lib.rs,176,1,2,0,0,0.5,0.5773502691896258,0.5,sum
+31,src/lib.rs,177,1,2,0,0,0.5,0.5773502691896258,0.5,}
+32,src/range.rs,15,1,2,0,0,0.5,0.5773502691896258,0.5,fn start(&self) -> Option<T> { None }
+33,src/lib.rs,45,0,0,1,2,0.0,0.0,0.0,"pub fn grow(&mut self, bits: usize) {"
+34,src/lib.rs,46,0,0,1,2,0.0,0.0,0.0,"let (mut blocks, rem) = div_rem(bits, BITS);"
+35,src/lib.rs,47,0,0,1,2,0.0,0.0,0.0,blocks += (rem > 0) as usize;
+36,src/lib.rs,48,0,0,1,2,0.0,0.0,0.0,if bits > self.length {
+37,src/lib.rs,49,0,0,1,2,0.0,0.0,0.0,self.length = bits;
+38,src/lib.rs,50,0,0,1,2,0.0,0.0,0.0,"self.data.resize(blocks, 0);"
+39,src/lib.rs,51,0,0,1,2,0.0,0.0,0.0,}
+40,src/lib.rs,52,0,0,1,2,0.0,0.0,0.0,}
+41,src/lib.rs,56,0,0,1,2,0.0,0.0,0.0,pub fn len(&self) -> usize { self.length }
+42,src/lib.rs,65,0,0,1,2,0.0,0.0,0.0,"pub fn contains(&self, bit: usize) -> bool"
+43,src/lib.rs,67,0,0,1,2,0.0,0.0,0.0,"let (block, i) = div_rem(bit, BITS);"
+44,src/lib.rs,68,0,0,1,2,0.0,0.0,0.0,match self.data.get(block) {
+45,src/lib.rs,69,0,0,1,2,0.0,0.0,0.0,"None => false,"
+46,src/lib.rs,70,0,0,1,2,0.0,0.0,0.0,"Some(b) => (b & (1 << i)) != 0,"
+47,src/lib.rs,72,0,0,1,2,0.0,0.0,0.0,}
+48,src/lib.rs,76,0,0,1,2,0.0,0.0,0.0,pub fn clear(&mut self)
+49,src/lib.rs,78,0,0,1,2,0.0,0.0,0.0,for elt in &mut self.data[..] {
+50,src/lib.rs,79,0,0,1,2,0.0,0.0,0.0,*elt = 0
+51,src/lib.rs,81,0,0,1,2,0.0,0.0,0.0,}
+52,src/lib.rs,87,0,0,1,2,0.0,0.0,0.0,"pub fn insert(&mut self, bit: usize)"
+53,src/lib.rs,89,0,0,1,2,0.0,0.0,0.0,assert!(bit < self.length);
+54,src/lib.rs,90,0,0,1,2,0.0,0.0,0.0,"let (block, i) = div_rem(bit, BITS);"
+55,src/lib.rs,91,0,0,1,2,0.0,0.0,0.0,unsafe {
+56,src/lib.rs,92,0,0,1,2,0.0,0.0,0.0,*self.data.get_unchecked_mut(block) |= 1 << i;
+57,src/lib.rs,94,0,0,1,2,0.0,0.0,0.0,}
+58,src/lib.rs,100,0,0,1,2,0.0,0.0,0.0,"pub fn put(&mut self, bit: usize) -> bool"
+59,src/lib.rs,102,0,0,1,2,0.0,0.0,0.0,assert!(bit < self.length);
+60,src/lib.rs,103,0,0,1,2,0.0,0.0,0.0,"let (block, i) = div_rem(bit, BITS);"
+61,src/lib.rs,105,0,0,1,2,0.0,0.0,0.0,let word = self.data.get_unchecked_mut(block);
+62,src/lib.rs,106,0,0,1,2,0.0,0.0,0.0,let prev = *word & (1 << i) != 0;
+63,src/lib.rs,107,0,0,1,2,0.0,0.0,0.0,*word |= 1 << i;
+64,src/lib.rs,108,0,0,1,2,0.0,0.0,0.0,prev
+65,src/lib.rs,110,0,0,1,2,0.0,0.0,0.0,}
+66,src/lib.rs,114,0,0,1,2,0.0,0.0,0.0,"pub fn set(&mut self, bit: usize, enabled: bool)"
+67,src/lib.rs,116,0,0,1,2,0.0,0.0,0.0,assert!(bit < self.length);
+68,src/lib.rs,117,0,0,1,2,0.0,0.0,0.0,"let (block, i) = div_rem(bit, BITS);"
+69,src/lib.rs,119,0,0,1,2,0.0,0.0,0.0,let elt = self.data.get_unchecked_mut(block);
+70,src/lib.rs,120,0,0,1,2,0.0,0.0,0.0,if enabled {
+71,src/lib.rs,122,0,0,1,2,0.0,0.0,0.0,} else {
+72,src/lib.rs,126,0,0,1,2,0.0,0.0,0.0,}
+73,src/lib.rs,132,0,0,1,2,0.0,0.0,0.0,"pub fn copy_bit(&mut self, from: usize, to: usize)"
+74,src/lib.rs,134,0,0,1,2,0.0,0.0,0.0,assert!(to < self.length);
+75,src/lib.rs,135,0,0,1,2,0.0,0.0,0.0,"let (to_block, t) = div_rem(to, BITS);"
+76,src/lib.rs,136,0,0,1,2,0.0,0.0,0.0,let enabled = self.contains(from);
+77,src/lib.rs,138,0,0,1,2,0.0,0.0,0.0,let to_elt = self.data.get_unchecked_mut(to_block);
+78,src/lib.rs,139,0,0,1,2,0.0,0.0,0.0,if enabled {
+79,src/lib.rs,141,0,0,1,2,0.0,0.0,0.0,} else {
+80,src/lib.rs,145,0,0,1,2,0.0,0.0,0.0,}
+81,src/lib.rs,181,0,0,1,2,0.0,0.0,0.0,pub fn as_slice(&self) -> &[u32]
+82,src/lib.rs,183,0,0,1,2,0.0,0.0,0.0,&self.data
+83,src/lib.rs,184,0,0,1,2,0.0,0.0,0.0,}
+84,src/lib.rs,189,0,0,1,2,0.0,0.0,0.0,pub fn as_mut_slice(&mut self) -> &mut [u32]
+85,src/lib.rs,191,0,0,1,2,0.0,0.0,0.0,&mut self.data
+86,src/lib.rs,192,0,0,1,2,0.0,0.0,0.0,}
+87,src/lib.rs,198,0,0,1,2,0.0,0.0,0.0,pub fn ones(&self) -> Ones {
+88,src/lib.rs,199,0,0,1,2,0.0,0.0,0.0,match self.as_slice().split_first() {
+89,src/lib.rs,200,0,0,1,2,0.0,0.0,0.0,"Some((&block, rem)) => {"
+90,src/lib.rs,201,0,0,1,2,0.0,0.0,0.0,Ones {
+91,src/lib.rs,209,0,0,1,2,0.0,0.0,0.0,Ones {
+92,src/lib.rs,217,0,0,1,2,0.0,0.0,0.0,}
+93,src/lib.rs,230,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<Self::Item> {
+94,src/lib.rs,231,0,0,1,2,0.0,0.0,0.0,let mut block = self.current_block;
+95,src/lib.rs,232,0,0,1,2,0.0,0.0,0.0,let mut idx = self.current_bit_idx;
+96,src/lib.rs,236,0,0,1,2,0.0,0.0,0.0,if (block & 1) == 1 {
+97,src/lib.rs,237,0,0,1,2,0.0,0.0,0.0,self.current_block = block >> 1;
+98,src/lib.rs,238,0,0,1,2,0.0,0.0,0.0,self.current_bit_idx = idx + 1;
+99,src/lib.rs,239,0,0,1,2,0.0,0.0,0.0,return Some(idx);
+100,src/lib.rs,240,0,0,1,2,0.0,0.0,0.0,}
+101,src/lib.rs,242,0,0,1,2,0.0,0.0,0.0,block = block >> 1;
+102,src/lib.rs,243,0,0,1,2,0.0,0.0,0.0,idx += 1;
+103,src/lib.rs,244,0,0,1,2,0.0,0.0,0.0,if block == 0 {
+104,src/lib.rs,245,0,0,1,2,0.0,0.0,0.0,break;
+105,src/lib.rs,246,0,0,1,2,0.0,0.0,0.0,}
+106,src/lib.rs,250,0,0,1,2,0.0,0.0,0.0,match self.remaining_blocks.split_first() {
+107,src/lib.rs,251,0,0,1,2,0.0,0.0,0.0,"Some((&next_block, rest)) => {"
+108,src/lib.rs,252,0,0,1,2,0.0,0.0,0.0,self.remaining_blocks = rest;
+109,src/lib.rs,253,0,0,1,2,0.0,0.0,0.0,self.current_block_idx += 1;
+110,src/lib.rs,259,0,0,1,2,0.0,0.0,0.0,return None;
+111,src/lib.rs,263,0,0,1,2,0.0,0.0,0.0,}
+112,src/lib.rs,268,0,0,1,2,0.0,0.0,0.0,fn clone(&self) -> Self
+113,src/lib.rs,270,0,0,1,2,0.0,0.0,0.0,FixedBitSet {
+114,src/lib.rs,271,0,0,1,2,0.0,0.0,0.0,"data: self.data.clone(),"
+115,src/lib.rs,274,0,0,1,2,0.0,0.0,0.0,}
+116,src/lib.rs,287,0,0,1,2,0.0,0.0,0.0,"fn index(&self, bit: usize) -> &bool"
+117,src/lib.rs,289,0,0,1,2,0.0,0.0,0.0,if self.contains(bit) {
+118,src/lib.rs,290,0,0,1,2,0.0,0.0,0.0,&TRUE
+119,src/lib.rs,292,0,0,1,2,0.0,0.0,0.0,&FALSE
+120,src/lib.rs,294,0,0,1,2,0.0,0.0,0.0,}
+121,src/lib.rs,298,0,0,1,2,0.0,0.0,0.0,fn it_works() {
+122,src/lib.rs,300,0,0,1,2,0.0,0.0,0.0,let mut fb = FixedBitSet::with_capacity(N);
+123,src/lib.rs,301,0,0,1,2,0.0,0.0,0.0,"println!(""{:?}"", fb);"
+124,src/lib.rs,303,0,0,1,2,0.0,0.0,0.0,for i in 0..(N + 10) {
+125,src/lib.rs,304,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.contains(i), false);"
+126,src/lib.rs,307,0,0,1,2,0.0,0.0,0.0,fb.insert(10);
+127,src/lib.rs,308,0,0,1,2,0.0,0.0,0.0,"fb.set(11, false);"
+128,src/lib.rs,309,0,0,1,2,0.0,0.0,0.0,"fb.set(12, false);"
+129,src/lib.rs,310,0,0,1,2,0.0,0.0,0.0,"fb.set(12, true);"
+130,src/lib.rs,311,0,0,1,2,0.0,0.0,0.0,"fb.set(N-1, true);"
+131,src/lib.rs,312,0,0,1,2,0.0,0.0,0.0,"println!(""{:?}"", fb);"
+132,src/lib.rs,313,0,0,1,2,0.0,0.0,0.0,assert!(fb.contains(10));
+133,src/lib.rs,314,0,0,1,2,0.0,0.0,0.0,assert!(!fb.contains(11));
+134,src/lib.rs,315,0,0,1,2,0.0,0.0,0.0,assert!(fb.contains(12));
+135,src/lib.rs,316,0,0,1,2,0.0,0.0,0.0,assert!(fb.contains(N-1));
+136,src/lib.rs,317,0,0,1,2,0.0,0.0,0.0,for i in 0..N {
+137,src/lib.rs,318,0,0,1,2,0.0,0.0,0.0,let contain = i == 10 || i == 12 || i == N - 1;
+138,src/lib.rs,319,0,0,1,2,0.0,0.0,0.0,"assert_eq!(contain, fb[i]);"
+139,src/lib.rs,322,0,0,1,2,0.0,0.0,0.0,fb.clear();
+140,src/lib.rs,323,0,0,1,2,0.0,0.0,0.0,}
+141,src/lib.rs,326,0,0,1,2,0.0,0.0,0.0,fn grow() {
+142,src/lib.rs,327,0,0,1,2,0.0,0.0,0.0,let mut fb = FixedBitSet::with_capacity(48);
+143,src/lib.rs,328,0,0,1,2,0.0,0.0,0.0,for i in 0..fb.len() {
+144,src/lib.rs,329,0,0,1,2,0.0,0.0,0.0,"fb.set(i, true);"
+145,src/lib.rs,332,0,0,1,2,0.0,0.0,0.0,let old_len = fb.len();
+146,src/lib.rs,333,0,0,1,2,0.0,0.0,0.0,fb.grow(72);
+147,src/lib.rs,334,0,0,1,2,0.0,0.0,0.0,for j in 0..fb.len() {
+148,src/lib.rs,335,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.contains(j), j < old_len);"
+149,src/lib.rs,337,0,0,1,2,0.0,0.0,0.0,"fb.set(64, true);"
+150,src/lib.rs,338,0,0,1,2,0.0,0.0,0.0,assert!(fb.contains(64));
+151,src/lib.rs,339,0,0,1,2,0.0,0.0,0.0,}
+152,src/lib.rs,342,0,0,1,2,0.0,0.0,0.0,fn copy_bit() {
+153,src/lib.rs,343,0,0,1,2,0.0,0.0,0.0,let mut fb = FixedBitSet::with_capacity(48);
+154,src/lib.rs,344,0,0,1,2,0.0,0.0,0.0,for i in 0..fb.len() {
+155,src/lib.rs,345,0,0,1,2,0.0,0.0,0.0,"fb.set(i, true);"
+156,src/lib.rs,347,0,0,1,2,0.0,0.0,0.0,"fb.set(42, false);"
+157,src/lib.rs,348,0,0,1,2,0.0,0.0,0.0,"fb.copy_bit(42, 2);"
+158,src/lib.rs,349,0,0,1,2,0.0,0.0,0.0,assert!(!fb.contains(42));
+159,src/lib.rs,350,0,0,1,2,0.0,0.0,0.0,assert!(!fb.contains(2));
+160,src/lib.rs,351,0,0,1,2,0.0,0.0,0.0,assert!(fb.contains(1));
+161,src/lib.rs,352,0,0,1,2,0.0,0.0,0.0,"fb.copy_bit(1, 42);"
+162,src/lib.rs,353,0,0,1,2,0.0,0.0,0.0,assert!(fb.contains(42));
+163,src/lib.rs,354,0,0,1,2,0.0,0.0,0.0,"fb.copy_bit(1024, 42);"
+164,src/lib.rs,355,0,0,1,2,0.0,0.0,0.0,assert!(!fb[42]);
+165,src/lib.rs,356,0,0,1,2,0.0,0.0,0.0,}
+166,src/lib.rs,359,0,0,1,2,0.0,0.0,0.0,fn count_ones() {
+167,src/lib.rs,360,0,0,1,2,0.0,0.0,0.0,let mut fb = FixedBitSet::with_capacity(100);
+168,src/lib.rs,361,0,0,1,2,0.0,0.0,0.0,"fb.set(11, true);"
+169,src/lib.rs,362,0,0,1,2,0.0,0.0,0.0,"fb.set(12, true);"
+170,src/lib.rs,363,0,0,1,2,0.0,0.0,0.0,"fb.set(7, true);"
+171,src/lib.rs,364,0,0,1,2,0.0,0.0,0.0,"fb.set(35, true);"
+172,src/lib.rs,365,0,0,1,2,0.0,0.0,0.0,"fb.set(40, true);"
+173,src/lib.rs,366,0,0,1,2,0.0,0.0,0.0,"fb.set(77, true);"
+174,src/lib.rs,367,0,0,1,2,0.0,0.0,0.0,"fb.set(95, true);"
+175,src/lib.rs,368,0,0,1,2,0.0,0.0,0.0,"fb.set(50, true);"
+176,src/lib.rs,369,0,0,1,2,0.0,0.0,0.0,"fb.set(99, true);"
+177,src/lib.rs,370,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..7), 0);"
+178,src/lib.rs,371,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..8), 1);"
+179,src/lib.rs,372,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..11), 1);"
+180,src/lib.rs,373,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..12), 2);"
+181,src/lib.rs,374,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..13), 3);"
+182,src/lib.rs,375,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..35), 3);"
+183,src/lib.rs,376,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..36), 4);"
+184,src/lib.rs,377,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..40), 4);"
+185,src/lib.rs,378,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..41), 5);"
+186,src/lib.rs,379,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(50..), 4);"
+187,src/lib.rs,380,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(70..95), 1);"
+188,src/lib.rs,381,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(70..96), 2);"
+189,src/lib.rs,382,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(70..99), 2);"
+190,src/lib.rs,383,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(..), 9);"
+191,src/lib.rs,384,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(0..100), 9);"
+192,src/lib.rs,385,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(0..0), 0);"
+193,src/lib.rs,386,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(100..100), 0);"
+194,src/lib.rs,387,0,0,1,2,0.0,0.0,0.0,}
+195,src/lib.rs,390,0,0,1,2,0.0,0.0,0.0,fn ones() {
+196,src/lib.rs,391,0,0,1,2,0.0,0.0,0.0,let mut fb = FixedBitSet::with_capacity(100);
+197,src/lib.rs,392,0,0,1,2,0.0,0.0,0.0,"fb.set(11, true);"
+198,src/lib.rs,393,0,0,1,2,0.0,0.0,0.0,"fb.set(12, true);"
+199,src/lib.rs,394,0,0,1,2,0.0,0.0,0.0,"fb.set(7, true);"
+200,src/lib.rs,395,0,0,1,2,0.0,0.0,0.0,"fb.set(35, true);"
+201,src/lib.rs,396,0,0,1,2,0.0,0.0,0.0,"fb.set(40, true);"
+202,src/lib.rs,397,0,0,1,2,0.0,0.0,0.0,"fb.set(77, true);"
+203,src/lib.rs,398,0,0,1,2,0.0,0.0,0.0,"fb.set(95, true);"
+204,src/lib.rs,399,0,0,1,2,0.0,0.0,0.0,"fb.set(50, true);"
+205,src/lib.rs,400,0,0,1,2,0.0,0.0,0.0,"fb.set(99, true);"
+206,src/lib.rs,402,0,0,1,2,0.0,0.0,0.0,let ones: Vec<_> = fb.ones().collect();
+207,src/lib.rs,404,0,0,1,2,0.0,0.0,0.0,"assert_eq!(vec![7, 11, 12, 35, 40, 50, 77, 95, 99], ones);"
+208,src/lib.rs,405,0,0,1,2,0.0,0.0,0.0,}
+209,src/lib.rs,408,0,0,1,2,0.0,0.0,0.0,fn iter_ones_range() {
+210,src/lib.rs,409,0,0,1,2,0.0,0.0,0.0,"fn test_range(from: usize, to: usize, capa: usize) {"
+211,src/lib.rs,410,0,0,1,2,0.0,0.0,0.0,assert!(to <= capa);
+212,src/lib.rs,411,0,0,1,2,0.0,0.0,0.0,let mut fb = FixedBitSet::with_capacity(capa);
+213,src/lib.rs,412,0,0,1,2,0.0,0.0,0.0,for i in from..to {
+214,src/lib.rs,413,0,0,1,2,0.0,0.0,0.0,fb.insert(i);
+215,src/lib.rs,415,0,0,1,2,0.0,0.0,0.0,let ones: Vec<_> = fb.ones().collect();
+216,src/lib.rs,416,0,0,1,2,0.0,0.0,0.0,let expected: Vec<_> = (from..to).collect();
+217,src/lib.rs,417,0,0,1,2,0.0,0.0,0.0,"assert_eq!(expected, ones);"
+218,src/lib.rs,418,0,0,1,2,0.0,0.0,0.0,}
+219,src/lib.rs,420,0,0,1,2,0.0,0.0,0.0,for i in 0..100 {
+220,src/lib.rs,421,0,0,1,2,0.0,0.0,0.0,"test_range(i, 100, 100);"
+221,src/lib.rs,424,0,0,1,2,0.0,0.0,0.0,}
+222,src/lib.rs,428,0,0,1,2,0.0,0.0,0.0,fn count_ones_oob() {
+223,src/lib.rs,429,0,0,1,2,0.0,0.0,0.0,let fb = FixedBitSet::with_capacity(100);
+224,src/lib.rs,430,0,0,1,2,0.0,0.0,0.0,fb.count_ones(90..101);
+225,src/lib.rs,431,0,0,1,2,0.0,0.0,0.0,}
+226,src/lib.rs,435,0,0,1,2,0.0,0.0,0.0,fn count_ones_negative_range() {
+227,src/lib.rs,436,0,0,1,2,0.0,0.0,0.0,let fb = FixedBitSet::with_capacity(100);
+228,src/lib.rs,437,0,0,1,2,0.0,0.0,0.0,fb.count_ones(90..80);
+229,src/lib.rs,438,0,0,1,2,0.0,0.0,0.0,}
+230,src/lib.rs,441,0,0,1,2,0.0,0.0,0.0,fn count_ones_panic() {
+231,src/lib.rs,442,0,0,1,2,0.0,0.0,0.0,for i in 1..128 {
+232,src/lib.rs,443,0,0,1,2,0.0,0.0,0.0,let fb = FixedBitSet::with_capacity(i);
+233,src/lib.rs,444,0,0,1,2,0.0,0.0,0.0,for j in 0..fb.len() + 1 {
+234,src/lib.rs,445,0,0,1,2,0.0,0.0,0.0,for k in j..fb.len() + 1 {
+235,src/lib.rs,446,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.count_ones(j..k), 0);"
+236,src/lib.rs,450,0,0,1,2,0.0,0.0,0.0,}
+237,src/lib.rs,456,0,0,1,2,0.0,0.0,0.0,}
+238,src/lib.rs,459,0,1,1,1,0.0,0.0,0.0,fn manual_count_ones_partial_even_block_range() {
+239,src/lib.rs,460,0,1,1,1,0.0,0.0,0.0,let fb = FixedBitSet::with_capacity(512);
+240,src/lib.rs,461,0,1,1,1,0.0,0.0,0.0,"assert_eq!(0, fb.count_ones(..511));"
+241,src/lib.rs,462,0,1,1,1,0.0,0.0,0.0,}
+242,src/lib.rs,465,0,1,1,1,0.0,0.0,0.0,fn manual_count_ones_odd_capacity_range() {
+243,src/lib.rs,466,0,1,1,1,0.0,0.0,0.0,let fb = FixedBitSet::with_capacity(513);
+244,src/lib.rs,467,0,1,1,1,0.0,0.0,0.0,"assert_eq!(0, fb.count_ones(..));"
+245,src/lib.rs,468,0,1,1,1,0.0,0.0,0.0,}
+246,src/lib.rs,472,0,0,1,2,0.0,0.0,0.0,fn default() {
+247,src/lib.rs,473,0,0,1,2,0.0,0.0,0.0,let fb = FixedBitSet::default();
+248,src/lib.rs,474,0,0,1,2,0.0,0.0,0.0,"assert_eq!(fb.len(), 0);"
+249,src/lib.rs,475,0,0,1,2,0.0,0.0,0.0,}
+250,src/range.rs,26,0,0,1,2,0.0,0.0,0.0,fn start(&self) -> Option<T> { Some(self.start) }
+251,src/range.rs,31,0,1,1,1,0.0,0.0,0.0,fn end(&self) -> Option<T> { Some(self.end) }
+252,src/range.rs,36,0,0,1,2,0.0,0.0,0.0,fn start(&self) -> Option<T> { Some(self.start) }
+253,src/range.rs,38,0,0,1,2,0.0,0.0,0.0,fn end(&self) -> Option<T> { Some(self.end) }

@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/read/abbrev.rs:413;src/read/mod.rs:385;src/read/mod.rs:529;src/read/unit.rs:2204,true,142,373,187.0,373,0.015889000783260603,0.041736600648987356,141,false,false,false,false,8937,src/read/abbrev.rs,413,pub fn implicit_const_value(&self) -> i64 {
+dstar2,src/read/abbrev.rs:413;src/read/mod.rs:385;src/read/mod.rs:529;src/read/unit.rs:2204,true,142,373,187.0,373,0.015889000783260603,0.041736600648987356,141,false,false,false,false,8937,src/read/abbrev.rs,413,pub fn implicit_const_value(&self) -> i64 {
+tarantula,src/read/abbrev.rs:413;src/read/mod.rs:385;src/read/mod.rs:529;src/read/unit.rs:2204,true,142,373,187.0,373,0.015889000783260603,0.041736600648987356,141,false,false,false,false,8937,src/read/abbrev.rs,413,pub fn implicit_const_value(&self) -> i64 {

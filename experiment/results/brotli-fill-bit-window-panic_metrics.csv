@@ -1,0 +1,4 @@
+formula,oracle,found,best_rank,worst_tie_rank,average_tie_rank,tie_size,exam_best,exam_worst_tie,wasted_effort_best,top1,top3,top5,top10,ranked_lines,best_oracle_file,best_oracle_line,best_oracle_text
+ochiai,src/bit_reader/mod.rs:137;src/bit_reader/mod.rs:575,true,21,713,357.0,713,0.006053617757278754,0.20553473623522628,20,false,false,false,false,3469,src/bit_reader/mod.rs,137,if (n_bits <= 8) {
+dstar2,src/bit_reader/mod.rs:137;src/bit_reader/mod.rs:575,true,21,713,357.0,713,0.006053617757278754,0.20553473623522628,20,false,false,false,false,3469,src/bit_reader/mod.rs,137,if (n_bits <= 8) {
+tarantula,src/bit_reader/mod.rs:137;src/bit_reader/mod.rs:575,true,21,713,357.0,713,0.006053617757278754,0.20553473623522628,20,false,false,false,false,3469,src/bit_reader/mod.rs,137,if (n_bits <= 8) {

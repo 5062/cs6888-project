@@ -1,0 +1,174 @@
+rank,file,line,ef,ep,nf,np,tarantula,ochiai,dstar2,text
+1,src/lib.rs,573,1,0,0,2,1.0,1.0,inf,pub fn no_deps(&mut self) -> &mut MetadataCommand {
+2,src/lib.rs,574,1,0,0,2,1.0,1.0,inf,self.no_deps = true;
+3,src/lib.rs,575,1,0,0,2,1.0,1.0,inf,self
+4,src/lib.rs,576,1,0,0,2,1.0,1.0,inf,}
+5,src/lib.rs,159,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,pub fn root_package(&self) -> Option<&Package> {
+6,src/lib.rs,160,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,let root = self.resolve.as_ref()?.root.as_ref()?;
+7,src/lib.rs,162,1,1,0,1,0.6666666666666666,0.7071067811865475,1.0,}
+8,src/dependency.rs,29,1,2,0,0,0.5,0.5773502691896258,0.5,fn default() -> DependencyKind {
+9,src/dependency.rs,30,1,2,0,0,0.5,0.5773502691896258,0.5,DependencyKind::Normal
+10,src/dependency.rs,31,1,2,0,0,0.5,0.5773502691896258,0.5,}
+11,src/dependency.rs,43,1,2,0,0,0.5,0.5773502691896258,0.5,"pub(super) fn parse_dependency_kind<'de, D>(d: D) -> Result<DependencyKind, D::Error>"
+12,src/dependency.rs,47,1,2,0,0,0.5,0.5773502691896258,0.5,Deserialize::deserialize(d).map(|x: Option<_>| x.unwrap_or_default())
+13,src/dependency.rs,48,1,2,0,0,0.5,0.5773502691896258,0.5,}
+14,src/lib.rs,552,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn new() -> MetadataCommand {
+15,src/lib.rs,553,1,2,0,0,0.5,0.5773502691896258,0.5,MetadataCommand::default()
+16,src/lib.rs,554,1,2,0,0,0.5,0.5773502691896258,0.5,}
+17,src/lib.rs,644,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn cargo_command(&self) -> Command {
+18,src/lib.rs,645,1,2,0,0,0.5,0.5773502691896258,0.5,let cargo = self
+19,src/lib.rs,647,1,2,0,0,0.5,0.5773502691896258,0.5,.clone()
+20,src/lib.rs,648,1,2,0,0,0.5,0.5773502691896258,0.5,".or_else(|| env::var(""CARGO"").map(PathBuf::from).ok())"
+21,src/lib.rs,649,1,2,0,0,0.5,0.5773502691896258,0.5,".unwrap_or_else(|| PathBuf::from(""cargo""));"
+22,src/lib.rs,650,1,2,0,0,0.5,0.5773502691896258,0.5,let mut cmd = Command::new(cargo);
+23,src/lib.rs,651,1,2,0,0,0.5,0.5773502691896258,0.5,"cmd.args(&[""metadata"", ""--format-version"", ""1""]);"
+24,src/lib.rs,653,1,2,0,0,0.5,0.5773502691896258,0.5,if self.no_deps {
+25,src/lib.rs,657,1,2,0,0,0.5,0.5773502691896258,0.5,if let Some(path) = self.current_dir.as_ref() {
+26,src/lib.rs,659,1,2,0,0,0.5,0.5773502691896258,0.5,}
+27,src/lib.rs,661,1,2,0,0,0.5,0.5773502691896258,0.5,if !self.features.is_empty() {
+28,src/lib.rs,663,1,2,0,0,0.5,0.5773502691896258,0.5,}
+29,src/lib.rs,664,1,2,0,0,0.5,0.5773502691896258,0.5,if self.all_features {
+30,src/lib.rs,666,1,2,0,0,0.5,0.5773502691896258,0.5,}
+31,src/lib.rs,667,1,2,0,0,0.5,0.5773502691896258,0.5,if self.no_default_features {
+32,src/lib.rs,669,1,2,0,0,0.5,0.5773502691896258,0.5,}
+33,src/lib.rs,671,1,2,0,0,0.5,0.5773502691896258,0.5,if let Some(manifest_path) = &self.manifest_path {
+34,src/lib.rs,673,1,2,0,0,0.5,0.5773502691896258,0.5,}
+35,src/lib.rs,674,1,2,0,0,0.5,0.5773502691896258,0.5,cmd.args(&self.other_options);
+36,src/lib.rs,676,1,2,0,0,0.5,0.5773502691896258,0.5,cmd
+37,src/lib.rs,677,1,2,0,0,0.5,0.5773502691896258,0.5,}
+38,src/lib.rs,681,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn parse<T: AsRef<str>>(data: T) -> Result<Metadata> {
+39,src/lib.rs,682,1,2,0,0,0.5,0.5773502691896258,0.5,let meta = serde_json::from_str(data.as_ref())?;
+40,src/lib.rs,683,1,2,0,0,0.5,0.5773502691896258,0.5,Ok(meta)
+41,src/lib.rs,684,1,2,0,0,0.5,0.5773502691896258,0.5,}
+42,src/lib.rs,687,1,2,0,0,0.5,0.5773502691896258,0.5,pub fn exec(&self) -> Result<Metadata> {
+43,src/lib.rs,688,1,2,0,0,0.5,0.5773502691896258,0.5,let output = self.cargo_command().output()?;
+44,src/lib.rs,689,1,2,0,0,0.5,0.5773502691896258,0.5,if !output.status.success() {
+45,src/lib.rs,693,1,2,0,0,0.5,0.5773502691896258,0.5,}
+46,src/lib.rs,694,1,2,0,0,0.5,0.5773502691896258,0.5,let stdout = from_utf8(&output.stdout)?
+47,src/lib.rs,695,1,2,0,0,0.5,0.5773502691896258,0.5,.lines()
+48,src/lib.rs,696,1,2,0,0,0.5,0.5773502691896258,0.5,.find(|line| line.starts_with('{'))
+49,src/lib.rs,697,1,2,0,0,0.5,0.5773502691896258,0.5,.ok_or(Error::NoJson)?;
+50,src/lib.rs,698,1,2,0,0,0.5,0.5773502691896258,0.5,Self::parse(stdout)
+51,src/lib.rs,699,1,2,0,0,0.5,0.5773502691896258,0.5,}
+52,src/dependency.rs,35,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+53,src/dependency.rs,36,0,0,1,2,0.0,0.0,0.0,let s = serde_json::to_string(self).unwrap();
+54,src/dependency.rs,38,0,0,1,2,0.0,0.0,0.0,f.write_str(&s[1..s.len() - 1])
+55,src/dependency.rs,39,0,0,1,2,0.0,0.0,0.0,}
+56,src/diagnostic.rs,152,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+57,src/diagnostic.rs,153,0,0,1,2,0.0,0.0,0.0,if let Some(ref rendered) = self.rendered {
+58,src/diagnostic.rs,154,0,0,1,2,0.0,0.0,0.0,f.write_str(rendered)?;
+59,src/diagnostic.rs,156,0,0,1,2,0.0,0.0,0.0,"f.write_str(""cargo didn't render this message"")?;"
+60,src/diagnostic.rs,158,0,0,1,2,0.0,0.0,0.0,Ok(())
+61,src/diagnostic.rs,159,0,0,1,2,0.0,0.0,0.0,}
+62,src/lib.rs,124,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+63,src/lib.rs,125,0,0,1,2,0.0,0.0,0.0,"fmt::Display::fmt(&self.repr, f)"
+64,src/lib.rs,126,0,0,1,2,0.0,0.0,0.0,}
+65,src/lib.rs,130,0,0,1,2,0.0,0.0,0.0,fn is_null(value: &serde_json::Value) -> bool {
+66,src/lib.rs,131,0,0,1,2,0.0,0.0,0.0,"matches!(value, serde_json::Value::Null)"
+67,src/lib.rs,132,0,0,1,2,0.0,0.0,0.0,}
+68,src/lib.rs,161,0,1,1,1,0.0,0.0,0.0,self.packages.iter().find(|pkg| &pkg.id == root)
+69,src/lib.rs,165,0,0,1,2,0.0,0.0,0.0,pub fn workspace_packages(&self) -> Vec<&Package> {
+70,src/lib.rs,166,0,0,1,2,0.0,0.0,0.0,self.packages
+71,src/lib.rs,168,0,0,1,2,0.0,0.0,0.0,.filter(|&p| self.workspace_members.contains(&p.id))
+72,src/lib.rs,169,0,0,1,2,0.0,0.0,0.0,.collect()
+73,src/lib.rs,170,0,0,1,2,0.0,0.0,0.0,}
+74,src/lib.rs,176,0,0,1,2,0.0,0.0,0.0,"fn index(&self, idx: &'a PackageId) -> &Package {"
+75,src/lib.rs,177,0,0,1,2,0.0,0.0,0.0,self.packages
+76,src/lib.rs,179,0,0,1,2,0.0,0.0,0.0,.find(|p| p.id == *idx)
+77,src/lib.rs,180,0,0,1,2,0.0,0.0,0.0,".unwrap_or_else(|| panic!(""no package with this id: {:?}"", idx))"
+78,src/lib.rs,181,0,0,1,2,0.0,0.0,0.0,}
+79,src/lib.rs,367,0,0,1,2,0.0,0.0,0.0,pub fn license_file(&self) -> Option<Utf8PathBuf> {
+80,src/lib.rs,368,0,0,1,2,0.0,0.0,0.0,self.license_file.as_ref().map(|file| {
+81,src/lib.rs,369,0,0,1,2,0.0,0.0,0.0,self.manifest_path
+82,src/lib.rs,370,0,0,1,2,0.0,0.0,0.0,.parent()
+83,src/lib.rs,372,0,0,1,2,0.0,0.0,0.0,.join(file)
+84,src/lib.rs,373,0,0,1,2,0.0,0.0,0.0,})
+85,src/lib.rs,374,0,0,1,2,0.0,0.0,0.0,}
+86,src/lib.rs,377,0,0,1,2,0.0,0.0,0.0,pub fn readme(&self) -> Option<Utf8PathBuf> {
+87,src/lib.rs,378,0,0,1,2,0.0,0.0,0.0,self.readme.as_ref().map(|file| {
+88,src/lib.rs,379,0,0,1,2,0.0,0.0,0.0,self.manifest_path
+89,src/lib.rs,380,0,0,1,2,0.0,0.0,0.0,.parent()
+90,src/lib.rs,382,0,0,1,2,0.0,0.0,0.0,.join(file)
+91,src/lib.rs,383,0,0,1,2,0.0,0.0,0.0,})
+92,src/lib.rs,384,0,0,1,2,0.0,0.0,0.0,}
+93,src/lib.rs,397,0,0,1,2,0.0,0.0,0.0,pub fn is_crates_io(&self) -> bool {
+94,src/lib.rs,398,0,0,1,2,0.0,0.0,0.0,"self.repr == ""registry+https://github.com/rust-lang/crates.io-index"""
+95,src/lib.rs,399,0,0,1,2,0.0,0.0,0.0,}
+96,src/lib.rs,403,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+97,src/lib.rs,404,0,0,1,2,0.0,0.0,0.0,"fmt::Display::fmt(&self.repr, f)"
+98,src/lib.rs,405,0,0,1,2,0.0,0.0,0.0,}
+99,src/lib.rs,485,0,0,1,2,0.0,0.0,0.0,pub fn as_str(&self) -> &'static str {
+100,src/lib.rs,487,0,0,1,2,0.0,0.0,0.0,match self {
+101,src/lib.rs,488,0,0,1,2,0.0,0.0,0.0,"E2015 => ""2015"","
+102,src/lib.rs,489,0,0,1,2,0.0,0.0,0.0,"E2018 => ""2018"","
+103,src/lib.rs,490,0,0,1,2,0.0,0.0,0.0,"E2021 => ""2021"","
+104,src/lib.rs,491,0,0,1,2,0.0,0.0,0.0,"_E2024 => ""2024"","
+105,src/lib.rs,492,0,0,1,2,0.0,0.0,0.0,"_E2027 => ""2027"","
+106,src/lib.rs,493,0,0,1,2,0.0,0.0,0.0,"_E2030 => ""2030"","
+107,src/lib.rs,495,0,0,1,2,0.0,0.0,0.0,}
+108,src/lib.rs,499,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"
+109,src/lib.rs,500,0,0,1,2,0.0,0.0,0.0,f.write_str(self.as_str())
+110,src/lib.rs,501,0,0,1,2,0.0,0.0,0.0,}
+111,src/lib.rs,505,0,0,1,2,0.0,0.0,0.0,fn default() -> Self {
+112,src/lib.rs,506,0,0,1,2,0.0,0.0,0.0,Self::E2015
+113,src/lib.rs,507,0,0,1,2,0.0,0.0,0.0,}
+114,src/lib.rs,510,0,0,1,2,0.0,0.0,0.0,fn default_true() -> bool {
+115,src/lib.rs,511,0,0,1,2,0.0,0.0,0.0,true
+116,src/lib.rs,512,0,0,1,2,0.0,0.0,0.0,}
+117,src/lib.rs,558,0,0,1,2,0.0,0.0,0.0,"pub fn cargo_path(&mut self, path: impl Into<PathBuf>) -> &mut MetadataCommand {"
+118,src/lib.rs,559,0,0,1,2,0.0,0.0,0.0,self.cargo_path = Some(path.into());
+119,src/lib.rs,560,0,0,1,2,0.0,0.0,0.0,self
+120,src/lib.rs,561,0,0,1,2,0.0,0.0,0.0,}
+121,src/lib.rs,563,0,0,1,2,0.0,0.0,0.0,"pub fn manifest_path(&mut self, path: impl Into<PathBuf>) -> &mut MetadataCommand {"
+122,src/lib.rs,564,0,0,1,2,0.0,0.0,0.0,self.manifest_path = Some(path.into());
+123,src/lib.rs,565,0,0,1,2,0.0,0.0,0.0,self
+124,src/lib.rs,566,0,0,1,2,0.0,0.0,0.0,}
+125,src/lib.rs,568,0,0,1,2,0.0,0.0,0.0,"pub fn current_dir(&mut self, path: impl Into<PathBuf>) -> &mut MetadataCommand {"
+126,src/lib.rs,569,0,0,1,2,0.0,0.0,0.0,self.current_dir = Some(path.into());
+127,src/lib.rs,570,0,0,1,2,0.0,0.0,0.0,self
+128,src/lib.rs,571,0,0,1,2,0.0,0.0,0.0,}
+129,src/lib.rs,615,0,0,1,2,0.0,0.0,0.0,"pub fn features(&mut self, features: CargoOpt) -> &mut MetadataCommand {"
+130,src/lib.rs,616,0,0,1,2,0.0,0.0,0.0,match features {
+131,src/lib.rs,617,0,0,1,2,0.0,0.0,0.0,"CargoOpt::SomeFeatures(features) => self.features.extend(features),"
+132,src/lib.rs,619,0,0,1,2,0.0,0.0,0.0,assert!(
+133,src/lib.rs,620,0,0,1,2,0.0,0.0,0.0,"!self.no_default_features,"
+134,src/lib.rs,623,0,0,1,2,0.0,0.0,0.0,self.no_default_features = true;
+135,src/lib.rs,626,0,0,1,2,0.0,0.0,0.0,assert!(
+136,src/lib.rs,627,0,0,1,2,0.0,0.0,0.0,"!self.all_features,"
+137,src/lib.rs,630,0,0,1,2,0.0,0.0,0.0,self.all_features = true;
+138,src/lib.rs,633,0,0,1,2,0.0,0.0,0.0,self
+139,src/lib.rs,634,0,0,1,2,0.0,0.0,0.0,}
+140,src/lib.rs,637,0,0,1,2,0.0,0.0,0.0,"pub fn other_options(&mut self, options: impl Into<Vec<String>>) -> &mut MetadataCommand {"
+141,src/lib.rs,638,0,0,1,2,0.0,0.0,0.0,self.other_options = options.into();
+142,src/lib.rs,639,0,0,1,2,0.0,0.0,0.0,self
+143,src/lib.rs,640,0,0,1,2,0.0,0.0,0.0,}
+144,src/lib.rs,655,0,2,1,0,0.0,0.0,0.0,}
+145,src/lib.rs,658,0,0,1,2,0.0,0.0,0.0,cmd.current_dir(path);
+146,src/lib.rs,662,0,0,1,2,0.0,0.0,0.0,"cmd.arg(""--features"").arg(self.features.join("",""));"
+147,src/lib.rs,672,0,0,1,2,0.0,0.0,0.0,"cmd.arg(""--manifest-path"").arg(manifest_path.as_os_str());"
+148,src/lib.rs,691,0,0,1,2,0.0,0.0,0.0,"stderr: String::from_utf8(output.stderr)?,"
+149,src/messages.rs,127,0,0,1,2,0.0,0.0,0.0,pub fn parse_stream<R: Read>(input: R) -> MessageIter<R> {
+150,src/messages.rs,128,0,0,1,2,0.0,0.0,0.0,MessageIter { input }
+151,src/messages.rs,129,0,0,1,2,0.0,0.0,0.0,}
+152,src/messages.rs,133,0,0,1,2,0.0,0.0,0.0,"fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {"
+153,src/messages.rs,134,0,0,1,2,0.0,0.0,0.0,"write!(f, ""{}"", self.message)"
+154,src/messages.rs,135,0,0,1,2,0.0,0.0,0.0,}
+155,src/messages.rs,145,0,0,1,2,0.0,0.0,0.0,fn next(&mut self) -> Option<Self::Item> {
+156,src/messages.rs,146,0,0,1,2,0.0,0.0,0.0,let mut line = String::new();
+157,src/messages.rs,147,0,0,1,2,0.0,0.0,0.0,self.input
+158,src/messages.rs,148,0,0,1,2,0.0,0.0,0.0,.read_line(&mut line)
+159,src/messages.rs,149,0,0,1,2,0.0,0.0,0.0,.map(|n| {
+160,src/messages.rs,150,0,0,1,2,0.0,0.0,0.0,if n == 0 {
+161,src/messages.rs,151,0,0,1,2,0.0,0.0,0.0,None
+162,src/messages.rs,153,0,0,1,2,0.0,0.0,0.0,if line.ends_with('\n') {
+163,src/messages.rs,154,0,0,1,2,0.0,0.0,0.0,line.truncate(line.len() - 1);
+164,src/messages.rs,155,0,0,1,2,0.0,0.0,0.0,}
+165,src/messages.rs,156,0,0,1,2,0.0,0.0,0.0,let mut deserializer = serde_json::Deserializer::from_str(&line);
+166,src/messages.rs,157,0,0,1,2,0.0,0.0,0.0,deserializer.disable_recursion_limit();
+167,src/messages.rs,158,0,0,1,2,0.0,0.0,0.0,Some(Message::deserialize(&mut deserializer).unwrap_or(Message::TextLine(line)))
+168,src/messages.rs,160,0,0,1,2,0.0,0.0,0.0,})
+169,src/messages.rs,161,0,0,1,2,0.0,0.0,0.0,.transpose()
+170,src/messages.rs,162,0,0,1,2,0.0,0.0,0.0,}
+171,src/messages.rs,172,0,0,1,2,0.0,0.0,0.0,pub fn parse_messages<R: Read>(input: R) -> MessageIterator<R> {
+172,src/messages.rs,173,0,0,1,2,0.0,0.0,0.0,serde_json::Deserializer::from_reader(input).into_iter::<Message>()
+173,src/messages.rs,174,0,0,1,2,0.0,0.0,0.0,}

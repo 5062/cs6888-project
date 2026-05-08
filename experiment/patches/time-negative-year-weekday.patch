@@ -1,0 +1,28 @@
+diff --git a/tests/date.rs b/tests/date.rs
+index e296730..6cffda4 100644
+--- a/tests/date.rs
++++ b/tests/date.rs
+@@ -1230,3 +1230,23 @@ fn previous_day_panics() {
+ fn julian_day_panics() {
+     Date::from_julian_day(i64::MAX);
+ }
++
++#[test]
++fn manual_negative_year_weekday() {
++    let date_ = time::Date::try_from_ymd(-36, 11, 1).unwrap();
++    let _ = time::Date::weekday(date_);
++}
++
++#[test]
++fn manual_positive_year_weekday() {
++    let date_ = time::Date::try_from_ymd(2021, 1, 1).unwrap();
++    let wd = time::Date::weekday(date_);
++    let _ = wd;
++}
++
++#[test]
++fn manual_epoch_weekday() {
++    let date_ = time::Date::try_from_ymd(1970, 1, 1).unwrap();
++    let wd = time::Date::weekday(date_);
++    let _ = wd;
++}
