@@ -15,6 +15,8 @@ experiment/
 ├── data/
 │   └── bugs.csv                      28-bugs (commits, oracles, test names, result paths)
 ├── patches/                          Regression test patches (25 bugs; 3 bugs use existing upstream tests)
+├── subjects/                         (gitignored) Cloned repos + per-bug worktrees
+├── artifacts/                        (gitignored) Per-bug coverage JSON and logs
 └── results/
     ├── analysis/                     Aggregate summaries
     ├── *_metrics.csv                 Per-bug SBFL metrics
